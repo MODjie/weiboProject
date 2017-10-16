@@ -1,6 +1,8 @@
 package com.qzz.weibo.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.qzz.weibo.entity.W_weibo;
 import com.qzz.weibo.service.W_weiboService;
 
 /**
@@ -16,7 +19,7 @@ import com.qzz.weibo.service.W_weiboService;
 @WebServlet("/WeiBoServlet")
 public class W_weiboServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    W_weiboService ws = new W_weiboService();
+    private W_weiboService ws = new W_weiboService();   
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -32,6 +35,7 @@ public class W_weiboServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
+		doPost(request, response);
 	}
 
 	/**
@@ -41,6 +45,20 @@ public class W_weiboServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
+		
+		//得到微博内容的集合
+		List<W_weibo> list = new ArrayList<>();
+		
+		//判断op的值
+		if (request.getParameter("op")!=null) {
+			String op = request.getParameter("op");
+			if (op.equals("queryMyWb")) {
+				list = ws.queryMyWb();
+				request.setAttribute("list", list);
+				request.setAttribute("test", "test");
+				request.getRequestDispatcher("my_home.jsp").forward(request, response);
+			}
+		}
 	}
 
 }

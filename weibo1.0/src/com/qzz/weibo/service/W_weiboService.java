@@ -22,7 +22,7 @@ public class W_weiboService {
 	 * @param w Œ¢≤©∂‘œÛ
 	 * @return
 	 */
-	public boolean addWeiBo(W_weibo w) {
-		return weiboDao.addWeiBo(w);
-	}
+//	public boolean addWeiBo(W_weibo w) {
+//		return weiboDao.addWeiBo(w);
+//	}
 }
