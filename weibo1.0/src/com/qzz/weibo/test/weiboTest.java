@@ -30,6 +30,9 @@ public class weiboTest {
 		}
 		
 		
+		System.out.println("Ê±¼ä"+new Date().getTime()+"");
+		
+		
 	}
 
 }

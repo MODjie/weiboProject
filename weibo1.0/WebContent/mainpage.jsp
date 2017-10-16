@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getLocalPort()
+			+ request.getContextPath() + "/";
+	pageContext.setAttribute("path", path);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -104,7 +110,7 @@
 			<form action="WeiBoServlet" method="post">
 				<textarea name="content" rows="" cols=""></textarea><br />
 
-				<a href="" class="xuanxiang" style="margin:0 0 50px 220px;">添加图片</a>
+				<a href="${path}imgupload/uploadimg.jsp" class="xuanxiang" style="margin:0 0 50px 220px;">添加图片</a>
 
 				<select name="" class="" style="margin-left: 50px;">
 					<option value="">公开</option>
