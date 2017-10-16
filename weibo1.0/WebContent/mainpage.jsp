@@ -101,8 +101,8 @@
 			<span id="title">
 				<img src="img/title.PNG"/>
 			</span>
-			<form action="" method="post">
-				<textarea name="" rows="" cols=""></textarea><br />
+			<form action="WeiBoServlet" method="post">
+				<textarea name="content" rows="" cols=""></textarea><br />
 
 				<a href="" class="xuanxiang" style="margin:0 0 50px 220px;">添加图片</a>
 

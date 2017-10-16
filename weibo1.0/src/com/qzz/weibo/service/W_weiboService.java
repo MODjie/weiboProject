@@ -16,4 +16,13 @@ public class W_weiboService {
 	public List<W_weibo> queryMyWb() {
 		return weiboDao.queryMyWb();
 	}
+	
+	/***
+	 * 添加一天数据到微博表中
+	 * @param w 微博对象
+	 * @return
+	 */
+	public boolean addWeiBo(W_weibo w) {
+		return weiboDao.addWeiBo(w);
+	}
 }

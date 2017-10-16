@@ -1,11 +1,14 @@
 package com.qzz.weibo.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.qzz.weibo.service.W_weiboService;
 
 /**
  * Servlet implementation class WeiBoServlet
@@ -13,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/WeiBoServlet")
 public class W_weiboServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    W_weiboService ws = new W_weiboService();
     /**
      * @see HttpServlet#HttpServlet()
      */
