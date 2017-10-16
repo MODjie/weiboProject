@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getLocalPort()
+			+ request.getContextPath() + "/";
+	pageContext.setAttribute("path", path);
+	session.setAttribute("username", "小蜜蜂");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,12 +19,6 @@
 		<script src="bootstrap-3.3.7-dist/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			$(function() {
-
-				//网页加载完毕首先生成主页
-				//				(function () {
-				//					$(".center").append('<div class="publish"><br /><span id="title"><img src="img/title.PNG"/></span><form action="" method="post"><textarea name="" rows="" cols=""></textarea><br /><a href="" class="xuanxiang" style="margin:0 0 50px 250px;">添加图片</a><select name="" class=""style="margin-left: 50px;" ><option value="">公开</option><option value="">仅自己可见</option><option value="">好友可见</option><option value="">匿名</option></select><button type="submit" class="btn btn-warning" >发布</button></form></div>');
-				//				})();
-
 				$(".aa").mousemove(function() {
 					$(this).css("background-color", "rgba(0,0,0,0.2)");
 				});
@@ -159,7 +160,7 @@
 							<div class="userinfo">
 								<a href="my_home.jsp"><img href="my_home.jsp" src="img/bg.jpg" alt="140×140" class="img-circle touxiang" /></a>
 								<div class="username">
-									<a href="my_home.jsp">我叫啦啦啦</a>
+									<a href="my_home.jsp">${sessionScope.username}</a>
 								</div>
 								<div class="WB_cardwrap S_bg2 " style="background-color: white;">
 									<div class="PCD_counter">
