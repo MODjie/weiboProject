@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
-	<head>
-		<meta charset="utf-8" />
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title></title>
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/imagediv.css"/>
@@ -57,7 +58,7 @@
 					<div class="col-md-3 column">
 						<ul class="nav nav-tabs" style="position:absolute ;display: inline;">
 							<li class="active">
-								<a href="homepage.html" >首页</a>
+								<a href="homepage.jsp" >首页</a>
 							</li>
 							<li>
 								<a href="#">简介</a>
@@ -102,13 +103,13 @@
 						<div class="left">
 
 							<div class="aa">
-								<a href="mainpage.html" target="maincontent">首页</a>
+								<a href="mainpage.jsp" target="maincontent">首页</a>
 							</div>
 							<div class="aa">
-								<a href="collectpage.html" target="maincontent">收藏</a>
+								<a href="collectpage.jsp" target="maincontent">收藏</a>
 							</div>
 							<div class="aa">
-								<a href="zanpage.html" target="maincontent">我的赞</a>
+								<a href="zanpage.jsp" target="maincontent">我的赞</a>
 							</div>
 							<hr />
 							<div class="aa">
@@ -148,7 +149,7 @@
 								<!-- 文本描述 -->
 								<div id="caption"></div>
 							</div>
-							<iframe id="maincontent" name="maincontent" src="mainpage.html" frameborder="0" width="100%" height="100%"></iframe>
+							<iframe id="maincontent" name="maincontent" src="mainpage.jsp" frameborder="0" width="100%" height="100%"></iframe>
 						</div>
 						<!--中部发布以及微博显示区域结束-->
 
@@ -156,9 +157,9 @@
 						<div class="right">
 							<!--个人信息显示区域开始-->
 							<div class="userinfo">
-								<a href="my_home.html"><img href="my_home.html" src="img/bg.jpg" alt="140×140" class="img-circle touxiang" /></a>
+								<a href="my_home.jsp"><img href="my_home.jsp" src="img/bg.jpg" alt="140×140" class="img-circle touxiang" /></a>
 								<div class="username">
-									<a href="my_home.html">我叫啦啦啦</a>
+									<a href="my_home.jsp">我叫啦啦啦</a>
 								</div>
 								<div class="WB_cardwrap S_bg2 " style="background-color: white;">
 									<div class="PCD_counter">

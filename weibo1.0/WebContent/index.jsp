@@ -1,7 +1,9 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
-	<head>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 		<script src="bootstrap-3.3.7-dist/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.css" />
@@ -31,10 +33,10 @@
 					<div class="col-md-3 column daohan3">
 						<ul class="nav navbar-nav navbar-right">
 							<li>
-								<a href="index.html"><span class="glyphicon glyphicon-home"></span>首页</a>
+								<a href="index.jsp"><span class="glyphicon glyphicon-home"></span>首页</a>
 							</li>
 							<li>
-								<a href="regiter.html">注册</a>
+								<a href="regiter.jsp">注册</a>
 							</li>
 							<li class="nav navbar-nav navbar-right">
 								<a id="loginmain" href="#modal-container-580488" role="button" class="btn" data-toggle="modal">登录</a>
@@ -207,7 +209,7 @@
             	时间：2017-10-11
             	描述：右侧的登录框开始
            -->
-						<form class="form-horizontal" role="form" style="background-color: rgb(255,255,255); margin:6px; margin-top: 10px; padding: 10px;" action="homepage.html">
+						<form class="form-horizontal" role="form" style="background-color: rgb(255,255,255); margin:6px; margin-top: 10px; padding: 10px;" action="homepage.jsp">
 							<div class="form" style="text-align:  center; height: 35px;line-height: 30px;">
 								<h3 style=" border-bottom: 3px solid orangered;">账号登录</h3>
 							</div>
@@ -228,10 +230,10 @@
 							</div>
 							<div class="form-group" style="text-align: center;">
 								<div class=" col-sm-10">
-									<button type="submit" class="btn btn-default " style="background-color: rgb(255,129,64); width: 280px;">登录</button>
+									<a href="homepage.jsp"><button type="submit" class="btn btn-default " style="background-color: rgb(255,129,64); width: 280px;" >登录</button></a>
 								</div>
 								<div class=" col-sm-10" style="text-align: left;">
-									还没有微博? <a href="regiter.html">立即注册</a>
+									还没有微博? <a href="regiter.jsp">立即注册</a>
 								</div>
 							</div>
 						</form>
@@ -396,7 +398,7 @@
 
 							</div>
 							<div id="zc_wj" style="text-align: center;">
-								<a class="a1" href="regiter.html" id="xiaomireg">注册账号</a>&nbsp;
+								<a class="a1" href="regiter.jsp" id="xiaomireg">注册账号</a>&nbsp;
 							</div>
 						</form>
 					</div>

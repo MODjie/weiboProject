@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
-	<head>
-		<meta charset="utf-8" />
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>我的微博</title>
 		<link rel="stylesheet" type="text/css" href="css/photo.css" />
 		<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.css" />
@@ -16,7 +17,7 @@
 			<div class="container">
 				<div class="row clearfix">
 					<div class="col-md-9 column">
-						<a href="homepage.html"><img src="img/logo.PNG" /></a>
+						<a href="homepage.jsp"><img src="img/logo.PNG" /></a>
 						<input type="text" class="search-input" placeholder="看不完的新鲜事" />
 					</div>
 
@@ -80,10 +81,10 @@
 											<tbody>
 												<tr>
 													<td>
-														<a href="my_home.html">我的主页</a>
+														<a href="my_home.jsp">我的主页</a>
 													</td>
 													<td>
-														<a href="photo.html">我的相册</a>
+														<a href="photo.jsp">我的相册</a>
 													</td>
 													<td>
 														<a href="#">管理中心</a>
