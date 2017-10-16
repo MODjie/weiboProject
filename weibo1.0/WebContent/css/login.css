@@ -1,0 +1,97 @@
+/*登录弹窗*/
+#name{
+	margin-left: auto;
+	margin-right: auto;
+	width: 302px;
+	height: 42px;
+	background-image: url(../img/name.jpg);
+	background-size: 42px;
+	background-repeat: no-repeat;
+	border: 1px solid black;
+}
+#password{
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 302px;
+	height: 42px;
+	background-image: url(../img/password.jpg);
+	background-size: 42px;
+	background-repeat: no-repeat;
+	border: 1px solid black;
+}
+#changeuser{
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 150px;
+}
+#btn_up{
+	margin-left: auto;
+	margin-right: auto;
+	width: 300px;
+}
+#zc_wj{
+	margin-left: auto;
+	margin-right: auto;
+	width: 195px;
+}
+#textname {
+	
+	margin-left: 40px;
+	width: 260px;
+	height: 40px;
+	color: grey;
+	border: none;
+	box-shadow: none;
+}#pwd {
+	color: grey;
+	margin-left: 40px;
+	width: 260px;
+	height: 40px;
+	border: none;
+	box-shadow: none;
+}
+#log {
+	margin-top: 20px;
+	
+	width: 302px;
+	height: 35px;
+	border: none;
+	background-color: orangered;
+	color: white;
+	font-size: 20px;
+}.a1 {
+	text-decoration: none;
+	margin-top: 20px;
+	border: none;
+	display: inline-block;
+	color: gray;
+	border: none;
+}.a1:hover {
+	color: orangered;
+}
+#hh4 {
+	text-align: center;
+	width: 30px;
+	display: inline-block;
+	font-size: 25px;
+}
+/*登录界面*/
+#name_main{
+	margin: auto;
+	background-image: url(../img/name.jpg);
+	background-size: 36px;
+	background-repeat: no-repeat;
+}
+#inputEmail3{
+	margin-left: 17px;
+}
+#password_main{
+	margin: auto;
+	background-image: url(../img/password.jpg);
+	background-size: 36px;
+	background-repeat: no-repeat;
+}#inputPassword3{
+	margin-left: 17px;
+}

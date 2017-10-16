@@ -1,0 +1,120 @@
+package com.qzz.weibo.entity;
+
+/**
+ * Œ¢≤© µÃÂ¿‡
+ * @author Administrator
+ *
+ */
+public class W_weibo {
+	private int WEIBOID;
+	private String FWDCONTENT;
+	private String CONTENT;
+	private String SENDNAME;
+	private String IMAGE;
+	private String PUBLISHTIME;
+	private int COMMENTNUM;
+	private int ZANNUM;
+	private int FORWARDNUM;
+	private int TYPEID;
+	private String ISFORWORD;
+	private int FWDWEIBOID;
+	public int getWEIBOID() {
+		return WEIBOID;
+	}
+	public void setWEIBOID(int wEIBOID) {
+		WEIBOID = wEIBOID;
+	}
+	public String getFWDCONTENT() {
+		return FWDCONTENT;
+	}
+	public void setFWDCONTENT(String fWDCONTENT) {
+		FWDCONTENT = fWDCONTENT;
+	}
+	public String getCONTENT() {
+		return CONTENT;
+	}
+	public void setCONTENT(String cONTENT) {
+		CONTENT = cONTENT;
+	}
+	public String getSENDNAME() {
+		return SENDNAME;
+	}
+	public void setSENDNAME(String sENDNAME) {
+		SENDNAME = sENDNAME;
+	}
+	public String getIMAGE() {
+		return IMAGE;
+	}
+	public void setIMAGE(String iMAGE) {
+		IMAGE = iMAGE;
+	}
+	public String getPUBLISHTIME() {
+		return PUBLISHTIME;
+	}
+	public void setPUBLISHTIME(String pUBLISHTIME) {
+		PUBLISHTIME = pUBLISHTIME;
+	}
+	public int getCOMMENTNUM() {
+		return COMMENTNUM;
+	}
+	public void setCOMMENTNUM(int cOMMENTNUM) {
+		COMMENTNUM = cOMMENTNUM;
+	}
+	public int getZANNUM() {
+		return ZANNUM;
+	}
+	public void setZANNUM(int zANNUM) {
+		ZANNUM = zANNUM;
+	}
+	public int getFORWARDNUM() {
+		return FORWARDNUM;
+	}
+	public void setFORWARDNUM(int fORWARDNUM) {
+		FORWARDNUM = fORWARDNUM;
+	}
+	public int getTYPEID() {
+		return TYPEID;
+	}
+	public void setTYPEID(int tYPEID) {
+		TYPEID = tYPEID;
+	}
+	public String getISFORWORD() {
+		return ISFORWORD;
+	}
+	public void setISFORWORD(String iSFORWORD) {
+		ISFORWORD = iSFORWORD;
+	}
+	public int getFWDWEIBOID() {
+		return FWDWEIBOID;
+	}
+	public void setFWDWEIBOID(int fWDWEIBOID) {
+		FWDWEIBOID = fWDWEIBOID;
+	}
+	@Override
+	public String toString() {
+		return "W_weibo [WEIBOID=" + WEIBOID + ", FWDCONTENT=" + FWDCONTENT + ", CONTENT=" + CONTENT + ", SENDNAME="
+				+ SENDNAME + ", IMAGE=" + IMAGE + ", PUBLISHTIME=" + PUBLISHTIME + ", COMMENTNUM=" + COMMENTNUM
+				+ ", ZANNUM=" + ZANNUM + ", FORWARDNUM=" + FORWARDNUM + ", TYPEID=" + TYPEID + ", ISFORWORD="
+				+ ISFORWORD + ", FWDWEIBOID=" + FWDWEIBOID + "]";
+	}
+	public W_weibo(int wEIBOID, String fWDCONTENT, String cONTENT, String sENDNAME, String iMAGE, String pUBLISHTIME,
+			int cOMMENTNUM, int zANNUM, int fORWARDNUM, int tYPEID, String iSFORWORD, int fWDWEIBOID) {
+		super();
+		WEIBOID = wEIBOID;
+		FWDCONTENT = fWDCONTENT;
+		CONTENT = cONTENT;
+		SENDNAME = sENDNAME;
+		IMAGE = iMAGE;
+		PUBLISHTIME = pUBLISHTIME;
+		COMMENTNUM = cOMMENTNUM;
+		ZANNUM = zANNUM;
+		FORWARDNUM = fORWARDNUM;
+		TYPEID = tYPEID;
+		ISFORWORD = iSFORWORD;
+		FWDWEIBOID = fWDWEIBOID;
+	}
+	
+	public W_weibo() {
+		// TODO Auto-generated constructor stub
+	}
+}

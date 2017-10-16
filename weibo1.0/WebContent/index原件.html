@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.css" />
+		<script src="bootstrap-3.3.7-dist/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			body {
+				/*background-color: rgb(31, 25, 20);*/
+				background-image: url(img/body_bg2.jpg);
+				background-color: rgb(94, 122, 161);
+				background-repeat: no-repeat;
+			}
+			#serach {
+				margin: 10px;
+				width: 400px;
+				height: 40px;
+			}
+			#sousuo{
+				background-color: rgba(0,0,0,0);
+				border: none;
+				position: absolute;
+				margin-left:-52px ;
+				top: 10px;
+				height: 40px;
+				width: 40px;
+				background-image: url(img/search.png);
+			}
+			#header {
+				position: fixed;
+				width: 100%;
+				background-color: rgb(246, 251, 253);
+				z-index: 5;
+			}
+			.aa {
+				width: 100%;
+				margin-top: 10px;
+			}
+			.aa a {
+				margin: 20px;
+				margin-top: 50px;
+				margin-left: 30px;
+				color: #FFFFFF;
+				font-size: 22px;
+			}
+			/*头部下方的区域*/
+			
+			.content {
+				top: 270px;
+				position: absolute;
+				/*filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 0.6;*/
+				/*background-color: rgb(96,167,210);*/
+				
+				background-color: rgba(0, 0, 0, 0.05);
+				width: 60%;
+				height: 3000px;
+				left: 20%;
+			}
+			/*下方左边导航栏*/
+			
+			.left {
+				/*filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 0.6;*/
+				
+				position: fixed;
+				top: 270px;
+				width: 8%;
+				height: 300px;
+			}
+			/*中间主要显示区域*/
+			
+			.center {
+				position: absolute;
+				width: 60%;
+				height: 2600px;
+				left: 16%;
+		
+				/*background-color: rgb(96,167,210);*/
+			}
+			/*发布区域*/
+			
+			.publish {
+				margin-top: 15px;
+				color: rgb(26, 127, 181);
+				background-color: white;
+				border-radius: 5px;
+			}
+			/*#title {
+				margin: 10px;
+			}*/
+			
+			textarea {
+				color: black;
+				width: 90%;
+				height: 100px;
+				margin: 10px;
+				margin-bottom: 5px;
+				resize: none;
+			}
+			.xuanxiang {
+				margin-bottom: 10px;
+				text-decoration: none;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				outline: none;
+			}
+			select {
+				background: transparent;
+				border: none;
+				outline: none;
+			}
+			/*下面是显示区域*/
+			
+			.type {
+				background-color: rgb(255, 255, 255);
+			}
+			.show {}
+			/***
+			 * 右边个人信息  排行榜区域
+			 */
+			
+			.right {
+				position: absolute;
+				width: 22%;
+				height: 2600px;
+				left: 77%;
+				/*background-color: rgb(96,167,210);*/
+			}
+			/*个人信息显示*/
+			
+			.userinfo {
+				margin-top: 15px;
+				height: 220px;
+				/*background-image: url(img/bodybg.jpg);*/
+				
+				border-radius: 50px;
+				background-color: rgba(0, 0, 0);
+				text-align: center;
+			}
+			.touxiang {
+				margin-top: 5px;
+				width: 100px;
+				height: 100px;
+			}
+			.username {
+				margin: 10px;
+			}
+			.username a {
+				font-size: 20px;
+				font-style: inherit;
+			}
+			/*微博，粉丝，关注卡片的样式*/
+			
+			.WB_cardwrap {
+				margin: 0 0 10px 0;
+				box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+				border-radius: 2px;
+			}
+			.PCD_counter {
+				overflow: hidden;
+			}
+			.WB_innerwrap {
+				padding: 16px;
+			}
+			.PCD_counter .WB_innerwrap {
+				width: 100%;
+				padding: 12px 0;
+			}
+			.S_line1 {
+				border-color: #d9d9d9;
+			}
+			.PCD_counter table td {
+				border-left-width: 1px;
+				border-left-style: solid;
+			}
+			.tb_counter {
+				width: 100%;
+				margin-left: -1px;
+				line-height: 14px;
+				text-align: center;
+				table-layout: fixed;
+			}
+			tbody {
+				display: table-row-group;
+				vertical-align: middle;
+				border-color: inherit;
+			}
+			tr {
+				display: table-row;
+				vertical-align: inherit;
+				border-color: inherit;
+			}
+			table td strong {
+				display: block;
+				margin: 2px 0 6px 0;
+				font-family: Tahoma;
+				font-weight: 400;
+			}
+			.S_txt2 {
+				color: #808080;
+				text-decoration: none;
+			}
+			.W_f18 {
+				font-size: 18px;
+			}
+			/*热搜榜样式*/
+			
+			.hotresearch {
+				border-radius: 10px;
+				height: 500px;
+				background-color: white;
+			}
+			/*排行榜*/
+			
+			.list ol li {
+				font-size: 16px;
+				margin: 0px 0px 15px -5px;
+			}
+		.list ol li	a:link {
+				color: black;
+			}
+			/* 未访问的链接 */
+			
+		.list ol li	a:visited {
+				color: black;
+			}
+			/* 已访问的链接 */
+			
+		.list ol li	a:hover {
+				color: rgb(240,173,78);
+				text-decoration: none;
+			}
+			/* 鼠标划过链接 */
+			
+		.list ol li	a:active {
+				color: black;
+			}
+			/* 已选中的链接 */
+		</style>
+		<script type="text/javascript">
+			$(function() {
+				$(".aa").mousemove(function() {
+					$(this).css("background-color", "rgba(0,0,0,0.2)");
+				});
+				$(".aa").mouseleave(function() {
+					$(this).css("background-color", "rgba(0,0,0,0)");
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<!--头部logo以及导航栏开始-->
+		<div id="header">
+			<div class="container">
+				<div class="row clearfix">
+					<div class="col-md-9 column">
+						<img src="img/logo.PNG" />
+						<input id="serach" type="search" placeholder="看不完的新鲜事">
+						<input type="button" id="sousuo"  value=""/>
+					</div>
+					<div class="col-md-3 column">
+						<ul class="nav nav-tabs" style="position:absolute ;display: inline;">
+							<li class="active">
+								<a href="#">首页</a>
+							</li>
+							<li>
+								<a href="#">简介</a>
+							</li>
+							<li class="disabled">
+								<a href="#">信息</a>
+							</li>
+							<li class="dropdown pull-right">
+								<a href="#" data-toggle="dropdown" class="dropdown-toggle">设置<strong class="caret"></strong></a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#">操作</a>
+									</li>
+									<li>
+										<a href="#">设置栏目</a>
+									</li>
+									<li>
+										<a href="#">更多设置</a>
+									</li>
+									<li class="divider">
+									</li>
+									<li>
+										<a href="#">分割线</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--头部logo以及导航栏结束-->
+
+		<!--下方内容区域开始-->
+		<div class="content">
+
+			<!--左边导航栏-->
+			<div class="left">
+				<div class="aa"><a href="">首页</a></div>
+				<div class="aa"><a href="">收藏</a></div>
+				<div class="aa"><a href="">我的赞</a></div>
+				<hr />
+				<div class="aa"><a href="">首页</a></div>
+				<div class="aa"><a href="">收藏</a></div>
+				<div class="aa"><a href="">我的赞</a></div>
+				<hr />
+				<div class="aa"><a href="">首页</a></div>
+				<div class="aa"><a href="">收藏</a></div>
+				<div class="aa"><a href="">我的赞</a></div>
+				<hr />
+			</div>
+			<!--中间发布以及微博显示区域-->
+			<div class="center">
+				<!--微博发布区域开始-->
+				<div class="publish">
+					<br />
+					<span id="title">
+				<img src="img/title.PNG"/>
+			</span>
+					<form action="" method="post">
+						<textarea name="" rows="" cols=""></textarea>
+						<div class="container">
+							<div class="row clearfix">
+								<div class="col-md-1 column">
+
+								</div>
+								<div class="col-md-9 column">
+									<div class="row clearfix">
+										<div class="col-sm-2 column">
+											<a href="" class="xuanxiang">添加图片</a>
+										</div>
+										<div class="col-sm-2 column">
+											<select name="" class="">
+												<option value="">公开</option>
+												<option value="">仅自己可见</option>
+												<option value="">好友可见</option>
+												<option value="">匿名</option>
+											</select>
+										</div>
+										<div class="col-sm-2 column">
+											<button type="submit" class="btn btn-warning">发布</button>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-1 column">
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<!--微博类型选择导航区域-->
+				<!--微博内容导航栏开始-->
+				<br />
+				<div class="type">
+					<nav class="navbar navbar-default" role="navigation">
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav">
+								<li>
+									<a href="#" class="aa">全部</a>
+								</li>
+								<li>
+									<a href="#" class="aa">原创</a>
+								</li>
+								<li>
+									<a href="#" class="aa">图片</a>
+								</li>
+								<li>
+									<a href="#" class="aa">标签</a>
+								</li>
+								<li>
+									<a href="#" class="aa">音乐</a>
+								</li>
+								<li>
+									<a href="#" class="aa">文章</a>
+								</li>
+							</ul>
+							<form class="navbar-form navbar-left" role="search" style="margin-top: 18px;">
+								<div class="form-group">
+									<input type="text" class="form-control" style="width: 200px;" />
+								</div>
+								<button type="submit" class="btn btn-info">搜索</button>
+							</form>
+
+						</div>
+					</nav>
+					<!--微博内容导航栏结束-->
+				</div>
+				<!--微博显示区域开始-->
+				<div class="show">
+					<!--微博内容开始-->
+					<div class="WB_content S_bg2" style="background-color: white;">
+						<div class="content_top row clearfix">
+							<!--微博内容中头像div开始-->
+							<div class="col-md-2 column">
+								<a href="#">
+									<img src="img/touxiang.jpg" class="touxiang img-circle" />
+								</a>
+							</div>
+							<!--微博内容中头像div结束-->
+							<!--微博发布的内容div开始-->
+							<div class="col-md-10 column">
+								<a href="#">
+									<h5>cleanEach</h5>
+								</a>
+								<h6>2017年10月11日 13:22</h6>
+								<p>#玩微博赢X9手机#我已经错过了拯救世界的机会，但绝不能再错过它，这些超值大奖！我参加了活动“玩微博赢X9手机”，你也来试试手气 </p>
+								<img src="img/content1.jpg" />
+							</div>
+							<!--微博发布的内容div结束-->
+						</div>
+						<!--微博内容评论转发div开始-->
+						<div class="content_bottom">
+							<ul class="nav nav-pills WB_row_line">
+								<li class="col" style="width: 150px; text-align: center;">
+									<a href="#"> 收藏<span class="badge">20</span></a>
+								</li>
+								<li class="col" style="width: 150px; text-align: center;">
+									<a href="#"> 转发<span class="badge">15</span></a>
+								</li>
+								<li class="col" style="width: 150px; text-align: center;">
+									<a href="#"> 评论<span class="badge">40</span></a>
+								</li>
+								<li style="width: 150px; text-align: center;">
+									<a href="#"> 赞<em class=""></em><span class="badge">1</span></a>
+								</li>
+							</ul>
+						</div>
+						<!--微博内容评论转发div结束-->
+					</div>
+					<div class="WB_content S_bg2">
+
+					</div>
+					<div class="WB_content S_bg2">
+
+					</div>
+					<div class="WB_content S_bg2">
+
+					</div>
+					<!--微博内容结束-->
+
+				</div>
+			</div>
+			<!--中部发布以及微博显示区域结束-->
+
+			<!--右边个人信息以及热搜榜区域开始-->
+			<div class="right">
+				<!--个人信息显示区域开始-->
+				<div class="userinfo">
+					<img src="img/bg.jpg" alt="140×140" class="img-circle touxiang" />
+					<div class="username">
+						<a href="">我叫啦啦啦</a>
+					</div>
+					<div class="WB_cardwrap S_bg2 " style="background-color: white;">
+						<div class="PCD_counter">
+							<div class="WB_innerwrap">
+								<table class="tb_counter" cellspacing="0" cellpadding="0">
+									<tbody>
+										<tr>
+											<td class="S_line1">
+												<a href="#">
+													<strong class="W_f18">92</strong>
+													<span class="S_txt2">关注</span>
+												</a>
+											</td>
+											<td class="S_line1">
+												<a href="#">
+													<strong class="W_f18">15</strong>
+													<span class="S_txt2">粉丝</span>
+												</a>
+											</td>
+											<td class="S_line1">
+												<a href="#">
+													<strong class="W_f18">10</strong>
+													<span class="S_txt2">微博</span>
+												</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<br />
+				<!--微博，粉丝，关注卡片div的结束-->
+				<!--热搜榜显示区域开始-->
+
+				<div class="hotresearch">
+					<label class="control-label" style="margin:15px 0px 0px 15px;">热门话题</label>
+					<a href="" class="text-right" style="margin-left: 100px;">¤换一换</a>
+					<hr />
+
+					<div class="list">
+						<ol>
+							<li>
+								<a href="">鹿晗关晓彤宣布恋情</a>
+							</li>
+							<li>
+								<a href="">国庆都去哪了</a>
+							</li>
+							<li>
+								<a href="">绝地求生即将禁播20天</a>
+							</li>
+							<li>
+								Facilisis in pretium nisl aliquet
+							</li>
+							<li>
+								Nulla volutpat aliquam velit
+							</li>
+							<li>
+								Faucibus porta lacus fringilla vel
+							</li>
+							<li>
+								Aenean sit amet erat nunc
+							</li>
+							<li>
+								Eget porttitor lorem
+							</li>
+						</ol>
+
+					</div>
+					<hr />
+					<center><a href="">查看更多</a></center>
+				</div>
+			</div>
+			<!--右边个人信息以及热搜榜显示区域结束-->
+
+		</div>
+
+	</body>
+
+</html>
