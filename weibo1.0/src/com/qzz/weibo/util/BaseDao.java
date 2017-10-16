@@ -16,10 +16,10 @@ import org.apache.commons.beanutils.BeanUtils;
  */
 public class BaseDao {
 
-	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://localhost:3306/cms?useunicode=true&characterEncoding=utf-8";
-	private static final String USER = "root"; // 用户名
-	private static final String PASSWORD = "6846947";// 密码
+	private static final String DRIVER = "oracle.jdbc.OracleDriver";
+	private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl1";
+	private static final String USER = "scott"; // 用户名
+	private static final String PASSWORD = "jie6846947";// 密码
 
 	/**
 	 * 获取连接对象
@@ -51,8 +51,7 @@ public class BaseDao {
 	 * @param conn
 	 *            连接对象
 	 */
-	public static void close(ResultSet rs, PreparedStatement pstmt,
-			Connection conn) {
+	public static void close(ResultSet rs, PreparedStatement pstmt, Connection conn) {
 		try {
 			if (rs != null) {
 				rs.close();
@@ -78,8 +77,8 @@ public class BaseDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	private static PreparedStatement setPstmt(String sql, Connection conn,
-			PreparedStatement pstmt, Object... param) throws SQLException {
+	private static PreparedStatement setPstmt(String sql, Connection conn, PreparedStatement pstmt, Object... param)
+			throws SQLException {
 		pstmt = conn.prepareStatement(sql);
 		if (param != null) {
 			for (int i = 0; i < param.length; i++) {
@@ -121,7 +120,7 @@ public class BaseDao {
 			pstmt = setPstmt(sql, conn, pstmt, param);
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
-			//这里最好得到异常信息
+			// 这里最好得到异常信息
 			e.printStackTrace();
 			throw new RuntimeException("数据库操作失败!", e);
 		} finally {
@@ -132,9 +131,12 @@ public class BaseDao {
 	/**
 	 * 通用查询方法
 	 * 
-	 * @param sql  要查询的sql语句
-	 * @param cla  Class对象
-	 * @param param  参数
+	 * @param sql
+	 *            要查询的sql语句
+	 * @param cla
+	 *            Class对象
+	 * @param param
+	 *            参数
 	 * @return
 	 */
 	public static Object select(String sql, Class cla, Object... param) {
@@ -155,8 +157,7 @@ public class BaseDao {
 	 * @param param
 	 * @return
 	 */
-	public static Object select(String sql, Connection conn, Class cla,
-			Object... param) {
+	public static Object select(String sql, Connection conn, Class cla, Object... param) {
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
 		List<Object> list = new ArrayList<Object>();
@@ -165,8 +166,8 @@ public class BaseDao {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				// ?rs 结果集 cla Class对象
-				//object其实就是数据表结构对应的一条实体记录,object就是那个实体类对象
-				//这个方法convert是将结果集和cla对象进行转换
+				// object其实就是数据表结构对应的一条实体记录,object就是那个实体类对象
+				// 这个方法convert是将结果集和cla对象进行转换
 				Object object = convert(rs, cla);
 				list.add(object);
 			}
@@ -248,15 +249,15 @@ public class BaseDao {
 				return rs.getObject(1);
 			}
 			// 创建实体类的实例 Class类对象的方法，创建指定对象的实例
-			// new Goods();  new News();  new person();  new Users();
-			Object object = cla.newInstance(); 
+			// new Goods(); new News(); new person(); new Users();
+			Object object = cla.newInstance();
 			//// 结果集头信息对象
 			ResultSetMetaData metaData = rs.getMetaData();
 			// 循环为实体类的实例的属性赋值 getColumnCount得到列的个数
 			for (int i = 1; i <= metaData.getColumnCount(); i++) {
-				// 获取列名 
+				// 获取列名
 				String name = metaData.getColumnLabel(i);
-				//// 注：列名与属性名必须一致。最好遵循骆驼命名方法.  rs.getObject(i) 结果集中的查询结果和对象匹配
+				//// 注：列名与属性名必须一致。最好遵循骆驼命名方法. rs.getObject(i) 结果集中的查询结果和对象匹配
 				BeanUtils.setProperty(object, name, rs.getObject(i));
 			}
 			return object;
@@ -268,17 +269,21 @@ public class BaseDao {
 	/**
 	 * 分页操作 mysql;
 	 * 
-	 * @param sql  查询的sql语句
-	 * @param page  当前页码
-	 * @param pageSize 每页显示的记录数
-	 * @param cla   Class类对象
-	 * @param param   sql有关的参数列表
-	 * @return    PageData 对象
+	 * @param sql
+	 *            查询的sql语句
+	 * @param page
+	 *            当前页码
+	 * @param pageSize
+	 *            每页显示的记录数
+	 * @param cla
+	 *            Class类对象
+	 * @param param
+	 *            sql有关的参数列表
+	 * @return PageData 对象
 	 */
-	public static PageData getPage(String sql, Integer page, Integer pageSize,
-			Class cla, Object... param) {
-		//sql  select * from news
-		//select count(1) from (select * from news) t  --得到记录总数
+	public static PageData getPage(String sql, Integer page, Integer pageSize, Class cla, Object... param) {
+		// sql select * from news
+		// select count(1) from (select * from news) t --得到记录总数
 		String selSql = "select count(1) from (" + sql + ") t";
 		if (page == null) {
 			page = 1;
@@ -286,17 +291,17 @@ public class BaseDao {
 		if (pageSize == null) {
 			pageSize = 10;
 		}
-		//查询得到总记录数
+		// 查询得到总记录数
 		Integer count = Integer.parseInt(getFirst(selSql, param).toString());
-		//实现简单的分页语句
-		//select * from news limit 起始位置,每页显示的记录数
-		//select * from news limit 起始位置,pageSize
-		//select * from news limit 10,5   每页5条记录 ，显示第3页
-		int start = (page - 1) * pageSize; //起始位置算法
-		//+ 其实不太好 最好用stringBuffer stringBuilder  append
+		// 实现简单的分页语句
+		// select * from news limit 起始位置,每页显示的记录数
+		// select * from news limit 起始位置,pageSize
+		// select * from news limit 10,5 每页5条记录 ，显示第3页
+		int start = (page - 1) * pageSize; // 起始位置算法
+		// + 其实不太好 最好用stringBuffer stringBuilder append
 		sql = sql + " limit " + start + "," + pageSize;
 		List list = (List) select(sql, cla, param);
-		//创建一个PageData对象
+		// 创建一个PageData对象
 		PageData data = new PageData(list, count, pageSize, page);
 		return data;
 	}
@@ -310,10 +315,8 @@ public class BaseDao {
 	 * @param identity
 	 * @return
 	 */
-	public static PageData getPage(Integer page, Integer pageSize, Class cla,
-			String identity) {
-		String name = cla.getName().substring(
-				cla.getName().lastIndexOf(".") + 1);// 根据命名规则从类名获取数据库表名
+	public static PageData getPage(Integer page, Integer pageSize, Class cla, String identity) {
+		String name = cla.getName().substring(cla.getName().lastIndexOf(".") + 1);// 根据命名规则从类名获取数据库表名
 		String selSql = "select count(1) from " + name;// 获取总数
 		if (page == null) {
 			page = 1;
@@ -323,12 +326,38 @@ public class BaseDao {
 		}
 		int start = (page - 1) * pageSize;
 		Integer count = Integer.parseInt(getFirst(selSql, null).toString());
-		selSql = "select top " + pageSize + " * from " + name + " where "
-				+ identity + " not in (select top " + start + " " + identity
-				+ " from " + name + " )"; // 拼接查询语句
+		selSql = "select top " + pageSize + " * from " + name + " where " + identity + " not in (select top " + start
+				+ " " + identity + " from " + name + " )"; // 拼接查询语句
 		List list = (List) select(selSql, cla, null);
 		PageData data = new PageData(list, count, pageSize, page);
 		return data;
 	}
 
+	public static PageData oracleGetPage(String sql, Integer page, Integer pageSize, Class cla, Object... param) {
+		// sql select * from news
+		
+		// 实现简单的分页语句
+		if (page == null) {
+			page = 1;
+		}
+		if (pageSize == null) {
+			pageSize = 10;
+		}
+		
+		int start = (page - 1) * pageSize; // 起始位置算法
+		int end = pageSize*page+1;
+		sql = sql + end + ") tt where r>" + start;
+		
+		// select count(1) from (select * from news) t --得到记录总数
+		String selSql = "select count(1) from (" + sql + ") t";
+		
+		
+		List list = (List) select(sql, cla, param);
+		// 查询得到总记录数
+		Integer count = Integer.parseInt(getFirst(selSql, param).toString());
+
+		// 创建一个PageData对象
+		PageData data = new PageData(list, count, pageSize, page);
+		return data;
+	}
 }
