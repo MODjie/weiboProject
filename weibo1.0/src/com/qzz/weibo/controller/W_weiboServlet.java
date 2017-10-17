@@ -78,8 +78,8 @@ public class W_weiboServlet extends HttpServlet {
 				w.setPUBLISHTIME(sdf.format(date));
 				w.setIMAGE(DataUtil.imgname);
 				w.setTYPEID(typeId);
-				if(ws.addWeiBo(w))
-					response.getWriter().print("<script language='javascript'>alert('发布成功');window.location.href='homepage.jsp';</script>");		
+				ws.addWeiBo(w);
+					request.getRequestDispatcher("mainpage.jsp").forward(request, response);
 			}
 		}
 		

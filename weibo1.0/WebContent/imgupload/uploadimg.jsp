@@ -22,7 +22,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="css/imguploadcss/dhtmlXVault.css" />
-
     <script language="JavaScript" type="text/javascript" src="${path}js/dhtmlXVault.js"></script>
 
     <script language="JavaScript" type="text/javascript">
@@ -62,6 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body onload="doOnLoad()">
     <div style="color:#ff0000;font-size:12px;">* 目前支持的上传格式 jpg,gif,bmp,png</div>
     <div id="vault1"></div>
+    <button onclick="history.go(-1)">返回</button>
     
   </body>
 </html>
