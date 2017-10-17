@@ -201,7 +201,7 @@
 							<a href="# "> 转发<span class="badge ">15</span></a>
 						</li>
 						<li class="col " style="width: 150px; text-align: center; ">
-							<a href="more.html"> 评论<span class="badge ">40</span></a>
+							<a href="more.jsp"> 评论<span class="badge ">40</span></a>
 						</li>
 						<li style="width: 150px; text-align: center; ">
 							<a href="# "> 赞<em class=" "></em><span class="badge ">1</span></a>
