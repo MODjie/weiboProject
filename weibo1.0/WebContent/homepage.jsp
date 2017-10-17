@@ -135,7 +135,7 @@
 							<hr />
 						</div>
 						<!--中间发布以及微博显示区域-->
-						<div class="center">
+						<div class="center" style="height:20000px">
 
 							<!-- 弹窗 -->
 							<div id="myModal" class="modal">
@@ -150,7 +150,7 @@
 								<!-- 文本描述 -->
 								<div id="caption"></div>
 							</div>
-							<iframe id="maincontent" name="maincontent" src="mainpage.jsp" frameborder="0" width="100%" height="100%"></iframe>
+							<iframe id="maincontent" name="maincontent" src="WeiBoServlet?op=queryAllWb" frameborder="0" width="100%" height="100%"></iframe>
 						</div>
 						<!--中部发布以及微博显示区域结束-->
 

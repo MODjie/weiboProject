@@ -65,6 +65,15 @@ public class W_weiboServlet extends HttpServlet {
 				request.setAttribute("sendName", sendName);
 				request.getRequestDispatcher("my_home.jsp").forward(request, response);
 			}
+			//查询所有微博
+			if (op.equals("queryAllWb")) {
+//				String sendName = (String) request.getAttribute("sendName");
+				//将查询到的微博list倒序输出			
+				list = ws.queryMyWb();
+				System.out.println(list.size()+"size");
+				request.setAttribute("list", list);
+				request.getRequestDispatcher("mainpage.jsp").forward(request, response);
+			}
 			//op的值等于publish说明提交发布请求
 			if(op.equals("publish")) {
 				Date date = new Date();

@@ -101,7 +101,7 @@
 
 	</head>
 
-	<body style="background-color: rgba(0,0,0,0);">
+	<body style="background-color: rgba(0,0,0,0); overflow:scroll;overflow-y:hidden">
 		<div class="publish">
 			<br />
 			<span id="title">
@@ -169,8 +169,11 @@
 			<!--微博内容导航栏结束-->
 		</div>
 		<!--微博显示区域开始-->
+		
 		<div class="show ">
 			<!--微博内容开始-->
+	<c:if test="${requestScope.list!=null}">
+		<c:forEach items="${requestScope.list}" var="weibo">
 			<div class="WB_content S_bg2 " style="background-color: white; margin-top: 15px; ">
 			<div class="container ">
 				<div class="content_top row clearfix ">
@@ -184,11 +187,11 @@
 					<!--微博发布的内容div开始-->
 					<div  style=" display: inline;float: left; width: 550px; ">
 						<a href="# ">
-							<h5>cleanEach</h5>
+							<h5>${weibo.SENDNAME}</h5>
 						</a>
-						<h6>2017年10月11日 13:22</h6>
-						<p>#haha玩微博赢X9手机#我已经错过了拯救世界的机会，但绝不能再错过它，这些超值大奖！我参加了活动“玩微博赢X9手机”，你也来试试手气 </p>
-						<img class="myImg " alt="文本描述 " src="img/content1.jpg " />
+						<h6>${weibo.PUBLISHTIME}</h6>
+						<p>${weibo.CONTENT}</p>
+						<img class="myImg "  src="${weibo.IMAGE}" />
 					</div>
 					<!--微博发布的内容div结束-->
 				</div>
@@ -214,134 +217,11 @@
 			
 				<!--微博内容评论转发div结束-->
 			</div>
-				<div class="WB_content S_bg2 " style="background-color: white; margin-top: 15px; ">
-				<div class="container ">
-				<div class="content_top row clearfix ">
-					<!--微博内容中头像div开始-->
-					<div style=" display: inline; float: left; ">
-						<a href="# ">
-							<img   src="img/touxiang.jpg " width="100px " height="100px " class="touxiang img-circle " />
-						</a>
-					</div>
-					<!--微博内容中头像div结束-->
-					<!--微博发布的内容div开始-->
-					<div  style=" display: inline;float: left; width: 550px; ">
-						<a href="# ">
-							<h5>cleanEach</h5>
-						</a>
-						<h6>2017年10月11日 13:22</h6>
-						<p>#玩微博赢X9手机#我已经错过了拯救世界的机会，但绝不能再错过它，这些超值大奖！我参加了活动“玩微博赢X9手机”，你也来试试手气 </p>
-						<img  class="myImg " src="img/content1.jpg " />
-					</div>
-					<!--微博发布的内容div结束-->
-				</div>
-					<div class="content_bottom " >
-					<ul class="nav nav-pills WB_row_line " >
-						<li class="col " style="width: 150px; text-align: center; ">
-							<a href="# "> 收藏<span class="badge ">20</span></a>
-						</li>
-						<li class="col " style="width: 150px; text-align: center; ">
-							<a href="# "> 转发<span class="badge ">15</span></a>
-						</li>
-						<li class="col " style="width: 150px; text-align: center; ">
-							<a href="# "> 评论<span class="badge ">40</span></a>
-						</li>
-						<li style="width: 150px; text-align: center; ">
-							<a href="# "> 赞<em class=" "></em><span class="badge ">1</span></a>
-						</li>
-					</ul>
-				</div>
-								
-			</div>
-				<!--微博内容评论转发div开始-->
+				</c:forEach>
+								</c:if>
 			
-				<!--微博内容评论转发div结束-->
-			</div>
-				<div class="WB_content S_bg2 " style="background-color: white; margin-top: 15px; ">
-					<div class="container ">
-				<div class="content_top row clearfix ">
-					<!--微博内容中头像div开始-->
-					<div style=" display: inline; float: left; ">
-						<a href="# ">
-							<img src="img/touxiang.jpg " width="100px " height="100px " class="touxiang img-circle " />
-						</a>
-					</div>
-					<!--微博内容中头像div结束-->
-					<!--微博发布的内容div开始-->
-					<div  style=" display: inline;float: left; width: 550px; ">
-						<a href="# ">
-							<h5>cleanEach</h5>
-						</a>
-						<h6>2017年10月11日 13:22</h6>
-						<p>#玩微博赢X9手机#我已经错过了拯救世界的机会，但绝不能再错过它，这些超值大奖！我参加了活动“玩微博赢X9手机”，你也来试试手气 </p>
-						<img src="img/content1.jpg " />
-					</div>
-					<!--微博发布的内容div结束-->
-				</div>
-					<div class="content_bottom " >
-					<ul class="nav nav-pills WB_row_line " >
-						<li class="col " style="width: 150px; text-align: center; ">
-							<a href="# "> 收藏<span class="badge ">20</span></a>
-						</li>
-						<li class="col " style="width: 150px; text-align: center; ">
-							<a href="# "> 转发<span class="badge ">15</span></a>
-						</li>
-						<li class="col " style="width: 150px; text-align: center; ">
-							<a href="# "> 评论<span class="badge ">40</span></a>
-						</li>
-						<li style="width: 150px; text-align: center; ">
-							<a href="# "> 赞<em class=" "></em><span class="badge ">1</span></a>
-						</li>
-					</ul>
-				</div>
-								
-			</div>
-				<!--微博内容评论转发div开始-->
 			
-				<!--微博内容评论转发div结束-->
-			</div>
-				<div class="WB_content S_bg2 " style="background-color: white; margin-top: 15px; ">
-					<div class="container ">
-				<div class="content_top row clearfix ">
-					<!--微博内容中头像div开始-->
-					<div style=" display: inline; float: left; ">
-						<a href="# ">
-							<img src="img/touxiang.jpg " width="100px " height="100px " class="touxiang img-circle " />
-						</a>
-					</div>
-					<!--微博内容中头像div结束-->
-					<!--微博发布的内容div开始-->
-					<div  style=" display: inline;float: left; width: 550px; ">
-						<a href="# ">
-							<h5>cleanEach</h5>
-						</a>
-						<h6>2017年10月11日 13:22</h6>
-						<p>#玩微博赢X9手机#我已经错过了拯救世界的机会，但绝不能再错过它，这些超值大奖！我参加了活动“玩微博赢X9手机”，你也来试试手气 </p>
-						<img src="img/content1.jpg " />
-					</div>
-					<!--微博发布的内容div结束-->
-				</div>
-					<div class="content_bottom " >
-					<ul class="nav nav-pills WB_row_line " >
-						<li class="col " style="width: 150px; text-align: center; ">
-							<a href="# "> 收藏<span class="badge ">20</span></a>
-						</li>
-						<li class="col " style="width: 150px; text-align: center; ">
-							<a href="# "> 转发<span class="badge ">15</span></a>
-						</li>
-						<li class="col " style="width: 150px; text-align: center; ">
-							<a href="# "> 评论<span class="badge ">40</span></a>
-						</li>
-						<li style="width: 150px; text-align: center; ">
-							<a href="# "> 赞<em class=" "></em><span class="badge ">1</span></a>
-						</li>
-					</ul>
-				</div>
-								
-			</div>
-				<!--微博内容评论转发div开始-->
 			
-				<!--微博内容评论转发div结束-->
 			</div>
 			<!--微博内容结束-->
 
