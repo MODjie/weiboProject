@@ -16,7 +16,7 @@ public class weiboTest {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
 		W_weibo w = new W_weibo();
 		w.setCONTENT("终于发微博了，好开森");
-		w.setSENDNAME("小蜜蜂");
+		w.setSENDNAME("看看不懂");
 		Date date = new Date();
 		String publishtime = sdf.format(date);
 		w.setPUBLISHTIME(publishtime);
@@ -24,7 +24,7 @@ public class weiboTest {
 		
 		
 		W_weiboService ws = new W_weiboService();
-	
+		ws.addWeiBo(w);
 		List<W_weibo> list = ws.queryMyWb();
 		System.out.println(list.size());
 		for (W_weibo w_weibo : list) {
@@ -36,13 +36,6 @@ public class weiboTest {
 		
 		
 		
-		
-		System.out.println("时间"+new Date().getTime()+"");
-		
-		
-		
-		
-		System.out.println("时间"+new Date().getTime()+"");
 		
 		
 	}

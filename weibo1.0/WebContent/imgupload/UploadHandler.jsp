@@ -1,3 +1,4 @@
+<%@page import="com.qzz.weibo.util.DataUtil"%>
 <%@ page import="org.apache.commons.fileupload.*"  pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.fileupload.servlet.*" %>
 <%@ page import="com.scand.fileupload.*" %>
@@ -56,13 +57,15 @@ while (iter.hasNext()) {
         long l = System.currentTimeMillis();
         String houzhui = fileName.substring(fileName.lastIndexOf("."));
         //指定文件的名字
-        System.out.println(houzhui);
         fileName = new Date().getTime()+""+houzhui;
+      
         if(houzhui.equals(".jpg") || houzhui.equals(".gif") || houzhui.equals(".png") || houzhui.equals(".bmp") || houzhui.equals(".JPG") || houzhui.equals(".GIF") || houzhui.equals(".PNG") || houzhui.equals(".BMP")){
 		 File uploadedFile = new File(dirs,fileName);
 		 item.write(uploadedFile);
+		 DataUtil.imgname="upload/"+fileName;
+		 System.out.println("DataUtil.imgname"+DataUtil.imgname);
 		 session.setAttribute("FileUpload.Progress."+fileId,"-1");
-		 session.setAttribute("imgname", fileName);
+		
         }else{
          session.setAttribute("FileUpload.Progress."+fileId,"-2");
         }

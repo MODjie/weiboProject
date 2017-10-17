@@ -58,7 +58,17 @@ public class W_weiboServlet extends HttpServlet {
 				request.setAttribute("test", "test");
 				request.getRequestDispatcher("my_home.jsp").forward(request, response);
 			}
+			//op的值等于publish说明提交发布请求
+			if(op.equals("publish")) {
+				String content = request.getParameter("content");
+				String sendname = (String) request.getSession().getAttribute("username");
+				String type = request.getParameter("type");
+				System.out.println(content+sendname+type);
+			}
 		}
+		
+		
+		
 	}
 
 }

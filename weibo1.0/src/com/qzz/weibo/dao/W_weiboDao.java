@@ -24,4 +24,14 @@ public class W_weiboDao {
 		System.out.println(list);
 		return list;
 	}
+	
+	/***
+	 * 向微博表中插入一条记录
+	 * @param w 微博对象
+	 * @return
+	 */
+	public boolean addWeiBo(W_weibo w) {
+		String sql = "insert into W_WEIBO values(null,null,?,?,?,?,0,0,0,1,'否',null)";
+		return BaseDao.execute(sql, w.getCONTENT(),w.getSENDNAME(),w.getIMAGE(),w.getPUBLISHTIME())>0;
+	}
 }
