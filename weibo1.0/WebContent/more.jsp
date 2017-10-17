@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -68,7 +69,7 @@
 							<div class="morename"
 								style="font-weight: bolder; line-height: 30px;">
 								<div style="display: inline-block;">
-									<a href="" style="text-decoration: none;">${requestScope.detailWb.SENDNAME }</a>
+									<a id="nikeName" href="" style="text-decoration: none;">${requestScope.detailWb.SENDNAME }</a>
 								</div>
 
 								<div
@@ -84,17 +85,17 @@
 								style="color: #889db6; font: 12px/18px arial; overflow: hidden; zoom: 1;">
 								<span> 10月05日 12:20 &nbsp;</span>
 							</div>
-							<div style="margin-top: 10px;">${requestScope.detailWb.FWDCONTENT} ${requestScope.detailWb.CONTENT }</div>
+							<div style="margin-top: 10px;">${requestScope.detailWb.FWDCONTENT}
+								${requestScope.detailWb.CONTENT }</div>
 						</div>
 						<!--
             	作者：offline
             	时间：2017-10-14
             	描述：中间图片区域开始
             -->
-						<div
-							style="text-align: center;  margin-top: 95px; padding: 10px; ">
+						<div style="text-align: center; margin-top: 95px; padding: 10px;">
 							<div style="margin-top: 20px;">
-								<img  src="${requestScope.detailWb.IMAGE }" />
+								<img src="${requestScope.detailWb.IMAGE }" />
 							</div>
 						</div>
 
@@ -106,13 +107,13 @@
 						<div class="shoucangqu">
 							<ul>
 								<li><a href="#"> <span
-										class="glyphicon glyphicon-star-empty"></span>&nbsp;<span>收藏</span></a></li>
+										class="glyphicon glyphicon-star-empty"></span>&nbsp;<span>${requestScope.detailWb.COLLECTNUM }</span></a></li>
 								<li><a href="#"><span
-										class="glyphicon glyphicon-new-window"></span> &nbsp;<span>4524</span></a></li>
+										class="glyphicon glyphicon-new-window"></span> &nbsp;<span>${requestScope.detailWb.FORWARDNUM }</span></a></li>
 								<li><a href="#"><span
-										class="glyphicon glyphicon-comment"></span> &nbsp;<span>4524</span></a></a></li>
+										class="glyphicon glyphicon-comment"></span> &nbsp;<span>${requestScope.detailWb.COMMENTNUM }</span></a></li>
 								<li><a href="#"><span
-										class="glyphicon glyphicon-thumbs-up"></span> &nbsp;<span>4524</span></a></a></li>
+										class="glyphicon glyphicon-thumbs-up"></span> &nbsp;<span>${requestScope.detailWb.ZANNUM }</span></a></li>
 							</ul>
 
 						</div>
@@ -129,12 +130,14 @@
 									<p id="face" style="position: absolute;">
 										<img src="img/imagemore/HI.jpg" class="current" />
 									</p>
-									<textarea class="teratext"
+									<textarea id="cm_area" class="teratext"
 										style="width: 580px; margin-left: 60px; border: 1px solid #D9D9D9;"></textarea>
 								</div>
 								<div class="tr">
 									<p>
-										<input id="sendBtn" type="button" value="评论"
+										<input type="hidden" id="weiboId"
+											value="${requestScope.detailWb.WEIBOID }"> <input
+											id="sendBtn" type="button" value="评论"
 											style="background-color: rgb(255, 192, 159); color: white;"
 											title="快捷键 Ctrl+Enter" />
 									</p>
@@ -145,38 +148,26 @@
 									<span style="background-color: rgb(242, 242, 245);">按热度</span>
 								</h3>
 								<ul>
-									<li>
+									<c:if test="${requestScope.list2!=null}">
+										<c:forEach items="${requestScope.list2}" var="comment">
+											<li>
+												<div class="userPic">
+													<img src="img/imagemore/1.jpg" />
+												</div>
+												<div class="content">
+													<div class="userName">
+														<a href="#" style="color: orangered;">${comment.COMMENTNAME }</a>:
+													</div>
+													<div class="msgInfo">${comment.COMMCONTENT }</div>
+													<div class="times">
+														<span>07月05日 15:14</span><a class="del"
+															href="javascript:;">删除</a>
+													</div>
+												</div>
 
-										<div class="userPic">
-											<img src="img/imagemore/1.jpg" />
-										</div>
-										<div class="content">
-											<div class="userName">
-												<a href="#" style="color: orangered;">伯牙绝弦</a>:
-											</div>
-											<div class="msgInfo">下一季的中国有嘻哈的就是你了</div>
-											<div class="times">
-												<span>07月05日 15:14</span><a class="del" href="javascript:;">删除</a>
-											</div>
-										</div>
-
-									</li>
-									<li>
-										<div class="userPic">
-											<img src="img/imagemore/2.jpg" />
-										</div>
-										<div class="content">
-											<div class="userName">
-												<a href="#" style="color: orangered;">火力全开</a>:
-											</div>
-											<div class="msgInfo">我是歌手第五季</div>
-											<div class="times">
-												<span>07月05日 12:20</span><a class="del" href="javascript:;">删除</a>
-											</div>
-
-										</div>
-									</li>
-
+											</li>
+										</c:forEach>
+									</c:if>
 								</ul>
 							</div>
 						</div>
@@ -242,4 +233,19 @@
 			</div>
 		</div>
 </body>
+
+<script type="text/javascript">
+	$(function() {
+		$("#sendBtn").click(
+				function() {
+					var nikeName = $("#nikeName").text();
+					var weiboId = $("#weiboId").val();
+					var commentContent = $("#cm_area").val();
+					location.href = "WeiBoServlet?op=queryWbById&cmsuccess=yes&nikeName="
+							+ nikeName + "&weiboId=" + weiboId
+							+ "&commentContent=" + commentContent;
+				})
+	});
+</script>
 </html>
+

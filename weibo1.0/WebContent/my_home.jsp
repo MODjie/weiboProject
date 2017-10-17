@@ -229,7 +229,7 @@
 															class="glyphicon glyphicon-new-window"></span> &nbsp;<span>${weibo.FORWARDNUM }</span></a>
 													</li>
 													<li class="col" style="width: 170px; text-align: center;">
-														<a href="WeiBoServlet?op=queryWbById&weiboid=${weibo.WEIBOID }"> <span class="glyphicon glyphicon-comment"></span>
+														<a href="WeiBoServlet?op=queryWbById&weiboid=${weibo.WEIBOID }&cmsuccess=no"> <span class="glyphicon glyphicon-comment"></span>
 															&nbsp;<span>${weibo.COMMENTNUM }</span></a>
 													</li>
 													<li style="width: 170px; text-align: center;"><a

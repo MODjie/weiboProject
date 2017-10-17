@@ -12,9 +12,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.qzz.weibo.entity.W_comment;
 import com.qzz.weibo.entity.W_weibo;
+import com.qzz.weibo.service.W_commentService;
 import com.qzz.weibo.service.W_weiboService;
 import com.qzz.weibo.util.DataUtil;
+
+import sun.nio.cs.ext.ISO_8859_11;
 
 /**
  * Servlet implementation class WeiBoServlet
@@ -22,7 +26,8 @@ import com.qzz.weibo.util.DataUtil;
 @WebServlet("/WeiBoServlet")
 public class W_weiboServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private W_weiboService ws = new W_weiboService();   
+    private W_weiboService ws = new W_weiboService(); 
+    private W_commentService wcs = new W_commentService();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -52,14 +57,14 @@ public class W_weiboServlet extends HttpServlet {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
 		//得到微博内容的集合
 		List<W_weibo> list = new ArrayList<>();
-		
+		List<W_comment> list2 = new ArrayList<>();
 		//判断op的值
 		if (request.getParameter("op")!=null) {
 			String op = request.getParameter("op");
 			//查找我的主页中我发过的所有微博
 			if (op.equals("queryMyWb")) {
 //				String sendName = (String) request.getAttribute("sendName");
-				String sendName = "看看不懂";
+				String sendName = "杰哥";
 				//将查询到的微博list倒序输出			
 				list = ws.queryWbByName(sendName);
 				request.setAttribute("list", list);
@@ -68,7 +73,6 @@ public class W_weiboServlet extends HttpServlet {
 			}
 			if (op.equals("queryAllWb")) {			
 				list = ws.queryMyWb();
-				System.out.println(list.size()+"size");
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("mainpage.jsp").forward(request, response);
 			}
@@ -88,11 +92,39 @@ public class W_weiboServlet extends HttpServlet {
 				if(ws.addWeiBo(w))
 					response.getWriter().print("<script language='javascript'>alert('发布成功');</script>");		
 			//通过id查找单个微博，跳转到该微博的详细信息页面
-			}else if (op.equals("queryWbById")) {		
-				int weiboId = Integer.parseInt((String) request.getParameter("weiboid"));
+			}else if (op.equals("queryWbById")) {
+				int weiboId = 0;
+				//接收评论成功标志
+				String successFlag = new String(request.getParameter("cmsuccess").getBytes("ISO-8859-1"),"UTF-8");
+				//如果没有评论
+				if (successFlag.equals("no")) {
+					weiboId = Integer.parseInt((String) request.getParameter("weiboid"));
+				//如果接收评论标志为yes，则增加评论
+				}else if (successFlag.equals("yes")) {
+					weiboId = Integer.parseInt((String) request.getParameter("weiboId"));
+					String nikeName = new String(request.getParameter("nikeName").getBytes("ISO-8859-1"),"UTF-8");
+					String commentContent = new String(request.getParameter("commentContent").getBytes("ISO-8859-1"),"UTF-8");
+					
+					W_comment comment = new W_comment(1,weiboId,nikeName,commentContent);
+					wcs.addComment(comment);
+				}
 				list = ws.queryWbById(weiboId);
 				W_weibo detailWb = list.get(0);
+				//获取本条微博的所有评论内容				
+				list2 = wcs.queryCmById(weiboId);
+				
+				
+				
+				request.setAttribute("list2", list2);
 				request.setAttribute("detailWb", detailWb);
+				request.getRequestDispatcher("more.jsp").forward(request, response);
+			}else if (op.equals("addComment")) {
+				int weiboId = Integer.parseInt((String) request.getParameter("weiboId"));
+				String nikeName = new String(request.getParameter("nikeName").getBytes("ISO-8859-1"),"UTF-8");
+				String commentContent = new String(request.getParameter("commentContent").getBytes("ISO-8859-1"),"UTF-8");
+				
+				W_comment comment = new W_comment(1,weiboId,nikeName,commentContent);
+				wcs.addComment(comment);
 				request.getRequestDispatcher("more.jsp").forward(request, response);
 			}		
 		}
