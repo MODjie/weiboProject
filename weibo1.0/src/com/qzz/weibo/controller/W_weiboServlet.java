@@ -79,7 +79,7 @@ public class W_weiboServlet extends HttpServlet {
 				w.setIMAGE(DataUtil.imgname);
 				w.setTYPEID(typeId);
 				if(ws.addWeiBo(w))
-					response.getWriter().print("<script language='javascript'>alert('发布成功');window.location.href='homepage.jsp';</script>");		
+					response.getWriter().print("<script language='javascript'>alert('发布成功');</script>");		
 			}
 		}
 		

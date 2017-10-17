@@ -59,7 +59,8 @@
 							<div id="fm" class="col-md-12 column">
 								<a href="#"><img alt="140x140" src="img/touxiang.jpg"
 									class="img-circle" /></a> <a id="userName"
-									href="WeiBoServlet?op=queryMyWb"><h4 id="niCheng">${requestScope.sendName } </h4></a>
+									href="WeiBoServlet?op=queryMyWb"><h4 id="niCheng">${requestScope.sendName }
+									</h4></a>
 								<h5>一句话介绍下你自己吧,让别人更了解你</h5>
 							</div>
 							<!--封面div结束-->
@@ -208,7 +209,7 @@
 												<!--微博发布的内容div开始-->
 												<div class="col-md-10 column">
 													<a href="WeiBoServlet?op=queryMyWb">
-														<h5 >${weibo.SENDNAME }</h5>
+														<h5>${weibo.SENDNAME }</h5>
 													</a>
 													<h6>${weibo.PUBLISHTIME }</h6>
 													<p>${weibo.FWDCONTENT }${weibo.CONTENT }</p>
@@ -219,18 +220,21 @@
 											<!--微博内容评论转发div开始-->
 											<div class="content_bottom">
 												<ul class="nav nav-pills WB_row_line">
-													<li class="col" style="width: 170px; text-align: center;">
-														<a href="#"> 收藏<span class="badge">${weibo.COLLECTNUM }</span></a>
+													<li class="col" style="width: 175px; text-align: center;">
+														<a id="test" href="#"> <span
+															class="glyphicon glyphicon-star-empty"></span>&nbsp;<span>${weibo.COLLECTNUM }</span></a>
+													</li>
+													<li class="col" style="width: 175px; text-align: center;">
+														<a href="#"><span
+															class="glyphicon glyphicon-new-window"></span> &nbsp;<span>${weibo.FORWARDNUM }</span></a>
 													</li>
 													<li class="col" style="width: 170px; text-align: center;">
-														<a href="#"> 转发<span class="badge">${weibo.FORWARDNUM }</span></a>
-													</li>
-													<li class="col" style="width: 170px; text-align: center;">
-														<a href="#"> 评论<span class="badge">${weibo.COMMENTNUM }</span></a>
+														<a href="#"> <span class="glyphicon glyphicon-comment"></span>
+															&nbsp;<span>${weibo.COMMENTNUM }</span></a>
 													</li>
 													<li style="width: 170px; text-align: center;"><a
-														href="#"> 赞<em class=""></em><span class="badge">${weibo.ZANNUM }</span></a>
-													</li>
+														href="#"> <span class="glyphicon glyphicon-thumbs-up"></span>
+															&nbsp;<span>${weibo.ZANNUM }</span></a></li>
 												</ul>
 											</div>
 											<!--微博内容评论转发div结束-->
