@@ -1,7 +1,9 @@
 package com.qzz.weibo.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.qzz.weibo.entity.W_weibo;
 import com.qzz.weibo.service.W_weiboService;
+import com.qzz.weibo.util.DataUtil;
 
 /**
  * Servlet implementation class WeiBoServlet
@@ -45,7 +48,7 @@ public class W_weiboServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
 		//得到微博内容的集合
 		List<W_weibo> list = new ArrayList<>();
 		
@@ -60,10 +63,19 @@ public class W_weiboServlet extends HttpServlet {
 			}
 			//op的值等于publish说明提交发布请求
 			if(op.equals("publish")) {
+				Date date = new Date();
 				String content = request.getParameter("content");
 				String sendname = (String) request.getSession().getAttribute("username");
-				String type = request.getParameter("type");
-				System.out.println(content+sendname+type);
+				String typeName = request.getParameter("type");
+				int typeId = ws.queryTypeIdByName(typeName);
+				W_weibo w = new W_weibo();
+				w.setCONTENT(content);
+				w.setSENDNAME(sendname);				
+				w.setPUBLISHTIME(sdf.format(date));
+				w.setIMAGE(DataUtil.imgname);
+				w.setTYPEID(typeId);
+				if(ws.addWeiBo(w))
+					response.getWriter().print("<script language='javascript'>alert('登录已失效请重新登陆');window.location.href='homepage.jsp';</script>");		
 			}
 		}
 		

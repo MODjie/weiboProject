@@ -19,7 +19,7 @@ public class W_weibo {
 	private String ISFORWORD;
 	private int FWDWEIBOID;	
 	private int COLLECTNUM;
-	
+	private String TOUXIANG;
 	
 	
 	public int getCOLLECTNUM() {
@@ -101,17 +101,19 @@ public class W_weibo {
 		FWDWEIBOID = fWDWEIBOID;
 	}
 	
-	
-	@Override
-	public String toString() {
-		return "W_weibo [WEIBOID=" + WEIBOID + ", FWDCONTENT=" + FWDCONTENT + ", CONTENT=" + CONTENT + ", SENDNAME="
-				+ SENDNAME + ", IMAGE=" + IMAGE + ", PUBLISHTIME=" + PUBLISHTIME + ", COMMENTNUM=" + COMMENTNUM
-				+ ", ZANNUM=" + ZANNUM + ", FORWARDNUM=" + FORWARDNUM + ", TYPEID=" + TYPEID + ", ISFORWORD="
-				+ ISFORWORD + ", FWDWEIBOID=" + FWDWEIBOID + ", COLLECTNUM=" + COLLECTNUM + "]";
+	public String getTOUXIANG() {
+		return TOUXIANG;
+	}
+	public void setTOUXIANG(String tOUXIANG) {
+		TOUXIANG = tOUXIANG;
 	}
 	
+	
+	
+	
 	public W_weibo(int wEIBOID, String fWDCONTENT, String cONTENT, String sENDNAME, String iMAGE, String pUBLISHTIME,
-			int cOMMENTNUM, int zANNUM, int fORWARDNUM, int tYPEID, String iSFORWORD, int fWDWEIBOID, int cOLLECTNUM) {
+			int cOMMENTNUM, int zANNUM, int fORWARDNUM, int tYPEID, String iSFORWORD, int fWDWEIBOID, int cOLLECTNUM,
+			String tOUXIANG) {
 		super();
 		WEIBOID = wEIBOID;
 		FWDCONTENT = fWDCONTENT;
@@ -126,6 +128,15 @@ public class W_weibo {
 		ISFORWORD = iSFORWORD;
 		FWDWEIBOID = fWDWEIBOID;
 		COLLECTNUM = cOLLECTNUM;
+		TOUXIANG = tOUXIANG;
+	}
+	@Override
+	public String toString() {
+		return "W_weibo [WEIBOID=" + WEIBOID + ", FWDCONTENT=" + FWDCONTENT + ", CONTENT=" + CONTENT + ", SENDNAME="
+				+ SENDNAME + ", IMAGE=" + IMAGE + ", PUBLISHTIME=" + PUBLISHTIME + ", COMMENTNUM=" + COMMENTNUM
+				+ ", ZANNUM=" + ZANNUM + ", FORWARDNUM=" + FORWARDNUM + ", TYPEID=" + TYPEID + ", ISFORWORD="
+				+ ISFORWORD + ", FWDWEIBOID=" + FWDWEIBOID + ", COLLECTNUM=" + COLLECTNUM + ", TOUXIANG=" + TOUXIANG
+				+ "]";
 	}
 	public W_weibo() {
 		// TODO Auto-generated constructor stub
