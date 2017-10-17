@@ -74,6 +74,10 @@
 		</style>
 		<script type="text/javascript">
 			$(function() {
+				window.onload = function() {
+					var height=$("body").height()+50;//这个是jquery代码 
+					$('#maincontent', window.parent.document).css("height", height+"px");
+				};
 				/***
 				 * 点击图片时，在其父窗口弹出展示图片完整信息的层
 				 */
@@ -100,8 +104,7 @@
 		</script>
 
 	</head>
-
-	<body style="background-color: rgba(0,0,0,0); ">
+	<body style="background-color: rgba(0,0,0,0); overflow:scroll;overflow-y:hidden;overflow-x:hidden">
 		<div class="publish">
 			<br />
 			<span id="title">
