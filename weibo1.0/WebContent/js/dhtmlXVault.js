@@ -44,13 +44,13 @@ dhtmlXVaultObject.prototype.create = function(htmlObject)
     this.container.style.position = "relative";
 
     var str = "<table style='background-color:#EDEEEF;border: 1px solid #7A7C80;' border='0'>" +
-              "<tr><td style='width:420px' colspan=3 align='center' id = 'cellContainer' >" +
-              "<div style='height:200px;'></div>" +
+              "<tr><td style='width:600px' colspan=3 align='center' id = 'cellContainer' >" +
+              "<div style='height:400px;'></div>" +
               "</td></tr>" +
-              "<tr><td style='width: 80px; height: 32px;' align='left'></td>" +
-              "<td style='width: 200px; height: 32px;' align='left'>" +
+              "<tr><td style='width: 80px; height: 50px;' align='left'></td>" +
+              "<td style='width: 400px; height: 50px;' align='left'>" +
               "<img _onclick='UploadControl.prototype.uploadAllItems()' _ID='ImageButton3'  src='imgs/btn_upload.gif' style='cursor:pointer'/></td>" +
-              "<td style='width: 140px; height: 32px;' align='right'>" +
+              "<td style='width: 400px; height: 50px;' align='right'>" +
               "<img _onclick='return UploadControl.prototype.removeAllItems()' _ID='ImageButton3'  src='imgs/btn_clean.gif' style='cursor:pointer;margin-right:20px'/></td></tr></table>" +
               "<div _id='fileContainer' style='width:84px;overflow:hidden;height:32px;left:0px;direction:rtl;position:absolute;top:211px'>" +
               "<img style='z-index:2' src='imgs/btn_add.gif'/>" +
@@ -524,6 +524,7 @@ dhtmlXVaultObject.prototype.startRequest = function(id)
 
         this.sessionId = xmlHttp.responseText;
         this.UPLOAD_IDENTIFIER = xmlHttp.responseText;
+       
 
     }else
     {
@@ -569,9 +570,9 @@ try{
                             this.endLoading(id);
 
                             var tblContent = this.getCurrentTblContent(id);
-                            tblContent.rows[1].cells[0].innerHTML += "<font class='text' style=\"font-size:12px;color:#009900\">上传完毕</font>";
+                            tblContent.rows[1].cells[0].innerHTML += "<font class='text' style=\"font-size:10px;color:#009900\">上传完毕</font>";
                             tblContent.rows[1].cells[0].vAlign = "top";
-
+                            
                             if (this.isUploadFileAll == "true")
                             {
                                 this.uploadAllItems();
@@ -718,6 +719,7 @@ dhtmlXVaultObject.prototype.uploadFile = function (id)
             this.uploadForm.submit();
 
     }
+    
 }
 
 
