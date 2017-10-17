@@ -17,17 +17,11 @@ public class W_weibo {
 	private int FORWARDNUM;
 	private int TYPEID;
 	private String ISFORWORD;
-	private int FWDWEIBOID;
-	private String TOUXIANG;
+	private int FWDWEIBOID;	
 	private int COLLECTNUM;
 	
 	
-	public String getTOUXIANG() {
-		return TOUXIANG;
-	}
-	public void setTOUXIANG(String tOUXIANG) {
-		TOUXIANG = tOUXIANG;
-	}
+	
 	public int getCOLLECTNUM() {
 		return COLLECTNUM;
 	}
@@ -107,18 +101,17 @@ public class W_weibo {
 		FWDWEIBOID = fWDWEIBOID;
 	}
 	
+	
 	@Override
 	public String toString() {
 		return "W_weibo [WEIBOID=" + WEIBOID + ", FWDCONTENT=" + FWDCONTENT + ", CONTENT=" + CONTENT + ", SENDNAME="
 				+ SENDNAME + ", IMAGE=" + IMAGE + ", PUBLISHTIME=" + PUBLISHTIME + ", COMMENTNUM=" + COMMENTNUM
 				+ ", ZANNUM=" + ZANNUM + ", FORWARDNUM=" + FORWARDNUM + ", TYPEID=" + TYPEID + ", ISFORWORD="
-				+ ISFORWORD + ", FWDWEIBOID=" + FWDWEIBOID + ", TOUXIANG=" + TOUXIANG + ", COLLECTNUM=" + COLLECTNUM
-				+ "]";
+				+ ISFORWORD + ", FWDWEIBOID=" + FWDWEIBOID + ", COLLECTNUM=" + COLLECTNUM + "]";
 	}
-	 
+	
 	public W_weibo(int wEIBOID, String fWDCONTENT, String cONTENT, String sENDNAME, String iMAGE, String pUBLISHTIME,
-			int cOMMENTNUM, int zANNUM, int fORWARDNUM, int tYPEID, String iSFORWORD, int fWDWEIBOID, String tOUXIANG,
-			int cOLLECTNUM) {
+			int cOMMENTNUM, int zANNUM, int fORWARDNUM, int tYPEID, String iSFORWORD, int fWDWEIBOID, int cOLLECTNUM) {
 		super();
 		WEIBOID = wEIBOID;
 		FWDCONTENT = fWDCONTENT;
@@ -132,7 +125,6 @@ public class W_weibo {
 		TYPEID = tYPEID;
 		ISFORWORD = iSFORWORD;
 		FWDWEIBOID = fWDWEIBOID;
-		TOUXIANG = tOUXIANG;
 		COLLECTNUM = cOLLECTNUM;
 	}
 	public W_weibo() {

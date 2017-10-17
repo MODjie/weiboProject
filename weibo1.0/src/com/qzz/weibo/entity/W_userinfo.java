@@ -15,6 +15,13 @@ public class W_userinfo {
 	private String QQ;
 	private String PHONENUM;
 	private String REMARK;
+	private String TOUXIANG;
+	public String getTOUXIANG() {
+		return TOUXIANG;
+	}
+	public void setTOUXIANG(String tOUXIANG) {
+		TOUXIANG = tOUXIANG;
+	}
 	public String getUSERNAME() {
 		return USERNAME;
 	}
@@ -75,14 +82,17 @@ public class W_userinfo {
 	public void setREMARK(String rEMARK) {
 		REMARK = rEMARK;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "W_userinfo [USERNAME=" + USERNAME + ", NICKNAME=" + NICKNAME + ", REALNAME=" + REALNAME + ", SEX=" + SEX
 				+ ", BIRTH=" + BIRTH + ", LOCATION=" + LOCATION + ", EMAIL=" + EMAIL + ", QQ=" + QQ + ", PHONENUM="
-				+ PHONENUM + ", REMARK=" + REMARK + "]";
+				+ PHONENUM + ", REMARK=" + REMARK + ", TOUXIANG=" + TOUXIANG + "]";
 	}
+	
 	public W_userinfo(String uSERNAME, String nICKNAME, String rEALNAME, String sEX, String bIRTH, String lOCATION,
-			String eMAIL, String qQ, String pHONENUM, String rEMARK) {
+			String eMAIL, String qQ, String pHONENUM, String rEMARK, String tOUXIANG) {
 		super();
 		USERNAME = uSERNAME;
 		NICKNAME = nICKNAME;
@@ -94,8 +104,8 @@ public class W_userinfo {
 		QQ = qQ;
 		PHONENUM = pHONENUM;
 		REMARK = rEMARK;
+		TOUXIANG = tOUXIANG;
 	}
-	
 	public W_userinfo() {
 		// TODO Auto-generated constructor stub
 	}
