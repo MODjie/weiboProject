@@ -31,6 +31,7 @@
 			$(function() {
 				//search-box 随屏幕滚动 
 				$(window).scroll(function() {
+					
 					console.log($(window).scrollTop());
 					if($(window).scrollTop() > 150) {
 						$(".left").attr("style", "margin-top:-200px");
@@ -104,7 +105,7 @@
 						<div class="left">
 
 							<div class="aa">
-								<a href="mainpage.jsp" target="maincontent">首页</a>
+								<a href="WeiBoServlet?op=queryAllWb" target="maincontent">首页</a>
 							</div>
 							<div class="aa">
 								<a href="collectpage.jsp" target="maincontent">收藏</a>
@@ -135,7 +136,7 @@
 							<hr />
 						</div>
 						<!--中间发布以及微博显示区域-->
-						<div class="center" style="height:20000px">
+						<div class="center" >
 
 							<!-- 弹窗 -->
 							<div id="myModal" class="modal">
@@ -150,7 +151,7 @@
 								<!-- 文本描述 -->
 								<div id="caption"></div>
 							</div>
-							<iframe id="maincontent" name="maincontent" src="WeiBoServlet?op=queryAllWb" frameborder="0" width="100%" height="100%"></iframe>
+							<iframe id="maincontent"  name="maincontent" src="WeiBoServlet?op=queryAllWb" frameborder="0" width="100%" height="100%"></iframe>
 						</div>
 						<!--中部发布以及微博显示区域结束-->
 
