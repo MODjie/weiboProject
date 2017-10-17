@@ -48,6 +48,7 @@ public class W_weiboServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
 		//得到微博内容的集合
 		List<W_weibo> list = new ArrayList<>();
@@ -74,7 +75,7 @@ public class W_weiboServlet extends HttpServlet {
 				w.setIMAGE(DataUtil.imgname);
 				w.setTYPEID(typeId);
 				if(ws.addWeiBo(w))
-					response.getWriter().print("<script language='javascript'>alert('登录已失效请重新登陆');window.location.href='homepage.jsp';</script>");		
+					response.getWriter().print("<script language='javascript'>alert('发布成功');window.location.href='homepage.jsp';</script>");		
 			}
 		}
 		
