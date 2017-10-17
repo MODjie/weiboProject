@@ -1,4 +1,4 @@
-/*鑳屾櫙鍥剧墖*/
+/*閼冲本娅欓崶鍓у*/
 body {
 	background-image: url(../img/body_bg2.jpg);
 	background-repeat: no-repeat;
@@ -11,7 +11,7 @@ body {
 	background-color: rgba(0,0,0,0);
 	overflow: hidden;
 }
-/*椤堕儴瀵艰埅鏍忔牱寮�*/
+/*妞ゅ爼鍎寸�佃壈鍩呴弽蹇旂壉瀵拷*/
 #serach {
 	margin: 10px;
 	width: 400px;
@@ -37,14 +37,14 @@ body {
 .main {
 	margin-top: 100px;
 }
-/*灏侀潰瀵艰埅琛ㄦ牸涓殑td鏍峰紡*/
+/*鐏忎線娼扮�佃壈鍩呯悰銊︾壐娑擃厾娈憈d閺嶅嘲绱�*/
 /*
 td,
 th {
 	display: table-cell;
 	vertical-align: inherit;
 }*/
-/*灏侀潰瀵艰埅琛ㄦ牸鐨刣iv鏍峰紡*/
+/*鐏忎線娼扮�佃壈鍩呯悰銊︾壐閻ㄥ垼iv閺嶅嘲绱�*/
 
 .tb_tab {
 	width: 100%;
@@ -68,12 +68,12 @@ th {
 	padding-bottom: 12px;
 }
 
-/*鎴戠殑涓婚〉涓诲鍣ㄦ牱寮�*/
+/*閹存垹娈戞稉濠氥�夋稉璇差啇閸ｃ劍鐗卞锟�*/
 
 #ct_main {
 	display: inline-block;
 }
-/*鎴戠殑涓婚〉宸︿晶鍐呭鏍峰紡*/
+/*閹存垹娈戞稉濠氥�夊锔挎櫠閸愬懎顔愰弽宄扮础*/
 
 .wb_frame_left {
 	display: inline-block;
@@ -82,7 +82,7 @@ th {
 	vertical-align: top;
 	font-size: 12px;
 }
-/*寰崥锛岀矇涓濓紝鍏虫敞鍗＄墖鐨勬牱寮�*/
+/*瀵邦喖宕ラ敍宀�鐭囨稉婵撶礉閸忚櫕鏁為崡锛勫閻ㄥ嫭鐗卞锟�*/
 
 .WB_cardwrap {
 	margin: 0 0 10px 0;
@@ -136,7 +136,7 @@ table td strong {
 .W_f18 {
 	font-size: 18px;
 }
-/*寰崥鍐呭鏍峰紡*/
+/*瀵邦喖宕ラ崘鍛啇閺嶅嘲绱�*/
 
 .WB_content {
 	width: 700px;
@@ -150,13 +150,14 @@ table td strong {
 .content_bottom {
 	overflow: hidden;
 }
-/*寰崥鍐呭涓ご鍍忕殑鏍峰紡*/
+
+/*瀵邦喖宕ラ崘鍛啇娑擃厼銇旈崓蹇曟畱閺嶅嘲绱�*/
 
 .content_tx {
 	width: 80px;
 	height: 80px;
 }
-/*寰崥鍐呭涓瘎璁哄尯鐨勬牱寮�*/
+/*瀵邦喖宕ラ崘鍛啇娑擃叀鐦庣拋鍝勫隘閻ㄥ嫭鐗卞锟�*/
 
 .div {
 	display: block;
@@ -171,25 +172,26 @@ table td strong {
 	border-right-style: solid;
 	color: #D9D9D9;
 }
-/*宸︿晶濂藉弸鍒楄〃鏍峰紡*/
+
+/*瀹革缚鏅舵總钘夊几閸掓銆冮弽宄扮础*/
 .friends_list {
 	text-align: center;
 }
-/*濂藉弸鍒楄〃涓殑鑳屾櫙鏍峰紡*/
+/*婵傝棄寮搁崚妤勩�冩稉顓犳畱閼冲本娅欓弽宄扮础*/
 /*.afriend_bg {
 	background: lightgray;
 }*/
-/*濂藉弸鍒楄〃涓殑a鏍囩鏍峰紡*/
+/*婵傝棄寮搁崚妤勩�冩稉顓犳畱a閺嶅洨顒烽弽宄扮础*/
 .afriend_wrap {
 	margin-left: 30px;
 	display: block;
 }
-/*濂藉弸鍒楄〃涓ソ鍙嬪ご鍍忔牱寮�*/
+/*婵傝棄寮搁崚妤勩�冩稉顓炪偨閸欏銇旈崓蹇旂壉瀵拷*/
 .FL_tx {
 	width: 50px;
 	height: 50px;
 }
-/*濂藉弸鍒楄〃涓ソ鍙嬫樀绉版牱寮�*/
+/*婵傝棄寮搁崚妤勩�冩稉顓炪偨閸欏妯�缁夌増鐗卞锟�*/
 .FL_name {
 	font-size: 20px;
 	padding-left: 20px;	

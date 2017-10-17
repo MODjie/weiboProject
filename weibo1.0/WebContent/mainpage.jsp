@@ -210,8 +210,7 @@
 							<a href="# "> 赞<em class=" "></em><span class="badge ">1</span></a>
 						</li>
 					</ul>
-				</div>
-								
+				</div>								
 			</div>
 				<!--微博内容评论转发div开始-->
 			
