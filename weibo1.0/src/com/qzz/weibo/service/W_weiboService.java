@@ -3,6 +3,7 @@ package com.qzz.weibo.service;
 import java.util.List;
 
 import com.qzz.weibo.dao.W_weiboDao;
+import com.qzz.weibo.entity.W_type;
 import com.qzz.weibo.entity.W_weibo;
 import com.qzz.weibo.util.BaseDao;
 
@@ -22,7 +23,16 @@ public class W_weiboService {
 	 * @param w 微博对象
 	 * @return
 	 */
-//	public boolean addWeiBo(W_weibo w) {
-//		return weiboDao.addWeiBo(w);
-//	}
+	public boolean addWeiBo(W_weibo w) {
+		return weiboDao.addWeiBo(w);
+	}
+	
+	/***
+	 * 根据类型名称查询类型编号
+	 * @param typeName
+	 * @return
+	 */
+	public int queryTypeIdByName(String typeName) {
+		return weiboDao.queryTypeIdByName(typeName);
+	}
 }

@@ -107,7 +107,7 @@
 			<span id="title">
 				<img src="img/title.PNG"/>
 			</span>
-			<form action="WeiBoServlet" method="post">
+			<form action="WeiBoServlet?op=publish" method="post">
 				<textarea name="content" rows="" cols=""></textarea><br />
 
 				<a href="${path}imgupload/uploadimg.jsp" class="xuanxiang" style="margin:0 0 50px 220px;">添加图片</a>
@@ -119,7 +119,7 @@
 					<option value="">匿名</option>
 				</select>
 				
-				<select name="" class="" style="margin-left: 50px;">
+				<select name="type" class="" style="margin-left: 50px;">
 					<option value="娱乐">娱乐</option>
 					<option value="搞笑">搞笑</option>
 					<option value="体育">体育</option>

@@ -2,6 +2,7 @@ package com.qzz.weibo.dao;
 
 import java.util.List;
 
+import com.qzz.weibo.entity.W_type;
 import com.qzz.weibo.entity.W_users;
 import com.qzz.weibo.entity.W_weibo;
 import com.qzz.weibo.util.BaseDao;
@@ -12,7 +13,7 @@ public class W_weiboDao {
 	 * @return
 	 */
 	public List<W_weibo> queryMyWb() {
-		return (List<W_weibo>)BaseDao.select("select * from W_WEIBO", W_weibo.class, null);
+		return (List<W_weibo>)BaseDao.select("select * from WEIBO_VIEW", W_weibo.class, null);
 	}
 	
 	/**
@@ -23,5 +24,26 @@ public class W_weiboDao {
 		List<W_users> list = (List<W_users>)BaseDao.select("select * from W_users", W_users.class, null);
 		System.out.println(list);
 		return list;
+	}
+	
+	/***
+	 * 向微博表中插入一条记录
+	 * @param w 微博对象
+	 * @return
+	 */
+	public boolean addWeiBo(W_weibo w) {
+		String sql = "insert into W_WEIBO values(null,null,?,?,?,?,0,0,0,?,'否',null,0)";
+		return BaseDao.execute(sql, w.getCONTENT(),w.getSENDNAME(),w.getIMAGE(),w.getPUBLISHTIME(),w.getTYPEID())>0;
+	}
+	
+	/***
+	 * 根据类型名称查询类型编号
+	 * @param typeName
+	 * @return
+	 */
+	public int queryTypeIdByName(String typeName) {
+		String sql = "select * from W_TYPE where TYPENAME = ?";
+		List<W_type> list = (List<W_type>)BaseDao.select(sql, W_type.class, typeName);
+		return list.get(0).getTYPEID();
 	}
 }
