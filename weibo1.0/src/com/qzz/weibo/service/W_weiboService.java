@@ -24,8 +24,16 @@ public class W_weiboService {
 	public List<W_weibo> queryWbByName(String sendName) {
 		return weiboDao.queryWbByName(sendName);
 	}
+	
+	/**
+	 * 通过id查找微博
+	 */
+	public List<W_weibo> queryWbById(int id) {
+		return weiboDao.queryWbById(id);
+	}
+	
 	/***
-	 * 添加一天数据到微博表中
+	 * 添加一条数据到微博表中
 	 * @param w 微博对象
 	 * @return
 	 */

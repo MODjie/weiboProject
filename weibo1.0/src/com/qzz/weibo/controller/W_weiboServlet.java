@@ -56,6 +56,7 @@ public class W_weiboServlet extends HttpServlet {
 		//判断op的值
 		if (request.getParameter("op")!=null) {
 			String op = request.getParameter("op");
+			//查找我的主页中我发过的所有微博
 			if (op.equals("queryMyWb")) {
 //				String sendName = (String) request.getAttribute("sendName");
 				String sendName = "看看不懂";
@@ -65,10 +66,7 @@ public class W_weiboServlet extends HttpServlet {
 				request.setAttribute("sendName", sendName);
 				request.getRequestDispatcher("my_home.jsp").forward(request, response);
 			}
-			//查询所有微博
-			if (op.equals("queryAllWb")) {
-//				String sendName = (String) request.getAttribute("sendName");
-				//将查询到的微博list倒序输出			
+			if (op.equals("queryAllWb")) {			
 				list = ws.queryMyWb();
 				System.out.println(list.size()+"size");
 				request.setAttribute("list", list);
@@ -89,7 +87,14 @@ public class W_weiboServlet extends HttpServlet {
 				w.setTYPEID(typeId);
 				if(ws.addWeiBo(w))
 					response.getWriter().print("<script language='javascript'>alert('发布成功');</script>");		
-			}
+			//通过id查找单个微博，跳转到该微博的详细信息页面
+			}else if (op.equals("queryWbById")) {		
+				int weiboId = Integer.parseInt((String) request.getParameter("weiboid"));
+				list = ws.queryWbById(weiboId);
+				W_weibo detailWb = list.get(0);
+				request.setAttribute("detailWb", detailWb);
+				request.getRequestDispatcher("more.jsp").forward(request, response);
+			}		
 		}
 		
 		

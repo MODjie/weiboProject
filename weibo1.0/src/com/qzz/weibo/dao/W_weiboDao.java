@@ -24,6 +24,12 @@ public class W_weiboDao {
 	}
 	
 	/**
+	 * 通过id查找微博
+	 */
+	public List<W_weibo> queryWbById(int id) {
+		return (List<W_weibo>)BaseDao.select("select * from WEIBO_VIEW where WEIBOID = ?", W_weibo.class, id);
+	}
+	/**
 	 * 查找所有用户
 	 * @return
 	 */

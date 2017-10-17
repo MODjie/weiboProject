@@ -101,7 +101,7 @@
 
 	</head>
 
-	<body style="background-color: rgba(0,0,0,0); overflow:scroll;overflow-y:hidden">
+	<body style="background-color: rgba(0,0,0,0); ">
 		<div class="publish">
 			<br />
 			<span id="title">
