@@ -56,8 +56,16 @@ public class W_weiboServlet extends HttpServlet {
 		if (request.getParameter("op")!=null) {
 			String op = request.getParameter("op");
 			if (op.equals("queryMyWb")) {
-				list = ws.queryMyWb();
+//				String sendName = (String) request.getAttribute("sendName");
+				String sendName = "看看不懂";
+				//将查询到的微博list倒序输出
+				List<W_weibo> list2 = new ArrayList<>();				
+				list = ws.queryWbByName(sendName);
+				for (int i = list2.size()-1; i >=0; i++) {
+					list.add(list2.get(i));
+				}
 				request.setAttribute("list", list);
+				request.setAttribute("sendName", sendName);
 				request.getRequestDispatcher("my_home.jsp").forward(request, response);
 			}
 			//op的值等于publish说明提交发布请求

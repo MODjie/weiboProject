@@ -17,6 +17,13 @@ public class W_weiboDao {
 	}
 	
 	/**
+	 * 通过用户名查找微博
+	 */
+	public List<W_weibo> queryWbByName(String sendName) {
+		return (List<W_weibo>)BaseDao.select("select * from WEIBO_VIEW where SENDNAME = ?", W_weibo.class, sendName);
+	}
+	
+	/**
 	 * 查找所有用户
 	 * @return
 	 */

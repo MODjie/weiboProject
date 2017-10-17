@@ -18,6 +18,12 @@ public class W_weiboService {
 		return weiboDao.queryMyWb();
 	}
 	
+	/**
+	 * 通过用户名查找微博
+	 */
+	public List<W_weibo> queryWbByName(String sendName) {
+		return weiboDao.queryWbByName(sendName);
+	}
 	/***
 	 * 添加一天数据到微博表中
 	 * @param w 微博对象

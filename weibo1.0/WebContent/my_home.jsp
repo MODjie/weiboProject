@@ -59,7 +59,7 @@
 							<div id="fm" class="col-md-12 column">
 								<a href="#"><img alt="140x140" src="img/touxiang.jpg"
 									class="img-circle" /></a> <a id="userName"
-									href="WeiBoServlet?op=queryMyWb"><h4 id="niCheng">cleanEach</h4></a>
+									href="WeiBoServlet?op=queryMyWb"><h4 id="niCheng">${requestScope.sendName } </h4></a>
 								<h5>一句话介绍下你自己吧,让别人更了解你</h5>
 							</div>
 							<!--封面div结束-->
