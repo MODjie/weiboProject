@@ -151,13 +151,13 @@ table td strong {
 	overflow: hidden;
 }
 
-/*微博内容中头像的样式*/
+/*瀵邦喖宕ラ崘鍛啇娑擃厼銇旈崓蹇曟畱閺嶅嘲绱�*/
 
 .content_tx {
 	width: 80px;
 	height: 80px;
 }
-/*微博内容中评论区的样式*/
+/*瀵邦喖宕ラ崘鍛啇娑擃叀鐦庣拋鍝勫隘閻ㄥ嫭鐗卞锟�*/
 
 .div {
 	display: block;
@@ -172,9 +172,7 @@ table td strong {
 	border-right-style: solid;
 	color: #D9D9D9;
 }
-#test:hover{
-	color: orangered;
-}
+
 /*瀹革缚鏅舵總钘夊几閸掓銆冮弽宄扮础*/
 .friends_list {
 	text-align: center;
