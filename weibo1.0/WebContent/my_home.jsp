@@ -7,11 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>我的微博</title>
 <link rel="stylesheet" type="text/css" href="css/my_home.css" />
-<link rel="stylesheet" type="text/css"
-	href="bootstrap-3.3.7-dist/css/bootstrap.css" />
-<script src="bootstrap-3.3.7-dist/js/bootstrap.js"
-	type="text/javascript" charset="utf-8"></script>
-<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap01.js"></script>
 </head>
 
 <body style="background-color: rgb(94, 122, 161);">
@@ -70,7 +68,7 @@
 									<table class="tb_tab" cellpadding="0" cellspacing="0">
 										<tbody>
 											<tr>
-												<td><a href="my_home.jsp">我的主页</a></td>
+												<td><a href="WeiBoServlet?op=queryMyWb">我的主页</a></td>
 												<td><a href="photo.jsp">我的相册</a></td>
 												<td><a href="#">管理中心</a></td>
 											</tr>
