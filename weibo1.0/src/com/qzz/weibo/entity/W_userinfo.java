@@ -1,6 +1,6 @@
 package com.qzz.weibo.entity;
 /**
- * ÓÃ»§ÏêÏ¸ÐÅÏ¢
+ * ï¿½Ã»ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢
  * @author Administrator
  *
  */
@@ -84,6 +84,20 @@ public class W_userinfo {
 	}
 	
 	
+	
+	public W_userinfo(String nICKNAME, String rEALNAME, String sEX, String bIRTH, String lOCATION, String eMAIL,
+			String qQ, String pHONENUM, String rEMARK) {
+		super();
+		NICKNAME = nICKNAME;
+		REALNAME = rEALNAME;
+		SEX = sEX;
+		BIRTH = bIRTH;
+		LOCATION = lOCATION;
+		EMAIL = eMAIL;
+		QQ = qQ;
+		PHONENUM = pHONENUM;
+		REMARK = rEMARK;
+	}
 	@Override
 	public String toString() {
 		return "W_userinfo [USERNAME=" + USERNAME + ", NICKNAME=" + NICKNAME + ", REALNAME=" + REALNAME + ", SEX=" + SEX
