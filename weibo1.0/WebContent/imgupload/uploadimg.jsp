@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="css/imguploadcss/dhtmlXVault.css" />
-    <script language="JavaScript" type="text/javascript" src="${path}js/dhtmlXVault.js"></script>
+    <script language="JavaScript" type="text/javascript" src="${path}js/dhtmlXVault.js?ver=1"></script>
 
     <script language="JavaScript" type="text/javascript">
         var vault = null;
