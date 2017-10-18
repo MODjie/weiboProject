@@ -221,7 +221,7 @@
 											<div class="content_bottom">
 												<ul class="nav nav-pills WB_row_line">
 													<li class="col" style="width: 175px; text-align: center;">
-														<a id="test" href="#"> <span
+														<a id="test" href="WeiBoServlet?op=collect&weiboid=${weibo.WEIBOID }"> <span
 															class="glyphicon glyphicon-star-empty"></span>&nbsp;<span>${weibo.COLLECTNUM }</span></a>
 													</li>
 													<li class="col" style="width: 175px; text-align: center;">
