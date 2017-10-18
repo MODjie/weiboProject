@@ -81,13 +81,13 @@ public class W_weiboServlet extends HttpServlet {
 				request.setAttribute("sendName", sendName);
 				request.getRequestDispatcher("my_home.jsp").forward(request, response);
 			}
-			if (op.equals("queryAllWb")) {			
+			else if (op.equals("queryAllWb")) {			
 				list = ws.queryMyWb();
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("mainpage.jsp").forward(request, response);
 			}
 			//op的值等于publish说明提交发布请求
-			if(op.equals("publish")) {
+			else if(op.equals("publish")) {
 				Date date = new Date();
 				String content = request.getParameter("content");
 				String sendname = (String) request.getSession().getAttribute("username");
@@ -113,9 +113,10 @@ public class W_weiboServlet extends HttpServlet {
 				//如果接收评论标志为yes，则增加评论
 				}else if (successFlag.equals("yes")) {
 					weiboId = Integer.parseInt((String) request.getParameter("weiboId"));
-					String nikeName = new String(request.getParameter("nikeName").getBytes("ISO-8859-1"),"UTF-8");
-					String commentContent = new String(request.getParameter("commentContent").getBytes("ISO-8859-1"),"UTF-8");
-					
+					//String nikeName = new String(request.getParameter("nikeName").getBytes("ISO-8859-1"),"UTF-8");
+					//String commentContent = new String(request.getParameter("commentContent").getBytes("ISO-8859-1"),"UTF-8");
+					String nikeName = request.getParameter("nikeName");
+					String commentContent = request.getParameter("commentContent");
 					//获取当前系统时间
 					String commentTime = sdf.format(new Date());
 					W_comment comment = new W_comment(1,weiboId,nikeName,commentContent,commentTime);
@@ -183,7 +184,34 @@ public class W_weiboServlet extends HttpServlet {
 				request.setAttribute("list", list);
 				request.setAttribute("sendName", collectName);
 				request.getRequestDispatcher("my_home.jsp").forward(request, response);
-			}	
+			}
+			else if (op.equals("dianzan")) {
+				//通过传过来的微博ID和点赞人的昵称查找数据库并且存储在zanlist中
+				int weiboId = Integer.parseInt((String) request.getParameter("weiboid"));
+				String zanName = (String) session.getAttribute("username");
+				List<W_zan> zanList = wzs.queryByNameAndId(weiboId, zanName);
+				//获取本条微博
+				W_weibo wei = ws.queryWbById(weiboId).get(0);
+				//通过zanList的长度来判断，返回数据是否为空
+				if (zanList.size()==0) {
+					//当返回数据为空时，就对该昵称和微博添加一条点赞记录
+					wzs.addZan(weiboId, zanName);
+					//点赞数加一
+					wei.setZANNUM(wei.getZANNUM()+1);
+				}else {
+					//如果返回数据不为空，就删除该记录，即取消点赞功能
+					wzs.deleteZan(weiboId, zanName);
+					//点赞数减一
+					wei.setZANNUM(wei.getZANNUM()-1);
+				}
+				//修改本条微博的点赞数
+					ws.updateWeiboById(wei);
+				//通过昵称查找微博	
+					list = ws.queryMyWb();
+					request.setAttribute("list", list);
+					request.getRequestDispatcher("mainpage.jsp").forward(request, response);
+			
+			}
 		}
 		
 		

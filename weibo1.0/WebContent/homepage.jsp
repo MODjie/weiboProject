@@ -13,7 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title></title>
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/imagediv.css"/>
+		<link rel="stylesheet" type="text/css" href="css/imagediv.css?df=1"/>
 		<link rel="stylesheet" type="text/css" href="css/index01.css"/>
 		<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.css" />
 		<script src="bootstrap-3.3.7-dist/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
