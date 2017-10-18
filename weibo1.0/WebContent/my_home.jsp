@@ -221,7 +221,7 @@
 											<div class="content_bottom">
 												<ul class="nav nav-pills WB_row_line">
 													<li class="col" style="width: 175px; text-align: center;">
-														<a id="test" href="#"> <span
+														<a id="test" href="WeiBoServlet?op=collect&weiboid=${weibo.WEIBOID }"> <span
 															class="glyphicon glyphicon-star-empty"></span>&nbsp;<span>${weibo.COLLECTNUM }</span></a>
 													</li>
 													<li class="col" style="width: 175px; text-align: center;">
@@ -233,7 +233,7 @@
 															&nbsp;<span>${weibo.COMMENTNUM }</span></a>
 													</li>
 													<li style="width: 170px; text-align: center;"><a
-														href="#"> <span class="glyphicon glyphicon-thumbs-up"></span>
+														href="WeiBoServlet?op=zan&weiboid=${weibo.WEIBOID }"> <span class="glyphicon glyphicon-thumbs-up"></span>
 															&nbsp;<span>${weibo.ZANNUM }</span></a></li>
 												</ul>
 											</div>

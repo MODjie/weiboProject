@@ -59,4 +59,13 @@ public class W_weiboDao {
 		List<W_type> list = (List<W_type>)BaseDao.select(sql, W_type.class, typeName);
 		return list.get(0).getTYPEID();
 	}
+	
+	/**
+	 * 修改微博的收藏、转发、评论、点赞数
+	 * @param weibo
+	 * @return
+	 */
+	public boolean updateWeiboById(W_weibo weibo) {
+		return BaseDao.execute("update W_weibo set COLLECTNUM=?,FORWARDNUM=?, COMMENTNUM = ?,ZANNUM=? where WEIBOID=?", weibo.getCOLLECTNUM(),weibo.getFORWARDNUM(),weibo.getCOMMENTNUM(),weibo.getZANNUM(),weibo.getWEIBOID())>0;
+	}
 }

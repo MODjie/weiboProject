@@ -9,14 +9,27 @@ public class W_collect {
 	private int COLLECTID;
 	private int WEIBOID;
 	private String USERNAME;
+	private String COLLECTTIME;
 	
-	public W_collect(int cOLLECTID, int wEIBOID, String uSERNAME) {
+	
+	public String getCOLLECTTIME() {
+		return COLLECTTIME;
+	}
+
+	public void setCOLLECTTIME(String cOLLECTTIME) {
+		COLLECTTIME = cOLLECTTIME;
+	}
+
+	
+	
+	public W_collect(int cOLLECTID, int wEIBOID, String uSERNAME, String cOLLECTTIME) {
 		super();
 		COLLECTID = cOLLECTID;
 		WEIBOID = wEIBOID;
 		USERNAME = uSERNAME;
+		COLLECTTIME = cOLLECTTIME;
 	}
-	
+
 	public W_collect() {
 		// TODO Auto-generated constructor stub
 	}
@@ -47,8 +60,11 @@ public class W_collect {
 
 	@Override
 	public String toString() {
-		return "W_collect [COLLECTID=" + COLLECTID + ", WEIBOID=" + WEIBOID + ", USERNAME=" + USERNAME + "]";
+		return "W_collect [COLLECTID=" + COLLECTID + ", WEIBOID=" + WEIBOID + ", USERNAME=" + USERNAME
+				+ ", COLLECTTIME=" + COLLECTTIME + "]";
 	}
+
+	
 	
 	
 }
