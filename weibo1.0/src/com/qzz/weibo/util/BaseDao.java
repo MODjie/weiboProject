@@ -12,21 +12,21 @@ import java.util.List;
 import org.apache.commons.beanutils.BeanUtils;
 
 /**
- * ���ݿ�����ĸ�����
+ * 锟斤拷锟捷匡拷锟斤拷锟斤拷母锟斤拷锟斤拷锟�
  */
 public class BaseDao {
 
 	private static final String DRIVER = "oracle.jdbc.OracleDriver";
-	private static final String URL = "jdbc:oracle:thin:@192.168.9.223:1521:orcl";
-//	private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl1";
-	private static final String USER = "scott"; // �û���
-//	private static final String PASSWORD = "jie6846947";// ����
-	private static final String PASSWORD = "jia";// ����
+//	private static final String URL = "jdbc:oracle:thin:@192.168.9.223:1521:orcl";
+	private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl01";
+	private static final String USER = "scott"; // 锟矫伙拷锟斤拷
+//	private static final String PASSWORD = "jie6846947";// 锟斤拷锟斤拷
+	private static final String PASSWORD = "jia";// 锟斤拷锟斤拷
 
 	/**
-	 * ��ȡ���Ӷ���
+	 * 锟斤拷取锟斤拷锟接讹拷锟斤拷
 	 * 
-	 * @return ���Ӷ���
+	 * @return 锟斤拷锟接讹拷锟斤拷
 	 */
 	public static Connection getConn() {
 
@@ -34,24 +34,24 @@ public class BaseDao {
 		try {
 
 			Class.forName(DRIVER);
-			// �õ����Ӷ���
+			// 锟矫碉拷锟斤拷锟接讹拷锟斤拷
 			conn = DriverManager.getConnection(URL, USER, PASSWORD);
 
 		} catch (Exception e) {
-			throw new RuntimeException("���ݿ�����ʧ��!", e);
+			throw new RuntimeException("锟斤拷锟捷匡拷锟斤拷锟斤拷失锟斤拷!", e);
 		}
 		return conn;
 	}
 
 	/**
-	 * �ͷ���Դ
+	 * 锟酵凤拷锟斤拷源
 	 * 
 	 * @param rs
-	 *            �����
+	 *            锟斤拷锟斤拷锟�
 	 * @param pstmt
-	 *            ��������
+	 *            锟斤拷锟筋处锟斤拷锟斤拷锟�
 	 * @param conn
-	 *            ���Ӷ���
+	 *            锟斤拷锟接讹拷锟斤拷
 	 */
 	public static void close(ResultSet rs, PreparedStatement pstmt, Connection conn) {
 		try {
@@ -65,12 +65,12 @@ public class BaseDao {
 				conn.close();
 			}
 		} catch (SQLException e) {
-			throw new RuntimeException("�ͷ���Դʧ��!", e);
+			throw new RuntimeException("锟酵凤拷锟斤拷源失锟斤拷!", e);
 		}
 	}
 
 	/**
-	 * ���ò���
+	 * 锟斤拷锟矫诧拷锟斤拷
 	 * 
 	 * @param sql
 	 * @param conn
@@ -91,13 +91,13 @@ public class BaseDao {
 	}
 
 	/**
-	 * ͨ�õ����ݿ�(��,ɾ,��)��������
+	 * 通锟矫碉拷锟斤拷锟捷匡拷(锟斤拷,删,锟斤拷)锟斤拷锟斤拷锟斤拷锟斤拷
 	 * 
 	 * @param sql
-	 *            sql���
+	 *            sql锟斤拷锟�
 	 * @param param
-	 *            sql������
-	 * @return ��Ӱ������
+	 *            sql锟斤拷锟斤拷锟斤拷
+	 * @return 锟斤拷影锟斤拷锟斤拷锟斤拷
 	 */
 	public static int execute(String sql, Object... param) {
 		Connection conn = getConn();
@@ -109,7 +109,7 @@ public class BaseDao {
 	}
 
 	/**
-	 * ͨ�õ���ɾ�Ĳ���(�������)
+	 * 通锟矫碉拷锟斤拷删锟侥诧拷锟斤拷(锟斤拷锟斤拷锟斤拷锟�)
 	 * 
 	 * @param sql
 	 * @param conn
@@ -122,23 +122,23 @@ public class BaseDao {
 			pstmt = setPstmt(sql, conn, pstmt, param);
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// ������õõ��쳣��Ϣ
+			// 锟斤拷锟斤拷锟斤拷玫玫锟斤拷斐ｏ拷锟较�
 			e.printStackTrace();
-			throw new RuntimeException("���ݿ����ʧ��!", e);
+			throw new RuntimeException("锟斤拷锟捷匡拷锟斤拷锟绞э拷锟�!", e);
 		} finally {
 			close(null, pstmt, null);
 		}
 	}
 
 	/**
-	 * ͨ�ò�ѯ����
+	 * 通锟矫诧拷询锟斤拷锟斤拷
 	 * 
 	 * @param sql
-	 *            Ҫ��ѯ��sql���
+	 *            要锟斤拷询锟斤拷sql锟斤拷锟�
 	 * @param cla
-	 *            Class����
+	 *            Class锟斤拷锟斤拷
 	 * @param param
-	 *            ����
+	 *            锟斤拷锟斤拷
 	 * @return
 	 */
 	public static Object select(String sql, Class cla, Object... param) {
@@ -151,7 +151,7 @@ public class BaseDao {
 	}
 
 	/**
-	 * ������Ĳ�ѯ����
+	 * 锟斤拷锟斤拷锟斤拷牟锟窖拷锟斤拷锟�
 	 * 
 	 * @param sql
 	 * @param conn
@@ -167,22 +167,22 @@ public class BaseDao {
 			pstmt = setPstmt(sql, conn, pstmt, param);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				// ?rs ����� cla Class����
-				// object��ʵ�������ݱ�ṹ��Ӧ��һ��ʵ���¼,object�����Ǹ�ʵ�������
-				// �������convert�ǽ��������cla�������ת��
+				// ?rs 锟斤拷锟斤拷锟� cla Class锟斤拷锟斤拷
+				// object锟斤拷实锟斤拷锟斤拷锟斤拷锟捷憋拷峁癸拷锟接︼拷锟揭伙拷锟绞碉拷锟斤拷录,object锟斤拷锟斤拷锟角革拷实锟斤拷锟斤拷锟斤拷锟�
+				// 锟斤拷锟斤拷锟斤拷锟絚onvert锟角斤拷锟斤拷锟斤拷锟斤拷锟絚la锟斤拷锟斤拷锟斤拷锟阶拷锟�
 				Object object = convert(rs, cla);
 				list.add(object);
 			}
 			return list;
 		} catch (SQLException e) {
-			throw new RuntimeException("���ݿ��ѯʧ��!", e);
+			throw new RuntimeException("锟斤拷锟捷匡拷锟窖э拷锟�!", e);
 		} finally {
 			close(rs, pstmt, null);
 		}
 	}
 
 	/**
-	 * ��ȡ������¼ֵ,�ǵ�����¼ע��,����count(1)
+	 * 锟斤拷取锟斤拷锟斤拷锟斤拷录值,锟角碉拷锟斤拷锟斤拷录注锟斤拷,锟斤拷锟斤拷count(1)
 	 * 
 	 * @param sql
 	 * @param param
@@ -198,7 +198,7 @@ public class BaseDao {
 	}
 
 	/**
-	 * ��ȡ������¼ ����
+	 * 锟斤拷取锟斤拷锟斤拷锟斤拷录 锟斤拷锟斤拷
 	 * 
 	 * @param sql
 	 * @param conn
@@ -214,7 +214,7 @@ public class BaseDao {
 	}
 
 	/**
-	 * ���������
+	 * 锟斤拷锟斤拷锟斤拷锟斤拷锟�
 	 * 
 	 * @param tran
 	 * @return
@@ -230,16 +230,16 @@ public class BaseDao {
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
-				throw new RuntimeException("�ع�ʧ��!", e);
+				throw new RuntimeException("锟截癸拷失锟斤拷!", e);
 			}
-			throw new RuntimeException("����ִ��ʧ��", e);
+			throw new RuntimeException("锟斤拷锟斤拷执锟斤拷失锟斤拷", e);
 		} finally {
 			close(null, null, conn);
 		}
 	}
 
 	/**
-	 * ��ѯ�����ת��
+	 * 锟斤拷询锟斤拷锟斤拷锟阶拷锟�
 	 * 
 	 * @param rs
 	 * @param cla
@@ -250,42 +250,42 @@ public class BaseDao {
 			if (cla.getName().equals("java.lang.Object")) {
 				return rs.getObject(1);
 			}
-			// ����ʵ�����ʵ�� Class�����ķ���������ָ�������ʵ��
+			// 锟斤拷锟斤拷实锟斤拷锟斤拷锟绞碉拷锟� Class锟斤拷锟斤拷锟侥凤拷锟斤拷锟斤拷锟斤拷锟斤拷指锟斤拷锟斤拷锟斤拷锟绞碉拷锟�
 			// new Goods(); new News(); new person(); new Users();
 			Object object = cla.newInstance();
-			//// �����ͷ��Ϣ����
+			//// 锟斤拷锟斤拷锟酵凤拷锟较拷锟斤拷锟�
 			ResultSetMetaData metaData = rs.getMetaData();
-			// ѭ��Ϊʵ�����ʵ�������Ը�ֵ getColumnCount�õ��еĸ���
+			// 循锟斤拷为实锟斤拷锟斤拷锟绞碉拷锟斤拷锟斤拷锟斤拷愿锟街� getColumnCount锟矫碉拷锟叫的革拷锟斤拷
 			for (int i = 1; i <= metaData.getColumnCount(); i++) {
-				// ��ȡ����
+				// 锟斤拷取锟斤拷锟斤拷
 				String name = metaData.getColumnLabel(i);
-				//// ע������������������һ�¡������ѭ������������. rs.getObject(i) ������еĲ�ѯ����Ͷ���ƥ��
+				//// 注锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷一锟铰★拷锟斤拷锟斤拷锟窖拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟�. rs.getObject(i) 锟斤拷锟斤拷锟斤拷械牟锟窖拷锟斤拷锟酵讹拷锟斤拷匹锟斤拷
 				BeanUtils.setProperty(object, name, rs.getObject(i));
 			}
 			return object;
 		} catch (Exception e) {
-			throw new RuntimeException("��������ʧ��!", e);
+			throw new RuntimeException("锟斤拷锟斤拷锟斤拷锟斤拷失锟斤拷!", e);
 		}
 	}
 
 	/**
-	 * ��ҳ���� mysql;
+	 * 锟斤拷页锟斤拷锟斤拷 mysql;
 	 * 
 	 * @param sql
-	 *            ��ѯ��sql���
+	 *            锟斤拷询锟斤拷sql锟斤拷锟�
 	 * @param page
-	 *            ��ǰҳ��
+	 *            锟斤拷前页锟斤拷
 	 * @param pageSize
-	 *            ÿҳ��ʾ�ļ�¼��
+	 *            每页锟斤拷示锟侥硷拷录锟斤拷
 	 * @param cla
-	 *            Class�����
+	 *            Class锟斤拷锟斤拷锟�
 	 * @param param
-	 *            sql�йصĲ����б�
-	 * @return PageData ����
+	 *            sql锟叫关的诧拷锟斤拷锟叫憋拷
+	 * @return PageData 锟斤拷锟斤拷
 	 */
 	public static PageData getPage(String sql, Integer page, Integer pageSize, Class cla, Object... param) {
 		// sql select * from news
-		// select count(1) from (select * from news) t --�õ���¼����
+		// select count(1) from (select * from news) t --锟矫碉拷锟斤拷录锟斤拷锟斤拷
 		String selSql = "select count(1) from (" + sql + ") t";
 		if (page == null) {
 			page = 1;
@@ -293,23 +293,23 @@ public class BaseDao {
 		if (pageSize == null) {
 			pageSize = 10;
 		}
-		// ��ѯ�õ��ܼ�¼��
+		// 锟斤拷询锟矫碉拷锟杰硷拷录锟斤拷
 		Integer count = Integer.parseInt(getFirst(selSql, param).toString());
-		// ʵ�ּ򵥵ķ�ҳ���
-		// select * from news limit ��ʼλ��,ÿҳ��ʾ�ļ�¼��
-		// select * from news limit ��ʼλ��,pageSize
-		// select * from news limit 10,5 ÿҳ5����¼ ����ʾ��3ҳ
-		int start = (page - 1) * pageSize; // ��ʼλ���㷨
-		// + ��ʵ��̫�� �����stringBuffer stringBuilder append
+		// 实锟街简单的凤拷页锟斤拷锟�
+		// select * from news limit 锟斤拷始位锟斤拷,每页锟斤拷示锟侥硷拷录锟斤拷
+		// select * from news limit 锟斤拷始位锟斤拷,pageSize
+		// select * from news limit 10,5 每页5锟斤拷锟斤拷录 锟斤拷锟斤拷示锟斤拷3页
+		int start = (page - 1) * pageSize; // 锟斤拷始位锟斤拷锟姐法
+		// + 锟斤拷实锟斤拷太锟斤拷 锟斤拷锟斤拷锟絪tringBuffer stringBuilder append
 		sql = sql + " limit " + start + "," + pageSize;
 		List list = (List) select(sql, cla, param);
-		// ����һ��PageData����
+		// 锟斤拷锟斤拷一锟斤拷PageData锟斤拷锟斤拷
 		PageData data = new PageData(list, count, pageSize, page);
 		return data;
 	}
 
 	/**
-	 * ��ҳ���� sqlserver
+	 * 锟斤拷页锟斤拷锟斤拷 sqlserver
 	 * 
 	 * @param page
 	 * @param pageSize
@@ -318,8 +318,8 @@ public class BaseDao {
 	 * @return
 	 */
 	public static PageData getPage(Integer page, Integer pageSize, Class cla, String identity) {
-		String name = cla.getName().substring(cla.getName().lastIndexOf(".") + 1);// �������������������ȡ���ݿ����
-		String selSql = "select count(1) from " + name;// ��ȡ����
+		String name = cla.getName().substring(cla.getName().lastIndexOf(".") + 1);// 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟饺★拷锟斤拷菘锟斤拷锟斤拷
+		String selSql = "select count(1) from " + name;// 锟斤拷取锟斤拷锟斤拷
 		if (page == null) {
 			page = 1;
 		}
@@ -329,7 +329,7 @@ public class BaseDao {
 		int start = (page - 1) * pageSize;
 		Integer count = Integer.parseInt(getFirst(selSql, null).toString());
 		selSql = "select top " + pageSize + " * from " + name + " where " + identity + " not in (select top " + start
-				+ " " + identity + " from " + name + " )"; // ƴ�Ӳ�ѯ���
+				+ " " + identity + " from " + name + " )"; // 拼锟接诧拷询锟斤拷锟�
 		List list = (List) select(selSql, cla, null);
 		PageData data = new PageData(list, count, pageSize, page);
 		return data;
@@ -338,7 +338,7 @@ public class BaseDao {
 	public static PageData oracleGetPage(String sql, Integer page, Integer pageSize, Class cla, Object... param) {
 		// sql select * from news
 		
-		// ʵ�ּ򵥵ķ�ҳ���
+		// 实锟街简单的凤拷页锟斤拷锟�
 		if (page == null) {
 			page = 1;
 		}
@@ -346,19 +346,19 @@ public class BaseDao {
 			pageSize = 10;
 		}
 		
-		int start = (page - 1) * pageSize; // ��ʼλ���㷨
+		int start = (page - 1) * pageSize; // 锟斤拷始位锟斤拷锟姐法
 		int end = pageSize*page+1;
 		sql = sql + end + ") tt where r>" + start;
 		
-		// select count(1) from (select * from news) t --�õ���¼����
+		// select count(1) from (select * from news) t --锟矫碉拷锟斤拷录锟斤拷锟斤拷
 		String selSql = "select count(1) from (" + sql + ") t";
 		
 		
 		List list = (List) select(sql, cla, param);
-		// ��ѯ�õ��ܼ�¼��
+		// 锟斤拷询锟矫碉拷锟杰硷拷录锟斤拷
 		Integer count = Integer.parseInt(getFirst(selSql, param).toString());
 
-		// ����һ��PageData����
+		// 锟斤拷锟斤拷一锟斤拷PageData锟斤拷锟斤拷
 		PageData data = new PageData(list, count, pageSize, page);
 		return data;
 	}

@@ -159,9 +159,9 @@
 						<div class="right">
 							<!--个人信息显示区域开始-->
 							<div class="userinfo">
-								<a href="WeiBoServlet?op=queryMyWb"><img href="my_home.jsp" src="img/bg.jpg" alt="140×140" class="img-circle touxiang" /></a>
+								<a href="WeiBoServlet?op=queryMyWb"><img href="my_home.jsp" src="${requestScope.userinfo.TOUXIANG}" alt="140×140" class="img-circle touxiang" /></a>
 								<div class="username">
-									<a href="WeiBoServlet?op=queryMyWb">${sessionScope.username}</a>
+									<a href="WeiBoServlet?op=queryMyWb">${requestScope.userinfo.NICKNAME}</a>
 								</div>
 								<div class="WB_cardwrap S_bg2 " style="background-color: white;">
 									<div class="PCD_counter">

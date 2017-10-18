@@ -191,7 +191,7 @@
 					<!--微博内容中头像div开始-->
 					<div style=" display: inline; float: left; ">
 						<a href="# ">
-							<img id=" " src="img/touxiang.jpg " width="100px " height="100px " class="touxiang img-circle " />
+							<img id=" " src="${weibo.TOUXIANG}" width="100px " height="100px " class="touxiang img-circle " />
 						</a>
 					</div>
 					<!--微博内容中头像div结束-->

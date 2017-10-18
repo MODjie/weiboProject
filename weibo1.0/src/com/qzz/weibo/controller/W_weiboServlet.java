@@ -17,8 +17,10 @@ import javax.websocket.Session;
 import com.qzz.weibo.dao.W_collectDao;
 import com.qzz.weibo.entity.W_collect;
 import com.qzz.weibo.entity.W_comment;
+import com.qzz.weibo.entity.W_userinfo;
 import com.qzz.weibo.entity.W_weibo;
 import com.qzz.weibo.entity.W_zan;
+import com.qzz.weibo.service.W_UserInfoService;
 import com.qzz.weibo.service.W_collectService;
 import com.qzz.weibo.service.W_commentService;
 import com.qzz.weibo.service.W_weiboService;
@@ -80,6 +82,14 @@ public class W_weiboServlet extends HttpServlet {
 				request.setAttribute("list", list);
 				request.setAttribute("sendName", sendName);
 				request.getRequestDispatcher("my_home.jsp").forward(request, response);
+			}
+			else if(op.equals("homepage")) {
+				String userName = (String) session.getAttribute("name");
+				W_UserInfoService wus = new W_UserInfoService();
+				W_userinfo userinfo = new W_userinfo();
+				userinfo = wus.getAllUserInfo(userName).get(0);
+				request.setAttribute("userinfo", userinfo);
+				request.getRequestDispatcher("homepage.jsp").forward(request, response);
 			}
 			else if (op.equals("queryAllWb")) {			
 				list = ws.queryMyWb();

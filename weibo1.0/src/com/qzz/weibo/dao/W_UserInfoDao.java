@@ -8,7 +8,7 @@ import com.qzz.weibo.util.BaseDao;
 public class W_UserInfoDao {
 
 	/**
-	 * 根据登录名获取用户的所有信息
+	 * 鏍规嵁鐧诲綍鍚嶈幏鍙栫敤鎴风殑鎵�鏈変俊鎭�
 	 * 
 	 * @param username
 	 * @return
@@ -16,11 +16,11 @@ public class W_UserInfoDao {
 	public List<W_userinfo> getAllUserInfo(String username) {
 		return (List<W_userinfo>) BaseDao.select("select * from W_USERINFO where USERNAME=?", W_userinfo.class,
 				username);
-
 	}
-
+	
+	
 	/**
-	 * 更新用户的基本信息情况
+	 * 鏇存柊鐢ㄦ埛鐨勫熀鏈俊鎭儏鍐�
 	 * 
 	 * @param userinfo
 	 * @param username
