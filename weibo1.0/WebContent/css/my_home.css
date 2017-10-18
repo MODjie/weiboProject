@@ -1,4 +1,4 @@
-/*閼冲本娅欓崶鍓у*/
+/*闁煎啿鏈▍娆撳炊閸撗冾暬*/
 body {
 	background-image: url(../img/body_bg2.jpg);
 	background-repeat: no-repeat;
@@ -11,7 +11,7 @@ body {
 	background-color: rgba(0,0,0,0);
 	overflow: hidden;
 }
-/*妞ゅ爼鍎寸�佃壈鍩呴弽蹇旂壉瀵拷*/
+/*濡炪倕鐖奸崕瀵革拷浣冨閸╁懘寮借箛鏃傚鐎殿噯鎷�*/
 #serach {
 	margin: 10px;
 	width: 400px;
@@ -37,14 +37,14 @@ body {
 .main {
 	margin-top: 100px;
 }
-/*鐏忎線娼扮�佃壈鍩呯悰銊︾壐娑擃厾娈憈d閺嶅嘲绱�*/
+/*閻忓繋绶氬鎵拷浣冨閸╁懐鎮伴妸锔惧濞戞搩鍘惧▓鎲坉闁哄秴鍢茬槐锟�*/
 /*
 td,
 th {
 	display: table-cell;
 	vertical-align: inherit;
 }*/
-/*鐏忎線娼扮�佃壈鍩呯悰銊︾壐閻ㄥ垼iv閺嶅嘲绱�*/
+/*閻忓繋绶氬鎵拷浣冨閸╁懐鎮伴妸锔惧闁汇劌鍨糹v闁哄秴鍢茬槐锟�*/
 
 .tb_tab {
 	width: 100%;
@@ -68,12 +68,12 @@ th {
 	padding-bottom: 12px;
 }
 
-/*閹存垹娈戞稉濠氥�夋稉璇差啇閸ｃ劍鐗卞锟�*/
+/*闁瑰瓨鍨瑰▓鎴炵▔婵犳哎锟藉绋夌拠宸晣闁革絻鍔嶉悧鍗烆嚕閿燂拷*/
 
 #ct_main {
 	display: inline-block;
 }
-/*閹存垹娈戞稉濠氥�夊锔挎櫠閸愬懎顔愰弽宄扮础*/
+/*闁瑰瓨鍨瑰▓鎴炵▔婵犳哎锟藉顔忛敂鎸庢珷闁告劕鎳庨鎰板冀瀹勬壆纭�*/
 
 .wb_frame_left {
 	display: inline-block;
@@ -82,7 +82,7 @@ th {
 	vertical-align: top;
 	font-size: 12px;
 }
-/*瀵邦喖宕ラ敍宀�鐭囨稉婵撶礉閸忚櫕鏁為崡锛勫閻ㄥ嫭鐗卞锟�*/
+/*鐎甸偊鍠栧畷銉╂晬瀹�锟介惌鍥ㄧ▔濠垫挾绀夐柛蹇氭珪閺佺偤宕￠敍鍕暬闁汇劌瀚悧鍗烆嚕閿燂拷*/
 
 .WB_cardwrap {
 	margin: 0 0 10px 0;
@@ -136,7 +136,7 @@ table td strong {
 .W_f18 {
 	font-size: 18px;
 }
-/*瀵邦喖宕ラ崘鍛啇閺嶅嘲绱�*/
+/*鐎甸偊鍠栧畷銉╁礃閸涱収鍟囬柡宥呭槻缁憋拷*/
 
 .WB_content {
 	width: 700px;
@@ -150,14 +150,17 @@ table td strong {
 .content_bottom {
 	overflow: hidden;
 }
+.content_bottom ul li a:hover{
+	color:orangered;
+}
 
-/*瀵邦喖宕ラ崘鍛啇娑擃厼銇旈崓蹇曟畱閺嶅嘲绱�*/
+/*鐎甸偊鍠栧畷銉╁礃閸涱収鍟囧☉鎿冨幖閵囨棃宕撹箛鏇熺暠闁哄秴鍢茬槐锟�*/
 
 .content_tx {
 	width: 80px;
 	height: 80px;
 }
-/*瀵邦喖宕ラ崘鍛啇娑擃叀鐦庣拋鍝勫隘閻ㄥ嫭鐗卞锟�*/
+/*鐎甸偊鍠栧畷銉╁礃閸涱収鍟囧☉鎿冨弨閻﹀海鎷嬮崫鍕殬闁汇劌瀚悧鍗烆嚕閿燂拷*/
 
 .div {
 	display: block;
@@ -173,25 +176,25 @@ table td strong {
 	color: #D9D9D9;
 }
 
-/*瀹革缚鏅舵總钘夊几閸掓銆冮弽宄扮础*/
+/*鐎归潻缂氶弲鑸电附閽樺鍑犻柛鎺擃殙閵嗗啴寮藉畡鎵*/
 .friends_list {
 	text-align: center;
 }
-/*婵傝棄寮搁崚妤勩�冩稉顓犳畱閼冲本娅欓弽宄扮础*/
+/*濠靛倽妫勫鎼佸礆濡ゅ嫨锟藉啯绋夐鐘崇暠闁煎啿鏈▍娆撳冀瀹勬壆纭�*/
 /*.afriend_bg {
 	background: lightgray;
 }*/
-/*婵傝棄寮搁崚妤勩�冩稉顓犳畱a閺嶅洨顒烽弽宄扮础*/
+/*濠靛倽妫勫鎼佸礆濡ゅ嫨锟藉啯绋夐鐘崇暠a闁哄秴娲ㄩ鐑藉冀瀹勬壆纭�*/
 .afriend_wrap {
 	margin-left: 30px;
 	display: block;
 }
-/*婵傝棄寮搁崚妤勩�冩稉顓炪偨閸欏銇旈崓蹇旂壉瀵拷*/
+/*濠靛倽妫勫鎼佸礆濡ゅ嫨锟藉啯绋夐鐐仺闁告瑥顑呴妵鏃堝磽韫囨梻澹夌�殿噯鎷�*/
 .FL_tx {
 	width: 50px;
 	height: 50px;
 }
-/*婵傝棄寮搁崚妤勩�冩稉顓炪偨閸欏妯�缁夌増鐗卞锟�*/
+/*濠靛倽妫勫鎼佸礆濡ゅ嫨锟藉啯绋夐鐐仺闁告瑥顑嗗Ο锟界紒澶屽閻楀崬顕ｉ敓锟�*/
 .FL_name {
 	font-size: 20px;
 	padding-left: 20px;	

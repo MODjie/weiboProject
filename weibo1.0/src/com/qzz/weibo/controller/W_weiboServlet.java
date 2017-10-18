@@ -115,7 +115,7 @@ public class W_weiboServlet extends HttpServlet {
 					weiboId = Integer.parseInt((String) request.getParameter("weiboId"));
 					String nikeName = new String(request.getParameter("nikeName").getBytes("ISO-8859-1"),"UTF-8");
 					String commentContent = new String(request.getParameter("commentContent").getBytes("ISO-8859-1"),"UTF-8");
-					
+//					String commentContent = request.getParameter("commentContent");
 					//获取当前系统时间
 					String commentTime = sdf.format(new Date());
 					W_comment comment = new W_comment(1,weiboId,nikeName,commentContent,commentTime);
@@ -141,7 +141,7 @@ public class W_weiboServlet extends HttpServlet {
 					//当返回数据为空时，就对该昵称和微博添加一条点赞记录
 					wzs.addZan(weiboId, zanName);
 					//点赞数加一
-					wei.setZANNUM(wei.getZANNUM()+1);
+					wei.setZANNUM(wei.getZANNUM()+1);					
 				}else {
 					//如果返回数据不为空，就删除该记录，即取消点赞功能
 					wzs.deleteZan(weiboId, zanName);

@@ -6,10 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>我的微博</title>
-<link rel="stylesheet" type="text/css" href="css/my_home.css" />
-		<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
-		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-		<script type="text/javascript" src="bootstrap/js/bootstrap01.js"></script>
+<link rel="stylesheet" type="text/css" href="css/my_home.css?s=1" />
+<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap01.js"></script>
+
 </head>
 
 <body style="background-color: rgb(94, 122, 161);">
@@ -219,20 +220,26 @@
 											<div class="content_bottom">
 												<ul class="nav nav-pills WB_row_line">
 													<li class="col" style="width: 175px; text-align: center;">
-														<a id="test" href="WeiBoServlet?op=collect&weiboid=${weibo.WEIBOID }"> <span
-															class="glyphicon glyphicon-star-empty"></span>&nbsp;<span>${weibo.COLLECTNUM }</span></a>
+														<a id="test"
+														href="WeiBoServlet?op=collect&weiboid=${weibo.WEIBOID }">
+															<span class="glyphicon glyphicon-star-empty"></span>&nbsp;<span>${weibo.COLLECTNUM }</span>
+													</a>
 													</li>
 													<li class="col" style="width: 175px; text-align: center;">
 														<a href="#"><span
 															class="glyphicon glyphicon-new-window"></span> &nbsp;<span>${weibo.FORWARDNUM }</span></a>
 													</li>
 													<li class="col" style="width: 170px; text-align: center;">
-														<a href="WeiBoServlet?op=queryWbById&weiboid=${weibo.WEIBOID }&cmsuccess=no"> <span class="glyphicon glyphicon-comment"></span>
-															&nbsp;<span>${weibo.COMMENTNUM }</span></a>
+														<a
+														href="WeiBoServlet?op=queryWbById&weiboid=${weibo.WEIBOID }&cmsuccess=no">
+															<span class="glyphicon glyphicon-comment"></span> &nbsp;<span>${weibo.COMMENTNUM }</span>
+													</a>
 													</li>
 													<li style="width: 170px; text-align: center;"><a
-														href="WeiBoServlet?op=zan&weiboid=${weibo.WEIBOID }"> <span class="glyphicon glyphicon-thumbs-up"></span>
-															&nbsp;<span>${weibo.ZANNUM }</span></a></li>
+														href="WeiBoServlet?op=zan&weiboid=${weibo.WEIBOID } ">
+															<span class="glyphicon glyphicon-thumbs-up"></span>
+															&nbsp;<span>${weibo.ZANNUM }</span>
+													</a></li>
 												</ul>
 											</div>
 											<!--微博内容评论转发div结束-->
