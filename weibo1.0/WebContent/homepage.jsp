@@ -13,7 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title></title>
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/imagediv.css"/>
+		<link rel="stylesheet" type="text/css" href="css/imagediv.css?df=1"/>
 		<link rel="stylesheet" type="text/css" href="css/index01.css"/>
 		<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.css" />
 		<script src="bootstrap-3.3.7-dist/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
@@ -159,9 +159,9 @@
 						<div class="right">
 							<!--个人信息显示区域开始-->
 							<div class="userinfo">
-								<a href="WeiBoServlet?op=queryMyWb"><img href="my_home.jsp" src="img/bg.jpg" alt="140×140" class="img-circle touxiang" /></a>
+								<a href="WeiBoServlet?op=queryMyWb"><img href="my_home.jsp" src="${requestScope.userinfo.TOUXIANG}" alt="140×140" class="img-circle touxiang" /></a>
 								<div class="username">
-									<a href="WeiBoServlet?op=queryMyWb">${sessionScope.username}</a>
+									<a href="WeiBoServlet?op=queryMyWb">${requestScope.userinfo.NICKNAME}</a>
 								</div>
 								<div class="WB_cardwrap S_bg2 " style="background-color: white;">
 									<div class="PCD_counter">

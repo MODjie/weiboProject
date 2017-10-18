@@ -71,6 +71,14 @@
 			.touxiang{
 				padding: 10px;
 			}
+			 a:hover{
+				color:orange;
+			}
+	/* 未访问的链接 */
+		.content_bottom ul li a:link {color:rgb(128,128,128)}
+		.content_bottom ul li a:visited {color:rgb(128,128,128)}	/* 已访问的链接 */
+		.content_bottom ul li a:hover {color: orange}	/* 鼠标移动到链接上 */
+		.content_bottom ul li a:active {color: #0000FF}	/* 选定的链接 */
 		</style>
 		<script type="text/javascript">
 			$(function() {
@@ -183,7 +191,7 @@
 					<!--微博内容中头像div开始-->
 					<div style=" display: inline; float: left; ">
 						<a href="# ">
-							<img id=" " src="img/touxiang.jpg " width="100px " height="100px " class="touxiang img-circle " />
+							<img id=" " src="${weibo.TOUXIANG}" width="100px " height="100px " class="touxiang img-circle " />
 						</a>
 					</div>
 					<!--微博内容中头像div结束-->
@@ -198,22 +206,25 @@
 					</div>
 					<!--微博发布的内容div结束-->
 				</div>
-					<div class="content_bottom " >
-					<ul class="nav nav-pills WB_row_line " >
-						<li class="col " style="width: 150px; text-align: center; ">
-							<a href="# "> 收藏<span class="badge ">20</span></a>
-						</li>
-						<li class="col " style="width: 150px; text-align: center; ">
-							<a href="# "> 转发<span class="badge ">15</span></a>
-						</li>
-						<li class="col " style="width: 150px; text-align: center; ">
-							<a href="more.jsp"> 评论<span class="badge ">40</span></a>
-						</li>
-						<li style="width: 150px; text-align: center; ">
-							<a href="# "> 赞<em class=" "></em><span class="badge ">1</span></a>
-						</li>
-					</ul>
-				</div>								
+					<div class="content_bottom">
+												<ul class="nav nav-pills WB_row_line" style="margin-left:35px">
+													<li class="col" style="width: 150px; text-align: center;">
+														<a id="test" href="WeiBoServlet?op=collect&weiboid=${weibo.WEIBOID }"> <span
+															class="glyphicon glyphicon-star-empty"></span>&nbsp;<span>${weibo.COLLECTNUM }</span></a>
+													</li>
+													<li class="col" style="width: 150px; text-align: center;">
+														<a href="#"><span
+															class="glyphicon glyphicon-new-window"></span> &nbsp;<span>${weibo.FORWARDNUM }</span></a>
+													</li>
+													<li class="col" style="width: 150px; text-align: center;">
+														<a href="WeiBoServlet?op=queryWbById&weiboid=${weibo.WEIBOID }&cmsuccess=no" target="_parent"> <span class="glyphicon glyphicon-comment"></span>
+															&nbsp;<span>${weibo.COMMENTNUM}</span></a>
+													</li>
+													<li style="width: 150px; text-align: center;"><a
+														href="WeiBoServlet?op=dianzan&weiboid=${weibo.WEIBOID }"> <span class="glyphicon glyphicon-thumbs-up"></span>
+															&nbsp;<span>${weibo.ZANNUM }</span></a></li>
+												</ul>
+											</div>							
 			</div>
 				<!--微博内容评论转发div开始-->
 			

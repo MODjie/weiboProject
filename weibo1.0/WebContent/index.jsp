@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%session.setAttribute("name", "jia") ;%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -209,7 +210,8 @@
             	时间：2017-10-11
             	描述：右侧的登录框开始
            -->
-						<form class="form-horizontal" role="form" style="background-color: rgb(255,255,255); margin:6px; margin-top: 10px; padding: 10px;" action="homepage.jsp">
+						<form class="form-horizontal" role="form" style="background-color: rgb(255,255,255); margin:6px; margin-top: 10px; padding: 10px;" action="WeiBoServlet?op=homepage">
+							<input type="hidden" name="op" value="homepage">
 							<div class="form" style="text-align:  center; height: 35px;line-height: 30px;">
 								<h3 style=" border-bottom: 3px solid orangered;">账号登录</h3>
 							</div>
@@ -230,7 +232,7 @@
 							</div>
 							<div class="form-group" style="text-align: center;">
 								<div class=" col-sm-10">
-									<a href="homepage.jsp"><button type="submit" class="btn btn-default " style="background-color: rgb(255,129,64); width: 280px;" >登录</button></a>
+									<button type="submit" class="btn btn-default " style="background-color: rgb(255,129,64); width: 280px;" >登录</button>
 								</div>
 								<div class=" col-sm-10" style="text-align: left;">
 									还没有微博? <a href="regiter.jsp">立即注册</a>

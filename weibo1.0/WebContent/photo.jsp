@@ -87,7 +87,7 @@
 														<a href="photo.jsp">我的相册</a>
 													</td>
 													<td>
-														<a href="#">管理中心</a>
+														<a href="/W_UserInfoServlet?op=getUserInfo">管理中心</a>
 													</td>
 												</tr>
 											</tbody>
