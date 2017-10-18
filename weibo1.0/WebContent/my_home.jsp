@@ -233,7 +233,7 @@
 															&nbsp;<span>${weibo.COMMENTNUM }</span></a>
 													</li>
 													<li style="width: 170px; text-align: center;"><a
-														href="#"> <span class="glyphicon glyphicon-thumbs-up"></span>
+														href="WeiBoServlet?op=zan&weiboid=${weibo.WEIBOID }"> <span class="glyphicon glyphicon-thumbs-up"></span>
 															&nbsp;<span>${weibo.ZANNUM }</span></a></li>
 												</ul>
 											</div>

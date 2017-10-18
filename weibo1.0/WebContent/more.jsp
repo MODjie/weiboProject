@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css"
 	href="bootstrap-3.3.7-dist/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="css/more.css" />
-<script src="backdrop/pixi.js" type="text/javascript"></script>
+<script src="backdrop/pixi.js?hd=1" type="text/javascript"></script>
 <script src="backdrop/quicksketch.min.js" type="text/javascript"></script>
 <script src="backdrop/introBG.js" type="text/javascript"></script>
 <meta charset="UTF-8">

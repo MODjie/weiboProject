@@ -16,8 +16,10 @@ import javax.websocket.Session;
 
 import com.qzz.weibo.entity.W_comment;
 import com.qzz.weibo.entity.W_weibo;
+import com.qzz.weibo.entity.W_zan;
 import com.qzz.weibo.service.W_commentService;
 import com.qzz.weibo.service.W_weiboService;
+import com.qzz.weibo.service.W_zanService;
 import com.qzz.weibo.util.DataUtil;
 
 import sun.nio.cs.ext.ISO_8859_11;
@@ -30,6 +32,7 @@ public class W_weiboServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private W_weiboService ws = new W_weiboService(); 
     private W_commentService wcs = new W_commentService();
+    private W_zanService wzs = new W_zanService();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -60,14 +63,14 @@ public class W_weiboServlet extends HttpServlet {
 		//得到微博内容的集合
 		List<W_weibo> list = new ArrayList<>();
 		List<W_comment> list2 = new ArrayList<>();
+		HttpSession session = request.getSession();
 		//判断op的值
 		if (request.getParameter("op")!=null) {
 			String op = request.getParameter("op");
 			//查找我的主页中我发过的所有微博
 			if (op.equals("queryMyWb")) {
-				HttpSession session = request.getSession();
+				
 				String sendName = (String) session.getAttribute("username");
-//				String sendName = "杰哥";
 				//将查询到的微博list倒序输出			
 				list = ws.queryWbByName(sendName);
 				request.setAttribute("list", list);
@@ -121,6 +124,33 @@ public class W_weiboServlet extends HttpServlet {
 				request.setAttribute("list2", list2);
 				request.setAttribute("detailWb", detailWb);
 				request.getRequestDispatcher("more.jsp").forward(request, response);
+			}else if (op.equals("zan")) {
+				//通过传过来的微博ID和点赞人的昵称查找数据库并且存储在zanlist中
+				int weiboId = Integer.parseInt((String) request.getParameter("weiboid"));
+				String zanName = (String) session.getAttribute("username");
+				List<W_zan> zanList = wzs.queryByNameAndId(weiboId, zanName);
+				//获取本条微博
+				W_weibo wei = ws.queryWbById(weiboId).get(0);
+				System.out.println(wei.getWEIBOID());
+				//通过zanList的长度来判断，返回数据是否为空
+				if (zanList.size()==0) {
+					//当返回数据为空时，就对该昵称和微博添加一条点赞记录
+					wzs.addZan(weiboId, zanName);
+					//点赞数加一
+					wei.setZANNUM(wei.getZANNUM()+1);
+				}else {
+					//如果返回数据不为空，就删除该记录，即取消点赞功能
+					wzs.deleteZan(weiboId, zanName);
+					//点赞数减一
+					wei.setZANNUM(wei.getZANNUM()-1);
+				}
+				//修改本条微博的点赞数
+					ws.updateWeiboById(wei);
+				//通过昵称查找微博			
+				list = ws.queryWbByName(zanName);
+				request.setAttribute("list", list);
+				request.setAttribute("sendName", zanName);
+				request.getRequestDispatcher("my_home.jsp").forward(request, response);
 			}	
 		}
 		

@@ -49,4 +49,12 @@ public class W_weiboService {
 	public int queryTypeIdByName(String typeName) {
 		return weiboDao.queryTypeIdByName(typeName);
 	}
+	/**
+	 * 修改微博的收藏、转发、评论、点赞数
+	 * @param weibo
+	 * @return
+	 */
+	public boolean updateWeiboById(W_weibo weibo) {
+		return weiboDao.updateWeiboById(weibo);
+	}
 }
