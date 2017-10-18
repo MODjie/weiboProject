@@ -160,7 +160,7 @@
 													</div>
 													<div class="msgInfo">${comment.COMMCONTENT }</div>
 													<div class="times">
-														<span>07月05日 15:14</span><a class="del"
+														<span>${comment.COMMENTTIME }</span><a class="del"
 															href="javascript:;">删除</a>
 													</div>
 												</div>

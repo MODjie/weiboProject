@@ -16,12 +16,12 @@ public class W_commentDao {
 	 * @return
 	 */
 	public boolean addComment(W_comment comment) {
-		return BaseDao.execute("insert into W_COMMENT values(null,?,?,?)", comment.getWEIBOID(),comment.getCOMMENTNAME(),comment.getCOMMCONTENT())>0;
+		return BaseDao.execute("insert into W_COMMENT values(null,?,?,?,?)", comment.getWEIBOID(),comment.getCOMMENTNAME(),comment.getCOMMCONTENT(),comment.getCOMMENTTIME())>0;
 	}
 	/**
 	 * 通过微博id查找评论
 	 */
 	public List<W_comment> queryCmById(int weiboId) {
-		return (List<W_comment>) BaseDao.select("select * from W_COMMENT where WEIBOID =?", W_comment.class, weiboId);
+		return (List<W_comment>) BaseDao.select("select * from W_COMMENT where WEIBOID =? order by W_COMMENT.COMMENTTIME desc", W_comment.class, weiboId);
 	}
 }

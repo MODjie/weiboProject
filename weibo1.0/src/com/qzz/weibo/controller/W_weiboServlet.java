@@ -11,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.qzz.weibo.entity.W_comment;
 import com.qzz.weibo.entity.W_weibo;
@@ -63,8 +65,9 @@ public class W_weiboServlet extends HttpServlet {
 			String op = request.getParameter("op");
 			//查找我的主页中我发过的所有微博
 			if (op.equals("queryMyWb")) {
-//				String sendName = (String) request.getAttribute("sendName");
-				String sendName = "杰哥";
+				HttpSession session = request.getSession();
+				String sendName = (String) session.getAttribute("username");
+//				String sendName = "杰哥";
 				//将查询到的微博list倒序输出			
 				list = ws.queryWbByName(sendName);
 				request.setAttribute("list", list);
@@ -104,29 +107,21 @@ public class W_weiboServlet extends HttpServlet {
 					weiboId = Integer.parseInt((String) request.getParameter("weiboId"));
 					String nikeName = new String(request.getParameter("nikeName").getBytes("ISO-8859-1"),"UTF-8");
 					String commentContent = new String(request.getParameter("commentContent").getBytes("ISO-8859-1"),"UTF-8");
-					
-					W_comment comment = new W_comment(1,weiboId,nikeName,commentContent);
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+					//获取当前系统时间
+					String commentTime = df.format(new Date());
+					W_comment comment = new W_comment(1,weiboId,nikeName,commentContent,commentTime);
 					wcs.addComment(comment);
 				}
 				list = ws.queryWbById(weiboId);
 				W_weibo detailWb = list.get(0);
 				//获取本条微博的所有评论内容				
 				list2 = wcs.queryCmById(weiboId);
-				
-				
-				
+
 				request.setAttribute("list2", list2);
 				request.setAttribute("detailWb", detailWb);
 				request.getRequestDispatcher("more.jsp").forward(request, response);
-			}else if (op.equals("addComment")) {
-				int weiboId = Integer.parseInt((String) request.getParameter("weiboId"));
-				String nikeName = new String(request.getParameter("nikeName").getBytes("ISO-8859-1"),"UTF-8");
-				String commentContent = new String(request.getParameter("commentContent").getBytes("ISO-8859-1"),"UTF-8");
-				
-				W_comment comment = new W_comment(1,weiboId,nikeName,commentContent);
-				wcs.addComment(comment);
-				request.getRequestDispatcher("more.jsp").forward(request, response);
-			}		
+			}	
 		}
 		
 		
