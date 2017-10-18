@@ -10,6 +10,14 @@ public class W_comment {
 	private int WEIBOID;
 	private String COMMENTNAME;
 	private String COMMCONTENT;
+	private String COMMENTTIME;
+	
+	public String getCOMMENTTIME() {
+		return COMMENTTIME;
+	}
+	public void setCOMMENTTIME(String cOMMENTTIME) {
+		COMMENTTIME = cOMMENTTIME;
+	}
 	public int getCOMMENTID() {
 		return COMMENTID;
 	}
@@ -34,19 +42,21 @@ public class W_comment {
 	public void setCOMMCONTENT(String cOMMCONTENT) {
 		COMMCONTENT = cOMMCONTENT;
 	}
+	
 	@Override
 	public String toString() {
 		return "W_comment [COMMENTID=" + COMMENTID + ", WEIBOID=" + WEIBOID + ", COMMENTNAME=" + COMMENTNAME
-				+ ", COMMCONTENT=" + COMMCONTENT + "]";
+				+ ", COMMCONTENT=" + COMMCONTENT + ", COMMENTTIME=" + COMMENTTIME + "]";
 	}
-	public W_comment(int cOMMENTID, int wEIBOID, String cOMMENTNAME, String cOMMCONTENT) {
+	
+	public W_comment(int cOMMENTID, int wEIBOID, String cOMMENTNAME, String cOMMCONTENT, String cOMMENTTIME) {
 		super();
 		COMMENTID = cOMMENTID;
 		WEIBOID = wEIBOID;
 		COMMENTNAME = cOMMENTNAME;
 		COMMCONTENT = cOMMCONTENT;
+		COMMENTTIME = cOMMENTTIME;
 	}
-	
 	public W_comment() {
 		// TODO Auto-generated constructor stub
 	}

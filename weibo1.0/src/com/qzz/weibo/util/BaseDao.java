@@ -17,9 +17,10 @@ import org.apache.commons.beanutils.BeanUtils;
 public class BaseDao {
 
 	private static final String DRIVER = "oracle.jdbc.OracleDriver";
-//	private static final String URL = "jdbc:oracle:thin:@192.168.9.223:1521:orcl";
 	private static final String URL = "jdbc:oracle:thin:@192.168.9.223:1521:orcl";
+//	private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl1";
 	private static final String USER = "scott"; // �û���
+//	private static final String PASSWORD = "jie6846947";// ����
 	private static final String PASSWORD = "jia";// ����
 
 	/**
