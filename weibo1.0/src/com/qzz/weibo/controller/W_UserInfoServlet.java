@@ -58,13 +58,19 @@ public class W_UserInfoServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String nickname = request.getParameter("nickname");
 		String realname = request.getParameter("realname");
-		String birth = request.getParameter("birth");
-		String location = request.getParameter("location");
 		String sex = request.getParameter("sex");
 		String remark = request.getParameter("remark");
 		String qq = request.getParameter("qq");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
+		String year = request.getParameter("year");
+		String month = request.getParameter("month");
+		String day = request.getParameter("day");
+		String province = request.getParameter("province");
+		String city = request.getParameter("city");
+
+		String location = province + city;
+		String birth = year + month + day;
 
 		// 将获取的值放进W_userinfo实体类中
 		W_userinfo userinfo = new W_userinfo(nickname, realname, sex, birth, location, email, qq, phone, remark);
@@ -78,15 +84,14 @@ public class W_UserInfoServlet extends HttpServlet {
 			// 如果传过来的值是updateuserinfo则先将用户的基本信息更新，再重新查询出来显示
 			else if (op.equals("updateuserinfo")) {
 				userinfoservice.updateUserInfo(userinfo, username);
-				
 				list = userinfoservice.getAllUserInfo(username);
 			}
 		}
-		
+
 		request.setAttribute("username", username);
 		request.setAttribute("nickname", nickname);
 		request.setAttribute("list", list);
-		System.out.println(list);
+
 		request.getRequestDispatcher("information.jsp").forward(request, response);
 
 	}
