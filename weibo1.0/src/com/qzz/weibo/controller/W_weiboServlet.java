@@ -99,8 +99,9 @@ public class W_weiboServlet extends HttpServlet {
 				w.setPUBLISHTIME(sdf.format(date));
 				w.setIMAGE(DataUtil.imgname);
 				w.setTYPEID(typeId);
-				if(ws.addWeiBo(w))
-					response.getWriter().print("<script language='javascript'>alert('发布成功');</script>");		
+				if(ws.addWeiBo(w)) {
+					response.getWriter().print("<script language='javascript'>alert('发布成功');parent.location.href='homepage.jsp'</script>");
+				}
 			//通过id查找单个微博，跳转到该微博的详细信息页面
 			}else if (op.equals("queryWbById")) {
 				int weiboId = 0;

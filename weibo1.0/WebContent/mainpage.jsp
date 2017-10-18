@@ -194,7 +194,7 @@
 						</a>
 						<h6>${weibo.PUBLISHTIME}</h6>
 						<p>${weibo.CONTENT}</p>
-						<img class="myImg "  src="${weibo.IMAGE}" />
+						<img class="myImg" src="${weibo.IMAGE}" width="500px " />
 					</div>
 					<!--微博发布的内容div结束-->
 				</div>
