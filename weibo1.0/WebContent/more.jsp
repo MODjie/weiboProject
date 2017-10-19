@@ -154,9 +154,17 @@
 												<div class="userPic">
 													<img src="img/imagemore/1.jpg" />
 												</div>
-												<div class="content">
-													<div class="userName">
-														<a href="#" style="color: orangered;">${comment.COMMENTNAME }</a>:
+												<div class="content" style="width: 580px;">
+													<div class="userName row clearfix">
+														<div class="col-md-2 column">
+															<a href="#" style="color: orangered;"
+																style="margin-left: 20px;">${comment.COMMENTNAME }</a>:
+														</div>
+														<div class="col-md-8 column"></div>
+														<div class="col-md-2 column">
+															<a href="WeiBoServlet?op=reply">回复</a> 
+															<a href="WeiBoServlet?op=deleteComment&commentId=${comment.COMMENTID }&cmweiboId=${comment.WEIBOID } ">删除</a>
+														</div>
 													</div>
 													<div class="msgInfo">${comment.COMMCONTENT }</div>
 													<div class="times">
@@ -236,15 +244,18 @@
 
 <script type="text/javascript">
 	$(function() {
-		$("#sendBtn").click(
-				function() {
-					var nikeName = $("#nikeName").text();
-					var weiboId = $("#weiboId").val();
-					var commentContent = $("#cm_area").val();
-					location.href = "WeiBoServlet?op=queryWbById&cmsuccess=yes&nikeName="
-							+ nikeName + "&weiboId=" + weiboId
-							+ "&commentContent=" + commentContent;
-				})
+		$("#sendBtn")
+				.click(
+						function() {
+							var nikeName = $("#nikeName").text();
+							var weiboId = $("#weiboId").val();
+							var commentContent = $("#cm_area").val();
+							location.href = "WeiBoServlet?op=queryWbById&cmsuccess=yes&nikeName="
+									+ nikeName
+									+ "&weiboId="
+									+ weiboId
+									+ "&commentContent=" + commentContent;
+						})
 	});
 </script>
 </html>

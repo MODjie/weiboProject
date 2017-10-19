@@ -176,11 +176,11 @@
 									id="bs-example-navbar-collapse-1">
 									<ul class="nav navbar-nav">
 										<li><a href="#">全部</a></li>
-										<li><a href="#">原创</a></li>
-										<li><a href="#">图片</a></li>
-										<li><a href="#">标签</a></li>
-										<li><a href="#">音乐</a></li>
-										<li><a href="#">文章</a></li>
+										<li><a href="#">军事</a></li>
+										<li><a href="#">美女</a></li>
+										<li><a href="#">动漫</a></li>
+										<li><a href="#">体育</a></li>
+										<li><a href="#">娱乐</a></li>
 									</ul>
 									<form class="navbar-form navbar-left" role="search"
 										style="margin-left: 30px;">
