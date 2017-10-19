@@ -55,8 +55,8 @@ public class W_weiboDao {
 	 * @return
 	 */
 	public boolean forwardWeiBo(W_weibo w) {
-		String sql = "insert into W_WEIBO values(null,?,?,?,null,?,0,0,0,?,'ÊÇ',?,0)";
-		return BaseDao.execute(sql,w.getFWDCONTENT(), w.getCONTENT(),w.getSENDNAME(),w.getPUBLISHTIME(),w.getTYPEID(),w.getFWDWEIBOID())>0;
+		String sql = "insert into W_WEIBO values(null,?,?,?,null,?,0,0,0,?,'ÊÇ',?,0,?)";
+		return BaseDao.execute(sql,w.getFWDCONTENT(), w.getCONTENT(),w.getSENDNAME(),w.getPUBLISHTIME(),w.getTYPEID(),w.getFWDWEIBOID(),w.getBASEID())>0;
 	}
 	
 	/***

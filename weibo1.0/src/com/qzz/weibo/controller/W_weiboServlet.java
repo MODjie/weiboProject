@@ -243,7 +243,8 @@ public class W_weiboServlet extends HttpServlet {
 				String content = request.getParameter("content");
 				String sendname = (String) request.getSession().getAttribute("username");
 				Date date = new Date();
-				W_weibo oldwb = ws.queryWbById(weiboId).get(0);
+				W_weibo wb = ws.queryWbById(weiboId).get(0);
+				W_weibo oldwb = ws.queryWbById(wb.getBASEID()).get(0);
 				W_weibo newwb = new W_weibo();
 				newwb.setFWDCONTENT(oldwb.getCONTENT());
 				newwb.setCONTENT(content);
@@ -251,6 +252,7 @@ public class W_weiboServlet extends HttpServlet {
 				newwb.setPUBLISHTIME(sdf.format(date));
 				newwb.setTYPEID(oldwb.getTYPEID());
 				newwb.setFWDWEIBOID(weiboId);
+				newwb.setBASEID(oldwb.getBASEID());
 				if(ws.forwardWeiBo(newwb)) {
 					response.getWriter().print("<script language='javascript'>alert('转发成功');parent.location.href='WeiBoServlet?op=homepage'</script>");
 				}
