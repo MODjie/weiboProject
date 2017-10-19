@@ -6,21 +6,24 @@ package com.qzz.weibo.entity;
  *
  */
 public class W_weibo {
-	private int WEIBOID;
-	private String FWDCONTENT;
-	private String CONTENT;
-	private String SENDNAME;
-	private String IMAGE;
-	private String PUBLISHTIME;
-	private int COMMENTNUM;
-	private int ZANNUM;
-	private int FORWARDNUM;
-	private int TYPEID;
-	private String ISFORWORD;
-	private int FWDWEIBOID;	
-	private int COLLECTNUM;
-	private String TOUXIANG;
-	
+	private int WEIBOID;//微博编号
+	private String FWDCONTENT;//转发时上一条微博的内容
+	private String CONTENT;//微博内容，转发时输入的内容
+	private String SENDNAME;//发送人昵称
+	private String IMAGE;//微博配图
+	private String PUBLISHTIME;//发布时间
+	private int COMMENTNUM;//评论数
+	private int ZANNUM;//点赞数
+	private int FORWARDNUM;//转发数
+	private int TYPEID;//微博类型
+	private String ISFORWORD;//是否为转发
+	private int FWDWEIBOID;	//上一级的微博编号
+	private int COLLECTNUM;//收藏数
+	private String TOUXIANG;//发送人头像
+	private String FORWARDIMG;//原来的图片（转发源）
+	private String OLDTIME;//原来（转发源）的发布时间
+	private String OLDNAME;//原来（转发源）的发布人昵称
+	private int BASEID;
 	
 	public int getCOLLECTNUM() {
 		return COLLECTNUM;
@@ -108,12 +111,35 @@ public class W_weibo {
 		TOUXIANG = tOUXIANG;
 	}
 	
+	public String getFORWARDIMG() {
+		return FORWARDIMG;
+	}
+	public void setFORWARDIMG(String fORWARDIMG) {
+		FORWARDIMG = fORWARDIMG;
+	}
+	public String getOLDTIME() {
+		return OLDTIME;
+	}
+	public void setOLDTIME(String oLDTIME) {
+		OLDTIME = oLDTIME;
+	}
 	
+	public String getOLDNAME() {
+		return OLDNAME;
+	}
+	public void setOLDNAME(String oLDNAME) {
+		OLDNAME = oLDNAME;
+	}
 	
-	
+	public int getBASEID() {
+		return BASEID;
+	}
+	public void setBASEID(int bASEID) {
+		BASEID = bASEID;
+	}
 	public W_weibo(int wEIBOID, String fWDCONTENT, String cONTENT, String sENDNAME, String iMAGE, String pUBLISHTIME,
 			int cOMMENTNUM, int zANNUM, int fORWARDNUM, int tYPEID, String iSFORWORD, int fWDWEIBOID, int cOLLECTNUM,
-			String tOUXIANG) {
+			String tOUXIANG, String fORWARDIMG, String oLDTIME, String oLDNAME, int bASEID) {
 		super();
 		WEIBOID = wEIBOID;
 		FWDCONTENT = fWDCONTENT;
@@ -129,6 +155,10 @@ public class W_weibo {
 		FWDWEIBOID = fWDWEIBOID;
 		COLLECTNUM = cOLLECTNUM;
 		TOUXIANG = tOUXIANG;
+		FORWARDIMG = fORWARDIMG;
+		OLDTIME = oLDTIME;
+		OLDNAME = oLDNAME;
+		BASEID = bASEID;
 	}
 	@Override
 	public String toString() {
@@ -136,6 +166,7 @@ public class W_weibo {
 				+ SENDNAME + ", IMAGE=" + IMAGE + ", PUBLISHTIME=" + PUBLISHTIME + ", COMMENTNUM=" + COMMENTNUM
 				+ ", ZANNUM=" + ZANNUM + ", FORWARDNUM=" + FORWARDNUM + ", TYPEID=" + TYPEID + ", ISFORWORD="
 				+ ISFORWORD + ", FWDWEIBOID=" + FWDWEIBOID + ", COLLECTNUM=" + COLLECTNUM + ", TOUXIANG=" + TOUXIANG
+				+ ", FORWARDIMG=" + FORWARDIMG + ", OLDTIME=" + OLDTIME + ", OLDNAME=" + OLDNAME + ", BASEID=" + BASEID
 				+ "]";
 	}
 	public W_weibo() {

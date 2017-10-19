@@ -33,12 +33,21 @@ public class W_weiboService {
 	}
 	
 	/***
-	 * 添加一条数据到微博表中
+	 * 发布微博添加一条数据到微博表中
 	 * @param w 微博对象
 	 * @return
 	 */
 	public boolean addWeiBo(W_weibo w) {
 		return weiboDao.addWeiBo(w);
+	}
+	
+	/***
+	 * 转发微博添加一条数据到微博表中
+	 * @param w 微博对象
+	 * @return
+	 */
+	public boolean forwardWeiBo(W_weibo w) {
+		return weiboDao.forwardWeiBo(w);
 	}
 	
 	/***

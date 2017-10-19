@@ -17,6 +17,12 @@
 		<link rel="stylesheet" type="text/css" href="css/index01.css"/>
 		<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.css" />
 		<script src="bootstrap-3.3.7-dist/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+		.share_weibo_wp{width:520px; padding:20px; background-color:#fff; margin-left:auto; margin-right:auto; margin-top:20px;-khtml-border-radius:10px;-ms-border-radius:10px;-o-border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;behavior: url(ie-css3.htc)}
+		.count_txt{color: #B5B5B5;text-align: right}
+		.count_txt strong {font-family: georgia;font-size: 24px; padding: 0 2px}
+		.inputstyle {height: 75px;line-height: 18px;overflow-x: hidden;overflow-y: auto;width: 472px;resize: none;}
+		</style>
 		<script type="text/javascript">
 			$(function() {
 				$(".aa").mousemove(function() {
@@ -28,6 +34,7 @@
 			});
 		</script>
 		<script type="text/javascript">
+		var weiboid;
 			$(function() {
 				//search-box 随屏幕滚动 
 				$(window).scroll(function() {
@@ -42,8 +49,37 @@
 					}
 
 				});
-
+				
+				
+				//点击取消关闭转发窗口
+				$("#cancle").click(function(){
+					$('#myModal1').css("display", "none");
+					//启用滚动条
+					$("body").css({
+						"overflow-y": "auto"
+					});
+				});
+				
+				//点击转发提交Weiboservlet处理
+				$("#forward").click(function(){
+					var content = $("#forwardcontent").val();
+					location.href="WeiBoServlet?op=forward&weiboid="+weiboid+"&content="+content;
+				})
 			})
+			
+			//获取子页面传过来的weiboid
+			function forward(id){
+				weiboid = id;
+			}
+			
+			//转发字符动态限制
+			function checkLength(which) {
+ 				 var maxChars = 120;
+ 				 if (which.value.length > maxChars)
+  					which.value = which.value.substring(0,maxChars);
+ 					var curr = maxChars - which.value.length;
+  					document.getElementById("currentLength").innerHTML = curr.toString()
+  				}
 		</script>
 	</head>
 
@@ -245,6 +281,32 @@
 				</div>
 			</div>
 		</div>
+		
+
+		
+		
+		<!-- 弹窗 -->
+							<div id="myModal1" class="modal">
+
+								<!-- 关闭按钮 -->
+								<span class="close" ><font size="7" color="white">&times;</font> </span>
+
+								<!-- 弹窗内容 -->
+								<center>
+								<div class="cl share_weibo_wp" style="">
+  <div class="cl">
+    <h4 class="l">分享到微博</h4>
+    <span class="r count_txt">还能输入<strong id="currentLength">120</strong>字</span>
+  </div>
+  <textarea onkeyup="checkLength(this);" id="forwardcontent" class="textarea radius inputstyle" name="" cols="" rows=""></textarea><br>
+  <button type="button" id="forward" style="margin-top:15px;" class="btn btn-primary text-right">转发</button>
+  <button type="button" id="cancle" style="margin-top:15px;margin-left:100px" class="btn btn-primary text-right">取消</button>
+</div>
+								</center>
+							
+							</div>
+</div>
+		
 	</body>
 
 </html>
