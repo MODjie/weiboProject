@@ -157,15 +157,17 @@
 												<div class="content" style="width: 580px;">
 													<div class="userName row clearfix">
 														<div class="col-md-2 column">
-															<a  href="#" style="color: orangered;"
-																style="margin-left: 20px;">${comment.COMMENTNAME }</a>:
+															<a href="#" style="color: orangered;"
+																style="margin-left: 20px;">${comment.COMMENTNAME }</a>
 														</div>
 														<div class="col-md-8 column"></div>
 														<div class="col-md-2 column">
-															<input type="hidden" id="回复者"  value="${sessionScope.username }">
-															<a class="replyA" id="modal-617802" href="#reply"  data-toggle="modal">回复</a> 
-															<input type="hidden"  value="${comment.COMMENTID }">
-															<a href="WeiBoServlet?op=deleteComment&commentId=${comment.COMMENTID }&cmweiboId=${comment.WEIBOID } ">删除</a>
+															<input type="hidden" id="回复者"
+																value="${sessionScope.username }"> <a
+																class="replyA" id="modal-617802" href="#reply"
+																data-toggle="modal">回复</a> <input type="hidden"
+																value="${comment.COMMENTID }"> <a
+																href="WeiBoServlet?op=deleteComment&commentId=${comment.COMMENTID }&cmweiboId=${comment.WEIBOID } ">删除</a>
 														</div>
 													</div>
 													<div class="msgInfo">${comment.COMMCONTENT }</div>
@@ -242,50 +244,66 @@
 				</div>
 			</div>
 		</div>
-	<!-- 回复的弹出窗口 -->
+		<!-- 回复的弹出窗口 -->
 		<div class="container">
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<div class="modal fade" id="reply" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h4 class="modal-title" id="replyHead">
-								回复
-							</h4>
+			<div class="row clearfix">
+				<div class="col-md-12 column">
+					<div class="modal fade" id="reply" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="replyHead">回复</h4>
+								</div>
+								<div class="modal-body">
+									<textarea id="replyContent"
+										style="width: 565px; height: 150px;"></textarea>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">关闭</button>
+									<button type="button" class="btn btn-primary" id="confirm">保存</button>
+								</div>
+							</div>
+
 						</div>
-						<div class="modal-body">
-							内容...
-						</div>
-						<div class="modal-footer">
-							 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> <button type="button" class="btn btn-primary">保存</button>
-						</div>
+
 					</div>
-					
+
 				</div>
-				
 			</div>
-			
 		</div>
-	</div>
-</div>
 </body>
 
 <script type="text/javascript">
-//回复按钮的点击事件
-$(function(){
-	$(".replyA").click(function(){
-		//评论编号
-		var commentId = $(this).next().val();
-		//回复者
-		var replyerA = $(this).prev().val();
-		//被回复的人
-		var replyerB = $(this).parent("div").prev().prev().text();
-		alert(commentId+"   "+replyerA+"   "+replyerB);
-	})
-});
-//评论按钮的点击事件
+	var commentId;
+	var replyerA;
+	var replyerB;
+	var replyContent;
+	$(function() {
+		//回复按钮的点击事件
+		$(".replyA").click(function() {
+			//评论编号
+			commentId = $(this).next().val();
+			//回复者
+			replyerA = $(this).prev().val();
+			//被回复的人
+			replyerB = $(this).parent("div").prev().prev().text();
+		})
+		//回复之后的确定按钮点击事件
+		$("#confirm").click(
+				function() {
+					//回复内容
+					replyContent = $("#replyContent").val();
+					alert(replyContent);
+					location.href = "WeiBoServlet?op=reply&commentId="
+							+ commentId + "&replyerA=" + replyerA + "&replyerB="
+							+ replyerB + "&replyContent=" + replyContent;
+				});
+	});
+	//评论按钮的点击事件
 	$(function() {
 		$("#sendBtn")
 				.click(
