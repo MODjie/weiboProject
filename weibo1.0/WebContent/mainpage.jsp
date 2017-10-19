@@ -107,6 +107,32 @@
 						"overflow-y": "auto"
 					});
 				})
+				
+				/***
+				 * 点击转发时，在其父窗口弹出展示转发窗口
+				 */
+				$(".forward").click(function() {
+					//禁用滚动条
+					var id = $(this).find(".weiboid").val();
+					//把该条微博的编号传给父页面
+					parent.forward(id);
+					$(window.parent.document.body).css({
+						"overflow-y": "hidden"
+					});
+					$('#myModal1', window.parent.document).css("display", "block");
+				});
+				$(".close", window.parent.document).click(function() {
+					$('#myModal1', window.parent.document).css("display", "none");
+					//启用滚动条
+					$(window.parent.document.body).css({
+						"overflow-y": "auto"
+					});
+				})
+				
+				//点击转发按钮，使父页面弹出遮罩层
+				
+				
+	
 
 			})
 		</script>
@@ -202,7 +228,15 @@
 						</a>
 						<h6>${weibo.PUBLISHTIME}</h6>
 						<p>${weibo.CONTENT}</p>
-						<img class="myImg" src="${weibo.IMAGE}" width="500px " />
+				<c:if test="${weibo.ISFORWORD!='是'}">
+					<img class="myImg" src="${weibo.IMAGE}" width="500px " />
+				</c:if>
+				<c:if test="${weibo.ISFORWORD=='是'}">
+					<div class="forwoarddiv" style="width:530px;">
+					
+					</div>
+				</c:if>
+						
 					</div>
 					<!--微博发布的内容div结束-->
 				</div>
@@ -213,8 +247,11 @@
 															class="glyphicon glyphicon-star-empty"></span>&nbsp;<span>${weibo.COLLECTNUM }</span></a>
 													</li>
 													<li class="col" style="width: 150px; text-align: center;">
-														<a href="#"><span
-															class="glyphicon glyphicon-new-window"></span> &nbsp;<span>${weibo.FORWARDNUM }</span></a>
+														 
+														<a href="" class="forward" data-toggle="modal" ><span
+															class="glyphicon glyphicon-new-window"></span> &nbsp;<span>${weibo.FORWARDNUM }</span>
+															<input class="weiboid" type="hidden" value="${weibo.WEIBOID }">
+															</a>
 													</li>
 													<li class="col" style="width: 150px; text-align: center;">
 														<a href="WeiBoServlet?op=queryWbById&weiboid=${weibo.WEIBOID }&cmsuccess=no" target="_parent"> <span class="glyphicon glyphicon-comment"></span>
@@ -240,7 +277,6 @@
 
 		</div>
 		
-
 	</body>
 
 </html>

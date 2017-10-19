@@ -13,21 +13,21 @@ public class W_weiboDao {
 	 * @return
 	 */
 	public List<W_weibo> queryMyWb() {
-		return (List<W_weibo>)BaseDao.select("select * from WEIBO_VIEW", W_weibo.class, null);
+		return (List<W_weibo>)BaseDao.select("select * from WB_VIEW", W_weibo.class, null);
 	}
 	
 	/**
 	 * 通过用户名查找微博
 	 */
 	public List<W_weibo> queryWbByName(String sendName) {
-		return (List<W_weibo>)BaseDao.select("select * from WEIBO_VIEW where SENDNAME = ?", W_weibo.class, sendName);
+		return (List<W_weibo>)BaseDao.select("select * from WB_VIEW where SENDNAME = ?", W_weibo.class, sendName);
 	}
 	
 	/**
 	 * 通过id查找微博
 	 */
 	public List<W_weibo> queryWbById(int id) {
-		return (List<W_weibo>)BaseDao.select("select * from WEIBO_VIEW where WEIBOID = ?", W_weibo.class, id);
+		return (List<W_weibo>)BaseDao.select("select * from WB_VIEW where WEIBOID = ?", W_weibo.class, id);
 	}
 	/**
 	 * 查找所有用户
@@ -40,13 +40,23 @@ public class W_weiboDao {
 	}
 	
 	/***
-	 * 向微博表中插入一条记录
+	 * 发布微博向微博表中插入一条记录
 	 * @param w 微博对象
 	 * @return
 	 */
 	public boolean addWeiBo(W_weibo w) {
 		String sql = "insert into W_WEIBO values(null,null,?,?,?,?,0,0,0,?,'否',null,0)";
 		return BaseDao.execute(sql, w.getCONTENT(),w.getSENDNAME(),w.getIMAGE(),w.getPUBLISHTIME(),w.getTYPEID())>0;
+	}
+	
+	/***
+	 * 转发微博向微博表中插入一条记录
+	 * @param w 微博对象
+	 * @return
+	 */
+	public boolean forwardWeiBo(W_weibo w) {
+		String sql = "insert into W_WEIBO values(null,?,?,?,null,?,0,0,0,?,'是',?,0)";
+		return BaseDao.execute(sql,w.getFWDCONTENT(), w.getCONTENT(),w.getSENDNAME(),w.getPUBLISHTIME(),w.getTYPEID(),w.getFWDWEIBOID())>0;
 	}
 	
 	/***

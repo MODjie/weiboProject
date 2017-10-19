@@ -211,8 +211,15 @@
 														<h5>${weibo.SENDNAME }</h5>
 													</a>
 													<h6>${weibo.PUBLISHTIME }</h6>
-													<p>${weibo.FWDCONTENT }${weibo.CONTENT }</p>
-													<img src="${weibo.IMAGE}" />
+													<p>${weibo.CONTENT }</p>
+													<p>${weibo.ISFORWORD}</p>
+													<c:if test="${weibo.ISFORWORD!='是'}">
+													<img src="${weibo.IMAGE}" width="500px" />
+													</c:if>
+													<c:if test="${weibo.ISFORWORD=='是'}">
+													<div class="forwoarddiv" style="width:530px;">
+													</div>
+													</c:if>
 												</div>
 												<!--微博发布的内容div结束-->
 											</div>

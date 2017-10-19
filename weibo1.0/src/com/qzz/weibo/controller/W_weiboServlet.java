@@ -222,6 +222,23 @@ public class W_weiboServlet extends HttpServlet {
 					request.getRequestDispatcher("mainpage.jsp").forward(request, response);
 			
 			}
+			else if(op.equals("forward")) {
+				int weiboId =Integer.parseInt(request.getParameter("weiboid")) ;
+				String content = request.getParameter("content");
+				String sendname = (String) request.getSession().getAttribute("username");
+				Date date = new Date();
+				W_weibo oldwb = ws.queryWbById(weiboId).get(0);
+				W_weibo newwb = new W_weibo();
+				newwb.setFWDCONTENT(oldwb.getCONTENT());
+				newwb.setCONTENT(content);
+				newwb.setSENDNAME(sendname);
+				newwb.setPUBLISHTIME(sdf.format(date));
+				newwb.setTYPEID(oldwb.getTYPEID());
+				newwb.setFWDWEIBOID(weiboId);
+				if(ws.forwardWeiBo(newwb)) {
+					response.getWriter().print("<script language='javascript'>alert('转发成功');parent.location.href='homepage.jsp'</script>");
+				}
+			}
 		}
 		
 		
