@@ -110,7 +110,7 @@ public class W_weiboServlet extends HttpServlet {
 				w.setIMAGE(DataUtil.imgname);
 				w.setTYPEID(typeId);
 				if(ws.addWeiBo(w)) {
-					response.getWriter().print("<script language='javascript'>alert('发布成功');parent.location.href='homepage.jsp'</script>");
+					response.getWriter().print("<script language='javascript'>alert('发布成功');parent.location.href='WeiBoServlet?op=homepage'</script>");
 				}
 			//通过id查找单个微博，跳转到该微博的详细信息页面,评论功能
 			}else if (op.equals("queryWbById")) {
@@ -252,7 +252,7 @@ public class W_weiboServlet extends HttpServlet {
 				newwb.setTYPEID(oldwb.getTYPEID());
 				newwb.setFWDWEIBOID(weiboId);
 				if(ws.forwardWeiBo(newwb)) {
-					response.getWriter().print("<script language='javascript'>alert('转发成功');parent.location.href='homepage.jsp'</script>");
+					response.getWriter().print("<script language='javascript'>alert('转发成功');parent.location.href='WeiBoServlet?op=homepage'</script>");
 				}
 			}
 		}

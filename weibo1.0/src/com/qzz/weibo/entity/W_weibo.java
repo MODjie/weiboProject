@@ -22,7 +22,8 @@ public class W_weibo {
 	private String TOUXIANG;//发送人头像
 	private String FORWARDIMG;//原来的图片（转发源）
 	private String OLDTIME;//原来（转发源）的发布时间
-	
+	private String OLDNAME;//原来（转发源）的发布人昵称
+	private int BASEID;
 	
 	public int getCOLLECTNUM() {
 		return COLLECTNUM;
@@ -123,9 +124,22 @@ public class W_weibo {
 		OLDTIME = oLDTIME;
 	}
 	
+	public String getOLDNAME() {
+		return OLDNAME;
+	}
+	public void setOLDNAME(String oLDNAME) {
+		OLDNAME = oLDNAME;
+	}
+	
+	public int getBASEID() {
+		return BASEID;
+	}
+	public void setBASEID(int bASEID) {
+		BASEID = bASEID;
+	}
 	public W_weibo(int wEIBOID, String fWDCONTENT, String cONTENT, String sENDNAME, String iMAGE, String pUBLISHTIME,
 			int cOMMENTNUM, int zANNUM, int fORWARDNUM, int tYPEID, String iSFORWORD, int fWDWEIBOID, int cOLLECTNUM,
-			String tOUXIANG, String fORWARDIMG, String oLDTIME) {
+			String tOUXIANG, String fORWARDIMG, String oLDTIME, String oLDNAME, int bASEID) {
 		super();
 		WEIBOID = wEIBOID;
 		FWDCONTENT = fWDCONTENT;
@@ -143,15 +157,17 @@ public class W_weibo {
 		TOUXIANG = tOUXIANG;
 		FORWARDIMG = fORWARDIMG;
 		OLDTIME = oLDTIME;
+		OLDNAME = oLDNAME;
+		BASEID = bASEID;
 	}
-	
 	@Override
 	public String toString() {
 		return "W_weibo [WEIBOID=" + WEIBOID + ", FWDCONTENT=" + FWDCONTENT + ", CONTENT=" + CONTENT + ", SENDNAME="
 				+ SENDNAME + ", IMAGE=" + IMAGE + ", PUBLISHTIME=" + PUBLISHTIME + ", COMMENTNUM=" + COMMENTNUM
 				+ ", ZANNUM=" + ZANNUM + ", FORWARDNUM=" + FORWARDNUM + ", TYPEID=" + TYPEID + ", ISFORWORD="
 				+ ISFORWORD + ", FWDWEIBOID=" + FWDWEIBOID + ", COLLECTNUM=" + COLLECTNUM + ", TOUXIANG=" + TOUXIANG
-				+ ", FORWARDIMG=" + FORWARDIMG + ", OLDTIME=" + OLDTIME + "]";
+				+ ", FORWARDIMG=" + FORWARDIMG + ", OLDTIME=" + OLDTIME + ", OLDNAME=" + OLDNAME + ", BASEID=" + BASEID
+				+ "]";
 	}
 	public W_weibo() {
 		// TODO Auto-generated constructor stub

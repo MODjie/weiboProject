@@ -45,7 +45,7 @@ public class W_weiboDao {
 	 * @return
 	 */
 	public boolean addWeiBo(W_weibo w) {
-		String sql = "insert into W_WEIBO values(null,null,?,?,?,?,0,0,0,?,'·ñ',null,0)";
+		String sql = "insert into W_WEIBO values(null,null,?,?,?,?,0,0,0,?,'·ñ',null,0,?)";
 		return BaseDao.execute(sql, w.getCONTENT(),w.getSENDNAME(),w.getIMAGE(),w.getPUBLISHTIME(),w.getTYPEID())>0;
 	}
 	

@@ -74,6 +74,11 @@
 			 a:hover{
 				color:orange;
 			}
+			.forwoarddiv{
+			background-color: rgb(242,242,245);
+			margin-left:-100px;
+			width:800px;
+			}
 	/* 未访问的链接 */
 		.content_bottom ul li a:link {color:rgb(128,128,128)}
 		.content_bottom ul li a:visited {color:rgb(128,128,128)}	/* 已访问的链接 */
@@ -232,8 +237,13 @@
 					<img class="myImg" src="${weibo.IMAGE}" width="500px " />
 				</c:if>
 				<c:if test="${weibo.ISFORWORD=='是'}">
-					<div class="forwoarddiv" style="width:530px;">
-					
+				<div class="forwoarddiv">
+					<div style="width:550px;margin-left:100px;margin-top:20px">
+					<h5>&nbsp;</h5>
+					<h5>${weibo.OLDNAME}<small>&nbsp;&nbsp;&nbsp;${weibo.OLDTIME}</small></small></h5>					
+					<p>${weibo.FWDCONTENT}</p>
+					<img class="myImg" src="${weibo.FORWARDIMG}" width="500px " />
+					</div>
 					</div>
 				</c:if>
 						
