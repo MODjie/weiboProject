@@ -112,7 +112,7 @@ public class W_weiboServlet extends HttpServlet {
 				if(ws.addWeiBo(w)) {
 					response.getWriter().print("<script language='javascript'>alert('发布成功');parent.location.href='homepage.jsp'</script>");
 				}
-			//通过id查找单个微博，跳转到该微博的详细信息页面
+			//通过id查找单个微博，跳转到该微博的详细信息页面,评论功能
 			}else if (op.equals("queryWbById")) {
 				int weiboId = 0;
 				//接收评论成功标志
@@ -220,7 +220,23 @@ public class W_weiboServlet extends HttpServlet {
 					list = ws.queryMyWb();
 					request.setAttribute("list", list);
 					request.getRequestDispatcher("mainpage.jsp").forward(request, response);
-			
+			//删除评论
+			}else if (op.equals("deleteComment")) {
+				//接收传回来的评论id，删除此评论
+				int commentId = Integer.parseInt((String) request.getParameter("commentId"));
+				wcs.deleteCmById(commentId);
+				
+				//获取本条微博
+				int weiboId = Integer.parseInt((String) request.getParameter("cmweiboId"));
+				list = ws.queryWbById(weiboId);
+				
+				W_weibo detailWb = list.get(0);
+				//获取本条微博的所有评论内容				
+				list2 = wcs.queryCmById(weiboId);
+
+				request.setAttribute("list2", list2);
+				request.setAttribute("detailWb", detailWb);
+				request.getRequestDispatcher("more.jsp").forward(request, response);
 			}
 		}
 		

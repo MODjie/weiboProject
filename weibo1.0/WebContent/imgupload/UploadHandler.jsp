@@ -69,7 +69,6 @@ while (iter.hasNext()) {
         }else{
          session.setAttribute("FileUpload.Progress."+fileId,"-2");
         }
-		
     }
  }
 

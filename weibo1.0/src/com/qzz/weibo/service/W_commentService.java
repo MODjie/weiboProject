@@ -21,4 +21,13 @@ public class W_commentService {
 	public List<W_comment> queryCmById(int weiboId) {
 		return commentDao.queryCmById(weiboId);
 	}
+	
+	/**
+	 * 通过评论id删除评论
+	 * @param commentId
+	 * @return
+	 */
+	public boolean deleteCmById(int commentId) {
+		return commentDao.deleteCmById(commentId);
+	}
 }

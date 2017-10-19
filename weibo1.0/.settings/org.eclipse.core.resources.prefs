@@ -1,9 +1,10 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=branch 'master' of https\://github.com/15080361511/WeiBoProject.git
 eclipse.preferences.version=1
 encoding//WebContent/css/imagediv.css=UTF-8
 encoding//WebContent/css/index01.css=UTF-8
-<<<<<<< HEAD
+encoding//WebContent/css/more.css=UTF-8
 encoding//WebContent/css/my_home.css=UTF-8
-=======
 encoding//src/com/qzz/weibo/dao/W_UserInfoDao.java=UTF-8
 encoding//src/com/qzz/weibo/util/BaseDao.java=UTF-8
->>>>>>> branch 'master' of https://github.com/15080361511/WeiBoProject.git

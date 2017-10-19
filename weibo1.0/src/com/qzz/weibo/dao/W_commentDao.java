@@ -24,4 +24,13 @@ public class W_commentDao {
 	public List<W_comment> queryCmById(int weiboId) {
 		return (List<W_comment>) BaseDao.select("select * from W_COMMENT where WEIBOID =? order by W_COMMENT.COMMENTTIME desc", W_comment.class, weiboId);
 	}
+	
+	/**
+	 * 通过评论id删除评论
+	 * @param commentId
+	 * @return
+	 */
+	public boolean deleteCmById(int commentId) {
+		return BaseDao.execute("delete from W_COMMENT where COMMENTID = ?", commentId)>0;
+	}
 }
