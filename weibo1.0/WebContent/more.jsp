@@ -162,6 +162,8 @@
 														</div>
 														<div class="col-md-8 column"></div>
 														<div class="col-md-2 column">
+															<input type="hidden" id="wbid"
+																value="${comment.WEIBOID}">
 															<input type="hidden" id="回复者"
 																value="${sessionScope.username }"> <a
 																class="replyA" id="modal-617802" href="#reply"
@@ -175,6 +177,50 @@
 														<span>${comment.COMMENTTIME }</span><a class="del"
 															href="javascript:;">删除</a>
 													</div>
+													<!--
+                    									作者：offline
+                    									时间：2017-10-19
+                    									描述：二级回复开始
+                   									 -->
+                   									 
+                   									 <c:if test="${requestScope.replyList!=null}">
+                   									 	<c:forEach items="${requestScope.replyList}" var="reply">
+                   									 		<!-- 如果此回复中的评论编号是否与此评论相同 则显示回复-->
+                   									 		<c:if test="${comment.COMMENTID==reply.COMMENTID }">
+                   									 			<br />
+                   									 		<div class="userPic">
+														<img src="img/imagemore/1.jpg" />
+													</div>
+													<div class="content" style="width: 510px;">
+														<div class="userName row clearfix">
+															<div class="col-md-4 column">
+																<a href="#" style="color: orangered;"
+																	style="margin-left: 20px;">${reply.REPLYANAME }</a>回复<a href="#"
+																	style="color: orangered;" style="margin-left: 20px;">${reply.REPLYBNAME }</a>
+															</div>
+															<div class="col-md-5 column"></div>
+															<div class="col-md-2 column" style="margin-left: 33px;">
+																<a class="replyA" id="modal-617802" href="#reply"
+																	data-toggle="modal">回复</a> <a href="#">删除</a>
+															</div>
+														</div>
+														<div class="msgInfo">${reply.REPLYCONTENT }</div>
+														<div class="times">
+															<span>${reply.REPLYTIME }</span><a class="del"
+																href="javascript:;">删除</a>
+														</div>
+													</div>
+                   									 		</c:if>
+                   									 	
+                   									 	</c:forEach>
+                   									 </c:if>
+													
+													
+													<!--
+                    									作者：offline
+                    									时间：2017-10-19
+                    									描述：二级回复结束
+                    								-->
 												</div>
 
 											</li>
@@ -278,6 +324,7 @@
 </body>
 
 <script type="text/javascript">
+	var weiboid;
 	var commentId;
 	var replyerA;
 	var replyerB;
@@ -285,6 +332,8 @@
 	$(function() {
 		//回复按钮的点击事件
 		$(".replyA").click(function() {
+			//微博编号
+			weiboid = $(this).prev().prev().val();
 			//评论编号
 			commentId = $(this).next().val();
 			//回复者
@@ -297,10 +346,10 @@
 				function() {
 					//回复内容
 					replyContent = $("#replyContent").val();
-					alert(replyContent);
 					location.href = "WeiBoServlet?op=reply&commentId="
-							+ commentId + "&replyerA=" + replyerA + "&replyerB="
-							+ replyerB + "&replyContent=" + replyContent;
+							+ commentId + "&replyerA=" + replyerA
+							+ "&replyerB=" + replyerB + "&replyContent="
+							+ replyContent+"&weiboid="+weiboid;
 				});
 	});
 	//评论按钮的点击事件
