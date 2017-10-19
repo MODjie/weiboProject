@@ -240,7 +240,7 @@
 				<div class="forwoarddiv">
 					<div style="width:550px;margin-left:100px;margin-top:20px">
 					<h5>&nbsp;</h5>
-					<h5>${weibo.OLDNAME}<small>&nbsp;&nbsp;&nbsp;${weibo.OLDTIME}</small></small></h5>					
+					<h5>@${weibo.OLDNAME}<small>&nbsp;&nbsp;&nbsp;${weibo.OLDTIME}</small></small></h5>					
 					<p>${weibo.FWDCONTENT}</p>
 					<img class="myImg" src="${weibo.FORWARDIMG}" width="500px " />
 					</div>
