@@ -84,7 +84,7 @@ public class W_weiboServlet extends HttpServlet {
 			String op = request.getParameter("op");
 			// 查找我的主页中我发过的所有微博
 			if (op.equals("queryMyWb")) {
-
+				
 				String sendName = (String) session.getAttribute("username");
 				System.out.println("session是  " + sendName);
 				// 将查询到的微博list倒序输出
@@ -93,7 +93,13 @@ public class W_weiboServlet extends HttpServlet {
 				request.setAttribute("sendName", sendName);
 				request.getRequestDispatcher("my_home.jsp").forward(request, response);
 			} else if (op.equals("homepage")) {
-				String nickname = (String) session.getAttribute("username");
+				String nickname="";
+				if(session.getAttribute("username")==null)
+				{
+					session.setAttribute("username", "看看不懂");
+				}
+				nickname = session.getAttribute("username")+"";
+				System.out.println("session"+nickname);
 				W_UserInfoService wus = new W_UserInfoService();
 				W_userinfo userinfo = new W_userinfo();
 				userinfo = wus.getUserInfoByNikeName(nickname).get(0);
