@@ -155,7 +155,7 @@
 				<a href="${path}imgupload/uploadimg.jsp" class="xuanxiang" style="margin:0 0 50px 220px;">添加图片</a>
 
 				<select name="" class="" style="margin-left: 50px;">
-					<option value="">公开</option>
+					<option value="">所有人可见</option>
 					<option value="">仅自己可见</option>
 					<option value="">好友可见</option>
 					<option value="">匿名</option>

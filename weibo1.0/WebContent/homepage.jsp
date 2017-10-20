@@ -144,10 +144,10 @@
 								<a href="WeiBoServlet?op=queryAllWb" target="maincontent">首页</a>
 							</div>
 							<div class="aa">
-								<a href="collectpage.jsp" target="maincontent">收藏</a>
+								<a href="WeiBoServlet?op=querymycoll" target="maincontent">收藏</a>
 							</div>
 							<div class="aa">
-								<a href="zanpage.jsp" target="maincontent">我的赞</a>
+								<a href="WeiBoServlet?op=querymyzan" target="maincontent">我的赞</a>
 							</div>
 							<hr />
 							<div class="aa">
