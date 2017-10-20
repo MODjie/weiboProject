@@ -96,7 +96,7 @@ public class W_weiboServlet extends HttpServlet {
 				request.getRequestDispatcher("homepage.jsp").forward(request, response);
 			}
 			else if (op.equals("queryAllWb")) {			
-				list = ws.queryMyWb();
+				list = ws.queryAllWb();
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("mainpage.jsp").forward(request, response);
 			}
@@ -201,12 +201,16 @@ public class W_weiboServlet extends HttpServlet {
 				//通过昵称查找微博	
 					if(flag.equals("1")) {
 						System.out.println("准备跳转");
+						list = ws.queryAllWb();
+						request.setAttribute("list", list);
 						if(msg.equals("收藏成功"))
 						{
-						response.getWriter().print("<script language='javascript'>alert('收藏成功');parent.location.href='WeiBoServlet?op=homepage'</script>");
+							
+						response.getWriter().print("<script language='javascript'>location.href='WeiBoServlet?op=queryAllWb';alert('收藏成功');</script>");
+//						request.getRequestDispatcher("mainpage.jsp").forward(request, response);
 						}
 						else {
-							response.getWriter().print("<script language='javascript'>alert('取消收藏');parent.location.href='WeiBoServlet?op=homepage'</script>");
+						response.getWriter().print("<script language='javascript'>alert('取消收藏');location.href='WeiBoServlet?op=queryAllWb'</script>");
 						}
 					}
 					else {
@@ -239,7 +243,7 @@ public class W_weiboServlet extends HttpServlet {
 				//修改本条微博的点赞数
 					ws.updateWeiboById(wei);
 				//通过昵称查找微博	
-					list = ws.queryMyWb();
+					list = ws.queryAllWb();
 					request.setAttribute("list", list);
 					request.getRequestDispatcher("mainpage.jsp").forward(request, response);
 			//删除评论

@@ -14,8 +14,8 @@ public class W_weiboService {
 	 * 查找我的所有微博内容
 	 * @return
 	 */
-	public List<W_weibo> queryMyWb() {
-		return weiboDao.queryMyWb();
+	public List<W_weibo> queryAllWb() {
+		return weiboDao.queryAllWb();
 	}
 	
 	/**
