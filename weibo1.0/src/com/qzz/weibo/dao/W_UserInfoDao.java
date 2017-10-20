@@ -33,4 +33,14 @@ public class W_UserInfoDao {
 				userinfo.getQQ(), userinfo.getPHONENUM(), userinfo.getREMARK(),  username);
 	}	
 	
+	/**
+	 * 通过昵称来查找用户信息
+	 * 
+	 * @param username
+	 * @return
+	 */
+	public List<W_userinfo> getUserInfoByNikeName(String nikeName) {
+		return (List<W_userinfo>) BaseDao.select("select * from W_USERINFO where NICKNAME=?", W_userinfo.class,
+				nikeName);
+	}
 }

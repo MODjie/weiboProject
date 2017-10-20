@@ -42,7 +42,7 @@ public class W_weiboServlet extends HttpServlet {
 	private W_zanService wzs = new W_zanService();
 	private W_collectService cts = new W_collectService();
 	private W_replyService rs = new W_replyService();
-
+	private W_UserInfoService us = new W_UserInfoService();
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -93,10 +93,10 @@ public class W_weiboServlet extends HttpServlet {
 				request.setAttribute("sendName", sendName);
 				request.getRequestDispatcher("my_home.jsp").forward(request, response);
 			} else if (op.equals("homepage")) {
-				String userName = (String) session.getAttribute("name");
+				String nickname = (String) session.getAttribute("username");
 				W_UserInfoService wus = new W_UserInfoService();
 				W_userinfo userinfo = new W_userinfo();
-				userinfo = wus.getAllUserInfo(userName).get(0);
+				userinfo = wus.getUserInfoByNikeName(nickname).get(0);
 				request.setAttribute("userinfo", userinfo);
 				request.getRequestDispatcher("homepage.jsp").forward(request, response);
 
@@ -134,16 +134,16 @@ public class W_weiboServlet extends HttpServlet {
 					// 如果接收评论标志为yes，则增加评论
 				} else if (successFlag.equals("yes")) {
 					weiboId = Integer.parseInt((String) request.getParameter("weiboId"));
-					String nikeName = new String(request.getParameter("nikeName").getBytes("ISO-8859-1"), "UTF-8");
+					String nikeName = (String) session.getAttribute("username");
 					String commentContent = new String(request.getParameter("commentContent").getBytes("ISO-8859-1"),
 							"UTF-8");
 					// String commentContent = request.getParameter("commentContent");
 					// String commentContent = request.getParameter("commentContent");
 					// 获取当前系统时间
-					String commentTime = sdf.format(new Date());
-					W_comment comment = new W_comment(1, weiboId, nikeName, commentContent, commentTime);
+					String commentTime = sdf.format(new Date());			
+					W_comment comment = new W_comment(1, weiboId, nikeName, commentContent, commentTime,"22");
 					wcs.addComment(comment);
-				}
+				}				
 				list = ws.queryWbById(weiboId);
 				W_weibo detailWb = list.get(0);
 				// 获取本条微博的所有评论内容
@@ -269,7 +269,9 @@ public class W_weiboServlet extends HttpServlet {
 				W_weibo detailWb = list.get(0);
 				// 获取本条微博的所有评论内容
 				list2 = wcs.queryCmById(weiboId);
-
+				// 得到此评论的所有回复存在replyList中
+				replyList = rs.queryAllReply();
+				request.setAttribute("replyList", replyList);
 				request.setAttribute("list2", list2);
 				request.setAttribute("detailWb", detailWb);
 				request.getRequestDispatcher("more.jsp").forward(request, response);
@@ -301,7 +303,7 @@ public class W_weiboServlet extends HttpServlet {
 				String replyerB = new String(request.getParameter("replyerB").getBytes("ISO-8859-1"), "UTF-8");
 				String replyContent = new String(request.getParameter("replyContent").getBytes("ISO-8859-1"), "UTF-8");
 				String replyTime = sdf.format(new Date());
-				W_reply reply = new W_reply(1, commentId, replyerA, replyerB, replyContent, replyTime);
+				W_reply reply = new W_reply(1, commentId, replyerA, replyerB, replyContent, replyTime,"SDFS");
 				// 调用service增加回复
 				rs.addReply(reply);
 				// 得到此评论的所有回复存在replyList中

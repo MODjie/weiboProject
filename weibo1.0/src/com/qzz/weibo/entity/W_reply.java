@@ -12,6 +12,14 @@ public class W_reply {
 	private String REPLYBNAME;
 	private String REPLYCONTENT;
 	private String REPLYTIME;
+	private String TOUXIANG;
+	
+	public String getTOUXIANG() {
+		return TOUXIANG;
+	}
+	public void setTOUXIANG(String tOUXIANG) {
+		TOUXIANG = tOUXIANG;
+	}
 	public int getREPLYID() {
 		return REPLYID;
 	}
@@ -48,13 +56,15 @@ public class W_reply {
 	public void setREPLYTIME(String rEPLYTIME) {
 		REPLYTIME = rEPLYTIME;
 	}
+	
 	@Override
 	public String toString() {
 		return "W_reply [REPLYID=" + REPLYID + ", COMMENTID=" + COMMENTID + ", REPLYANAME=" + REPLYANAME
-				+ ", REPLYBNAME=" + REPLYBNAME + ", REPLYCONTENT=" + REPLYCONTENT + ", REPLYTIME=" + REPLYTIME + "]";
+				+ ", REPLYBNAME=" + REPLYBNAME + ", REPLYCONTENT=" + REPLYCONTENT + ", REPLYTIME=" + REPLYTIME
+				+ ", TOUXIANG=" + TOUXIANG + "]";
 	}
 	public W_reply(int rEPLYID, int cOMMENTID, String rEPLYANAME, String rEPLYBNAME, String rEPLYCONTENT,
-			String rEPLYTIME) {
+			String rEPLYTIME, String tOUXIANG) {
 		super();
 		REPLYID = rEPLYID;
 		COMMENTID = cOMMENTID;
@@ -62,6 +72,7 @@ public class W_reply {
 		REPLYBNAME = rEPLYBNAME;
 		REPLYCONTENT = rEPLYCONTENT;
 		REPLYTIME = rEPLYTIME;
+		TOUXIANG = tOUXIANG;
 	}
 	
 	public W_reply() {

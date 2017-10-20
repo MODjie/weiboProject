@@ -22,7 +22,7 @@ public class W_commentDao {
 	 * 通过微博id查找评论
 	 */
 	public List<W_comment> queryCmById(int weiboId) {
-		return (List<W_comment>) BaseDao.select("select * from W_COMMENT where WEIBOID =? order by W_COMMENT.COMMENTTIME desc", W_comment.class, weiboId);
+		return (List<W_comment>) BaseDao.select("select * from COMMENT_VIEW where WEIBOID =? order by COMMENT_VIEW.COMMENTTIME desc", W_comment.class, weiboId);
 	}
 	
 	/**
