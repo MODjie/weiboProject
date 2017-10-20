@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.qzz.weibo.dao.W_UserInfoDao;
+import com.qzz.weibo.dao.W_collectDao;
 import com.qzz.weibo.dao.W_weiboDao;
 import com.qzz.weibo.entity.W_userinfo;
 import com.qzz.weibo.entity.W_users;
@@ -28,12 +29,12 @@ public class weiboTest {
 //			System.out.println(list);
 //		}		
 		
-		String username ="jia";
-		List<W_userinfo>  list1 = new ArrayList<>();
-		W_UserInfoDao userInfoDao = new W_UserInfoDao();
-		list1= userInfoDao.getAllUserInfo(username);
-		for (W_userinfo w_userinfo : list1) {
-			System.out.println(w_userinfo);
+		String nickname ="¿´¿´²»¶®";
+		List<W_weibo>  list1 = new ArrayList<>();
+		W_collectDao W_collectDao = new W_collectDao();
+		list1= W_collectDao.queryMyColl(nickname);
+		for (W_weibo W_weibo : list1) {
+			System.out.println(W_weibo);
 		}
 		
 	}

@@ -309,6 +309,20 @@ public class W_weiboServlet extends HttpServlet {
 				request.setAttribute("detailWb", detailWb);
 				request.getRequestDispatcher("more.jsp").forward(request, response);
 			}
+			else if (op.equals("querymycoll"))//查询我收藏过的微博
+			{				
+				String nickname = (String) session.getAttribute("username");
+				List<W_weibo> colllist = new W_collectService().queryMyColl(nickname);
+				request.setAttribute("colllist", colllist);
+				request.getRequestDispatcher("collectpage.jsp").forward(request, response);
+			}
+			else if (op.equals("querymyzan"))//查询我点赞过的微博
+			{				
+				String nickname = (String) session.getAttribute("username");
+				List<W_weibo> zanlist = new W_zanService().queryMyZAN(nickname);
+				request.setAttribute("zanlist", zanlist);
+				request.getRequestDispatcher("zanpage.jsp").forward(request, response);
+			}
 		}
 		
 		

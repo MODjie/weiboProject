@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,6 +30,11 @@
 				margin-top: 70px;
 				width: 100%;
 			}
+			.forwoarddiv{
+			background-color: rgb(242,242,245);
+			margin-left:-100px;
+			width:800px;
+			}
 		</style>
 	</head>
 	<body>
@@ -43,50 +49,71 @@
 		</div>
 		<div class="show">
 			<!--微博内容开始-->
-			<div class="WB_content S_bg2" style="background-color: white; margin-top: 15px;">
-			<div class="container">
-				<div class="content_top row clearfix">
+	<c:if test="${requestScope.colllist!=null}">
+		<c:forEach items="${requestScope.colllist}" var="weibo">
+			<div class="WB_content S_bg2 " style="background-color: white; margin-top: 15px; ">
+			<div class="container ">
+				<div class="content_top row clearfix ">
 					<!--微博内容中头像div开始-->
-					<div style=" display: inline; float: left;">
-						<a href="#">
-							<img src="img/touxiang2.jpg" width="100px" height="100px" class="touxiang img-circle" />
+					<div style=" display: inline; float: left; ">
+						<a href="# ">
+							<img id=" " src="${weibo.TOUXIANG}" width="100px " height="100px " class="touxiang img-circle " />
 						</a>
 					</div>
 					<!--微博内容中头像div结束-->
 					<!--微博发布的内容div开始-->
-					<div  style="  display: inline;float: left; width: 550px;">
-						<a href="#">
-							<h5>cleanEach</h5>
+					<div  style=" display: inline;float: left; width: 550px; ">
+						<a href="# ">
+							<h5>${weibo.SENDNAME}</h5>
 						</a>
-						<h6>2017年10月11日 13:22</h6>
-						<p>【83岁老人两入火海救出仨娃 烧成重伤获爱心捐助[心]】国庆刚过，气温骤降，但人们的内心却因为一件事儿而格外温暖。来自临颍县的一位83岁高龄的老人，两入两出火场，奋力救出被困的重孙子重孙女，不幸被烧成重伤。当地的公益组织和一所医院及时伸出援手，组织募捐，提供无偿救治。愿老人早日康复！</p>
-						<img src="img/content2.jpg" width="580px" height="200px" />
+						<h6>${weibo.PUBLISHTIME}</h6>
+						<p>${weibo.CONTENT}</p>
+				<c:if test="${weibo.ISFORWORD!='是'}">
+					<img class="myImg" src="${weibo.IMAGE}" width="500px " />
+				</c:if>
+				<c:if test="${weibo.ISFORWORD=='是'}">
+				<div class="forwoarddiv">
+					<div style="width:550px;margin-left:100px;margin-top:20px">
+					<h5>&nbsp;</h5>
+					<h5>@${weibo.OLDNAME}<small>&nbsp;&nbsp;&nbsp;${weibo.OLDTIME}</small></small></h5>					
+					<p>${weibo.FWDCONTENT}</p>
+					<img class="myImg" src="${weibo.FORWARDIMG}" width="500px " />
+					</div>
+					</div>
+				</c:if>
+						
 					</div>
 					<!--微博发布的内容div结束-->
 				</div>
-					<div class="content_bottom" >
-					<ul class="nav nav-pills WB_row_line" >
-						<li class="col" style="width: 150px; text-align: center;">
-							<a href="#"> 收藏<span class="badge">20</span></a>
-						</li>
-						<li class="col" style="width: 150px; text-align: center;">
-							<a href="#"> 转发<span class="badge">15</span></a>
-						</li>
-						<li class="col" style="width: 150px; text-align: center;">
-							<a href="#"> 评论<span class="badge">40</span></a>
-						</li>
-						<li style="width: 150px; text-align: center;">
-							<a href="#"> 赞<em class=""></em><span class="badge">1</span></a>
-						</li>
-					</ul>
-				</div>
-								
+					<div class="content_bottom">
+												<ul class="nav nav-pills WB_row_line" style="margin-left:35px">
+													<li class="col" style="width: 150px; text-align: center;">
+														<a id="test" href="WeiBoServlet?op=collect&weiboid=${weibo.WEIBOID }&flag=1"> <span
+															class="glyphicon glyphicon-star-empty"></span>&nbsp;<span>${weibo.COLLECTNUM }</span></a>
+													</li>
+													<li class="col" style="width: 150px; text-align: center;">
+														 
+														<a href="" class="forward" data-toggle="modal" ><span
+															class="glyphicon glyphicon-new-window"></span> &nbsp;<span>${weibo.FORWARDNUM }</span>
+															<input class="weiboid" type="hidden" value="${weibo.WEIBOID }">
+															</a>
+													</li>
+													<li class="col" style="width: 150px; text-align: center;">
+														<a href="WeiBoServlet?op=queryWbById&weiboid=${weibo.WEIBOID }&cmsuccess=no" target="_parent"> <span class="glyphicon glyphicon-comment"></span>
+															&nbsp;<span>${weibo.COMMENTNUM}</span></a>
+													</li>
+													<li style="width: 150px; text-align: center;"><a
+														href="WeiBoServlet?op=dianzan&weiboid=${weibo.WEIBOID }"> <span class="glyphicon glyphicon-thumbs-up"></span>
+															&nbsp;<span>${weibo.ZANNUM }</span></a></li>
+												</ul>
+											</div>							
 			</div>
 				<!--微博内容评论转发div开始-->
 			
 				<!--微博内容评论转发div结束-->
 			</div>
-			</div>
+				</c:forEach>
+								</c:if>
 			
 	</body>
 </html>

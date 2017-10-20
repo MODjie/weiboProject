@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.qzz.weibo.dao.W_collectDao;
 import com.qzz.weibo.entity.W_collect;
+import com.qzz.weibo.entity.W_weibo;
 import com.qzz.weibo.util.BaseDao;
 
 public class W_collectService {
@@ -29,5 +30,14 @@ public class W_collectService {
 	 */
 	public boolean deleteCollect(W_collect collect) {
 		return collectDao.deleteCollect(collect);
+	}
+	
+	/***
+	 * 查询某人收藏的所有微博
+	 * @param nickname 登录人昵称
+	 * @return
+	 */
+	public List<W_weibo> queryMyColl(String nickname){
+		return collectDao.queryMyColl(nickname);
 	}
 }
