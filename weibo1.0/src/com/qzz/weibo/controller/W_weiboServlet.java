@@ -99,8 +99,10 @@ public class W_weiboServlet extends HttpServlet {
 				userinfo = wus.getAllUserInfo(userName).get(0);
 				request.setAttribute("userinfo", userinfo);
 				request.getRequestDispatcher("homepage.jsp").forward(request, response);
-			} else if (op.equals("queryAllWb")) {
-				list = ws.queryMyWb();
+
+			} 
+			else if (op.equals("queryAllWb")) {			
+				list = ws.queryAllWb();
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("mainpage.jsp").forward(request, response);
 			}
@@ -178,10 +180,13 @@ public class W_weiboServlet extends HttpServlet {
 				request.setAttribute("list", list);
 				request.setAttribute("sendName", zanName);
 				request.getRequestDispatcher("my_home.jsp").forward(request, response);
-			} else if (op.equals("collect")) {
-				// 通过传过来的微博ID和收藏人的昵称查找数据库并且存储在collectList中
+			}else if (op.equals("collect")) {
+				//通过传过来的微博ID和收藏人的昵称查找数据库并且存储在collectList中
+				String msg="";
 				int weiboId = Integer.parseInt((String) request.getParameter("weiboid"));
 				String collectName = (String) session.getAttribute("username");
+				String flag = request.getParameter("flag");
+				System.out.println("flag:"+flag);
 				String collectTime = sdf.format(new Date());
 				W_collect collect = new W_collect(1, weiboId, collectName, collectTime);
 				List<W_collect> collectList = cts.queryCollect(collect);
@@ -191,23 +196,43 @@ public class W_weiboServlet extends HttpServlet {
 				if (collectList.size() == 0) {
 					// 当返回数据为空时，就对该昵称和微博添加一条收藏记录
 					cts.addCollect(collect);
-					// 收藏数加一
-					wei.setCOLLECTNUM(wei.getCOLLECTNUM() + 1);
-				} else {
-					// 如果返回数据不为空，就删除该记录，即取消收藏功能
+					msg="收藏成功";
+					//收藏数加一
+					wei.setCOLLECTNUM(wei.getCOLLECTNUM()+1);
+				}else {
+					//如果返回数据不为空，就删除该记录，即取消收藏功能
 					cts.deleteCollect(collect);
-					// 收藏数减一
-					wei.setCOLLECTNUM(wei.getCOLLECTNUM() - 1);
+					msg="取消收藏";
+					//收藏数减一
+					wei.setCOLLECTNUM(wei.getCOLLECTNUM()-1);
 				}
-				// 修改本条微博的收藏数
-				ws.updateWeiboById(wei);
-				// 通过昵称查找微博
-				list = ws.queryWbByName(collectName);
-				request.setAttribute("list", list);
-				request.setAttribute("sendName", collectName);
-				request.getRequestDispatcher("my_home.jsp").forward(request, response);
-			} else if (op.equals("dianzan")) {
-				// 通过传过来的微博ID和点赞人的昵称查找数据库并且存储在zanlist中
+				//修改本条微博的收藏数
+					ws.updateWeiboById(wei);
+				//通过昵称查找微博	
+					if(flag.equals("1")) {
+						System.out.println("准备跳转");
+						list = ws.queryAllWb();
+						request.setAttribute("list", list);
+						if(msg.equals("收藏成功"))
+						{
+							
+						response.getWriter().print("<script language='javascript'>location.href='WeiBoServlet?op=queryAllWb';alert('收藏成功');</script>");
+//						request.getRequestDispatcher("mainpage.jsp").forward(request, response);
+						}
+						else {
+						response.getWriter().print("<script language='javascript'>alert('取消收藏');location.href='WeiBoServlet?op=queryAllWb'</script>");
+						}
+					}
+					else {
+						list = ws.queryWbByName(collectName);
+						request.setAttribute("list", list);
+						request.setAttribute("sendName", collectName);
+						request.getRequestDispatcher("my_home.jsp").forward(request, response);
+					}
+				
+			}
+			else if (op.equals("dianzan")) {
+				//通过传过来的微博ID和点赞人的昵称查找数据库并且存储在zanlist中
 				int weiboId = Integer.parseInt((String) request.getParameter("weiboid"));
 				String zanName = (String) session.getAttribute("username");
 				List<W_zan> zanList = wzs.queryByNameAndId(weiboId, zanName);
@@ -225,15 +250,15 @@ public class W_weiboServlet extends HttpServlet {
 					// 点赞数减一
 					wei.setZANNUM(wei.getZANNUM() - 1);
 				}
-				// 修改本条微博的点赞数
-				ws.updateWeiboById(wei);
-				// 通过昵称查找微博
-				list = ws.queryMyWb();
-				request.setAttribute("list", list);
-				request.getRequestDispatcher("mainpage.jsp").forward(request, response);
-				// 删除评论
-			} else if (op.equals("deleteComment")) {
-				// 接收传回来的评论id，删除此评论
+				//修改本条微博的点赞数
+					ws.updateWeiboById(wei);
+				//通过昵称查找微博	
+					list = ws.queryAllWb();
+					request.setAttribute("list", list);
+					request.getRequestDispatcher("mainpage.jsp").forward(request, response);
+			//删除评论
+			}else if (op.equals("deleteComment")) {
+				//接收传回来的评论id，删除此评论
 				int commentId = Integer.parseInt((String) request.getParameter("commentId"));
 				wcs.deleteCmById(commentId);
 

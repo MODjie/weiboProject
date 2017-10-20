@@ -89,14 +89,14 @@
 			<div class="container">
 				<div class="row clearfix">
 					<div class="col-md-9 column">
-						<img src="img/logo.PNG" />
+						<a href="WeiBoServlet?op=homepage" ><img src="img/logo.PNG" /></a>
 						<input id="serach" type="search" placeholder="看不完的新鲜事">
 						<input type="button" id="sousuo" value="" />
 					</div>
 					<div class="col-md-3 column">
 						<ul class="nav nav-tabs" style="position:absolute ;display: inline;">
 							<li class="active">
-								<a href="homepage.jsp" >首页</a>
+								<a href="WeiBoServlet?op=homepage" >首页</a>
 							</li>
 							<li>
 								<a href="#">简介</a>
@@ -160,16 +160,7 @@
 								<a href="">匿名微博</a>
 							</div>
 							<hr />
-							<div class="aa">
-								<a href="">首页</a>
-							</div>
-							<div class="aa">
-								<a href="">收藏</a>
-							</div>
-							<div class="aa">
-								<a href="">我的赞</a>
-							</div>
-							<hr />
+							
 						</div>
 						<!--中间发布以及微博显示区域-->
 						<div class="center" >

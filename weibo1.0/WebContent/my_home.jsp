@@ -10,7 +10,14 @@
 <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap01.js"></script>
-
+<style type="text/css">
+.forwoarddiv{
+			background-color: rgb(242,242,245);
+			margin-left:-138px;
+			
+			width:700px;
+			}
+</style>
 </head>
 
 <body style="background-color: rgb(94, 122, 161);">
@@ -19,14 +26,14 @@
 		<div class="container">
 			<div class="row clearfix">
 				<div class="col-md-9 column">
-					<a href="homepage.jsp"><img src="img/logo.PNG" /></a> <input
+					<a href="WeiBoServlet?op=homepage"><img src="img/logo.PNG" /></a> <input
 						type="text" class="search-input" placeholder="看不完的新鲜事" />
 				</div>
 
 				<div class="col-md-3 column">
 					<ul class="nav nav-tabs"
 						style="position: absolute; display: inline;">
-						<li class="active"><a href="homepage.jsp">首页</a></li>
+						<li class="active"><a href="WeiBoServlet?op=homepage">首页</a></li>
 						<li><a href="#">简介</a></li>
 						<li class="disabled"><a href="#">信息</a></li>
 						<li class="dropdown pull-right"><a href="#"
@@ -212,14 +219,19 @@
 													</a>
 													<h6>${weibo.PUBLISHTIME }</h6>
 													<p>${weibo.CONTENT }</p>
-													<p>${weibo.ISFORWORD}</p>
 													<c:if test="${weibo.ISFORWORD!='是'}">
-													<img src="${weibo.IMAGE}" width="500px" />
-													</c:if>
-													<c:if test="${weibo.ISFORWORD=='是'}">
-													<div class="forwoarddiv" style="width:530px;">
-													</div>
-													</c:if>
+					<img class="myImg" src="${weibo.IMAGE}" width="500px " />
+				</c:if>
+				<c:if test="${weibo.ISFORWORD=='是'}">
+				<div class="forwoarddiv">
+					<div style="width:550px;margin-left:100px;margin-top:20px">
+					<h5>&nbsp;</h5>
+					<h5>@${weibo.OLDNAME}<small>&nbsp;&nbsp;&nbsp;${weibo.OLDTIME}</small></small></h5>					
+					<p>${weibo.FWDCONTENT}</p>
+					<img class="myImg" src="${weibo.FORWARDIMG}" width="500px " />
+					</div>
+					</div>
+				</c:if>
 												</div>
 												<!--微博发布的内容div结束-->
 											</div>

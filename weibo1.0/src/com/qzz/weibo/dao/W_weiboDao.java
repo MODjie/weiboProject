@@ -12,7 +12,7 @@ public class W_weiboDao {
 	 * 查找我的所有微博内容
 	 * @return
 	 */
-	public List<W_weibo> queryMyWb() {
+	public List<W_weibo> queryAllWb() {
 		return (List<W_weibo>)BaseDao.select("select * from WB_VIEW", W_weibo.class, null);
 	}
 	
