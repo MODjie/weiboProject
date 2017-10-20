@@ -172,8 +172,11 @@ public class W_weiboServlet extends HttpServlet {
 				request.getRequestDispatcher("my_home.jsp").forward(request, response);
 			}else if (op.equals("collect")) {
 				//通过传过来的微博ID和收藏人的昵称查找数据库并且存储在collectList中
+				String msg="";
 				int weiboId = Integer.parseInt((String) request.getParameter("weiboid"));
 				String collectName = (String) session.getAttribute("username");
+				String flag = request.getParameter("flag");
+				System.out.println("flag:"+flag);
 				String collectTime = sdf.format(new Date());
 				W_collect collect = new W_collect(1,weiboId,collectName,collectTime);
 				List<W_collect> collectList =cts.queryCollect(collect);
@@ -183,21 +186,36 @@ public class W_weiboServlet extends HttpServlet {
 				if (collectList.size()==0) {
 					//当返回数据为空时，就对该昵称和微博添加一条收藏记录
 					cts.addCollect(collect);
+					msg="收藏成功";
 					//收藏数加一
 					wei.setCOLLECTNUM(wei.getCOLLECTNUM()+1);
 				}else {
 					//如果返回数据不为空，就删除该记录，即取消收藏功能
 					cts.deleteCollect(collect);
+					msg="取消收藏";
 					//收藏数减一
 					wei.setCOLLECTNUM(wei.getCOLLECTNUM()-1);
 				}
 				//修改本条微博的收藏数
 					ws.updateWeiboById(wei);
-				//通过昵称查找微博			
-				list = ws.queryWbByName(collectName);
-				request.setAttribute("list", list);
-				request.setAttribute("sendName", collectName);
-				request.getRequestDispatcher("my_home.jsp").forward(request, response);
+				//通过昵称查找微博	
+					if(flag.equals("1")) {
+						System.out.println("准备跳转");
+						if(msg.equals("收藏成功"))
+						{
+						response.getWriter().print("<script language='javascript'>alert('收藏成功');parent.location.href='WeiBoServlet?op=homepage'</script>");
+						}
+						else {
+							response.getWriter().print("<script language='javascript'>alert('取消收藏');parent.location.href='WeiBoServlet?op=homepage'</script>");
+						}
+					}
+					else {
+						list = ws.queryWbByName(collectName);
+						request.setAttribute("list", list);
+						request.setAttribute("sendName", collectName);
+						request.getRequestDispatcher("my_home.jsp").forward(request, response);
+					}
+				
 			}
 			else if (op.equals("dianzan")) {
 				//通过传过来的微博ID和点赞人的昵称查找数据库并且存储在zanlist中
