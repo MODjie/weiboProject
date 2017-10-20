@@ -17,12 +17,14 @@ import javax.websocket.Session;
 import com.qzz.weibo.dao.W_collectDao;
 import com.qzz.weibo.entity.W_collect;
 import com.qzz.weibo.entity.W_comment;
+import com.qzz.weibo.entity.W_reply;
 import com.qzz.weibo.entity.W_userinfo;
 import com.qzz.weibo.entity.W_weibo;
 import com.qzz.weibo.entity.W_zan;
 import com.qzz.weibo.service.W_UserInfoService;
 import com.qzz.weibo.service.W_collectService;
 import com.qzz.weibo.service.W_commentService;
+import com.qzz.weibo.service.W_replyService;
 import com.qzz.weibo.service.W_weiboService;
 import com.qzz.weibo.service.W_zanService;
 import com.qzz.weibo.util.DataUtil;
@@ -39,6 +41,7 @@ public class W_weiboServlet extends HttpServlet {
     private W_commentService wcs = new W_commentService();
     private W_zanService wzs = new W_zanService();
     private W_collectService cts = new W_collectService();
+    private W_replyService rs = new W_replyService();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -257,6 +260,32 @@ public class W_weiboServlet extends HttpServlet {
 				if(ws.forwardWeiBo(newwb)) {
 					response.getWriter().print("<script language='javascript'>alert('转发成功');parent.location.href='WeiBoServlet?op=homepage'</script>");
 				}
+			}else if (op.equals("reply")) {
+				//接收传过来的值
+				int commentId =Integer.parseInt(request.getParameter("commentId")) ;
+				String replyerA = new String(request.getParameter("replyerA").getBytes("ISO-8859-1"),"UTF-8");
+				String replyerB = new String(request.getParameter("replyerB").getBytes("ISO-8859-1"),"UTF-8");
+				String replyContent = new String(request.getParameter("replyContent").getBytes("ISO-8859-1"),"UTF-8");
+				String replyTime = sdf.format(new Date());
+				W_reply reply = new W_reply(1, commentId, replyerA, replyerB, replyContent, replyTime);
+				//调用service增加回复
+				rs.addReply(reply);
+				//得到此评论的所有回复存在replyList中
+				List<W_reply> replyList = new ArrayList<>();
+				replyList = rs.queryReply(commentId);
+				
+				//获取本条微博
+				int weiboId = Integer.parseInt((String) request.getParameter("weiboid"));
+				list = ws.queryWbById(weiboId);
+				
+				W_weibo detailWb = list.get(0);
+				//获取本条微博的所有评论内容				
+				list2 = wcs.queryCmById(weiboId);
+
+				request.setAttribute("list2", list2);
+				request.setAttribute("replyList", replyList);
+				request.setAttribute("detailWb", detailWb);
+				request.getRequestDispatcher("more.jsp").forward(request, response);
 			}
 		}
 		
