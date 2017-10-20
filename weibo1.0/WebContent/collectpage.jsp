@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -41,7 +42,7 @@
 		<div class="top">
 
 			<span class="content">
-				<h4><strong>我的收藏</strong><small>（共3条）</small>
+				<h4><strong>我的收藏</strong><small>（共${fn:length(colllist)}条）</small>
 					<input style="margin-left:180px;" class="search-icon" type="search" name="search"  placeholder="Search" >
 					<input style="margin-top:-5px; margin-left: 50px;" type="button" class="btn btn-info" id="serach" value="搜索" />
 				</h4>
