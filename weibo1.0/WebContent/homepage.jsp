@@ -5,7 +5,7 @@
 	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getLocalPort()
 			+ request.getContextPath() + "/";
 	pageContext.setAttribute("path", path);
-	session.setAttribute("username", "看看不懂");
+	session.setAttribute("username","看看不懂");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

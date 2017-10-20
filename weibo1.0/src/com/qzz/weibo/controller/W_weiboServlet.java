@@ -77,6 +77,7 @@ public class W_weiboServlet extends HttpServlet {
 			if (op.equals("queryMyWb")) {
 				
 				String sendName = (String) session.getAttribute("username");
+				System.out.println("session是  "+sendName);
 				//将查询到的微博list倒序输出			
 				list = ws.queryWbByName(sendName);
 				request.setAttribute("list", list);
