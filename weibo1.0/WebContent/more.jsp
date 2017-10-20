@@ -25,13 +25,13 @@
 		<div class="container">
 			<div class="row clearfix">
 				<div class="col-md-9 column  sousuo">
-					<img style="height: 40px; widows: 50px;" src="img/logo.PNG" /> <input
+					<a href="WeiBoServlet?op=homepage"><img style="height: 40px; widows: 50px;" src="img/logo.PNG" /></a> <input
 						id="serach" type="search" placeholder="大家都在搜：鹿晗、关晓彤分手"> <input
 						type="button" class="btnsearch" name="" id="" value="" />
 				</div>
 				<div class="col-md-3 column daohan3">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="index.html"><span
+						<li><a href="WeiBoServlet?op=homepage"><span
 								class="glyphicon glyphicon-home"></span>首页</a></li>
 						<li><a href="regiter.html">注册</a></li>
 						<li class="nav navbar-nav navbar-right"><a id="loginmain"
