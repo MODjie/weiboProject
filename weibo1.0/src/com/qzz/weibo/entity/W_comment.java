@@ -11,7 +11,14 @@ public class W_comment {
 	private String COMMENTNAME;
 	private String COMMCONTENT;
 	private String COMMENTTIME;
+	private String TOUXIANG;
 	
+	public String getTOUXIANG() {
+		return TOUXIANG;
+	}
+	public void setTOUXIANG(String tOUXIANG) {
+		TOUXIANG = tOUXIANG;
+	}
 	public String getCOMMENTTIME() {
 		return COMMENTTIME;
 	}
@@ -43,19 +50,22 @@ public class W_comment {
 		COMMCONTENT = cOMMCONTENT;
 	}
 	
+	
 	@Override
 	public String toString() {
 		return "W_comment [COMMENTID=" + COMMENTID + ", WEIBOID=" + WEIBOID + ", COMMENTNAME=" + COMMENTNAME
-				+ ", COMMCONTENT=" + COMMCONTENT + ", COMMENTTIME=" + COMMENTTIME + "]";
+				+ ", COMMCONTENT=" + COMMCONTENT + ", COMMENTTIME=" + COMMENTTIME + ", TOUXIANG=" + TOUXIANG + "]";
 	}
 	
-	public W_comment(int cOMMENTID, int wEIBOID, String cOMMENTNAME, String cOMMCONTENT, String cOMMENTTIME) {
+	public W_comment(int cOMMENTID, int wEIBOID, String cOMMENTNAME, String cOMMCONTENT, String cOMMENTTIME,
+			String tOUXIANG) {
 		super();
 		COMMENTID = cOMMENTID;
 		WEIBOID = wEIBOID;
 		COMMENTNAME = cOMMENTNAME;
 		COMMCONTENT = cOMMCONTENT;
 		COMMENTTIME = cOMMENTTIME;
+		TOUXIANG = tOUXIANG;
 	}
 	public W_comment() {
 		// TODO Auto-generated constructor stub

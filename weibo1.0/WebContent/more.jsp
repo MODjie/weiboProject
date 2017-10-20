@@ -125,24 +125,21 @@
                 -->
 
 						<div id="msgBox" style="background-color: rgb(242, 242, 245);">
-							<form>
-								<div>
-									<p id="face" style="position: absolute;">
-										<img src="img/imagemore/HI.jpg" class="current" />
-									</p>
+							<div class="row clearfix">
+								<div class="col-md-9 column">
 									<textarea id="cm_area" class="teratext"
-										style="width: 580px; margin-left: 60px; border: 1px solid #D9D9D9;"></textarea>
+										style="width: 540px; margin-left:20px; border: 1px solid #D9D9D9;resize:none;"></textarea>
 								</div>
-								<div class="tr">
+								<div class="col-md-3 column" style="text-align:center;padding-top: 5px;padding-left: 30px">
 									<p>
 										<input type="hidden" id="weiboId"
-											value="${requestScope.detailWb.WEIBOID }"> <input
-											id="sendBtn" type="button" value="评论"
-											style="background-color: rgb(255, 192, 159); color: white;"
+											value="${requestScope.detailWb.WEIBOID }"> 
+										<input id="sendBtn" type="button" value="评论"
+											style="background-color: rgb(255, 192, 159);color: white;"
 											title="快捷键 Ctrl+Enter" />
 									</p>
 								</div>
-							</form>
+							</div>
 							<div class="list" style="background-color: rgb(242, 242, 245);">
 								<h3>
 									<span style="background-color: rgb(242, 242, 245);">按热度</span>
@@ -152,7 +149,7 @@
 										<c:forEach items="${requestScope.list2}" var="comment">
 											<li>
 												<div class="userPic">
-													<img src="img/imagemore/1.jpg" />
+													<img src="${comment.TOUXIANG } " style="width: 50px;"/>
 												</div>
 												<div class="content" style="width: 580px;">
 													<div class="userName row clearfix">
@@ -188,7 +185,7 @@
 															<c:if test="${comment.COMMENTID==reply.COMMENTID }">
 																<br />
 																<div class="userPic">
-																	<img src="img/imagemore/1.jpg" />
+																	<img src="${reply.TOUXIANG }" style="width: 50px;"/>
 																</div>
 																<div class="content" style="width: 510px;">
 																	<div class="userName row clearfix">

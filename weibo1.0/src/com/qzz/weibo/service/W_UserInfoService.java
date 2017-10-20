@@ -4,13 +4,14 @@ import java.util.List;
 
 import com.qzz.weibo.dao.W_UserInfoDao;
 import com.qzz.weibo.entity.W_userinfo;
+import com.qzz.weibo.util.BaseDao;
 
 public class W_UserInfoService {
 
 	W_UserInfoDao userinfodao = new W_UserInfoDao();
 
 	/**
-	 * 根据登录名获取用户的所有信息
+	 * 鏍规嵁鐧诲綍鍚嶈幏鍙栫敤鎴风殑鎵�鏈変俊鎭�
 	 * 
 	 * @param username
 	 * @return
@@ -20,7 +21,7 @@ public class W_UserInfoService {
 	}
 
 	/**
-	 * 更新用户的基本信息情况
+	 * 鏇存柊鐢ㄦ埛鐨勫熀鏈俊鎭儏鍐�
 	 * 
 	 * @param userinfo
 	 * @param username
@@ -28,5 +29,15 @@ public class W_UserInfoService {
 	 */
 	public int updateUserInfo(W_userinfo userinfo, String username) {
 		return userinfodao.updateUserInfo(userinfo, username);
+	}
+	
+	/**
+	 * 通过昵称来查找用户信息
+	 * 
+	 * @param username
+	 * @return
+	 */
+	public List<W_userinfo> getUserInfoByNikeName(String nikeName) {
+		return userinfodao.getUserInfoByNikeName(nikeName);
 	}
 }
