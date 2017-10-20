@@ -11,12 +11,11 @@
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap01.js"></script>
 <style type="text/css">
-.forwoarddiv{
-			background-color: rgb(242,242,245);
-			margin-left:-138px;
-			
-			width:700px;
-			}
+.forwoarddiv {
+	background-color: rgb(242, 242, 245);
+	margin-left: -138px;
+	width: 700px;
+}
 </style>
 </head>
 
@@ -26,8 +25,8 @@
 		<div class="container">
 			<div class="row clearfix">
 				<div class="col-md-9 column">
-					<a href="WeiBoServlet?op=homepage"><img src="img/logo.PNG" /></a> <input
-						type="text" class="search-input" placeholder="看不完的新鲜事" />
+					<a href="WeiBoServlet?op=homepage"><img src="img/logo.PNG" /></a>
+					<input type="text" class="search-input" placeholder="看不完的新鲜事" />
 				</div>
 
 				<div class="col-md-3 column">
@@ -206,32 +205,36 @@
 										<div class="WB_content S_bg2">
 											<div class="content_top row clearfix">
 												<!--微博内容中头像div开始-->
-												<div class="col-md-2 column">
+												<div class="col-md-1 column">
 													<a href="#"> <img src="${weibo.TOUXIANG }"
 														class="content_tx img-circle" />
 													</a>
 												</div>
 												<!--微博内容中头像div结束-->
 												<!--微博发布的内容div开始-->
-												<div class="col-md-10 column">
+												<div class="col-md-11 column" style="padding-left: 40px;">
 													<a href="WeiBoServlet?op=queryMyWb">
 														<h5>${weibo.SENDNAME }</h5>
 													</a>
 													<h6>${weibo.PUBLISHTIME }</h6>
 													<p>${weibo.CONTENT }</p>
 													<c:if test="${weibo.ISFORWORD!='是'}">
-					<img class="myImg" src="${weibo.IMAGE}" width="500px " />
-				</c:if>
-				<c:if test="${weibo.ISFORWORD=='是'}">
-				<div class="forwoarddiv">
-					<div style="width:550px;margin-left:100px;margin-top:20px">
-					<h5>&nbsp;</h5>
-					<h5>@${weibo.OLDNAME}<small>&nbsp;&nbsp;&nbsp;${weibo.OLDTIME}</small></small></h5>					
-					<p>${weibo.FWDCONTENT}</p>
-					<img class="myImg" src="${weibo.FORWARDIMG}" width="500px " />
-					</div>
-					</div>
-				</c:if>
+														<img class="myImg" src="${weibo.IMAGE}" width="500px " />
+													</c:if>
+													<c:if test="${weibo.ISFORWORD=='是'}">
+														<div class="forwoarddiv">
+															<div
+																style="width: 550px; margin-left: 100px; margin-top: 20px">
+																<h5>&nbsp;</h5>
+																<h5>
+																	@${weibo.OLDNAME}<small>&nbsp;&nbsp;&nbsp;${weibo.OLDTIME}</small></small>
+																</h5>
+																<p>${weibo.FWDCONTENT}</p>
+																<img class="myImg" src="${weibo.FORWARDIMG}"
+																	width="500px " />
+															</div>
+														</div>
+													</c:if>
 												</div>
 												<!--微博发布的内容div结束-->
 											</div>
