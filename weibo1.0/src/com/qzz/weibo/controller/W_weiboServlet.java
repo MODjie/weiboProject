@@ -93,10 +93,10 @@ public class W_weiboServlet extends HttpServlet {
 				request.setAttribute("sendName", sendName);
 				request.getRequestDispatcher("my_home.jsp").forward(request, response);
 			} else if (op.equals("homepage")) {
-				String userName = (String) session.getAttribute("name");
+				String nickname = (String) session.getAttribute("username");
 				W_UserInfoService wus = new W_UserInfoService();
 				W_userinfo userinfo = new W_userinfo();
-				userinfo = wus.getAllUserInfo(userName).get(0);
+				userinfo = wus.getUserInfoByNikeName(nickname).get(0);
 				request.setAttribute("userinfo", userinfo);
 				request.getRequestDispatcher("homepage.jsp").forward(request, response);
 
