@@ -24,4 +24,12 @@ public class W_replyDao {
 	public List<W_reply> queryReply(int commentId) {
 		return (List<W_reply>) BaseDao.select("select * from W_REPLY where COMMENTID = ?", W_reply.class, commentId);
 	}
+	
+	/**
+	 * 查找全部评论
+	 * @return
+	 */
+	public List<W_reply> queryAllReply() {
+		return (List<W_reply>) BaseDao.select("select * from W_REPLY", W_reply.class, null);
+	}
 }

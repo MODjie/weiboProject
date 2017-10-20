@@ -24,4 +24,12 @@ public class W_replyService {
 	public List<W_reply> queryReply(int commentId) {
 		return replyDao.queryReply(commentId);
 	}
+	
+	/**
+	 * 查找全部评论
+	 * @return
+	 */
+	public List<W_reply> queryAllReply() {
+		return replyDao.queryAllReply();
+	}
 }

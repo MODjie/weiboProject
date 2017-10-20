@@ -162,8 +162,7 @@
 														</div>
 														<div class="col-md-8 column"></div>
 														<div class="col-md-2 column">
-															<input type="hidden" id="wbid"
-																value="${comment.WEIBOID}">
+															<input type="hidden" id="wbid" value="${comment.WEIBOID}">
 															<input type="hidden" id="回复者"
 																value="${sessionScope.username }"> <a
 																class="replyA" id="modal-617802" href="#reply"
@@ -180,46 +179,57 @@
 													<!--
                     									作者：offline
                     									时间：2017-10-19
-                    									描述：二级回复开始
+                    									描述：一级回复开始
                    									 -->
-                   									 
-                   									 <c:if test="${requestScope.replyList!=null}">
-                   									 	<c:forEach items="${requestScope.replyList}" var="reply">
-                   									 		<!-- 如果此回复中的评论编号是否与此评论相同 则显示回复-->
-                   									 		<c:if test="${comment.COMMENTID==reply.COMMENTID }">
-                   									 			<br />
-                   									 		<div class="userPic">
-														<img src="img/imagemore/1.jpg" />
-													</div>
-													<div class="content" style="width: 510px;">
-														<div class="userName row clearfix">
-															<div class="col-md-4 column">
-																<a href="#" style="color: orangered;"
-																	style="margin-left: 20px;">${reply.REPLYANAME }</a>回复<a href="#"
-																	style="color: orangered;" style="margin-left: 20px;">${reply.REPLYBNAME }</a>
-															</div>
-															<div class="col-md-5 column"></div>
-															<div class="col-md-2 column" style="margin-left: 33px;">
-																<a class="replyA" id="modal-617802" href="#reply"
-																	data-toggle="modal">回复</a> <a href="#">删除</a>
-															</div>
-														</div>
-														<div class="msgInfo">${reply.REPLYCONTENT }</div>
-														<div class="times">
-															<span>${reply.REPLYTIME }</span><a class="del"
-																href="javascript:;">删除</a>
-														</div>
-													</div>
-                   									 		</c:if>
-                   									 	
-                   									 	</c:forEach>
-                   									 </c:if>
-													
-													
+
+													<c:if test="${requestScope.replyList!=null}">
+														<c:forEach items="${requestScope.replyList}" var="reply">
+															<!-- 如果此回复中的评论编号是否与此评论相同 则显示回复-->
+															<c:if test="${comment.COMMENTID==reply.COMMENTID }">
+																<br />
+																<div class="userPic">
+																	<img src="img/imagemore/1.jpg" />
+																</div>
+																<div class="content" style="width: 510px;">
+																	<div class="userName row clearfix">
+																		<div class="col-md-4 column">
+																			<a href="#" style="color: orangered;"
+																				style="margin-left: 20px;">${reply.REPLYANAME }</a>回复<a
+																				href="#" style="color: orangered;"
+																				style="margin-left: 20px;">${reply.REPLYBNAME }</a>
+																		</div>
+																		<div class="col-md-5 column"></div>
+																		<div class="col-md-2 column"
+																			style="margin-left: 33px;">
+																				<!-- 通过hidden传值 -->
+																				<input type="hidden" id="wbid" value="${comment.WEIBOID}"> 
+																				<input type="hidden" id="回复者" value="${sessionScope.username }"> 
+																				
+																				<a class="reply_replyA" id="modal-617802"
+																				href="#reply_reply" data-toggle="modal">回复</a> 
+																				
+																				<input type="hidden" value="${comment.COMMENTID }">
+																				<input type="hidden" value="${reply.REPLYANAME }">
+																				
+																				<a href="#">删除</a>
+																		</div>
+																	</div>
+																	<div class="msgInfo">${reply.REPLYCONTENT }</div>
+																	<div class="times">
+																		<span>${reply.REPLYTIME }</span><a class="del"
+																			href="javascript:;">删除</a>
+																	</div>
+																</div>
+															</c:if>
+
+														</c:forEach>
+													</c:if>
+
+
 													<!--
                     									作者：offline
                     									时间：2017-10-19
-                    									描述：二级回复结束
+                    									描述：一级回复结束
                     								-->
 												</div>
 
@@ -290,7 +300,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- 回复的弹出窗口 -->
+		<!-- 回复评论的弹出窗口 -->
 		<div class="container">
 			<div class="row clearfix">
 				<div class="col-md-12 column">
@@ -321,6 +331,39 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- 回复回复的弹出窗口 -->
+		<div class="container">
+			<div class="row clearfix">
+				<div class="col-md-12 column">
+					<div class="modal fade" id="reply_reply" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<h4 class="modal-title" id="reply_replyHead">回复</h4>
+								</div>
+								<div class="modal-body">
+									<textarea id="reply_replyContent"
+										style="width: 565px; height: 150px;"></textarea>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">关闭</button>
+									<button type="button" class="btn btn-primary"
+										id="reply_confirm">确定</button>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
 </body>
 
 <script type="text/javascript">
@@ -330,7 +373,7 @@
 	var replyerB;
 	var replyContent;
 	$(function() {
-		//回复按钮的点击事件
+		//回复评论按钮的点击事件
 		$(".replyA").click(function() {
 			//微博编号
 			weiboid = $(this).prev().prev().val();
@@ -341,7 +384,7 @@
 			//被回复的人
 			replyerB = $(this).parent("div").prev().prev().text();
 		})
-		//回复之后的确定按钮点击事件
+		//回复评论之后的确定按钮点击事件
 		$("#confirm").click(
 				function() {
 					//回复内容
@@ -349,9 +392,36 @@
 					location.href = "WeiBoServlet?op=reply&commentId="
 							+ commentId + "&replyerA=" + replyerA
 							+ "&replyerB=" + replyerB + "&replyContent="
-							+ replyContent+"&weiboid="+weiboid;
+							+ replyContent + "&weiboid=" + weiboid;
 				});
 	});
+
+	$(function() {
+		//回复评论按钮的点击事件
+		$(".reply_replyA").click(function() {
+			//微博编号
+			weiboid = $(this).prev().prev().val();
+			//评论编号
+			commentId = $(this).next().val();
+			//回复者
+			replyerA = $(this).prev().val();
+			//被回复的人
+			replyerB = $(this).next().next().val();
+			alert(replyerA+" "+replyerB);
+		
+		})
+		//回复评论之后的确定按钮点击事件
+		$("#reply_confirm").click(
+				function() {
+					//回复内容
+					replyContent = $("#reply_replyContent").val();					
+					location.href = "WeiBoServlet?op=reply&commentId="
+							+ commentId + "&replyerA=" + replyerA
+							+ "&replyerB=" + replyerB + "&replyContent="
+							+ replyContent + "&weiboid=" + weiboid;
+				});
+	});
+
 	//评论按钮的点击事件
 	$(function() {
 		$("#sendBtn")
