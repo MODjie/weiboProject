@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+
+/*滚动样式开始*/
+::-webkit-scrollbar {
+		width: 10px;
+	}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: rgba(25, 147, 147, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(25, 147, 147, 0.2);
+}
+/*滚动样式结束*/
+
+.chat-thread {
+  margin: 24px auto 0 auto;
+  padding: 0 20px 0 0;
+  list-style: none;
+}
+
+.chat-thread li {
+  position: relative;
+  clear: both;
+  display: inline-block;
+  padding: 16px 40px 16px 20px;
+  margin: 0 0 20px 0;
+  font: 16px/20px 'Noto Sans', sans-serif;
+  border-radius: 10px;
+  background-color: rgba(25, 147, 147, 0.2);
+}
+
+/*在li中元素的后面加上内容*/
+.chat-thread li:after {
+  position: absolute;
+  top: 15px;
+  content: '';
+  width: 0;
+  height: 0;
+  border-top: 15px solid rgba(25, 147, 147, 0.2);
+}
+
+/*奇数行list的文字后面加上三角形*/
+.chat-thread li:nth-child(odd):after {
+  border-right: 15px solid transparent;
+  right: -15px;
+}
+
+/*偶数行list的文字前面加上三角形*/
+.chat-thread li:nth-child(even):after {
+  border-left: 15px solid transparent;
+  left: -15px;
+}
+
+/*li的奇数行*/
+.chat-thread li:nth-child(odd) {
+  float: right;
+  margin-right: 70px;
+  color: #0AD5C1;
+}
+
+/*li的偶数行*/
+.chat-thread li:nth-child(even) {
+  float: left;
+  margin-left: 90px;
+  color: #0EC879;
+}
+
+/*聊天记录中头像class*/
+.cotent_tx {
+	position: absolute;
+  	top: 0;
+}
+/*偶数行li的img*/
+.chat-thread li:nth-child(even) img {
+  left: -80px;
+}
+/*奇数行li的img*/
+.chat-thread li:nth-child(odd) img {
+  right: -80px;
+}
+
+
+
+
+
