@@ -1,6 +1,7 @@
 package com.qzz.weibo.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,10 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
+import com.google.gson.Gson;
 import com.qzz.weibo.dao.W_collectDao;
 import com.qzz.weibo.entity.W_collect;
 import com.qzz.weibo.entity.W_comment;
 import com.qzz.weibo.entity.W_friend;
+import com.qzz.weibo.entity.W_message;
 import com.qzz.weibo.entity.W_reply;
 import com.qzz.weibo.entity.W_userinfo;
 import com.qzz.weibo.entity.W_weibo;
@@ -26,6 +29,7 @@ import com.qzz.weibo.service.W_UserInfoService;
 import com.qzz.weibo.service.W_collectService;
 import com.qzz.weibo.service.W_commentService;
 import com.qzz.weibo.service.W_friendService;
+import com.qzz.weibo.service.W_messageService;
 import com.qzz.weibo.service.W_replyService;
 import com.qzz.weibo.service.W_weiboService;
 import com.qzz.weibo.service.W_zanService;
@@ -46,6 +50,8 @@ public class W_weiboServlet extends HttpServlet {
 	private W_replyService rs = new W_replyService();
 	private W_UserInfoService us = new W_UserInfoService();
 	private W_friendService fs = new W_friendService();
+	private W_messageService ms = new W_messageService();
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -82,12 +88,13 @@ public class W_weiboServlet extends HttpServlet {
 		List<W_comment> list2 = new ArrayList<>();
 		List<W_reply> replyList = new ArrayList<>();
 		HttpSession session = request.getSession();
+		PrintWriter out = response.getWriter();
 		// 判断op的值
 		if (request.getParameter("op") != null) {
 			String op = request.getParameter("op");
 			// 查找我的主页中我发过的所有微博
 			if (op.equals("queryMyWb")) {
-				
+
 				String sendName = (String) session.getAttribute("username");
 				// 将查询到的微博list倒序输出
 				list = ws.queryWbByName(sendName);
@@ -95,20 +102,18 @@ public class W_weiboServlet extends HttpServlet {
 				request.setAttribute("sendName", sendName);
 				request.getRequestDispatcher("my_home.jsp").forward(request, response);
 			} else if (op.equals("homepage")) {
-				String nickname="";
-				if(session.getAttribute("username")==null)
-				{
-					session.setAttribute("username", "看看不懂");
+				String nickname = "";
+				if (session.getAttribute("username") == null) {
+					session.setAttribute("username", "杰哥");
 				}
-				nickname = session.getAttribute("username")+"";
+				nickname = session.getAttribute("username") + "";
 				W_UserInfoService wus = new W_UserInfoService();
 				W_userinfo userinfo = new W_userinfo();
 				userinfo = wus.getUserInfoByNikeName(nickname).get(0);
 				request.setAttribute("userinfo", userinfo);
 				request.getRequestDispatcher("homepage.jsp").forward(request, response);
 
-			} 
-			else if (op.equals("queryAllWb")) {			
+			} else if (op.equals("queryAllWb")) {
 				list = ws.queryAllWb();
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("mainpage.jsp").forward(request, response);
@@ -147,10 +152,10 @@ public class W_weiboServlet extends HttpServlet {
 					// String commentContent = request.getParameter("commentContent");
 					// String commentContent = request.getParameter("commentContent");
 					// 获取当前系统时间
-					String commentTime = sdf.format(new Date());			
-					W_comment comment = new W_comment(1, weiboId, nikeName, commentContent, commentTime,"22");
+					String commentTime = sdf.format(new Date());
+					W_comment comment = new W_comment(1, weiboId, nikeName, commentContent, commentTime, "22");
 					wcs.addComment(comment);
-				}				
+				}
 				list = ws.queryWbById(weiboId);
 				W_weibo detailWb = list.get(0);
 				// 获取本条微博的所有评论内容
@@ -187,9 +192,9 @@ public class W_weiboServlet extends HttpServlet {
 				request.setAttribute("list", list);
 				request.setAttribute("sendName", zanName);
 				request.getRequestDispatcher("my_home.jsp").forward(request, response);
-			}else if (op.equals("collect")) {
-				//通过传过来的微博ID和收藏人的昵称查找数据库并且存储在collectList中
-				String msg="";
+			} else if (op.equals("collect")) {
+				// 通过传过来的微博ID和收藏人的昵称查找数据库并且存储在collectList中
+				String msg = "";
 				int weiboId = Integer.parseInt((String) request.getParameter("weiboid"));
 				String collectName = (String) session.getAttribute("username");
 				String flag = request.getParameter("flag");
@@ -202,42 +207,40 @@ public class W_weiboServlet extends HttpServlet {
 				if (collectList.size() == 0) {
 					// 当返回数据为空时，就对该昵称和微博添加一条收藏记录
 					cts.addCollect(collect);
-					msg="收藏成功";
-					//收藏数加一
-					wei.setCOLLECTNUM(wei.getCOLLECTNUM()+1);
-				}else {
-					//如果返回数据不为空，就删除该记录，即取消收藏功能
+					msg = "收藏成功";
+					// 收藏数加一
+					wei.setCOLLECTNUM(wei.getCOLLECTNUM() + 1);
+				} else {
+					// 如果返回数据不为空，就删除该记录，即取消收藏功能
 					cts.deleteCollect(collect);
-					msg="取消收藏";
-					//收藏数减一
-					wei.setCOLLECTNUM(wei.getCOLLECTNUM()-1);
+					msg = "取消收藏";
+					// 收藏数减一
+					wei.setCOLLECTNUM(wei.getCOLLECTNUM() - 1);
 				}
-				//修改本条微博的收藏数
-					ws.updateWeiboById(wei);
-				//通过昵称查找微博	
-					if(flag.equals("1")) {
-						list = ws.queryAllWb();
-						request.setAttribute("list", list);
-						if(msg.equals("收藏成功"))
-						{
-							
-						response.getWriter().print("<script language='javascript'>location.href='WeiBoServlet?op=queryAllWb';alert('收藏成功');</script>");
-//						request.getRequestDispatcher("mainpage.jsp").forward(request, response);
-						}
-						else {
-						response.getWriter().print("<script language='javascript'>alert('取消收藏');location.href='WeiBoServlet?op=queryAllWb'</script>");
-						}
+				// 修改本条微博的收藏数
+				ws.updateWeiboById(wei);
+				// 通过昵称查找微博
+				if (flag.equals("1")) {
+					list = ws.queryAllWb();
+					request.setAttribute("list", list);
+					if (msg.equals("收藏成功")) {
+
+						response.getWriter().print(
+								"<script language='javascript'>location.href='WeiBoServlet?op=queryAllWb';alert('收藏成功');</script>");
+						// request.getRequestDispatcher("mainpage.jsp").forward(request, response);
+					} else {
+						response.getWriter().print(
+								"<script language='javascript'>alert('取消收藏');location.href='WeiBoServlet?op=queryAllWb'</script>");
 					}
-					else {
-						list = ws.queryWbByName(collectName);
-						request.setAttribute("list", list);
-						request.setAttribute("sendName", collectName);
-						request.getRequestDispatcher("my_home.jsp").forward(request, response);
-					}
-				
-			}
-			else if (op.equals("dianzan")) {
-				//通过传过来的微博ID和点赞人的昵称查找数据库并且存储在zanlist中
+				} else {
+					list = ws.queryWbByName(collectName);
+					request.setAttribute("list", list);
+					request.setAttribute("sendName", collectName);
+					request.getRequestDispatcher("my_home.jsp").forward(request, response);
+				}
+
+			} else if (op.equals("dianzan")) {
+				// 通过传过来的微博ID和点赞人的昵称查找数据库并且存储在zanlist中
 				int weiboId = Integer.parseInt((String) request.getParameter("weiboid"));
 				String zanName = (String) session.getAttribute("username");
 				List<W_zan> zanList = wzs.queryByNameAndId(weiboId, zanName);
@@ -255,15 +258,15 @@ public class W_weiboServlet extends HttpServlet {
 					// 点赞数减一
 					wei.setZANNUM(wei.getZANNUM() - 1);
 				}
-				//修改本条微博的点赞数
-					ws.updateWeiboById(wei);
-				//通过昵称查找微博	
-					list = ws.queryAllWb();
-					request.setAttribute("list", list);
-					request.getRequestDispatcher("mainpage.jsp").forward(request, response);
-			//删除评论
-			}else if (op.equals("deleteComment")) {
-				//接收传回来的评论id，删除此评论
+				// 修改本条微博的点赞数
+				ws.updateWeiboById(wei);
+				// 通过昵称查找微博
+				list = ws.queryAllWb();
+				request.setAttribute("list", list);
+				request.getRequestDispatcher("mainpage.jsp").forward(request, response);
+				// 删除评论
+			} else if (op.equals("deleteComment")) {
+				// 接收传回来的评论id，删除此评论
 				int commentId = Integer.parseInt((String) request.getParameter("commentId"));
 				wcs.deleteCmById(commentId);
 
@@ -308,7 +311,7 @@ public class W_weiboServlet extends HttpServlet {
 				String replyerB = new String(request.getParameter("replyerB").getBytes("ISO-8859-1"), "UTF-8");
 				String replyContent = new String(request.getParameter("replyContent").getBytes("ISO-8859-1"), "UTF-8");
 				String replyTime = sdf.format(new Date());
-				W_reply reply = new W_reply(1, commentId, replyerA, replyerB, replyContent, replyTime,"SDFS");
+				W_reply reply = new W_reply(1, commentId, replyerA, replyerB, replyContent, replyTime, "SDFS");
 				// 调用service增加回复
 				rs.addReply(reply);
 				// 得到此评论的所有回复存在replyList中
@@ -326,28 +329,56 @@ public class W_weiboServlet extends HttpServlet {
 				request.setAttribute("replyList", replyList);
 				request.setAttribute("detailWb", detailWb);
 				request.getRequestDispatcher("more.jsp").forward(request, response);
-			}
-			else if (op.equals("querymycoll"))//查询我收藏过的微博
-			{				
+			} else if (op.equals("querymycoll"))// 查询我收藏过的微博
+			{
 				String nickname = (String) session.getAttribute("username");
 				List<W_weibo> colllist = new W_collectService().queryMyColl(nickname);
 				request.setAttribute("colllist", colllist);
 				request.getRequestDispatcher("collectpage.jsp").forward(request, response);
-			}
-			else if (op.equals("querymyzan"))//查询我点赞过的微博
-			{				
+			} else if (op.equals("querymyzan"))// 查询我点赞过的微博
+			{
 				String nickname = (String) session.getAttribute("username");
 				List<W_weibo> zanlist = new W_zanService().queryMyZAN(nickname);
 				request.setAttribute("zanlist", zanlist);
 				request.getRequestDispatcher("zanpage.jsp").forward(request, response);
-			}else if (op.equals("chatpage")) {
+			} else if (op.equals("chatpage")) {
 				String nickName = (String) session.getAttribute("username");
 				List<W_friend> friendList = fs.queryMyFriend(nickName);
 				List<W_userinfo> myList = us.getUserInfoByNikeName(nickName);
-				System.out.println(friendList);
+//				request.setAttribute("firstName", friendList.get(0).getFRIENDNAME());
 				request.setAttribute("friendList", friendList);
 				request.setAttribute("mytouxiang", myList.get(0).getTOUXIANG());
 				request.getRequestDispatcher("chat.jsp").forward(request, response);
+			}
+			// 聊天记录的ajax请求
+			else if (op.equals("chatcontent")) {
+				String sendName = (String) session.getAttribute("username");
+				String receiveName = new String(request.getParameter("receiveName").getBytes("ISO-8859-1"), "UTF-8");
+				List<W_message> sendMessageList = ms.queryMessageByName(sendName, receiveName);
+
+				Gson g = new Gson();
+				String jsonString = g.toJson(sendMessageList);
+				// //如果这里加了这句话，意味着视图那一层不需要JSON.parse
+				// 这里已经将返回的数据变成了json对象
+				response.setContentType("application/json");
+				out.print(jsonString);
+
+			} else if (op.equals("sendMessage")) {
+				String sendName = (String) session.getAttribute("username");
+				String receiveName = new String(request.getParameter("receiveName").getBytes("ISO-8859-1"), "UTF-8");
+				String sendTime = sdf.format(new Date());
+				String content = new String(request.getParameter("sendContent").getBytes("ISO-8859-1"), "UTF-8");
+				W_message message = new W_message(0, sendName, receiveName, content, sendTime, "未读", "我是假的头像");
+				ms.addMessage(message);
+
+				List<W_message> sendMessageList = ms.queryMessageByName(sendName, receiveName);
+
+				Gson g = new Gson();
+				String jsonString = g.toJson(sendMessageList);
+				// //如果这里加了这句话，意味着视图那一层不需要JSON.parse
+				// 这里已经将返回的数据变成了json对象
+				response.setContentType("application/json");
+				out.print(jsonString);
 			}
 		}
 
