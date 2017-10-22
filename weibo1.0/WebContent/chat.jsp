@@ -20,16 +20,10 @@
 	$(function() {
 		
 		setInterval(function(){ 
-			/*选中好友点击事件*/
-			$(".friend").click(function() {
-				$(this).css("background-color", "#3C464C");
-				$(this).siblings().css("background-color", "#2E3238");
-				
-				/*Ajax请求返回聊天记录*/
-				receiveName = $(this).find("p").text();
-				$.post("WeiBoServlet?op=chatcontent&receiveName="+receiveName,function(msgList,status){
-					showData(msgList,status);	
-				});		
+			/*Ajax请求返回聊天记录*/
+			receiveName = $(this).find("p").text();
+			$.post("WeiBoServlet?op=chatcontent&receiveName="+receiveName,function(msgList,status){
+				showData(msgList,status);	
 			});
 		}, 20);
 		
