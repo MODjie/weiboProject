@@ -84,9 +84,9 @@
 							</div>
 							<div
 								style="color: #889db6; font: 12px/18px arial; overflow: hidden; zoom: 1;">
-								<span> 10月05日 12:20 &nbsp;</span>
+								<span> ${requestScope.detailWb.PUBLISHTIME } &nbsp;</span>
 							</div>
-							<div style="margin-top: 10px;">${requestScope.detailWb.FWDCONTENT}
+							<div style="margin-top: 10px;">
 								${requestScope.detailWb.CONTENT }</div>
 						</div>
 						<!--
@@ -94,12 +94,15 @@
             	时间：2017-10-14
             	描述：中间图片区域开始
             -->
+            			
 						<div style="text-align: center; margin-top: 95px; padding: 10px;">
 							<div style="margin-top: 20px;">
-								<img src="${requestScope.detailWb.IMAGE }" />
+								<c:if test="${requestScope.detailWb.ISFORWORD!='是'}">
+									<img src="${requestScope.detailWb.IMAGE }" width="500px"/>
+								</c:if>
 							</div>
 						</div>
-
+						
 						<!--
             	作者：offline
             	时间：2017-10-14
@@ -131,7 +134,7 @@
 									<textarea id="cm_area" class="teratext"
 										style="width: 540px; margin-left:20px; border: 1px solid #D9D9D9;resize:none;"></textarea>
 								</div>
-								<div class="col-md-3 column" style="text-align:center;padding-top: 5px;padding-left: 30px">
+								<div class="col-md-3 column" style="text-align:center;padding-top: 5px;padding-left: 50px">
 									<p>
 										<input type="hidden" id="weiboId"
 											value="${requestScope.detailWb.WEIBOID }"> 

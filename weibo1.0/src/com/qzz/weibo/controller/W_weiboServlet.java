@@ -17,6 +17,7 @@ import javax.websocket.Session;
 import com.qzz.weibo.dao.W_collectDao;
 import com.qzz.weibo.entity.W_collect;
 import com.qzz.weibo.entity.W_comment;
+import com.qzz.weibo.entity.W_friend;
 import com.qzz.weibo.entity.W_reply;
 import com.qzz.weibo.entity.W_userinfo;
 import com.qzz.weibo.entity.W_weibo;
@@ -24,6 +25,7 @@ import com.qzz.weibo.entity.W_zan;
 import com.qzz.weibo.service.W_UserInfoService;
 import com.qzz.weibo.service.W_collectService;
 import com.qzz.weibo.service.W_commentService;
+import com.qzz.weibo.service.W_friendService;
 import com.qzz.weibo.service.W_replyService;
 import com.qzz.weibo.service.W_weiboService;
 import com.qzz.weibo.service.W_zanService;
@@ -43,6 +45,7 @@ public class W_weiboServlet extends HttpServlet {
 	private W_collectService cts = new W_collectService();
 	private W_replyService rs = new W_replyService();
 	private W_UserInfoService us = new W_UserInfoService();
+	private W_friendService fs = new W_friendService();
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -86,7 +89,6 @@ public class W_weiboServlet extends HttpServlet {
 			if (op.equals("queryMyWb")) {
 				
 				String sendName = (String) session.getAttribute("username");
-				System.out.println("session是  " + sendName);
 				// 将查询到的微博list倒序输出
 				list = ws.queryWbByName(sendName);
 				request.setAttribute("list", list);
@@ -95,7 +97,6 @@ public class W_weiboServlet extends HttpServlet {
 			} else if (op.equals("homepage")) {
 				String nickname="";
 				nickname = session.getAttribute("username")+"";
-				System.out.println("session"+nickname);
 				W_UserInfoService wus = new W_UserInfoService();
 				W_userinfo userinfo = new W_userinfo();
 				userinfo = wus.getUserInfoByNikeName(nickname).get(0);
@@ -188,7 +189,6 @@ public class W_weiboServlet extends HttpServlet {
 				int weiboId = Integer.parseInt((String) request.getParameter("weiboid"));
 				String collectName = (String) session.getAttribute("username");
 				String flag = request.getParameter("flag");
-				System.out.println("flag:"+flag);
 				String collectTime = sdf.format(new Date());
 				W_collect collect = new W_collect(1, weiboId, collectName, collectTime);
 				List<W_collect> collectList = cts.queryCollect(collect);
@@ -212,7 +212,6 @@ public class W_weiboServlet extends HttpServlet {
 					ws.updateWeiboById(wei);
 				//通过昵称查找微博	
 					if(flag.equals("1")) {
-						System.out.println("准备跳转");
 						list = ws.queryAllWb();
 						request.setAttribute("list", list);
 						if(msg.equals("收藏成功"))
@@ -337,6 +336,14 @@ public class W_weiboServlet extends HttpServlet {
 				List<W_weibo> zanlist = new W_zanService().queryMyZAN(nickname);
 				request.setAttribute("zanlist", zanlist);
 				request.getRequestDispatcher("zanpage.jsp").forward(request, response);
+			}else if (op.equals("chatpage")) {
+				String nickName = (String) session.getAttribute("username");
+				List<W_friend> friendList = fs.queryMyFriend(nickName);
+				List<W_userinfo> myList = us.getUserInfoByNikeName(nickName);
+				System.out.println(friendList);
+				request.setAttribute("friendList", friendList);
+				request.setAttribute("mytouxiang", myList.get(0).getTOUXIANG());
+				request.getRequestDispatcher("chat.jsp").forward(request, response);
 			}
 		}
 

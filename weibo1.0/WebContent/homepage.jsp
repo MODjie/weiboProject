@@ -100,8 +100,8 @@
 							<li>
 								<a href="#">简介</a>
 							</li>
-							<li class="disabled">
-								<a href="#">信息</a>
+							<li>
+								<a href="WeiBoServlet?op=chatpage">信息</a>
 							</li>
 							<li class="dropdown pull-right">
 								<a href="#" data-toggle="dropdown" class="dropdown-toggle">设置<strong class="caret"></strong></a>
