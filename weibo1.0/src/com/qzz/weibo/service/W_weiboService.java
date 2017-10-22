@@ -6,6 +6,7 @@ import com.qzz.weibo.dao.W_weiboDao;
 import com.qzz.weibo.entity.W_type;
 import com.qzz.weibo.entity.W_weibo;
 import com.qzz.weibo.util.BaseDao;
+import com.qzz.weibo.util.PageData;
 
 public class W_weiboService {
 	private W_weiboDao weiboDao = new W_weiboDao();
@@ -57,6 +58,15 @@ public class W_weiboService {
 	 */
 	public int queryTypeIdByName(String typeName) {
 		return weiboDao.queryTypeIdByName(typeName);
+	}
+	
+	/**
+	 *  根据微博类型编号获取相关类型微博
+	 *
+	 * @return
+	*/
+	public List<W_weibo> queryWebBytype(int contenttypeid){
+		return weiboDao.queryWebBytype(contenttypeid);
 	}
 	/**
 	 * 修改微博的收藏、转发、评论、点赞数

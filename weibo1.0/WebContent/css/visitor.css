@@ -1,7 +1,34 @@
-.lefelist a:hover {
-				background-color: rgb(254, 84, 53);
-				color: ghostwhite;
-			}
+.navdown {
+	       	color: ghostwhite;	 
+		   	text-decoration: none;      
+        	background-color: rgb(254, 84, 53);   	 
+        	}
+            .lefelist a:hover{
+           	   color: ghostwhite;
+           	   background-color: rgb(254, 84, 53);   
+               text-decoration: none; 
+                            	 
+           }
+          
+           .lefelist a{
+           	text-decoration: none;           
+				line-height: 40px;
+				font-weight: bolder ;
+				font-size: large;	
+						
+           }
+           .list div:hover{           
+                        
+        	background-color: rgb(254, 84, 53);  
+           }
+			.lefelist{
+				width: 110px;
+				height: 40px;
+				margin: 2px;
+				padding: 0px;
+			} 
+			
+			
 			
 			#zhongjianneirong {
 				margin: 0px;
@@ -62,8 +89,29 @@
 				background-color: white;
 				color: orangered;
 			} 			
-			a:hover{
-				text-decoration: none;
+						
+			.ffgroup ul li {
+          	    margin-left: 5px;
+          	    display: inline-block;
+            	 
+            }
+          .ffgroup ul .lithree{
+          	  margin-left: 95px;
+          }
+	      .ffgroup ul li a:hover{
+          	    background-color: white;
 				color: orangered;
-			}
+				text-decoration: none;
+				
+          }
+           .foorgroup a:hover{   
+           color: orangered;   	
+			text-decoration: none;
+          }
+          .leftcontent span:first-child:hover{
+          color: orangered;
+          }
+          .formore h6:hover{   
+           color: orangered;   				
+          }
 	

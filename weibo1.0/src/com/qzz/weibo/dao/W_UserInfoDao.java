@@ -43,4 +43,12 @@ public class W_UserInfoDao {
 		return (List<W_userinfo>) BaseDao.select("select * from W_USERINFO where NICKNAME=?", W_userinfo.class,
 				nikeName);
 	}
+	/***
+	 * 通过用户名获取用户昵称
+	 * @param username
+	 * @return
+	 */
+	public String getNickNameByUserName(String username) {
+		return BaseDao.getFirst("select NICKNAME FROM W_USERINFO WHERE USERNAME=?", username)+"";
+	}
 }

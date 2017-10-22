@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css"
 	href="bootstrap-3.3.7-dist/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="css/more.css" />
+<link rel="stylesheet" type="text/css" href="css/login.css" />
 <script src="backdrop/pixi.js?hd=1" type="text/javascript"></script>
 <script src="backdrop/quicksketch.min.js" type="text/javascript"></script>
 <script src="backdrop/introBG.js" type="text/javascript"></script>
@@ -167,7 +168,7 @@
 																value="${sessionScope.username }"> <a
 																class="replyA" id="modal-617802" href="#reply"
 																data-toggle="modal">回复</a> <input type="hidden"
-																value="${comment.COMMENTID }"> <a
+																value="${comment.COMMENTID }"> <a class="del"
 																href="WeiBoServlet?op=deleteComment&commentId=${comment.COMMENTID }&cmweiboId=${comment.WEIBOID } ">删除</a>
 														</div>
 													</div>
@@ -363,10 +364,48 @@
 
 				</div>
 			</div>
+		
+		</div>
+		
+			<!-- 模态窗口 -->
+		<div class="modal fade" id="modal-container-580488" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">×</button>
+						<h4 class="modal-title" id="myModalLabel">账号登录</h4>
+					</div>
+					<div class="modal-body">
+						<form action="LoginRegister" method="post">
+							<div id="name">
+								<input type="text" id="textname" name="namet" placeholder="用户名" />
+							</div>
+							<div id="password">
+								<input type="password" id="pwd" name="pwdt" placeholder="密码" />
+							</div>
+							<div id="changeuser">
+								<input type="hidden" name="cu"  value="user" />
+							</div>
+							<div id="btn_up">
+								<input type="hidden" name="op" value="logintreply" /> <input
+									type="submit" id="log" value="登录" />
+							</div>
+							<div id="zc_wj" style="text-align: center;">
+								<a class="a1" href="regiter.jsp" id="xiaomireg">注册账号</a>&nbsp;
+							</div>
+						</form>
+					</div>
+
+				</div>
+
+			</div>
 		</div>
 </body>
 
 <script type="text/javascript">
+	var mn="<%=session.getAttribute("username")%>";
 	var weiboid;
 	var commentId;
 	var replyerA;
@@ -375,6 +414,10 @@
 	$(function() {
 		//回复评论按钮的点击事件
 		$(".replyA").click(function() {
+			var th = $(this);
+			if (mn=="null") {
+				$.judgelogin(th);
+			} 
 			//微博编号
 			weiboid = $(this).prev().prev().val();
 			//评论编号
@@ -383,6 +426,14 @@
 			replyerA = $(this).prev().val();
 			//被回复的人
 			replyerB = $(this).parent("div").prev().prev().text();
+		})
+		
+		//删除按钮的点击事件
+		$(".del").click(function(){
+			var th = $(this);
+			if (mn=="null") {
+				$.judgelogin(th);
+			} 
 		})
 		//回复评论之后的确定按钮点击事件
 		$("#confirm").click(
@@ -400,6 +451,7 @@
 		//回复评论按钮的点击事件
 		$(".reply_replyA").click(function() {
 			//微博编号
+			
 			weiboid = $(this).prev().prev().val();
 			//评论编号
 			commentId = $(this).next().val();
@@ -410,6 +462,7 @@
 			alert(replyerA+" "+replyerB);
 		
 		})
+		
 		//回复评论之后的确定按钮点击事件
 		$("#reply_confirm").click(
 				function() {
@@ -426,7 +479,12 @@
 	$(function() {
 		$("#sendBtn")
 				.click(
-						function() {
+						function() {							
+							var th = $(this);
+							if (mn=="null") {
+								$.judgelogin(th);
+							} 
+							else{
 							var nikeName = $("#nikeName").text();
 							var weiboId = $("#weiboId").val();
 							var commentContent = $("#cm_area").val();
@@ -435,7 +493,21 @@
 									+ "&weiboId="
 									+ weiboId
 									+ "&commentContent=" + commentContent;
+							}
+							
 						})
+						
+				
+						
+		/*判断用户是否已进行过登录*/
+		$.extend({'judgelogin':function(th){			
+			th.attr({
+					"href" : "#modal-container-580488",
+					"data-toggle" : "modal"
+				});
+			}});    
+		
+		
 	});
 </script>
 </html>

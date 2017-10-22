@@ -102,11 +102,9 @@ public class W_weiboServlet extends HttpServlet {
 				request.setAttribute("sendName", sendName);
 				request.getRequestDispatcher("my_home.jsp").forward(request, response);
 			} else if (op.equals("homepage")) {
-				String nickname = "";
-				if (session.getAttribute("username") == null) {
-					session.setAttribute("username", "½Ü¸ç");
-				}
-				nickname = session.getAttribute("username") + "";
+
+				String nickname="";
+				nickname = session.getAttribute("username")+"";
 				W_UserInfoService wus = new W_UserInfoService();
 				W_userinfo userinfo = new W_userinfo();
 				userinfo = wus.getUserInfoByNikeName(nickname).get(0);
