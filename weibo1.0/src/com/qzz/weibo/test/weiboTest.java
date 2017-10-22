@@ -29,13 +29,17 @@ public class weiboTest {
 //			System.out.println(list);
 //		}		
 		
-		String nickname ="心心音峡";
-		List<W_weibo>  list1 = new ArrayList<>();
-		W_collectDao W_collectDao = new W_collectDao();
-		list1= W_collectDao.queryMyColl(nickname);
-		for (W_weibo W_weibo : list1) {
-			System.out.println(W_weibo);
-		}
+//		String nickname ="心心音峡";
+//		List<W_weibo>  list1 = new ArrayList<>();
+//		W_collectDao W_collectDao = new W_collectDao();
+//		list1= W_collectDao.queryMyColl(nickname);
+//		for (W_weibo W_weibo : list1) {
+//			System.out.println(W_weibo);
+//		}
+		
+		W_UserInfoDao wif = new W_UserInfoDao();
+		String nickname1 = wif.getNickNameByUserName("jie");
+		System.out.println(nickname1);
 		
 	}
 

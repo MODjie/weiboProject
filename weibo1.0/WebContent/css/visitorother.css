@@ -1,0 +1,42 @@
+		
+           .lefelist a:hover {
+				background-color: rgb(254, 84, 53);
+				color: ghostwhite;
+			}
+			
+			#zhongjianneirong {
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			#tupian {
+				margin: 0px;
+				padding: 0px;
+			}
+			
+            .ffgroup{
+            	height:40px;
+            	line-height: 35px;
+            }
+		 .ffgroup ul{
+		 	display: inline-block;
+		 }
+          .ffgroup ul li {         	
+          	    display: inline-block;            	
+            }
+            .ffgroup .line{
+            	float: left;
+            }
+          .ffgroup .line2{
+            	float: right;
+            }
+	      .ffgroup ul li a:hover{
+          	    background-color: white;
+				color: orangered;
+				text-decoration: none;
+          }
+          .foorgroup a:hover{
+          	color: orangered;
+				text-decoration: none;
+          }
+           

@@ -12,22 +12,20 @@ import java.util.List;
 import org.apache.commons.beanutils.BeanUtils;
 
 /**
- * 数据库操作的辅助类
+ * ���ݿ�����ĸ�����
  */
 public class BaseDao {
-
 	private static final String DRIVER = "oracle.jdbc.OracleDriver";
-	private static final String URL = "jdbc:oracle:thin:@192.168.9.223:1521:orcl";
+//	private static final String URL = "jdbc:oracle:thin:@192.168.9.223:1521:orcl";
 //	private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl1";
-//	private static final String URL = "jdbc:oracle:thin:@192.168.1.103:1521:orcl01";
-	private static final String USER = "scott"; // 用户名
-//	private static final String PASSWORD = "jie6846947";// 密码
-	private static final String PASSWORD = "jia";// 密码
-
+	private static final String URL = "jdbc:oracle:thin:@192.168.1.106:1521:orcl01";
+	private static final String USER = "scott"; // �û���
+//	private static final String PASSWORD = "jie6846947";// ����
+	private static final String PASSWORD = "jia";// ����
 	/**
-	 * 获取连接对象
+	 * ��ȡ���Ӷ���
 	 * 
-	 * @return 连接对象
+	 * @return ���Ӷ���
 	 */
 	public static Connection getConn() {
 
@@ -35,26 +33,27 @@ public class BaseDao {
 		try {
 
 			Class.forName(DRIVER);
-			// 得到连接对象
+			// �õ����Ӷ���
 			conn = DriverManager.getConnection(URL, USER, PASSWORD);
 
 		} catch (Exception e) {
-			throw new RuntimeException("数据库连接失败!", e);
+			throw new RuntimeException("���ݿ�����ʧ��!", e);
 		}
 		return conn;
 	}
 
 	/**
-	 * 释放资源
+	 * �ͷ���Դ
 	 * 
 	 * @param rs
-	 *            结果集
+	 *            �����
 	 * @param pstmt
-	 *            命令处理对象
+	 *            ��������
 	 * @param conn
-	 *            连接对象
+	 *            ���Ӷ���
 	 */
-	public static void close(ResultSet rs, PreparedStatement pstmt, Connection conn) {
+	public static void close(ResultSet rs, PreparedStatement pstmt,
+			Connection conn) {
 		try {
 			if (rs != null) {
 				rs.close();
@@ -66,12 +65,12 @@ public class BaseDao {
 				conn.close();
 			}
 		} catch (SQLException e) {
-			throw new RuntimeException("释放资源失败!", e);
+			throw new RuntimeException("�ͷ���Դʧ��!", e);
 		}
 	}
 
 	/**
-	 * 设置参数
+	 * ���ò���
 	 * 
 	 * @param sql
 	 * @param conn
@@ -80,8 +79,8 @@ public class BaseDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	private static PreparedStatement setPstmt(String sql, Connection conn, PreparedStatement pstmt, Object... param)
-			throws SQLException {
+	private static PreparedStatement setPstmt(String sql, Connection conn,
+			PreparedStatement pstmt, Object... param) throws SQLException {
 		pstmt = conn.prepareStatement(sql);
 		if (param != null) {
 			for (int i = 0; i < param.length; i++) {
@@ -92,13 +91,13 @@ public class BaseDao {
 	}
 
 	/**
-	 * 通用的数据库(增,删,改)操作方法
+	 * ͨ�õ����ݿ�(��,ɾ,��)��������
 	 * 
 	 * @param sql
-	 *            sql语句
+	 *            sql���
 	 * @param param
-	 *            sql语句参数
-	 * @return 受影响行数
+	 *            sql������
+	 * @return ��Ӱ������
 	 */
 	public static int execute(String sql, Object... param) {
 		Connection conn = getConn();
@@ -110,7 +109,7 @@ public class BaseDao {
 	}
 
 	/**
-	 * 通用的增删改操作(事务访问)
+	 * ͨ�õ���ɾ�Ĳ���(�������)
 	 * 
 	 * @param sql
 	 * @param conn
@@ -123,23 +122,20 @@ public class BaseDao {
 			pstmt = setPstmt(sql, conn, pstmt, param);
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// 这里最好得到异常信息
+			//������õõ��쳣��Ϣ
 			e.printStackTrace();
-			throw new RuntimeException("数据库操作失败!", e);
+			throw new RuntimeException("���ݿ����ʧ��!", e);
 		} finally {
 			close(null, pstmt, null);
 		}
 	}
 
 	/**
-	 * 通用查询方法
+	 * ͨ�ò�ѯ����
 	 * 
-	 * @param sql
-	 *            要查询的sql语句
-	 * @param cla
-	 *            Class对象
-	 * @param param
-	 *            参数
+	 * @param sql  Ҫ��ѯ��sql���
+	 * @param cla  Class����
+	 * @param param  ����
 	 * @return
 	 */
 	public static Object select(String sql, Class cla, Object... param) {
@@ -152,7 +148,7 @@ public class BaseDao {
 	}
 
 	/**
-	 * 带事务的查询方法
+	 * ������Ĳ�ѯ����
 	 * 
 	 * @param sql
 	 * @param conn
@@ -160,7 +156,8 @@ public class BaseDao {
 	 * @param param
 	 * @return
 	 */
-	public static Object select(String sql, Connection conn, Class cla, Object... param) {
+	public static Object select(String sql, Connection conn, Class cla,
+			Object... param) {
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
 		List<Object> list = new ArrayList<Object>();
@@ -168,22 +165,22 @@ public class BaseDao {
 			pstmt = setPstmt(sql, conn, pstmt, param);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				// ?rs 结果集 cla Class对象
-				// object其实就是数据表结构对应的一条实体记录,object就是那个实体类对象
-				// 这个方法convert是将结果集和cla对象进行转换
+				// ?rs ����� cla Class����
+				//object��ʵ�������ݱ�ṹ��Ӧ��һ��ʵ���¼,object�����Ǹ�ʵ�������
+				//�������convert�ǽ��������cla�������ת��
 				Object object = convert(rs, cla);
 				list.add(object);
 			}
 			return list;
 		} catch (SQLException e) {
-			throw new RuntimeException("数据库查询失败!", e);
+			throw new RuntimeException("���ݿ��ѯʧ��!", e);
 		} finally {
 			close(rs, pstmt, null);
 		}
 	}
 
 	/**
-	 * 获取单个记录值,是单个记录注意,类似count(1)
+	 * ��ȡ������¼ֵ,�ǵ�����¼ע��,����count(1)
 	 * 
 	 * @param sql
 	 * @param param
@@ -199,7 +196,7 @@ public class BaseDao {
 	}
 
 	/**
-	 * 获取单个记录 事务
+	 * ��ȡ������¼ ����
 	 * 
 	 * @param sql
 	 * @param conn
@@ -215,7 +212,7 @@ public class BaseDao {
 	}
 
 	/**
-	 * 事务处理操作
+	 * ���������
 	 * 
 	 * @param tran
 	 * @return
@@ -231,16 +228,16 @@ public class BaseDao {
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
-				throw new RuntimeException("回滚失败!", e);
+				throw new RuntimeException("�ع�ʧ��!", e);
 			}
-			throw new RuntimeException("事务执行失败", e);
+			throw new RuntimeException("����ִ��ʧ��", e);
 		} finally {
 			close(null, null, conn);
 		}
 	}
 
 	/**
-	 * 查询结果的转换
+	 * ��ѯ�����ת��
 	 * 
 	 * @param rs
 	 * @param cla
@@ -251,42 +248,38 @@ public class BaseDao {
 			if (cla.getName().equals("java.lang.Object")) {
 				return rs.getObject(1);
 			}
-			// 创建实体类的实例 Class类对象的方法，创建指定对象的实例
-			// new Goods(); new News(); new person(); new Users();
-			Object object = cla.newInstance();
-			//// 结果集头信息对象
+			// ����ʵ�����ʵ�� Class�����ķ���������ָ�������ʵ��
+			// new Goods();  new News();  new person();  new Users();
+			Object object = cla.newInstance(); 
+			//// �����ͷ��Ϣ����
 			ResultSetMetaData metaData = rs.getMetaData();
-			// 循环为实体类的实例的属性赋值 getColumnCount得到列的个数
+			// ѭ��Ϊʵ�����ʵ�������Ը�ֵ getColumnCount�õ��еĸ���
 			for (int i = 1; i <= metaData.getColumnCount(); i++) {
-				// 获取列名
+				// ��ȡ���� 
 				String name = metaData.getColumnLabel(i);
-				//// 注：列名与属性名必须一致。最好遵循骆驼命名方法. rs.getObject(i) 结果集中的查询结果和对象匹配
+				//// ע������������������һ�¡������ѭ������������.  rs.getObject(i) ������еĲ�ѯ����Ͷ���ƥ��
 				BeanUtils.setProperty(object, name, rs.getObject(i));
 			}
 			return object;
 		} catch (Exception e) {
-			throw new RuntimeException("属性设置失败!", e);
+			throw new RuntimeException("��������ʧ��!", e);
 		}
 	}
 
 	/**
-	 * 分页操作 mysql;
+	 * ��ҳ���� mysql;
 	 * 
-	 * @param sql
-	 *            查询的sql语句
-	 * @param page
-	 *            当前页码
-	 * @param pageSize
-	 *            每页显示的记录数
-	 * @param cla
-	 *            Class类对象
-	 * @param param
-	 *            sql有关的参数列表
-	 * @return PageData 对象
+	 * @param sql  ��ѯ��sql���
+	 * @param page  ��ǰҳ��
+	 * @param pageSize ÿҳ��ʾ�ļ�¼��
+	 * @param cla   Class�����
+	 * @param param   sql�йصĲ����б�
+	 * @return    PageData ����
 	 */
-	public static PageData getPage(String sql, Integer page, Integer pageSize, Class cla, Object... param) {
-		// sql select * from news
-		// select count(1) from (select * from news) t --得到记录总数
+	public static PageData getPage(String sql, Integer page, Integer pageSize,
+			Class cla, Object... param) {
+		//sql  select * from news
+		//select count(1) from (select * from news) t  --�õ���¼����
 		String selSql = "select count(1) from (" + sql + ") t";
 		if (page == null) {
 			page = 1;
@@ -294,23 +287,23 @@ public class BaseDao {
 		if (pageSize == null) {
 			pageSize = 10;
 		}
-		// 查询得到总记录数
+		//��ѯ�õ��ܼ�¼��
 		Integer count = Integer.parseInt(getFirst(selSql, param).toString());
-		// 实现简单的分页语句
-		// select * from news limit 起始位置,每页显示的记录数
-		// select * from news limit 起始位置,pageSize
-		// select * from news limit 10,5 每页5条记录 ，显示第3页
-		int start = (page - 1) * pageSize; // 起始位置算法
-		// + 其实不太好 最好用stringBuffer stringBuilder append
+		//ʵ�ּ򵥵ķ�ҳ���
+		//select * from news limit ��ʼλ��,ÿҳ��ʾ�ļ�¼��
+		//select * from news limit ��ʼλ��,pageSize
+		//select * from news limit 10,5   ÿҳ5����¼ ����ʾ��3ҳ
+		int start = (page - 1) * pageSize; //��ʼλ���㷨
+		//+ ��ʵ��̫�� �����stringBuffer stringBuilder  append
 		sql = sql + " limit " + start + "," + pageSize;
 		List list = (List) select(sql, cla, param);
-		// 创建一个PageData对象
+		//����һ��PageData����
 		PageData data = new PageData(list, count, pageSize, page);
 		return data;
 	}
 
 	/**
-	 * 分页操作 sqlserver
+	 * ��ҳ���� sqlserver
 	 * 
 	 * @param page
 	 * @param pageSize
@@ -318,9 +311,11 @@ public class BaseDao {
 	 * @param identity
 	 * @return
 	 */
-	public static PageData getPage(Integer page, Integer pageSize, Class cla, String identity) {
-		String name = cla.getName().substring(cla.getName().lastIndexOf(".") + 1);// 根据命名规则从类名获取数据库表名
-		String selSql = "select count(1) from " + name;// 获取总数
+	public static PageData getPage(Integer page, Integer pageSize, Class cla,
+			String identity) {
+		String name = cla.getName().substring(
+				cla.getName().lastIndexOf(".") + 1);// �������������������ȡ���ݿ����
+		String selSql = "select count(1) from " + name;// ��ȡ����
 		if (page == null) {
 			page = 1;
 		}
@@ -329,38 +324,58 @@ public class BaseDao {
 		}
 		int start = (page - 1) * pageSize;
 		Integer count = Integer.parseInt(getFirst(selSql, null).toString());
-		selSql = "select top " + pageSize + " * from " + name + " where " + identity + " not in (select top " + start
-				+ " " + identity + " from " + name + " )"; // 拼接查询语句
+		selSql = "select top " + pageSize + " * from " + name + " where "
+				+ identity + " not in (select top " + start + " " + identity
+				+ " from " + name + " )"; // ƴ�Ӳ�ѯ���
 		List list = (List) select(selSql, cla, null);
 		PageData data = new PageData(list, count, pageSize, page);
 		return data;
 	}
-
-	public static PageData oracleGetPage(String sql, Integer page, Integer pageSize, Class cla, Object... param) {
-		// sql select * from news
-		
-		// 实现简单的分页语句
+	
+	
+	
+	/**
+	 * oracle�ķ�ҳʵ��
+	 * @param sql
+	 * @param page
+	 * @param pageSize
+	 * @param cla
+	 * @param param
+	 * @return
+	 */
+	public static PageData getOraclePage(String sql, Integer page, Integer pageSize,
+			Class cla, Object... param) {
+		//sql  select * from news
+		//select count(1) from (select * from news) t  --�õ���¼����
+		String selSql = "select count(1) from (" + sql + ") t";
 		if (page == null) {
 			page = 1;
 		}
 		if (pageSize == null) {
 			pageSize = 10;
 		}
-		
-		int start = (page - 1) * pageSize; // 起始位置算法
-		int end = pageSize*page+1;
-		sql = sql + end + ") tt where r>" + start;
-		
-		// select count(1) from (select * from news) t --得到记录总数
-		String selSql = "select count(1) from (" + sql + ") t";
-		
-		
-		List list = (List) select(sql, cla, param);
-		// 查询得到总记录数
+		//��ѯ�õ��ܼ�¼��
 		Integer count = Integer.parseInt(getFirst(selSql, param).toString());
+		//ʵ�ּ򵥵ķ�ҳ���
+		//�����oracle���ݿ�Ļ� Ӧ��ʹ��rownum��ʵ�ּ򵥵ķ�ҳ����
+		int start = (page - 1) * pageSize; //��ʼλ���㷨
+		//+ ��ʵ��̫�� �����stringBuffer stringBuilder  append
+		
+		//rownum<=10 ���10Ӧ���ǽ���λ��  page = 2 ÿҳ��ʾ10��  ->��11����20��
+		int end = page * pageSize;
+		// r>5 ����ǹ��˵��Ĳ���
+		
+		//sql ��ʵ���� (select * from emp) tbl
+		String oracleSql = "select * from (select tbl.*,rownum r from ("+sql+") tbl where rownum<="+end+") mytable  where r>"+start;
 
-		// 创建一个PageData对象
+		List list = (List) select(oracleSql, cla, param);
+		//����һ��PageData����
 		PageData data = new PageData(list, count, pageSize, page);
 		return data;
 	}
+
+	
+	
+	
+
 }

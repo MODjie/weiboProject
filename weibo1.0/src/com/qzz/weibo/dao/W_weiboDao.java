@@ -6,6 +6,7 @@ import com.qzz.weibo.entity.W_type;
 import com.qzz.weibo.entity.W_users;
 import com.qzz.weibo.entity.W_weibo;
 import com.qzz.weibo.util.BaseDao;
+import com.qzz.weibo.util.PageData;
 
 public class W_weiboDao {
 	/**
@@ -68,6 +69,16 @@ public class W_weiboDao {
 		String sql = "select * from W_TYPE where TYPENAME = ?";
 		List<W_type> list = (List<W_type>)BaseDao.select(sql, W_type.class, typeName);
 		return list.get(0).getTYPEID();
+	}
+	
+	/**
+	 *  根据微博类型编号获取相关类型微博
+	 *
+	 * @return
+	*/
+	public  List<W_weibo> queryWebBytype(int contenttypeid){
+		String sql="select * from WB_VIEW where TYPEID =? ";
+		return (List<W_weibo>)BaseDao.select(sql, W_weibo.class, contenttypeid);
 	}
 	
 	/**

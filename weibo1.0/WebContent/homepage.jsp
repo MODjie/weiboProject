@@ -185,10 +185,22 @@
 						<div class="right">
 							<!--个人信息显示区域开始-->
 							<div class="userinfo">
+								<c:choose>
+								<c:when test="${requestScope.userinfo!=null}">
 								<a href="WeiBoServlet?op=queryMyWb"><img src="${requestScope.userinfo.TOUXIANG}" alt="140×140" class="img-circle touxiang" /></a>
 								<div class="username">
 									<a href="WeiBoServlet?op=queryMyWb">${requestScope.userinfo.NICKNAME}</a>
 								</div>
+								</c:when>
+								<c:otherwise>
+								<a href="WeiBoServlet?op=queryMyWb"><img src="upload/touxiang.jpg" alt="140×140" class="img-circle touxiang" /></a>
+								<div class="username">
+									<a href="WeiBoServlet?op=queryMyWb">未设置昵称</a>
+								</div>
+								</c:otherwise>
+								</c:choose>
+								
+								
 								<div class="WB_cardwrap S_bg2 " style="background-color: white;">
 									<div class="PCD_counter">
 										<div class="WB_innerwrap">

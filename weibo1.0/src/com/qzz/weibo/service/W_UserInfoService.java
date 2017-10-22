@@ -40,4 +40,13 @@ public class W_UserInfoService {
 	public List<W_userinfo> getUserInfoByNikeName(String nikeName) {
 		return userinfodao.getUserInfoByNikeName(nikeName);
 	}
+	
+	/***
+	 * 通过用户名获取用户昵称
+	 * @param username
+	 * @return
+	 */
+	public String getNickNameByUserName(String username) {
+		return userinfodao.getNickNameByUserName(username);
+	}
 }

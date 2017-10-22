@@ -163,7 +163,7 @@
 				
 				<select name="type" class="" style="margin-left: 50px;">
 					<option value="娱乐">娱乐</option>
-					<option value="搞笑">搞笑</option>
+					<option value="热门">热门</option>
 					<option value="体育">体育</option>
 					<option value="情感">情感</option>
 					<option value="美女">美女</option>
