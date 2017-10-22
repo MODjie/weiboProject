@@ -13,7 +13,7 @@
 <style type="text/css">
 .forwoarddiv {
 	background-color: rgb(242, 242, 245);
-	margin-left: -138px;
+	margin-left: -103px;
 	width: 700px;
 }
 </style>
@@ -77,7 +77,7 @@
 											<tr>
 												<td><a href="WeiBoServlet?op=queryMyWb">我的主页</a></td>
 												<td><a href="photo.jsp">我的相册</a></td>
-												<td><a href="/W_UserInfoServlet?op=getUserInfo">管理中心</a></td>
+												<td><a href="information.jsp">管理中心</a></td>
 											</tr>
 										</tbody>
 									</table>
