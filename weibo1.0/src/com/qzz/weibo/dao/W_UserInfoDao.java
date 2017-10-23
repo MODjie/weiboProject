@@ -51,4 +51,13 @@ public class W_UserInfoDao {
 	public String getNickNameByUserName(String username) {
 		return BaseDao.getFirst("select NICKNAME FROM W_USERINFO WHERE USERNAME=?", username)+"";
 	}
+	/***
+	 * 判断用户昵称是否已存在
+	 * @param nickname
+	 * @return
+	 */
+	public int isExisNickname(String nickname) {
+		String flag= BaseDao.getFirst("select count(1) from W_USERINFO where NICKNAME = ?", nickname)+"";
+		return Integer.parseInt(flag);
+	}
 }

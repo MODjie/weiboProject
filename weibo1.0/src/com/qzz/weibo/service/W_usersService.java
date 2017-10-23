@@ -21,5 +21,9 @@ public class W_usersService {
 	public String queryUserpwdByName(String name) {
 		return ud.queryUserpwdByName(name).toString();
 	}
+	
+	public boolean userRegister(String username,String password,String nickname) {
+		return ud.userRegister(username, password, nickname);
+	}
 
 }

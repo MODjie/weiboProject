@@ -2,8 +2,6 @@ package com.qzz.weibo.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +12,9 @@ import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
-import com.qzz.weibo.entity.W_weibo;
 import com.qzz.weibo.service.W_UserInfoService;
 import com.qzz.weibo.service.W_usersService;
+import com.qzz.weibo.util.DataUtil;
 
 /**
  * Servlet implementation class LoginRegister
@@ -80,15 +78,66 @@ public class LoginRegister extends HttpServlet {
 				out.print(jsonString);
 				out.close();
 			} // 注册功能
+				// 注册功能验证用户昵称是否存在
+			if (op.equals("nickname")) {
+				W_UserInfoService uis = new W_UserInfoService();
+				String nickname = "";
+				String msg = "";
+				nickname = new String(request.getParameter("nickname").getBytes("ISO-8859-1"),
+						"UTF-8");
+				
+				System.out.println("nickname"+nickname);
+				if (!nickname.equals("")) {
+					int i = uis.isExisNickname(nickname);
+					System.out.println("i"+i);
+					if (i == 1) {
+						msg = "该昵称已存在!!!";
+					} else {
+						msg = "该昵称可用";
+					}
+				} else {
+					msg = "昵称不能为空";
+				}
+				Gson gson = new Gson();
+				String jsonString = gson.toJson(msg);
+				// 使用printWriter对象
+				PrintWriter out = response.getWriter();
+				out.print(jsonString);
+				out.close();
+			} // 注册功能
+			// 注册功能验证用户验证码是否正确
+			if (op.equals("number")) {
+				String number = DataUtil.number;//图片生成的验证码
+				String num = request.getParameter("number");//用户输入的验证码	
+				String msg = "";
+				if (!num.equals("")) {
+					if(num.equals(number)) {
+						msg="验证码正确";
+					}
+					else {
+						msg="验证码输入错误";
+					}
+				}
+				else {
+					msg="验证码不能为空";
+				}
+				Gson gson = new Gson();
+				String jsonString = gson.toJson(msg);
+				// 使用printWriter对象
+				PrintWriter out = response.getWriter();
+				out.print(jsonString);
+				out.close();
+			} // 注册功能
 			else if (op.equals("regst")) {
 				W_usersService us = new W_usersService();
-				String name = request.getParameter("phone");
-				String pwd = request.getParameter("pwd");
-				boolean flag = us.addUsers(name, pwd);
+				String username = request.getParameter("phone");
+				String password = request.getParameter("pwd");
+				String nickname = request.getParameter("nickname");
+				boolean flag = us.userRegister(username, password, nickname);
 				if (flag) {
-					//JOptionPane.showMessageDialog(null, "注册成功");
-					request.setAttribute("name", name);
-					request.setAttribute("pwd", pwd);
+					// JOptionPane.showMessageDialog(null, "注册成功");
+					request.setAttribute("name", username);
+					request.setAttribute("pwd", password);
 					response.getWriter().print("<script language='javascript'>alert('注册成功');</script>");
 					request.getRequestDispatcher("index.jsp").forward(request, response);
 				} else {
@@ -112,14 +161,12 @@ public class LoginRegister extends HttpServlet {
 					if (pwdyz.equals(pwd)) {
 						W_UserInfoService userinfoser = new W_UserInfoService();
 						String username = userinfoser.getNickNameByUserName(name);
-						if(username.equals("null")) {
+						if (username.equals("null")) {
 							response.sendRedirect("homepage.jsp");
-						}
-						else {
+						} else {
 							session.setAttribute("username", username);
 							response.sendRedirect("WeiBoServlet?op=homepage");
 						}
-						
 
 					} else {
 						JOptionPane.showMessageDialog(null, "您的密码输入错误！！", "密码错误", JOptionPane.ERROR_MESSAGE);
@@ -129,11 +176,10 @@ public class LoginRegister extends HttpServlet {
 					}
 				}
 
-			} 
-			else if (op.equals("logintreply")) {
+			} else if (op.equals("logintreply")) {
 				W_usersService us = new W_usersService();
 				String name = request.getParameter("namet");
-				System.out.println("username"+name);
+				System.out.println("username" + name);
 				String pwd = request.getParameter("pwdt");
 				int j = us.RegisterPhone(name);
 				if (j == 0) {
@@ -146,12 +192,13 @@ public class LoginRegister extends HttpServlet {
 					if (pwdyz.equals(pwd)) {
 						W_UserInfoService userinfoser = new W_UserInfoService();
 						String username = userinfoser.getNickNameByUserName(name);
-							session.setAttribute("username", username);
-							System.out.println("more界面点击登录");
-//							response.getWriter().print("<script language='javascript'>history.go(-2);</script>");
-							response.getWriter().println("<script language='javascript'>window.history.go(-1);window.history.go(0)</script>");
+						session.setAttribute("username", username);
+						System.out.println("more界面点击登录");
+						// response.getWriter().print("<script
+						// language='javascript'>history.go(-2);</script>");
+						response.getWriter().println(
+								"<script language='javascript'>window.history.go(-1);window.history.go(0)</script>");
 					}
-						
 
 					else {
 						JOptionPane.showMessageDialog(null, "您的密码输入错误！！", "密码错误", JOptionPane.ERROR_MESSAGE);
@@ -161,8 +208,7 @@ public class LoginRegister extends HttpServlet {
 					}
 				}
 
-			} 
-			else if (op.equals("logint")) {
+			} else if (op.equals("logint")) {
 				W_usersService us = new W_usersService();
 				String name = request.getParameter("namet");
 				String pwd = request.getParameter("pwdt");
@@ -182,10 +228,9 @@ public class LoginRegister extends HttpServlet {
 						if (pwdyz.equals(pwd)) {
 							W_UserInfoService userinfoser = new W_UserInfoService();
 							String username = userinfoser.getNickNameByUserName(name);
-							if(username.equals("null")) {
+							if (username.equals("null")) {
 								response.sendRedirect("homepage.jsp");
-							}
-							else {
+							} else {
 								session.setAttribute("username", username);
 								response.sendRedirect("WeiBoServlet?op=homepage");
 							}
@@ -204,14 +249,13 @@ public class LoginRegister extends HttpServlet {
 						request.getRequestDispatcher("index.jsp").forward(request, response);
 					} else {
 						String pwdyz = us.queryUserpwdByName(name);
-						//登录成功的话
+						// 登录成功的话
 						if (pwdyz.equals(pwd)) {
 							W_UserInfoService userinfoser = new W_UserInfoService();
 							String username = userinfoser.getNickNameByUserName(name);
-							if(username.equals("null")) {
+							if (username.equals("null")) {
 								response.sendRedirect("homepage.jsp");
-							}
-							else {
+							} else {
 								session.setAttribute("username", username);
 								response.sendRedirect("WeiBoServlet?op=homepage");
 							}

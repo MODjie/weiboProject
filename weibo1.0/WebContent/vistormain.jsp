@@ -416,7 +416,7 @@ $(function() {
 									style="background-color: rgb(255, 129, 64); width: 280px;">登录</button>
 							</div>
 							<div class=" col-sm-10" style="text-align: left;">
-								还没有微博? <a href="regiter.jsp">立即注册</a>
+								还没有微博? <a href="regiter2.jsp">立即注册</a>
 							</div>
 						</div>
 					</form>
