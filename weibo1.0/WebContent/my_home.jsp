@@ -21,6 +21,7 @@
 <!--ajax刷新点赞和收藏-->
 <script type="text/javascript">
 			$(function() {
+				
 				//收藏按钮的点击事件
 				$('.collectA').click(function() {
 					var a=$(this);
@@ -33,7 +34,6 @@
 						}else{
 							a.css("color","#337A7A");
 						}
-						
 					});
 				});
 			});
