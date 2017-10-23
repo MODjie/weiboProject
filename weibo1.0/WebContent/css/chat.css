@@ -1,15 +1,23 @@
 @charset "UTF-8";
 body {
 	background-image: url(../chat-img/bg.jpg);
-	overflow-x: hidden;
+	background-size: 100%;
 }
 
+/*让聊天窗口自适应屏幕大小显示在正中间*/
+.main-body{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -400px;
+	margin-top: -300px;
+}
 
 /*聊天框最外层的div*/
 
 #friend_body {
 	height: 600px;
-	padding-top: 22px;
+	width: 800px;
 }
 
 

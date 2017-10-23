@@ -82,6 +82,7 @@
 <body>
 	<input id="hiddenName" type="hidden" value=${sessionScope.username }>
 	<input id="firstName" type="hidden" value=${requestScope.firstName }>
+	<div class="main-body">
 	<div class="clearfix row">
 		<div class="col-md-2"></div>
 		<!--friend-body层开始-->
@@ -150,7 +151,7 @@
 		<!--friend-body层结束-->
 		<div class="col-md-2"></div>
 	</div>
-
+	</div>
 </body>
 
 </html>

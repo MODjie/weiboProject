@@ -76,4 +76,12 @@ public class W_weiboService {
 	public boolean updateWeiboById(W_weibo weibo) {
 		return weiboDao.updateWeiboById(weibo);
 	}
+	/**
+	 * Ä£ºý²éÑ¯
+	 * @param word
+	 * @return
+	 */
+	public List<W_weibo> queryWbByWord(String word,String sendName) {
+		return weiboDao.queryWbByWord(word,sendName);
+	}
 }
