@@ -49,4 +49,13 @@ public class W_UserInfoService {
 	public String getNickNameByUserName(String username) {
 		return userinfodao.getNickNameByUserName(username);
 	}
+	
+	/***
+	 * 判断用户昵称是否已存在
+	 * @param nickname
+	 * @return
+	 */
+	public int isExisNickname(String nickname) {
+		return userinfodao.isExisNickname(nickname);
+	}
 }

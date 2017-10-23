@@ -21,4 +21,10 @@ public class W_usersDao {
 	public Object queryUserpwdByName(String name) {
 		return BaseDao.getFirst("select userpwd from W_users where username=?", name);
 	}
+	
+	public boolean userRegister(String username,String password,String nickname) {
+		int i = BaseDao.execute("insert into w_users values(null,?,?,'ÓÃ»§')", username, password) ;
+		int j = BaseDao.execute("insert into W_USERINFO values(?,?,null,null,null,null,null,null,null,null,'upload/touxiang.jpg')", username, nickname);
+		return (i+j)>1;
+	}
 }

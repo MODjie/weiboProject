@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.qzz.weibo.dao.W_UserInfoDao;
 import com.qzz.weibo.dao.W_collectDao;
+import com.qzz.weibo.dao.W_usersDao;
 import com.qzz.weibo.dao.W_weiboDao;
 import com.qzz.weibo.entity.W_userinfo;
 import com.qzz.weibo.entity.W_users;
@@ -37,10 +38,12 @@ public class weiboTest {
 //			System.out.println(W_weibo);
 //		}
 		
-		W_UserInfoDao wif = new W_UserInfoDao();
-		String nickname1 = wif.getNickNameByUserName("jie");
-		System.out.println(nickname1);
-		
+//		W_UserInfoDao wif = new W_UserInfoDao();
+//		int i = Integer.parseInt(wif.isExisNickname("心心音峡"));
+//		System.out.println(i>1);
+		W_usersDao ws = new W_usersDao();
+		boolean f=ws.userRegister("haha", "000000", "込込込");
+		System.out.println(f);
 	}
 
 }
