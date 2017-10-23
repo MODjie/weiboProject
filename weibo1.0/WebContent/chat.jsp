@@ -20,8 +20,7 @@
 	$(function() {
 		
 		setInterval(function(){ 
-			/*Ajax请求返回聊天记录*/
-			receiveName = $(this).find("p").text();
+			/*Ajax请求返回聊天记录*/			
 			$.post("WeiBoServlet?op=chatcontent&receiveName="+receiveName,function(msgList,status){
 				showData(msgList,status);	
 			});
