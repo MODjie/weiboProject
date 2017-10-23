@@ -18,7 +18,7 @@
 <script type="text/javascript">
 	
 	$(function() {
-		
+		receiveName = $("#firstName").val();
 		setInterval(function(){ 
 			/*Ajax请求返回聊天记录*/			
 			$.post("WeiBoServlet?op=chatcontent&receiveName="+receiveName,function(msgList,status){
@@ -81,6 +81,7 @@
 
 <body>
 	<input id="hiddenName" type="hidden" value=${sessionScope.username }>
+	<input id="firstName" type="hidden" value=${requestScope.firstName }>
 	<div class="clearfix row">
 		<div class="col-md-2"></div>
 		<!--friend-body层开始-->

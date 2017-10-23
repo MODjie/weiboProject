@@ -343,7 +343,7 @@ public class W_weiboServlet extends HttpServlet {
 				String nickName = (String) session.getAttribute("username");
 				List<W_friend> friendList = fs.queryMyFriend(nickName);
 				List<W_userinfo> myList = us.getUserInfoByNikeName(nickName);
-//				request.setAttribute("firstName", friendList.get(0).getFRIENDNAME());
+				request.setAttribute("firstName", friendList.get(0).getFRIENDNAME());
 				request.setAttribute("friendList", friendList);
 				request.setAttribute("mytouxiang", myList.get(0).getTOUXIANG());
 				request.getRequestDispatcher("chat.jsp").forward(request, response);
