@@ -206,7 +206,7 @@ public class W_weiboServlet extends HttpServlet {
 			} else if (op.equals("collect")) {
 				// 通过传过来的微博ID和收藏人的昵称查找数据库并且存储在collectList中
 				String msg = "";
-				int weiboId = Integer.parseInt((String) request.getParameter("weiboid"));
+				int weiboId = Integer.parseInt(request.getParameter("weiboid"));
 				String collectName = (String) session.getAttribute("username");
 				String flag = request.getParameter("flag");
 				String collectTime = sdf.format(new Date());
@@ -231,7 +231,15 @@ public class W_weiboServlet extends HttpServlet {
 				// 修改本条微博的收藏数
 				ws.updateWeiboById(wei);
 				// 通过昵称查找微博
-				if (flag.equals("1")) {
+				if(flag == null) {
+					int collectNum = wei.getCOLLECTNUM();
+					Gson g = new Gson();
+					String jsonString = g.toJson(collectNum);
+					// //如果这里加了这句话，意味着视图那一层不需要JSON.parse
+					// 这里已经将返回的数据变成了json对象
+					response.setContentType("application/json");
+					out.print(jsonString);
+				} else if (flag.equals("1")) {
 					list = ws.queryAllWb();
 					request.setAttribute("list", list);
 					if (msg.equals("收藏成功")) {
@@ -243,12 +251,7 @@ public class W_weiboServlet extends HttpServlet {
 						response.getWriter().print(
 								"<script language='javascript'>alert('取消收藏');location.href='WeiBoServlet?op=queryAllWb'</script>");
 					}
-				} else {
-					list = ws.queryWbByName(collectName);
-					request.setAttribute("list", list);
-					request.setAttribute("sendName", collectName);
-					request.getRequestDispatcher("my_home.jsp").forward(request, response);
-				}
+				} 
 
 			} else if (op.equals("dianzan")) {
 				// 通过传过来的微博ID和点赞人的昵称查找数据库并且存储在zanlist中

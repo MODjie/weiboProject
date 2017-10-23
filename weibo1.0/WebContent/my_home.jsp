@@ -17,6 +17,27 @@
 	width: 700px;
 }
 </style>
+
+<!--ajax刷新点赞和收藏-->
+<script type="text/javascript">
+			$(function() {
+				//收藏按钮的点击事件
+				$('.collectA').click(function() {
+					var a=$(this);
+					weiboid = $(this).find(".ajaxWbId").val();
+					$.post("WeiBoServlet?op=collect&weiboid="+weiboid,function(collectNum,status){
+						a.find(".collectNumSpan").html(collectNum);
+						//通过判断收藏数修改收藏区域的颜色
+						if (collectNum==1) {
+							a.css("color","orangered");
+						}else{
+							a.css("color","#337A7A");
+						}
+						
+					});
+				});
+			});
+		</script>
 </head>
 
 <body style="background-color: rgb(94, 122, 161);">
@@ -249,23 +270,24 @@
 											<div class="content_bottom">
 												<ul class="nav nav-pills WB_row_line">
 													<li class="col" style="width: 175px; text-align: center;">
-														<a id="test"
-														href="WeiBoServlet?op=collect&weiboid=${weibo.WEIBOID }">
-															<span class="glyphicon glyphicon-star-empty"></span>&nbsp;<span>${weibo.COLLECTNUM }</span>
-													</a>
+														<a class="collectA">
+															<input class="ajaxWbId" type="hidden" value="${weibo.WEIBOID }">
+															<span class="glyphicon glyphicon-star-empty">
+															<span class="collectNumSpan">${weibo.COLLECTNUM }</span>
+														</a>
 													</li>
 													<li class="col" style="width: 175px; text-align: center;">
-														<a href="#"><span
+														<a><span
 															class="glyphicon glyphicon-new-window"></span> &nbsp;<span>${weibo.FORWARDNUM }</span></a>
 													</li>
 													<li class="col" style="width: 170px; text-align: center;">
-														<a
-														href="WeiBoServlet?op=queryWbById&weiboid=${weibo.WEIBOID }&cmsuccess=no">
+														<a href="WeiBoServlet?op=queryWbById&weiboid=${weibo.WEIBOID }&cmsuccess=no">
 															<span class="glyphicon glyphicon-comment"></span> &nbsp;<span>${weibo.COMMENTNUM }</span>
 													</a>
 													</li>
-													<li style="width: 170px; text-align: center;"><a
+													<li style="width: 170px; text-align: center;"><a class="zanA"
 														href="WeiBoServlet?op=zan&weiboid=${weibo.WEIBOID } ">
+															<input class="ajaxWbId" type="hidden" value="${weibo.WEIBOID }">
 															<span class="glyphicon glyphicon-thumbs-up"></span>
 															&nbsp;<span>${weibo.ZANNUM }</span>
 													</a></li>
