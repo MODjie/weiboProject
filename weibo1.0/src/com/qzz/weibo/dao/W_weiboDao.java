@@ -89,4 +89,12 @@ public class W_weiboDao {
 	public boolean updateWeiboById(W_weibo weibo) {
 		return BaseDao.execute("update W_weibo set COLLECTNUM=?,FORWARDNUM=?, COMMENTNUM = ?,ZANNUM=? where WEIBOID=?", weibo.getCOLLECTNUM(),weibo.getFORWARDNUM(),weibo.getCOMMENTNUM(),weibo.getZANNUM(),weibo.getWEIBOID())>0;
 	}
+	/**
+	 * Ä£ºý²éÑ¯
+	 * @param word
+	 * @return
+	 */
+	public List<W_weibo> queryWbByWord(String word,String sendName) {
+		return (List<W_weibo>) BaseDao.select("select * from WB_VIEW where SENDNAME = ? and CONTENT like ?", W_weibo.class,sendName, "%"+word+"%");
+	}
 }

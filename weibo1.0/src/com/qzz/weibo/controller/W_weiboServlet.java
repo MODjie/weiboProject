@@ -22,6 +22,7 @@ import com.qzz.weibo.entity.W_comment;
 import com.qzz.weibo.entity.W_friend;
 import com.qzz.weibo.entity.W_message;
 import com.qzz.weibo.entity.W_reply;
+import com.qzz.weibo.entity.W_type;
 import com.qzz.weibo.entity.W_userinfo;
 import com.qzz.weibo.entity.W_weibo;
 import com.qzz.weibo.entity.W_zan;
@@ -51,7 +52,6 @@ public class W_weiboServlet extends HttpServlet {
 	private W_UserInfoService us = new W_UserInfoService();
 	private W_friendService fs = new W_friendService();
 	private W_messageService ms = new W_messageService();
-
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -94,17 +94,30 @@ public class W_weiboServlet extends HttpServlet {
 			String op = request.getParameter("op");
 			// 查找我的主页中我发过的所有微博
 			if (op.equals("queryMyWb")) {
-
+				
 				String sendName = (String) session.getAttribute("username");
-				// 将查询到的微博list倒序输出
-				list = ws.queryWbByName(sendName);
+				// 查询到的微博list
+				if (request.getParameter("queryWbBy")==null) {
+					list = ws.queryWbByName(sendName);
+				}else if(request.getParameter("queryWbBy").equals("type")){
+					// 我的主页通过类型查询
+					int typeId = Integer.parseInt(request.getParameter("typeId"));
+					list = ws.queryWebBytype(typeId);
+				}else if(request.getParameter("queryWbBy").equals("word")){
+					// 我的主页模糊查询微博内容
+					String word = request.getParameter("serchContent");
+					System.out.println(word);
+					list = ws.queryWbByWord(word, sendName);
+				}
+				
+				List<W_userinfo> myInfo = us.getUserInfoByNikeName(sendName);
+				request.setAttribute("myInfo", myInfo.get(0));
 				request.setAttribute("list", list);
-				request.setAttribute("sendName", sendName);
 				request.getRequestDispatcher("my_home.jsp").forward(request, response);
 			} else if (op.equals("homepage")) {
 
-				String nickname="";
-				nickname = session.getAttribute("username")+"";
+				String nickname = "";
+				nickname = session.getAttribute("username") + "";
 				W_UserInfoService wus = new W_UserInfoService();
 				W_userinfo userinfo = new W_userinfo();
 				userinfo = wus.getUserInfoByNikeName(nickname).get(0);
@@ -343,7 +356,7 @@ public class W_weiboServlet extends HttpServlet {
 				String nickName = (String) session.getAttribute("username");
 				List<W_friend> friendList = fs.queryMyFriend(nickName);
 				List<W_userinfo> myList = us.getUserInfoByNikeName(nickName);
-//				request.setAttribute("firstName", friendList.get(0).getFRIENDNAME());
+				request.setAttribute("firstName", friendList.get(0).getFRIENDNAME());
 				request.setAttribute("friendList", friendList);
 				request.setAttribute("mytouxiang", myList.get(0).getTOUXIANG());
 				request.getRequestDispatcher("chat.jsp").forward(request, response);
@@ -378,6 +391,7 @@ public class W_weiboServlet extends HttpServlet {
 				response.setContentType("application/json");
 				out.print(jsonString);
 			}
+			
 		}
 
 	}

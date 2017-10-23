@@ -62,10 +62,10 @@
 						<div class="row clearfix">
 							<!--封面div开始-->
 							<div id="fm" class="col-md-12 column">
-								<a href="#"><img alt="140x140" src="img/touxiang.jpg"
-									class="img-circle" /></a> <a id="userName"
-									href="WeiBoServlet?op=queryMyWb"><h4 id="niCheng">${requestScope.sendName }
-									</h4></a>
+								<a href="WeiBoServlet?op=queryMyWb"><img alt="140x140"
+									src="${requestScope.myInfo.TOUXIANG }" class="img-circle" /></a> <a
+									id="userName" href="WeiBoServlet?op=queryMyWb"><h4
+										id="niCheng">${requestScope.myInfo.NICKNAME }</h4></a>
 								<h5>一句话介绍下你自己吧,让别人更了解你</h5>
 							</div>
 							<!--封面div结束-->
@@ -181,17 +181,24 @@
 								<div class="collapse navbar-collapse"
 									id="bs-example-navbar-collapse-1">
 									<ul class="nav navbar-nav">
-										<li><a href="#">全部</a></li>
-										<li><a href="#">军事</a></li>
-										<li><a href="#">美女</a></li>
-										<li><a href="#">动漫</a></li>
-										<li><a href="#">体育</a></li>
-										<li><a href="#">娱乐</a></li>
+										<li><a href="WeiBoServlet?op=queryMyWb">全部</a></li>
+										<li><a href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=3">明星</a></li>
+										<li><a href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=5">美女</a></li>
+										<li><a href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=6">动漫</a></li>										
+										<li class="dropdown"><a href="#"
+											data-toggle="dropdown" class="dropdown-toggle">更多<strong
+												class="caret"></strong></a>
+											<ul class="dropdown-menu">
+												<li><a href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=7">社会</a></li>
+												<li><a href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=4">情感</a></li>
+												<li><a href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=10">时尚</a></li>
+												<li><a href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=9">新鲜事</a></li>
+											</ul></li>
 									</ul>
 									<form class="navbar-form navbar-left" role="search"
-										style="margin-left: 30px;">
+										style="margin-left: 25px;" method = "post" action="WeiBoServlet?op=queryMyWb&queryWbBy=word">
 										<div class="form-group">
-											<input type="text" class="form-control" placeholder="搜索我的微博" />
+											<input name="serchContent" type="text" class="form-control" placeholder="搜索我的微博" />
 										</div>
 										<button type="submit" class="btn btn-default">搜索</button>
 									</form>
