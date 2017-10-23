@@ -16,17 +16,72 @@
 	type="text/javascript" charset="utf-8"></script>
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript">
-	/*选中好友点击时间*/
+	
 	$(function() {
+		
+		setInterval(function(){ 
+			/*Ajax请求返回聊天记录*/
+			receiveName = $(this).find("p").text();
+			$.post("WeiBoServlet?op=chatcontent&receiveName="+receiveName,function(msgList,status){
+				showData(msgList,status);	
+			});
+		}, 20);
+		
+		/*选中好友点击事件*/
 		$(".friend").click(function() {
 			$(this).css("background-color", "#3C464C");
 			$(this).siblings().css("background-color", "#2E3238");
+			
+			/*Ajax请求返回聊天记录*/
+			receiveName = $(this).find("p").text();
+			$.post("WeiBoServlet?op=chatcontent&receiveName="+receiveName,function(msgList,status){
+				showData(msgList,status);	
+			});		
 		});
+		//输入框的键盘监听事件
+		$("textarea").keypress(function(event) {
+			var sendContent = $("textarea").val();
+			if(event.keyCode==13){
+				//避免enter键换行
+				event.preventDefault();
+				//发送添加信息请求到servlet
+				$.post("WeiBoServlet?op=sendMessage&receiveName="+receiveName+"&sendContent="+sendContent,function(msgList,status){
+					showData(msgList,status);
+				});
+				//清空textarea输入框
+				$("textarea").val("");
+			}else if(e.keyCode == 13 && event.shiftKey){
+				alert(111);
+                // shift+enter实现换行
+                var textContent = $("textarea").val("");
+		        $("textarea").val(+"\n");
+		    }
+		});
+		
 	});
+
+	/*刷新聊天内容*/
+	function showData(msgList,status){
+		var hiddenName = $("#hiddenName").val();
+		//每次加载时先删除原来的显示
+		$(".chat-thread li").remove();
+		//因为在服务器端已经返回json对象，所以这里不用使用JSON.parse
+		$.each(msgList,function(index,msg){
+			if (hiddenName==msg.SENDNAME) {
+				$(".chat-thread").append("<li class='myself'><img src='"+ msg.TOUXIANG +"'class='cotent_tx img-circle'  height='50px'/>"+msg.CONTENT+"</li>");
+			}else {
+				$(".chat-thread").append("<li class='other'><img src='"+ msg.TOUXIANG +"'class='cotent_tx img-circle'  height='50px'/>"+msg.CONTENT+"</li>");
+			}
+			
+		});
+		$('.msg-content').scrollTop( $('.msg-content')[0].scrollHeight );
+	}
+	
 </script>
 </head>
 
 <body>
+	<input id="hiddenName" type="hidden" value=${sessionScope.username }>
 	<div class="clearfix row">
 		<div class="col-md-2"></div>
 		<!--friend-body层开始-->
@@ -80,19 +135,13 @@
 				<!--显示聊天记录开始-->
 				<div class="msg-content">
 					<ul class="chat-thread">
-						<li><img src="chat-img/touxiang3.gif"
-							class="cotent_tx img-circle" height="50px" />Are we meeting
-							today?</li>
-
-						<li><img src="chat-img/touxiang2.gif"
-							class="cotent_tx img-circle" height="50px" />yes, what time suits
-							you?</li>
+						
 					</ul>
 				</div>
 				<!--显示聊天记录结束-->
 				<!--显示发送内容开始-->
 				<div class="msg-send">
-					<textarea placeholder="按 Enter 发送"></textarea>
+					<textarea placeholder="按 Enter 发送  Shift + Enter换行"></textarea>
 				</div>
 				<!--显示发送内容结束-->
 			</div>

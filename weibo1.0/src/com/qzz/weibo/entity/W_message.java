@@ -11,6 +11,14 @@ public class W_message {
 	private String CONTENT;
 	private String SENDTIME;
 	private String STATE;
+	private String TOUXIANG;
+	
+	public String getTOUXIANG() {
+		return TOUXIANG;
+	}
+	public void setTOUXIANG(String tOUXIANG) {
+		TOUXIANG = tOUXIANG;
+	}
 	public int getMESSAGEID() {
 		return MESSAGEID;
 	}
@@ -47,13 +55,16 @@ public class W_message {
 	public void setSTATE(String sTATE) {
 		STATE = sTATE;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "W_message [MESSAGEID=" + MESSAGEID + ", SENDNAME=" + SENDNAME + ", RECEIVENAME=" + RECEIVENAME
-				+ ", CONTENT=" + CONTENT + ", SENDTIME=" + SENDTIME + ", STATE=" + STATE + "]";
+				+ ", CONTENT=" + CONTENT + ", SENDTIME=" + SENDTIME + ", STATE=" + STATE + ", TOUXIANG=" + TOUXIANG
+				+ "]";
 	}
-	public W_message(int mESSAGEID, String sENDNAME, String rECEIVENAME, String cONTENT, String sENDTIME,
-			String sTATE) {
+	public W_message(int mESSAGEID, String sENDNAME, String rECEIVENAME, String cONTENT, String sENDTIME, String sTATE,
+			String tOUXIANG) {
 		super();
 		MESSAGEID = mESSAGEID;
 		SENDNAME = sENDNAME;
@@ -61,8 +72,8 @@ public class W_message {
 		CONTENT = cONTENT;
 		SENDTIME = sENDTIME;
 		STATE = sTATE;
+		TOUXIANG = tOUXIANG;
 	}
-	
 	public W_message() {
 		// TODO Auto-generated constructor stub
 	}

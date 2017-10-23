@@ -64,7 +64,7 @@ body {
 }
 /*好友列表层*/
 #friend-list{
-	overflow-y: scroll;
+	overflow-y: auto;
 	overflow-x: hidden;
 	height: 485px;
 }
@@ -111,7 +111,7 @@ body {
 	margin-left: -15px;
 	margin-right: -15px;
 	border-top-right-radius: 4px;
-	overflow-y: scroll;	
+	overflow-y: auto;
 }
 
 

@@ -1,7 +1,5 @@
-@charset "UTF-8";
 
-
-/*æ»šåŠ¨æ ·å¼å¼€å§‹*/
+/*¹ö¶¯ÑùÊ½¿ªÊ¼*/
 ::-webkit-scrollbar {
 		width: 10px;
 	}
@@ -15,7 +13,7 @@
   border-radius: 10px;
   background-color: rgba(25, 147, 147, 0.2);
 }
-/*æ»šåŠ¨æ ·å¼ç»“æŸ*/
+/*¹ö¶¯ÑùÊ½½áÊø*/
 
 .chat-thread {
   margin: 24px auto 0 auto;
@@ -28,13 +26,13 @@
   clear: both;
   display: inline-block;
   padding: 16px 40px 16px 20px;
-  margin: 0 0 20px 0;
+  margin: 0 0 20px 0px;
   font: 16px/20px 'Noto Sans', sans-serif;
   border-radius: 10px;
   background-color: rgba(25, 147, 147, 0.2);
 }
 
-/*åœ¨liä¸­å…ƒç´ çš„åé¢åŠ ä¸Šå†…å®¹*/
+/*ÔÚliÖĞÔªËØµÄºóÃæ¼ÓÉÏÄÚÈİ*/
 .chat-thread li:after {
   position: absolute;
   top: 15px;
@@ -44,47 +42,39 @@
   border-top: 15px solid rgba(25, 147, 147, 0.2);
 }
 
-/*å¥‡æ•°è¡Œlistçš„æ–‡å­—åé¢åŠ ä¸Šä¸‰è§’å½¢*/
-.chat-thread li:nth-child(odd):after {
+/*ÆæÊıĞĞlistµÄÎÄ×ÖºóÃæ¼ÓÉÏÈı½ÇĞÎ*/
+.myself:after {
   border-right: 15px solid transparent;
   right: -15px;
 }
 
-/*å¶æ•°è¡Œlistçš„æ–‡å­—å‰é¢åŠ ä¸Šä¸‰è§’å½¢*/
-.chat-thread li:nth-child(even):after {
+/*Å¼ÊıĞĞlistµÄÎÄ×ÖÇ°Ãæ¼ÓÉÏÈı½ÇĞÎ*/
+.other:after {
   border-left: 15px solid transparent;
   left: -15px;
 }
 
-/*liçš„å¥‡æ•°è¡Œ*/
-.chat-thread li:nth-child(odd) {
-  float: right;
-  margin-right: 70px;
-  color: #0AD5C1;
+.myself{	
+	float: right;
+	left: -70px;
+	color: #0AD5C1;
 }
 
-/*liçš„å¶æ•°è¡Œ*/
-.chat-thread li:nth-child(even) {
-  float: left;
-  margin-left: 90px;
-  color: #0EC879;
+.other{
+	float: left;
+	right: -90px;
+	color: #0EC879;
 }
 
-/*èŠå¤©è®°å½•ä¸­å¤´åƒclass*/
+/*ÁÄÌì¼ÇÂ¼ÖĞÍ·Ïñclass*/
 .cotent_tx {
 	position: absolute;
   	top: 0;
 }
-/*å¶æ•°è¡Œliçš„img*/
-.chat-thread li:nth-child(even) img {
+
+.other img{
   left: -80px;
 }
-/*å¥‡æ•°è¡Œliçš„img*/
-.chat-thread li:nth-child(odd) img {
-  right: -80px;
+.myself img {
+  right: -80px;	
 }
-
-
-
-
-
