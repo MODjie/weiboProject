@@ -112,8 +112,11 @@
 			which.value = which.value.substring(0, maxChars);
 		var curr = maxChars - which.value.length;
 		document.getElementById("currentLength").innerHTML = curr.toString()
-	}
+	}	
 </script>
+
+
+
 </head>
 
 <body style="background-color: rgb(94, 122, 161);">
