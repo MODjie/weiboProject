@@ -75,25 +75,12 @@
 							<div id="fm" class="col-md-12 column">
 								<a href="#"><img alt="140x140" src="img/touxiang.jpg"
 									class="img-circle" /></a>
-								<h4 id="niCheng">${requestScope.nickname}</h4>
+									<a id="userName" href="W_UserInfoServlet?op=getUserInfo">
+								<h4 id="niCheng">${requestScope.nickname}</h4></a>
 								<h5>一句话介绍下你自己吧,让别人更了解你</h5>
 							</div>
 							<!--封面div结束-->
-							<!--封面导航 div开始-->
-							<div class="col-md-12 column PCD_tab S_bg2">
-								<div class="tab_wrap">
-									<table class="tb_tab" cellpadding="0" cellspacing="0">
-										<tbody>
-											<tr>
-												<td><a href="my_home.jsp">我的主页</a></td>
-												<td><a href="photo.jsp">我的相册</a></td>
-												<td><a href="information.jsp">管理中心</a></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<!--封面导航 div结束-->
+							
 							<!-- 所有基本信息 -->
 
 							<div class=" col-md-12 column info_main">
@@ -105,16 +92,7 @@
 											<!-- 基本信息 -->
 											<div>
 												<ul>
-													<li>
-														<div class="col-md-12 column">
-															<div class="col-md-2 ">
-																<label>登&nbsp;&nbsp;录&nbsp;&nbsp;名:</label>
-															</div>
-															<div class="col-md-10 ">
-																<label id="username" name="username" value="">${requestScope.username}</label>
-															</div>
-														</div>
-													</li>
+													
 													<p class="lh-30"></p>
 													<li>
 														<div class="col-md-12 column">
@@ -147,8 +125,14 @@
 																<label>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</label>
 															</div>
 															<div class="col-md-10 ">
-																<input name="sex" type="radio" group="sex" value="男">男
-																<input name="sex" type="radio" group="sex" value="女">女
+																<c:if test="${userinfo.SEX=='男' }">
+																	<input name="sex" type="radio" group="sex" value="男" checked="true">男
+																	<input name="sex" type="radio" group="sex" value="女">女
+																</c:if>
+																<c:if test="${userinfo.SEX=='女' }">
+																	<input name="sex" type="radio" group="sex" value="男" >男
+																	<input name="sex" type="radio" group="sex" value="女" checked="true">女
+																</c:if>
 															</div>
 														</div>
 													</li>
@@ -169,18 +153,8 @@
 															</div>
 															<div class="col-md-10 ">
 																<input type="hidden" id="birth"> <input
-																	type="text" id="year" value="" class="in_text" />年 <input
-																	type="text" id="month" value="" class="in_text" />月 <input
-																	type="text" id="day" value="" class="in_text" />日
-																<form name="reg_testdate">
-																	<select name="YYYY" onchange="YYYYDD(this.value)">
-																		<option value=""> 年</option>
-																	</select> <select name="MM" onchange="MMDD(this.value)">
-																		<option value=""> 月</option>
-																	</select> <select name="DD">
-																		<option value=""> 日</option>
-																	</select>
-																</form>
+																	type="text" id="year" value="${requestScope.birth }" class="in_text" >
+																
 															</div>
 														</div>
 													</li>

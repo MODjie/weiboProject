@@ -6,6 +6,7 @@ encoding//WebContent/css/imagediv.css=UTF-8
 encoding//WebContent/css/index01.css=UTF-8
 encoding//WebContent/css/more.css=UTF-8
 encoding//WebContent/css/my_home.css=UTF-8
+encoding//src/com/qzz/weibo/controller/W_UserInfoServlet.java=UTF-8
 encoding//src/com/qzz/weibo/dao/W_UserInfoDao.java=UTF-8
 encoding//src/com/qzz/weibo/service/W_UserInfoService.java=UTF-8
 encoding//src/com/qzz/weibo/util/BaseDao.java=UTF-8

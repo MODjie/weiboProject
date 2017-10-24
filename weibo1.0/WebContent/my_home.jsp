@@ -134,26 +134,12 @@
 							<div id="fm" class="col-md-12 column">
 								<a href="WeiBoServlet?op=queryMyWb"><img alt="140x140"
 									src="${requestScope.myInfo.TOUXIANG }" class="img-circle" /></a> <a
-									id="userName" href="WeiBoServlet?op=queryMyWb"><h4
+									id="userName" href="W_UserInfoServlet?op=getUserInfo"><h4
 										id="niCheng">${requestScope.myInfo.NICKNAME }</h4></a>
 								<h5>一句话介绍下你自己吧,让别人更了解你</h5>
 							</div>
 							<!--封面div结束-->
-							<!--封面导航 div开始-->
-							<div class="col-md-12 column PCD_tab S_bg2">
-								<div class="tab_wrap">
-									<table class="tb_tab" cellpadding="0" cellspacing="0">
-										<tbody>
-											<tr>
-												<td><a href="WeiBoServlet?op=queryMyWb">我的主页</a></td>
-												<td><a href="photo.jsp">我的相册</a></td>
-												<td><a href="information.jsp">管理中心</a></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<!--封面导航 div结束-->
+							
 
 						</div>
 						<!--ct_main div开始-->

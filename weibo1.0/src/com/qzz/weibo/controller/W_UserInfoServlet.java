@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.qzz.weibo.entity.W_userinfo;
 import com.qzz.weibo.entity.W_weibo;
@@ -53,10 +54,12 @@ public class W_UserInfoServlet extends HttpServlet {
 		// 创建对象
 		List<W_userinfo> list = new ArrayList<W_userinfo>();
 		W_UserInfoService userinfoservice = new W_UserInfoService();
-
+		
+		HttpSession session = request.getSession(); 
+		
 		// 获取页面传过来的属性
 		String username = request.getParameter("username");
-		String nickname = request.getParameter("nickname");
+		String nickname = (String) session.getAttribute("username");
 		String realname = request.getParameter("realname");
 		String sex = request.getParameter("sex");
 		String remark = request.getParameter("remark");
@@ -79,7 +82,7 @@ public class W_UserInfoServlet extends HttpServlet {
 			String op = request.getParameter("op");
 			// 如果传过来的值是getUserInfo则查询该用户下的基本信息
 			if (op.equals("getUserInfo")) {
-				list = userinfoservice.getAllUserInfo(username);
+				list = userinfoservice.getUserInfoByNikeName(nickname);
 			}
 			// 如果传过来的值是updateuserinfo则先将用户的基本信息更新，再重新查询出来显示
 			else if (op.equals("updateuserinfo")) {
@@ -91,7 +94,8 @@ public class W_UserInfoServlet extends HttpServlet {
 		request.setAttribute("username", username);
 		request.setAttribute("nickname", nickname);
 		request.setAttribute("list", list);
-
+		request.setAttribute("birth", list.get(0).getBIRTH().substring(0, 10));
+		request.setAttribute("userinfo", list.get(0));
 		request.getRequestDispatcher("information.jsp").forward(request, response);
 
 	}
