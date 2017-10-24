@@ -198,11 +198,15 @@ public class W_weiboServlet extends HttpServlet {
 				}
 				// 修改本条微博的点赞数
 				ws.updateWeiboById(wei);
-				// 通过昵称查找微博
-				list = ws.queryWbByName(zanName);
-				request.setAttribute("list", list);
-				request.setAttribute("sendName", zanName);
-				request.getRequestDispatcher("my_home.jsp").forward(request, response);
+				int zanNum = wei.getZANNUM();
+				Gson g = new Gson();
+				String jsonString = g.toJson(zanNum);
+				// //如果这里加了这句话，意味着视图那一层不需要JSON.parse
+				// 这里已经将返回的数据变成了json对象
+				response.setContentType("application/json");
+				out.print(jsonString);
+				
+				
 			} else if (op.equals("collect")) {
 				// 通过传过来的微博ID和收藏人的昵称查找数据库并且存储在collectList中
 				String msg = "";

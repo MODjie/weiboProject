@@ -21,6 +21,24 @@
 <!--ajax刷新点赞和收藏-->
 <script type="text/javascript">
 			$(function() {
+				//修改收藏标签与点赞标签的颜色
+				setInterval(function(){
+					$('.collectNumSpan').each(function (index) {
+						if ($(this).html()==1) {
+							$(this).parent().css("color","orangered");
+						}if ($(this).html()==0) {
+							$(this).parent().css("color","#337A7A");
+						}
+					});
+					
+					$('.zanNumSpan').each(function (index) {
+						if ($(this).html()==1) {
+							$(this).parent().css("color","orangered");
+						}if ($(this).html()==0) {
+							$(this).parent().css("color","#337A7A");
+						}
+					});
+				});
 				
 				//收藏按钮的点击事件
 				$('.collectA').click(function() {
@@ -28,12 +46,15 @@
 					weiboid = $(this).find(".ajaxWbId").val();
 					$.post("WeiBoServlet?op=collect&weiboid="+weiboid,function(collectNum,status){
 						a.find(".collectNumSpan").html(collectNum);
-						//通过判断收藏数修改收藏区域的颜色
-						if (collectNum==1) {
-							a.css("color","orangered");
-						}else{
-							a.css("color","#337A7A");
-						}
+					});
+				});
+				
+				//赞按钮的点击事件
+				$('.zanA').click(function() {
+					var a=$(this);
+					weiboid = $(this).find(".ajaxWbId").val();
+					$.post("WeiBoServlet?op=zan&weiboid="+weiboid,function(zanNum,status){
+						a.find(".zanNumSpan").html(zanNum);						
 					});
 				});
 			});
@@ -285,11 +306,10 @@
 															<span class="glyphicon glyphicon-comment"></span> &nbsp;<span>${weibo.COMMENTNUM }</span>
 													</a>
 													</li>
-													<li style="width: 170px; text-align: center;"><a class="zanA"
-														href="WeiBoServlet?op=zan&weiboid=${weibo.WEIBOID } ">
+													<li style="width: 170px; text-align: center;"><a class="zanA">
 															<input class="ajaxWbId" type="hidden" value="${weibo.WEIBOID }">
 															<span class="glyphicon glyphicon-thumbs-up"></span>
-															&nbsp;<span>${weibo.ZANNUM }</span>
+															&nbsp;<span class="zanNumSpan">${weibo.ZANNUM }</span>
 													</a></li>
 												</ul>
 											</div>
