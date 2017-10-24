@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,45 +21,72 @@
 
 <!--ajax刷新点赞和收藏-->
 <script type="text/javascript">
-			$(function() {
-				//修改收藏标签与点赞标签的颜色
-				setInterval(function(){
-					$('.collectNumSpan').each(function (index) {
-						if ($(this).html()==1) {
-							$(this).parent().css("color","orangered");
-						}if ($(this).html()==0) {
-							$(this).parent().css("color","#337A7A");
-						}
-					});
-					
-					$('.zanNumSpan').each(function (index) {
-						if ($(this).html()==1) {
-							$(this).parent().css("color","orangered");
-						}if ($(this).html()==0) {
-							$(this).parent().css("color","#337A7A");
-						}
-					});
-				});
-				
-				//收藏按钮的点击事件
-				$('.collectA').click(function() {
-					var a=$(this);
-					weiboid = $(this).find(".ajaxWbId").val();
-					$.post("WeiBoServlet?op=collect&weiboid="+weiboid,function(collectNum,status){
-						a.find(".collectNumSpan").html(collectNum);
-					});
-				});
-				
-				//赞按钮的点击事件
-				$('.zanA').click(function() {
-					var a=$(this);
-					weiboid = $(this).find(".ajaxWbId").val();
-					$.post("WeiBoServlet?op=zan&weiboid="+weiboid,function(zanNum,status){
-						a.find(".zanNumSpan").html(zanNum);						
-					});
-				});
+	$(function() {
+		//修改收藏标签与点赞标签的颜色
+		setInterval(function() {
+			$('.collectNumSpan').each(function(index) {
+				if ($(this).html() == 1) {
+					$(this).parent().css("color", "orangered");
+				}
+				if ($(this).html() == 0) {
+					$(this).parent().css("color", "#337A7A");
+				}
 			});
-		</script>
+
+			$('.zanNumSpan').each(function(index) {
+				if ($(this).html() == 1) {
+					$(this).parent().css("color", "orangered");
+				}
+				if ($(this).html() == 0) {
+					$(this).parent().css("color", "#337A7A");
+				}
+			});
+		});
+
+		//收藏按钮的点击事件
+		$('.collectA').click(
+				function() {
+					var a = $(this);
+					weiboid = $(this).find(".ajaxWbId").val();
+					$.post("WeiBoServlet?op=collect&weiboid=" + weiboid,
+							function(collectNum, status) {
+								a.find(".collectNumSpan").html(collectNum);								
+							});
+				});
+
+		//赞按钮的点击事件
+		$('.zanA').click(
+				function() {
+					var a = $(this);
+					weiboid = $(this).find(".ajaxWbId").val();
+					$.post("WeiBoServlet?op=zan&weiboid=" + weiboid, function(
+							zanNum, status) {
+						a.find(".zanNumSpan").html(zanNum);
+					});
+				});
+		//好友分组标签的点击事件
+		$('.zanA').click(
+				function() {
+					var a = $(this);
+					weiboid = $(this).find(".ajaxWbId").val();
+					$.post("WeiBoServlet?op=zan&weiboid=" + weiboid, function(
+							zanNum, status) {
+						a.find(".zanNumSpan").html(zanNum);
+					});
+				});
+		//好友列表的ajax请求
+		$('.myGroup').click(function() {
+				var groupId = $(this).find("#groupId").val();
+				$('#'+groupId).children().remove();
+				$.post("WeiBoServlet?op=myHomeFriend&groupId="+ groupId,function(myHomefriendList, status) {
+					$.each(myHomefriendList,function(index,friend) {
+						$("#"+groupId).append("<div class='panel-body afriend_bg'><a href='WeiBoServlet?op=chatpage' class='afriend_wrap'> <img src='"+friend.TOUXIANG+"' class='img-circle FL_tx' /> <spanclass='FL_name'>"+ friend.FRIENDNAME+ "</span></a></div>");
+						});
+
+					});
+				});
+	});
+</script>
 </head>
 
 <body style="background-color: rgb(94, 122, 161);">
@@ -76,7 +104,7 @@
 						style="position: absolute; display: inline;">
 						<li class="active"><a href="WeiBoServlet?op=homepage">首页</a></li>
 						<li><a href="#">简介</a></li>
-						<li class="disabled"><a href="#">信息</a></li>
+						<li><a href="WeiBoServlet?op=chatpage">信息</a></li>
 						<li class="dropdown pull-right"><a href="#"
 							data-toggle="dropdown" class="dropdown-toggle">设置<strong
 								class="caret"></strong></a>
@@ -159,59 +187,23 @@
 								<!--我的好友列表开始-->
 								<div class="panel-group" id="panel-723651">
 									<h4>我的好友</h4>
-									<div class="panel panel-default">
-										<div class="panel-heading friends_list">
-											<a class="panel-title collapsed" data-toggle="collapse"
-												data-parent="#panel-723651" href="#panel-element-287887">朋友</a>
-										</div>
-										<div id="panel-element-287887" class="panel-collapse collapse">
-											<div class="panel-body afriend_bg">
-												<a href="#" class="afriend_wrap"> <img
-													src="img/touxiang.jpg" class="img-circle FL_tx" /> <span
-													class="FL_name">小飞</span>
-												</a>
+									<c:if test="${requestScope.groupList!=null}">
+										<c:forEach items="${requestScope.groupList}" var="group">
+											<div class="panel panel-default myGroup">
+
+												<div class="panel-heading friends_list">
+													<input id="groupId" type="hidden" value="${group.GROUPID }">
+													<a class="panel-title collapsed" data-toggle="collapse"
+														data-parent="#panel-723651" href="#${group.GROUPID }">${group.GROUPNAME }</a>
+												</div>
+												<div id="${group.GROUPID }" class="panel-collapse collapse"></div>
+
 											</div>
-											<div class="panel-body afriend_bg">
-												<a href="#" class="afriend_wrap"> <img
-													src="img/touxiang.jpg" class="img-circle FL_tx" /> <span
-													class="FL_name">自闯</span>
-												</a>
-											</div>
-											<div class="panel-body afriend_bg">
-												<a href="#" class="afriend_wrap"> <img
-													src="img/touxiang.jpg" class="img-circle FL_tx" /> <span
-													class="FL_name">帅兵</span>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="panel panel-default">
-										<div class="panel-heading friends_list">
-											<a class="panel-title collapsed" data-toggle="collapse"
-												data-parent="#panel-723651" href="#list2">同事</a>
-										</div>
-										<div id="list2" class="panel-collapse collapse">
-											<div class="panel-body afriend_bg">
-												<a href="#" class="afriend_wrap"> <img
-													src="img/touxiang.jpg" class="img-circle FL_tx" /> <span
-													class="FL_name">刘德华</span>
-												</a>
-											</div>
-											<div class="panel-body afriend_bg">
-												<a href="#" class="afriend_wrap"> <img
-													src="img/touxiang.jpg" class="img-circle FL_tx" /> <span
-													class="FL_name">周润发</span>
-												</a>
-											</div>
-											<div class="panel-body afriend_bg">
-												<a href="#" class="afriend_wrap"> <img
-													src="img/touxiang.jpg" class="img-circle FL_tx" /> <span
-													class="FL_name">黄渤</span>
-												</a>
-											</div>
-										</div>
-									</div>
+										</c:forEach>
+									</c:if>
 								</div>
+
+
 								<!--我的好友列表结束-->
 							</div>
 							<!--我的主页左侧内容结束-->
@@ -224,23 +216,31 @@
 									id="bs-example-navbar-collapse-1">
 									<ul class="nav navbar-nav">
 										<li><a href="WeiBoServlet?op=queryMyWb">全部</a></li>
-										<li><a href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=3">明星</a></li>
-										<li><a href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=5">美女</a></li>
-										<li><a href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=6">动漫</a></li>										
-										<li class="dropdown"><a href="#"
-											data-toggle="dropdown" class="dropdown-toggle">更多<strong
-												class="caret"></strong></a>
+										<li><a
+											href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=3">明星</a></li>
+										<li><a
+											href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=5">美女</a></li>
+										<li><a
+											href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=6">动漫</a></li>
+										<li class="dropdown"><a href="#" data-toggle="dropdown"
+											class="dropdown-toggle">更多<strong class="caret"></strong></a>
 											<ul class="dropdown-menu">
-												<li><a href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=7">社会</a></li>
-												<li><a href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=4">情感</a></li>
-												<li><a href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=10">时尚</a></li>
-												<li><a href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=9">新鲜事</a></li>
+												<li><a
+													href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=7">社会</a></li>
+												<li><a
+													href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=4">情感</a></li>
+												<li><a
+													href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=10">时尚</a></li>
+												<li><a
+													href="WeiBoServlet?op=queryMyWb&queryWbBy=type&typeId=9">新鲜事</a></li>
 											</ul></li>
 									</ul>
 									<form class="navbar-form navbar-left" role="search"
-										style="margin-left: 25px;" method = "post" action="WeiBoServlet?op=queryMyWb&queryWbBy=word">
+										style="margin-left: 25px;" method="post"
+										action="WeiBoServlet?op=queryMyWb&queryWbBy=word">
 										<div class="form-group">
-											<input name="serchContent" type="text" class="form-control" placeholder="搜索我的微博" />
+											<input name="serchContent" type="text" class="form-control"
+												placeholder="搜索我的微博" />
 										</div>
 										<button type="submit" class="btn btn-default">搜索</button>
 									</form>
@@ -291,25 +291,26 @@
 											<div class="content_bottom">
 												<ul class="nav nav-pills WB_row_line">
 													<li class="col" style="width: 175px; text-align: center;">
-														<a class="collectA">
-															<input class="ajaxWbId" type="hidden" value="${weibo.WEIBOID }">
-															<span class="glyphicon glyphicon-star-empty">
-															<span class="collectNumSpan">${weibo.COLLECTNUM }</span>
-														</a>
+														<a class="collectA"> <input class="ajaxWbId"
+															type="hidden" value="${weibo.WEIBOID }"> <span
+															class="glyphicon glyphicon-star-empty"> <span
+																class="collectNumSpan">${weibo.COLLECTNUM }</span></a>
 													</li>
 													<li class="col" style="width: 175px; text-align: center;">
-														<a><span
-															class="glyphicon glyphicon-new-window"></span> &nbsp;<span>${weibo.FORWARDNUM }</span></a>
+														<a><span class="glyphicon glyphicon-new-window"></span>
+															&nbsp;<span>${weibo.FORWARDNUM }</span></a>
 													</li>
 													<li class="col" style="width: 170px; text-align: center;">
-														<a href="WeiBoServlet?op=queryWbById&weiboid=${weibo.WEIBOID }&cmsuccess=no">
+														<a
+														href="WeiBoServlet?op=queryWbById&weiboid=${weibo.WEIBOID }&cmsuccess=no">
 															<span class="glyphicon glyphicon-comment"></span> &nbsp;<span>${weibo.COMMENTNUM }</span>
 													</a>
 													</li>
-													<li style="width: 170px; text-align: center;"><a class="zanA">
-															<input class="ajaxWbId" type="hidden" value="${weibo.WEIBOID }">
-															<span class="glyphicon glyphicon-thumbs-up"></span>
-															&nbsp;<span class="zanNumSpan">${weibo.ZANNUM }</span>
+													<li style="width: 170px; text-align: center;"><a
+														class="zanA"> <input class="ajaxWbId" type="hidden"
+															value="${weibo.WEIBOID }"> <span
+															class="glyphicon glyphicon-thumbs-up"></span> &nbsp;<span
+															class="zanNumSpan">${weibo.ZANNUM }</span>
 													</a></li>
 												</ul>
 											</div>

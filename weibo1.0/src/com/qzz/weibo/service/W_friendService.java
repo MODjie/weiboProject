@@ -16,4 +16,12 @@ public class W_friendService {
 	public List<W_friend> queryMyFriend(String nickName) {
 		return friendDao.queryMyFriend(nickName);
 	}
+	/**
+	 * 通过昵称和分组编号查找我的好友
+	 * @param nickName groupId
+	 * @return
+	 */
+	public List<W_friend> queryMyFriend(String nickName,int groupId) {
+		return friendDao.queryMyFriend(nickName, groupId);
+	}
 }

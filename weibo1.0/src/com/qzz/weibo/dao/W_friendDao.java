@@ -14,4 +14,12 @@ public class W_friendDao {
 	public List<W_friend> queryMyFriend(String nickName) {
 		return (List<W_friend>) BaseDao.select("select * from FRIEND_VIEW where FRIENDOWNERNAME = ?", W_friend.class, nickName);
 	}
+	/**
+	 * 通过昵称和分组编号查找我的好友
+	 * @param nickName groupId
+	 * @return
+	 */
+	public List<W_friend> queryMyFriend(String nickName,int groupId) {
+		return (List<W_friend>) BaseDao.select("select * from friend_view where GROUPID=? and FRIENDOWNERNAME=?", W_friend.class,groupId, nickName);
+	}
 }

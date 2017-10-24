@@ -20,6 +20,7 @@ import com.qzz.weibo.dao.W_collectDao;
 import com.qzz.weibo.entity.W_collect;
 import com.qzz.weibo.entity.W_comment;
 import com.qzz.weibo.entity.W_friend;
+import com.qzz.weibo.entity.W_group;
 import com.qzz.weibo.entity.W_message;
 import com.qzz.weibo.entity.W_reply;
 import com.qzz.weibo.entity.W_type;
@@ -30,6 +31,7 @@ import com.qzz.weibo.service.W_UserInfoService;
 import com.qzz.weibo.service.W_collectService;
 import com.qzz.weibo.service.W_commentService;
 import com.qzz.weibo.service.W_friendService;
+import com.qzz.weibo.service.W_groupService;
 import com.qzz.weibo.service.W_messageService;
 import com.qzz.weibo.service.W_replyService;
 import com.qzz.weibo.service.W_weiboService;
@@ -52,6 +54,7 @@ public class W_weiboServlet extends HttpServlet {
 	private W_UserInfoService us = new W_UserInfoService();
 	private W_friendService fs = new W_friendService();
 	private W_messageService ms = new W_messageService();
+	private W_groupService gs = new W_groupService();
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -109,7 +112,9 @@ public class W_weiboServlet extends HttpServlet {
 					System.out.println(word);
 					list = ws.queryWbByWord(word, sendName);
 				}
-				
+				//获得分组list
+				List<W_group> groupList = gs.queryGroupByName(sendName);
+				request.setAttribute("groupList", groupList);				
 				List<W_userinfo> myInfo = us.getUserInfoByNikeName(sendName);
 				request.setAttribute("myInfo", myInfo.get(0));
 				request.setAttribute("list", list);
@@ -243,47 +248,50 @@ public class W_weiboServlet extends HttpServlet {
 					// 这里已经将返回的数据变成了json对象
 					response.setContentType("application/json");
 					out.print(jsonString);
-				} else if (flag.equals("1")) {
-					list = ws.queryAllWb();
-					request.setAttribute("list", list);
-					if (msg.equals("收藏成功")) {
-
-						response.getWriter().print(
-								"<script language='javascript'>location.href='WeiBoServlet?op=queryAllWb';alert('收藏成功');</script>");
-						// request.getRequestDispatcher("mainpage.jsp").forward(request, response);
-					} else {
-						response.getWriter().print(
-								"<script language='javascript'>alert('取消收藏');location.href='WeiBoServlet?op=queryAllWb'</script>");
-					}
+//				} else if (flag.equals("1")) {
+//					list = ws.queryAllWb();
+//					request.setAttribute("list", list);
+//					if (msg.equals("收藏成功")) {
+//
+//						response.getWriter().print(
+//								"<script language='javascript'>location.href='WeiBoServlet?op=queryAllWb';alert('收藏成功');</script>");
+//						// request.getRequestDispatcher("mainpage.jsp").forward(request, response);
+//					} else {
+//						response.getWriter().print(
+//								"<script language='javascript'>alert('取消收藏');location.href='WeiBoServlet?op=queryAllWb'</script>");
+//					}
 				} 
 
-			} else if (op.equals("dianzan")) {
-				// 通过传过来的微博ID和点赞人的昵称查找数据库并且存储在zanlist中
-				int weiboId = Integer.parseInt((String) request.getParameter("weiboid"));
-				String zanName = (String) session.getAttribute("username");
-				List<W_zan> zanList = wzs.queryByNameAndId(weiboId, zanName);
-				// 获取本条微博
-				W_weibo wei = ws.queryWbById(weiboId).get(0);
-				// 通过zanList的长度来判断，返回数据是否为空
-				if (zanList.size() == 0) {
-					// 当返回数据为空时，就对该昵称和微博添加一条点赞记录
-					wzs.addZan(weiboId, zanName);
-					// 点赞数加一
-					wei.setZANNUM(wei.getZANNUM() + 1);
-				} else {
-					// 如果返回数据不为空，就删除该记录，即取消点赞功能
-					wzs.deleteZan(weiboId, zanName);
-					// 点赞数减一
-					wei.setZANNUM(wei.getZANNUM() - 1);
-				}
-				// 修改本条微博的点赞数
-				ws.updateWeiboById(wei);
-				// 通过昵称查找微博
-				list = ws.queryAllWb();
-				request.setAttribute("list", list);
-				request.getRequestDispatcher("mainpage.jsp").forward(request, response);
-				// 删除评论
-			} else if (op.equals("deleteComment")) {
+			} 
+//			else if (op.equals("dianzan")) {
+//				// 通过传过来的微博ID和点赞人的昵称查找数据库并且存储在zanlist中
+//				int weiboId = Integer.parseInt((String) request.getParameter("weiboid"));
+//				String zanName = (String) session.getAttribute("username");
+//				List<W_zan> zanList = wzs.queryByNameAndId(weiboId, zanName);
+//				// 获取本条微博
+//				W_weibo wei = ws.queryWbById(weiboId).get(0);
+//				// 通过zanList的长度来判断，返回数据是否为空
+//				if (zanList.size() == 0) {
+//					// 当返回数据为空时，就对该昵称和微博添加一条点赞记录
+//					wzs.addZan(weiboId, zanName);
+//					// 点赞数加一
+//					wei.setZANNUM(wei.getZANNUM() + 1);
+//				} else {
+//					// 如果返回数据不为空，就删除该记录，即取消点赞功能
+//					wzs.deleteZan(weiboId, zanName);
+//					// 点赞数减一
+//					wei.setZANNUM(wei.getZANNUM() - 1);
+//				}
+//				// 修改本条微博的点赞数
+//				ws.updateWeiboById(wei);
+//				// 通过昵称查找微博
+//				list = ws.queryAllWb();
+//				request.setAttribute("list", list);
+//				request.getRequestDispatcher("mainpage.jsp").forward(request, response);
+//				
+//			} 
+			// 删除评论
+			else if (op.equals("deleteComment")) {
 				// 接收传回来的评论id，删除此评论
 				int commentId = Integer.parseInt((String) request.getParameter("commentId"));
 				wcs.deleteCmById(commentId);
@@ -393,6 +401,20 @@ public class W_weiboServlet extends HttpServlet {
 
 				Gson g = new Gson();
 				String jsonString = g.toJson(sendMessageList);
+				// //如果这里加了这句话，意味着视图那一层不需要JSON.parse
+				// 这里已经将返回的数据变成了json对象
+				response.setContentType("application/json");
+				out.print(jsonString);
+			}
+			//我的主页好友列表请求
+			else if (op.equals("myHomeFriend")) {
+				String nickName = (String) session.getAttribute("username");
+				int groupId = Integer.parseInt(request.getParameter("groupId"));
+				//获得用户信息
+				List<W_friend> myHomefriendList = fs.queryMyFriend(nickName,groupId);
+
+				Gson g = new Gson();
+				String jsonString = g.toJson(myHomefriendList);
 				// //如果这里加了这句话，意味着视图那一层不需要JSON.parse
 				// 这里已经将返回的数据变成了json对象
 				response.setContentType("application/json");

@@ -19,10 +19,23 @@
 	
 	$(function() {
 		receiveName = $("#firstName").val();
+		//上一个集合最后一个msg的id
+		var oddLastId=0;
+		var newLastId=0;
 		setInterval(function(){ 
-			/*Ajax请求返回聊天记录*/			
+			/*Ajax请求返回聊天记录*/	
+				
 			$.post("WeiBoServlet?op=chatcontent&receiveName="+receiveName,function(msgList,status){
-				showData(msgList,status);	
+				$.each(msgList,function(index,msg){
+					newLastId=msg.MESSAGEID;
+				});
+				showData(msgList,status);
+				//当传回来的数据发生变化时，就将滚动条放在最下方
+				if (oddLastId != newLastId) {
+					//滚动条放在最下方
+					$('.msg-content').scrollTop( $('.msg-content')[0].scrollHeight );
+				}
+				oddLastId = newLastId;
 			});
 		}, 20);
 		
@@ -34,7 +47,9 @@
 			/*Ajax请求返回聊天记录*/
 			receiveName = $(this).find("p").text();
 			$.post("WeiBoServlet?op=chatcontent&receiveName="+receiveName,function(msgList,status){
-				showData(msgList,status);	
+				showData(msgList,status);
+				//滚动条放在最下方
+				$('.msg-content').scrollTop( $('.msg-content')[0].scrollHeight );
 			});		
 		});
 		//输入框的键盘监听事件
@@ -46,6 +61,8 @@
 				//发送添加信息请求到servlet
 				$.post("WeiBoServlet?op=sendMessage&receiveName="+receiveName+"&sendContent="+sendContent,function(msgList,status){
 					showData(msgList,status);
+					//滚动条放在最下方
+					$('.msg-content').scrollTop( $('.msg-content')[0].scrollHeight );
 				});
 				//清空textarea输入框
 				$("textarea").val("");
@@ -73,7 +90,7 @@
 			}
 			
 		});
-		$('.msg-content').scrollTop( $('.msg-content')[0].scrollHeight );
+		
 	}
 	
 </script>
