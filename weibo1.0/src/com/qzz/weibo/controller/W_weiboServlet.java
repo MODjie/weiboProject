@@ -166,7 +166,7 @@ public class W_weiboServlet extends HttpServlet {
 							"<script language='javascript'>alert('发布成功');parent.location.href='WeiBoServlet?op=homepage'</script>");
 				}
 				// 通过id查找单个微博，跳转到该微博的详细信息页面,评论功能
-			} else if (op.equals("queryWbById")) {
+			} else if (op.equals("queryWbById")) {					
 				int weiboId = 0;
 				// 接收评论成功标志
 				String successFlag = new String(request.getParameter("cmsuccess").getBytes("ISO-8859-1"), "UTF-8");
@@ -186,6 +186,17 @@ public class W_weiboServlet extends HttpServlet {
 					W_comment comment = new W_comment(1, weiboId, nikeName, commentContent, commentTime, "22");
 					wcs.addComment(comment);
 				}
+				
+				//获得微博右侧的微博类型ID,获取所有相关类型的微博
+				List<W_weibo> list3 = new ArrayList<>();
+				int typeid= Integer.parseInt(request.getParameter("contetypeid"));
+				list3=ws.queryWebBytype(typeid);
+				 int i=0;
+				for(;i<list3.size();i++){
+					 if(weiboId==(list3.get(i).getWEIBOID())){
+						 list3.remove(i);	
+					}
+				}		
 				list = ws.queryWbById(weiboId);
 				W_weibo detailWb = list.get(0);
 				// 获取本条微博的所有评论内容
@@ -194,6 +205,7 @@ public class W_weiboServlet extends HttpServlet {
 				replyList = rs.queryAllReply();
 				request.setAttribute("replyList", replyList);
 				request.setAttribute("list2", list2);
+				request.setAttribute("list3", list3);
 				request.setAttribute("detailWb", detailWb);
 				request.getRequestDispatcher("more.jsp").forward(request, response);
 			} else if (op.equals("zan")) {
@@ -319,9 +331,20 @@ public class W_weiboServlet extends HttpServlet {
 				// 获取本条微博的所有评论内容
 				list2 = wcs.queryCmById(weiboId);
 				// 得到此评论的所有回复存在replyList中
+				List<W_weibo> list3 = new ArrayList<>();
+				int typeid= Integer.parseInt(request.getParameter("contetypeid"));
+				list3=ws.queryWebBytype(typeid);
+				 int i=0;
+				for(;i<list3.size();i++){
+					 if(weiboId==(list3.get(i).getWEIBOID())){
+						 list3.remove(i);	
+					}
+				}		
+				
 				replyList = rs.queryAllReply();
 				request.setAttribute("replyList", replyList);
 				request.setAttribute("list2", list2);
+				request.setAttribute("list3", list3);
 				request.setAttribute("detailWb", detailWb);
 				request.getRequestDispatcher("more.jsp").forward(request, response);
 			} else if (op.equals("forward")) {
@@ -365,10 +388,20 @@ public class W_weiboServlet extends HttpServlet {
 				W_weibo detailWb = list.get(0);
 				// 获取本条微博的所有评论内容
 				list2 = wcs.queryCmById(weiboId);
-
+				
+				List<W_weibo> list3 = new ArrayList<>();
+				int typeid= Integer.parseInt(request.getParameter("contetypeid"));
+				list3=ws.queryWebBytype(typeid);
+				 int i=0;
+				for(;i<list3.size();i++){
+					 if(weiboId==(list3.get(i).getWEIBOID())){
+						 list3.remove(i);	
+					}
+				}		
 				request.setAttribute("list2", list2);
 				request.setAttribute("replyList", replyList);
 				request.setAttribute("detailWb", detailWb);
+				request.setAttribute("list3", list3);
 				request.getRequestDispatcher("more.jsp").forward(request, response);
 			} else if (op.equals("querymycoll"))// 查询我收藏过的微博
 			{

@@ -235,7 +235,7 @@ $(function() {
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="index.jsp"><span
 								class="glyphicon glyphicon-home"></span>首页</a></li>
-						<li><a href="regiter.jsp">注册</a></li>
+						<li><a href="regiter2.jsp">注册</a></li>
 						<li class="nav navbar-nav navbar-right"><a id="loginmain"
 							href="#modal-container-580488" role="button" class="btn"
 							data-toggle="modal">登录</a></li>
@@ -613,7 +613,7 @@ $(function() {
 								type="submit" id="log" value="登录" />
 						</div>
 						<div id="zc_wj" style="text-align: center;">
-							<a class="a1" href="regiter.jsp" id="xiaomireg">注册账号</a>&nbsp;
+							<a class="a1" href="regiter2.jsp" id="xiaomireg">注册账号</a>&nbsp;
 						</div>
 					</form>
 				</div>

@@ -82,6 +82,7 @@ color: orangered;
 		$(".oneweiboid").hide();
 		$(".onetypeid").hide();
 		$(".pagetotal").hide();
+		$(".oneweibotypeid").hide();
 		$(".hotspan").hover().css("cursor", "pointer");
 		$(".change").hover().css("cursor", "pointer");
 		$(".firstconnt").hover().css("cursor", "pointer");
@@ -95,9 +96,7 @@ color: orangered;
 			}
 		});
 	});
-  $(function(){
-	  
-  
+  $(function(){	  
 		$(".firstconnt")
 				.click(
 						function() {
@@ -105,17 +104,17 @@ color: orangered;
 									.html());
 							var contetypeid = parseInt($(this).find(".typeid")
 									.html());                                                      
-							parent.location.href = "WeiBoServlet?xra=xmoreweibo&contypeid="
+							parent.location.href = "firstWeiBoServlet?xra=xmoreweibo&contypeid="
 									+ contetypeid + "&conid=" + conteid;
 						})
 						
-		$(function(){
+	
         //元素时网页回到顶部
        $(".change").click(function(){     
         $(".xracont").animate({scrollTop:0},100);//回到顶端
         return false;
                });
-         });			
+         			
 
 		/* $(".change").click(
 				function() {
@@ -151,7 +150,7 @@ color: orangered;
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="WeiBoServlet?op=homepage"><span
 								class="glyphicon glyphicon-home"></span>首页</a></li>
-						<li><a href="regiter.html">注册</a></li>
+						<li><a href="regiter2.jsp">注册</a></li>
 						<li class="nav navbar-nav navbar-right"><a id="loginmain"
 							href="#modal-container-580488" role="button" class="btn"
 							data-toggle="modal">登录</a></li>
@@ -205,6 +204,8 @@ color: orangered;
 							</div>
 							<div style="margin-top: 10px;">
 								${requestScope.detailWb.CONTENT }</div>
+							<div class="oneweibotypeid">
+								${requestScope.detailWb.TYPEID }</div>
 						</div>
 						<!--
             	作者：offline
@@ -286,7 +287,7 @@ color: orangered;
 																class="replyA" id="modal-617802" href="#reply"
 																data-toggle="modal">回复</a> <input type="hidden"
 																value="${comment.COMMENTID }"> <a class="del"
-																href="WeiBoServlet?op=deleteComment&commentId=${comment.COMMENTID }&cmweiboId=${comment.WEIBOID } ">删除</a>
+																href="WeiBoServlet?op=deleteComment&commentId=${comment.COMMENTID }&contetypeid=${requestScope.detailWb.TYPEID}&cmweiboId=${comment.WEIBOID } ">删除</a>
 														</div>
 													</div>
 													<div class="msgInfo">${comment.COMMCONTENT }</div>
@@ -374,10 +375,7 @@ color: orangered;
                 	<!--   描述：右侧中间滚动的内容开始-->     
 				<div class="xracont">
 				
-				<c:if test="${requestScope.list3!=null }">	
-				<div class="pagetotal">
-				${pd.totalPage}
-				</div>			
+				<c:if test="${requestScope.list3!=null }">			
 				<c:forEach items="${requestScope.list3}" var="rs">						
 		                <div class="col-md-12 firstconnt" style="height: 240px;border-bottom: 1px solid #D4D4D4;">
 		                	<!--      描述：第一div(包括用户头像、用户昵称、日期时间、关注字样)开始-->
@@ -571,19 +569,21 @@ color: orangered;
 		})
 		
 		//删除按钮的点击事件
-		$(".del").click(function(){
+		 $(".del").click(function(){
 			var th = $(this);
 			if (mn=="null") {
 				$.judgelogin(th);
 			} 
-		})
+		}) 
 		//回复评论之后的确定按钮点击事件
 		$("#confirm").click(
 				function() {
 					//回复内容
+					var contetypeid = parseInt($(".oneweibotypeid").
+									html());  
 					replyContent = $("#replyContent").val();
 					location.href = "WeiBoServlet?op=reply&commentId="
-							+ commentId + "&replyerA=" + replyerA
+							+ commentId + "&contetypeid="+contetypeid+"&replyerA=" + replyerA
 							+ "&replyerB=" + replyerB + "&replyContent="
 							+ replyContent + "&weiboid=" + weiboid;
 				});
@@ -609,9 +609,11 @@ color: orangered;
 		$("#reply_confirm").click(
 				function() {
 					//回复内容
+					var contetypeid = parseInt($(".oneweibotypeid").
+									html());  
 					replyContent = $("#reply_replyContent").val();					
 					location.href = "WeiBoServlet?op=reply&commentId="
-							+ commentId + "&replyerA=" + replyerA
+							+ commentId + "&contetypeid="+contetypeid+"&replyerA=" + replyerA
 							+ "&replyerB=" + replyerB + "&replyContent="
 							+ replyContent + "&weiboid=" + weiboid;
 				});
@@ -622,6 +624,8 @@ color: orangered;
 		$("#sendBtn")
 				.click(
 						function() {							
+							var contetypeid = parseInt($(".oneweibotypeid").
+									html());  
 							var th = $(this);
 							if (mn=="null") {
 								$.judgelogin(th);
@@ -630,7 +634,7 @@ color: orangered;
 							var nikeName = $("#nikeName").text();
 							var weiboId = $("#weiboId").val();
 							var commentContent = $("#cm_area").val();
-							location.href = "WeiBoServlet?op=queryWbById&cmsuccess=yes&nikeName="
+							location.href = "WeiBoServlet?op=queryWbById&cmsuccess=yes&contetypeid="+contetypeid+"&nikeName="
 									+ nikeName
 									+ "&weiboId="
 									+ weiboId

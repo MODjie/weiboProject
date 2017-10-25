@@ -40,26 +40,54 @@
 					<div class="col-md-7 column" style="margin: 0px ; padding: 0px;">
 						<div class="carousel slide" id="carousel-299699" data-ride="carousel" data-interval="2000">
 							<div class="carousel-inner">
+							<!-- <div class="item active">
+									<a href=""><img alt="" src="img/visitor_img/3.jpg" style="width: 700px; height: 300px;" /></a>					
+									<div class="carousel-caption">
+										<h4>
+								失联大学生
+							</h4>
+									</div>
+								</div> -->
 							<c:if test="${requestScope.hotpticture!=null}">
 							<c:forEach items="${requestScope.hotpticture}" var="rs">
-								<div class="item moreweibo" >
-									<a href=""><img alt="" src="${rs.IMAGE}" width="700px"  height="300px"  /></a>
-									
+							 <c:if test="${rs.WEIBOID==542}">                                   
+                                  <div class="item active moreweibo" >
+									<a href=""><img alt="" src="${rs.IMAGE }" width="700px"  height="300px"  /></a>									
 									<div class="carousel-caption">
 										<h4>
 								     ${rs.CONTENT}
 							             </h4>
 									</div>
 								
-								                   <div class="contentid">
+								           <div class="contentid">
+                                                    ${rs.WEIBOID }  
+                                           </div>
+                                           <div class="contenttypeid">
+                                                    ${rs.TYPEID }  
+                                            </div>
+                                     </div>
+                                     
+                                     </c:if>
+							<c:if test="${rs.WEIBOID!=542}">   							
+								<div class="item moreweibo" >
+									<a href=""><img alt="" src="${rs.IMAGE }" width="700px"  height="300px"  /></a>									
+									<div class="carousel-caption">
+										<h4>
+								     ${rs.CONTENT}
+							             </h4>
+									</div>
+								
+								                    <div class="contentid">
                                                          ${rs.WEIBOID }  
                                                    </div>
                                                     <div class="contenttypeid">
                                                          ${rs.TYPEID }  
                                                    </div>
                                      </div>
+                                  </c:if>    
+                                    
 								</c:forEach>
-							</c:if>													
+							</c:if>																
 							</div>
 							<a class="left carousel-control" href="#carousel-299699" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
 							<a class="right carousel-control" href="#carousel-299699" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
@@ -77,8 +105,8 @@
 						<!--中间的下面的内容开始-->
 						<!--第一个开始-->
 						<div class="carousel " style="margin-top: 20px;">	
-							<c:if test="${requestScope.list!=null}">
-                                <c:forEach items="${requestScope.list}" var="rs">											
+							<c:if test="${requestScope.hotbutton!=null}">
+                                <c:forEach items="${requestScope.hotbutton}" var="rs">											
 								  <a href=""  style="text-decoration: none;">														
 			                        <div class="col-md-12 moreweibo" id="zhongjianneirong"   style="height: 120px;width: 100%;margin-bottom: 15px; margin-bottom: 15px; padding-bottom: 6px; border-bottom: 1px solid #CFCFCF;">
 										<div class="col-md-3" id="tupian" style="height: 120px;float: left;position: absolute;width: 40%;">
