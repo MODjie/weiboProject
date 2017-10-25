@@ -235,7 +235,7 @@ $(function() {
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="index.jsp"><span
 								class="glyphicon glyphicon-home"></span>首页</a></li>
-						<li><a href="regiter.jsp">注册</a></li>
+						<li><a href="regiter2.jsp">注册</a></li>
 						<li class="nav navbar-nav navbar-right"><a id="loginmain"
 							href="#modal-container-580488" role="button" class="btn"
 							data-toggle="modal">登录</a></li>

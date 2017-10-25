@@ -1,4 +1,4 @@
-/*背景图片*/
+/*鑳屾櫙鍥剧墖*/
 body {
 	background-image: url(../img/body_bg2.jpg);
 	background-repeat: no-repeat;
@@ -10,7 +10,7 @@ body {
 	text-align: center;
 	background-color: rgba(0, 0, 0, 0);
 }
-/*顶部导航栏样式*/
+/*椤堕儴瀵艰埅鏍忔牱寮�*/
 #serach {
 	margin: 10px;
 	width: 400px;
@@ -40,20 +40,20 @@ body {
 .main {
 	margin-top: 100px;
 }
-/*封面导航表格中的td样式*/
+/*灏侀潰瀵艰埅琛ㄦ牸涓殑td鏍峰紡*/
 /*
 td,
 th {
 	display: table-cell;
 	vertical-align: inherit;
 }*/
-/*封面导航表格的div样式*/
+/*灏侀潰瀵艰埅琛ㄦ牸鐨刣iv鏍峰紡*/
 .tb_tab {
 	width: 100%;
 	table-layout: fixed;
 	text-align: center;
 }
-/*封面导航最外面的div样式*/
+/*灏侀潰瀵艰埅鏈�澶栭潰鐨刣iv鏍峰紡*/
 .PCD_tab {
 	min-width: 572px;
 	margin-bottom: 16px;
@@ -70,10 +70,10 @@ th {
 	padding-top: 12px;
 	padding-bottom: 12px;
 }
-/*基本信息的样式*/
+/*鍩烘湰淇℃伅鐨勬牱寮�*/
 .info_main {
 	display: block;
-	width: 975px;
+	width: 300px;
 	margin-bottom: 100px;
 	padding-bottom: 40px;
 }
@@ -81,20 +81,20 @@ th {
 ul {
 	list-style: none;
 }
-/*基本信息字体样式*/
+/*鍩烘湰淇℃伅瀛椾綋鏍峰紡*/
 .in_small {
 	font-size: 20px;
 	border-left-width: 1px;
 	color: rgb(66, 48, 9)
 }
-/*基本信息文本框样式*/
+/*鍩烘湰淇℃伅鏂囨湰妗嗘牱寮�*/
 .in_text {
 	border-top: 0px;
 	border-left: 0px;
 	border-right: 0px;
 	background-color: rgba(94, 122, 161, 0.2)
 }
-/*30像素行距*/
+/*30鍍忕礌琛岃窛*/
 .lh-30 {
 	line-height: 30px
 }
@@ -103,7 +103,7 @@ ul {
 	background-color: #fff;
 	border: solid 1px transparent
 }
-/*主要面板*/
+/*涓昏闈㈡澘*/
 .panel-primary {
 	border-color: #5a98de
 }
@@ -114,22 +114,22 @@ ul {
 	color: #fff
 }
 
-/*面板标题*/
+/*闈㈡澘鏍囬*/
 .panel-header {
 	border-bottom: solid 1px transparent;
 	padding: 8px 15px;
 	font-size: 14px;
 	font-weight: 700
 }
-/*面板内容*/
+/*闈㈡澘鍐呭*/
 .panel-body {
 	padding: 15px
 }
-/*设置信息背景透明*/
+/*璁剧疆淇℃伅鑳屾櫙閫忔槑*/
 .background {
 	background-color: rgba(94, 122, 161, 0.2)
 }
-/*所在地样式*/
+/*鎵�鍦ㄥ湴鏍峰紡*/
 #province select {
 	margin-left: 10px;
 	width: 100px
