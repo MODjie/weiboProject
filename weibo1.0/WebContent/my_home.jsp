@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap01.js"></script>
+<script src="layer/layer.js"></script>
 <style type="text/css">
 .forwoarddiv {
 	background-color: rgb(242, 242, 245);
@@ -148,8 +149,8 @@
 						<div class="row clearfix">
 							<!--封面div开始-->
 							<div id="fm" class="col-md-12 column">
-								<a href="WeiBoServlet?op=queryMyWb"><img alt="140x140"
-									src="${requestScope.myInfo.TOUXIANG }" class="img-circle" /></a> <a
+								<img id="touxiangimg" alt="140x140"
+									src="${requestScope.myInfo.TOUXIANG }" title="换个头像试试？" width="120px" class="img-circle" /> <a
 									id="userName" href="W_UserInfoServlet?op=getUserInfo"><h4
 										id="niCheng">${requestScope.myInfo.NICKNAME }</h4></a>
 								<h5>一句话介绍下你自己吧,让别人更了解你</h5>
@@ -346,9 +347,14 @@
 
 <script type="text/javascript">
 	$(function() {
-		$('#userName').click(function() {
-
-		});
+		$("#touxiangimg").click(function(){
+			layer.open({
+				type: 1,
+				area: ['', ''],
+				shadeClose: true, //点击遮罩关闭
+				content: '<iframe src="touxiangupload.jsp" width="100%" height="100%"></iframe>'
+			});
+		})
 	});
 </script>
 </html>
