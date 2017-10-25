@@ -87,12 +87,14 @@ public class W_firstweiboServlet extends HttpServlet {
 			}else if(xra.equals("hotdoor")){
 				/* 获取热门微博头三条微博，用于轮播滚动时用*/
 				List<W_weibo>hotpticture=new ArrayList<>();
+				List<W_weibo>hotbutton=new ArrayList<>();
 				list=ws.queryWebBytype(2);	
-                if(list.size()>3) {
-                	hotpticture=list.subList(0, 2);
-                }	
+                if(list.size()>4) {
+                	hotpticture=list.subList(0, 3);
+                }   
+                hotbutton=list.subList(3, list.size());
                 request.setAttribute("hotpticture", hotpticture);
-				request.setAttribute("list", list);		
+				request.setAttribute("hotbutton", hotbutton);		
 				request.getRequestDispatcher("vistorhotdoor.jsp").forward(request, response);
 				return;				
 			}else if(xra.equals("vsatr")){
@@ -123,13 +125,16 @@ public class W_firstweiboServlet extends HttpServlet {
 			}else if(xra.equals("xmoreweibo")) {
 				List<W_weibo> list3 = new ArrayList<>();
 				int weiboid= Integer.parseInt(request.getParameter("conid"));
-				int typeid= Integer.parseInt(request.getParameter("contypeid"));
-				
-				W_commentService wcs = new W_commentService();
-				
+				int typeid= Integer.parseInt(request.getParameter("contypeid"));				
+				W_commentService wcs = new W_commentService();					
 				list = ws.queryWbById(weiboid);
 				list3=ws.queryWebBytype(typeid);
-				
+				 int i=0;
+				for(;i<list3.size();i++){
+					 if(weiboid==(list3.get(i).getWEIBOID())){
+						 list3.remove(i);	
+					}
+				}							
 				W_weibo detailWb = list.get(0);
 				// 获取本条微博的所有评论内容
 				list2 = wcs.queryCmById(weiboid);

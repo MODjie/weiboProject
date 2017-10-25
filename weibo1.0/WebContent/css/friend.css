@@ -113,3 +113,8 @@ body {
 .panel-body {
 	padding: 15px
 }
+.home{
+	color: rgb(245,245,245);
+	cursor: pointer;
+	text-decoration:none;
+}

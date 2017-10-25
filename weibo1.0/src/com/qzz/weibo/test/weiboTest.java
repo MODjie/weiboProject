@@ -43,17 +43,16 @@ public class weiboTest {
 //		W_UserInfoDao wif = new W_UserInfoDao();
 //		int i = Integer.parseInt(wif.isExisNickname("心心音峡"));
 //		System.out.println(i>1);
-		/*List<W_weibo>list=new ArrayList<>();
+		List<W_weibo>list=new ArrayList<>();
+		List<W_weibo>hotpticture=new ArrayList<>();
 		W_weiboDao ws = new W_weiboDao();
-		list=ws.queryWebBytype(3);
-		for (W_weibo w_weibo : list) {
+		list=ws.queryWebBytype(2);
+		if(list.size()>3) {
+			hotpticture=list.subList(0, 3);
+		}
+		for (W_weibo w_weibo : hotpticture) {
 			System.out.println(w_weibo);
 		}
-	*/
-	
-		W_UserInfoService wus = new W_UserInfoService();
-		W_userinfo wu = new W_userinfo();
-		wu=wus.getUserInfoByNikeName("心心音峡");
-		System.out.println(wu);
+
 	}
 }

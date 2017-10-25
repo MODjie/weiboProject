@@ -613,7 +613,7 @@ $(function() {
 								type="submit" id="log" value="登录" />
 						</div>
 						<div id="zc_wj" style="text-align: center;">
-							<a class="a1" href="regiter.jsp" id="xiaomireg">注册账号</a>&nbsp;
+							<a class="a1" href="regiter2.jsp" id="xiaomireg">注册账号</a>&nbsp;
 						</div>
 					</form>
 				</div>

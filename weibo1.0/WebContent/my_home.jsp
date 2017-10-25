@@ -170,7 +170,7 @@
 											<table class="tb_counter" cellspacing="0" cellpadding="0">
 												<tbody>
 													<tr>
-														<td class="S_line1"><a href="friend.jsp"> <strong
+														<td class="S_line1"><a href="W_UserInfoServlet?op=point"> <strong
 																class="W_f18">92</strong> <span class="S_txt2">关注</span>
 														</a></td>
 														<td class="S_line1"><a href="#"> <strong

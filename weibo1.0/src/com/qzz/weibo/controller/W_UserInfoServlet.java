@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.qzz.weibo.entity.W_relation;
 import com.qzz.weibo.entity.W_userinfo;
 import com.qzz.weibo.entity.W_weibo;
 import com.qzz.weibo.service.W_UserInfoService;
+import com.qzz.weibo.service.W_relationService;
 
 /**
  * Servlet implementation class W_UserInfoServlet
@@ -56,6 +58,7 @@ public class W_UserInfoServlet extends HttpServlet {
 		// 创建对象
 		List<W_userinfo> list = new ArrayList<W_userinfo>();
 		W_UserInfoService userinfoservice = new W_UserInfoService();
+		W_relationService relationService = new W_relationService();
 		
 		HttpSession session = request.getSession(); 
 		
@@ -84,9 +87,12 @@ public class W_UserInfoServlet extends HttpServlet {
 			String touxiang="";
 			// 如果传过来的值是getUserInfo则查询该用户下的基本信息
 			if (op.equals("getUserInfo")) {
+
 				userinfo = userinfoservice.getUserInfoByNikeName(nickname);
 				touxiang = userinfo.getTOUXIANG();
 				request.setAttribute("userinfo",userinfo);
+
+				
 				request.getRequestDispatcher("information.jsp").forward(request, response);
 			}
 			// 如果传过来的值是updateuserinfo则先将用户的基本信息更新，再重新查询出来显示
@@ -105,9 +111,34 @@ public class W_UserInfoServlet extends HttpServlet {
 				 }
  				
 			}
+			//关注页面
+			else if (op.equals("point")) {
+				W_userinfo w_userinfo = userinfoservice.getUserInfoByNikeName(nickname);
+				List<W_relation> myPointerList = relationService.queryMyAllPointer(nickname);
+				//如果有搜索的名字就接收
+				
+				if (request.getParameter("searchName")!=null) {
+					String searchName = new String(request.getParameter("searchName").getBytes("ISO-8859-1"),"UTF-8");
+					myPointerList = relationService.queryMyPointerByNickName(nickname, searchName);
+				}
+				List<W_relation> myPointerListLeft = new ArrayList<>();
+				List<W_relation> myPointerListRight = new ArrayList<>();
+				//将信息拆成两列显示
+				for (int i = 0; i < myPointerList.size(); i++) {
+					if (i<myPointerList.size()/2) {
+						myPointerListRight.add(myPointerList.get(i));
+					}else {
+						myPointerListLeft.add(myPointerList.get(i));
+					}
+				}
+				
+				request.setAttribute("myPointerListLeft", myPointerListLeft);
+				request.setAttribute("myPointerListRight", myPointerListRight);
+				request.setAttribute("myInfo", w_userinfo);
+				request.getRequestDispatcher("friend.jsp").forward(request, response);
+			}
 		}
 
-		
 		
 
 	}
