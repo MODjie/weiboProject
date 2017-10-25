@@ -64,23 +64,13 @@
 						a.find(".zanNumSpan").html(zanNum);
 					});
 				});
-		//好友分组标签的点击事件
-		$('.zanA').click(
-				function() {
-					var a = $(this);
-					weiboid = $(this).find(".ajaxWbId").val();
-					$.post("WeiBoServlet?op=zan&weiboid=" + weiboid, function(
-							zanNum, status) {
-						a.find(".zanNumSpan").html(zanNum);
-					});
-				});
 		//好友列表的ajax请求
 		$('.myGroup').click(function() {
 				var groupId = $(this).find("#groupId").val();
 				$('#'+groupId).children().remove();
 				$.post("WeiBoServlet?op=myHomeFriend&groupId="+ groupId,function(myHomefriendList, status) {
 					$.each(myHomefriendList,function(index,friend) {
-						$("#"+groupId).append("<div class='panel-body afriend_bg'><a href='WeiBoServlet?op=chatpage' class='afriend_wrap'> <img src='"+friend.TOUXIANG+"' class='img-circle FL_tx' /> <spanclass='FL_name'>"+ friend.FRIENDNAME+ "</span></a></div>");
+						$("#"+groupId).append("<div class='panel-body afriend_bg'><input type='checkbox' class='pull-left friend-choose'/><a href='WeiBoServlet?op=chatpage' class='afriend_wrap'> <img src='"+friend.TOUXIANG+"' class='img-circle FL_tx' /> <spanclass='FL_name'>"+ friend.FRIENDNAME+ "</span></a></div>");
 						});
 
 					});
@@ -180,7 +170,7 @@
 											<table class="tb_counter" cellspacing="0" cellpadding="0">
 												<tbody>
 													<tr>
-														<td class="S_line1"><a href="friend.jsp"> <strong
+														<td class="S_line1"><a href="W_UserInfoServlet?op=point"> <strong
 																class="W_f18">92</strong> <span class="S_txt2">关注</span>
 														</a></td>
 														<td class="S_line1"><a href="#"> <strong
@@ -200,7 +190,10 @@
 								<div class="panel-group" id="myFriendList">
 										<h4>
 											我的好友
-											<a id="addGroup" class="glyphicon glyphicon-plus pull-right"></a>
+											<input type="checkbox" class="chooseAll" style="margin-left: 50px;"/>							
+											<a id="edit" class="glyphicon glyphicon-pencil deal" ></a>
+											<a id="delete" class="glyphicon glyphicon-trash deal" ></a>
+											<a id="addGroup" class="glyphicon glyphicon-plus pull-right deal"></a>
 										</h4>
 									
 									<c:if test="${requestScope.groupList!=null}">
@@ -208,6 +201,7 @@
 											<div class="panel panel-default myGroup">
 
 												<div class="panel-heading friends_list">
+													<input type="checkbox" class="pull-left group-choose"/>
 													<input id="groupId" type="hidden" value="${group.GROUPID }">
 													<a class="panel-title collapsed" data-toggle="collapse"
 														data-parent="#panel-723651" href="#${group.GROUPID }">${group.GROUPNAME }</a>
