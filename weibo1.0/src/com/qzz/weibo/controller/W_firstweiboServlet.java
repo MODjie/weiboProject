@@ -79,50 +79,56 @@ public class W_firstweiboServlet extends HttpServlet {
 					pdhotdoor=pdhotdoorall.subList(0, 4);
 				}else {
 					pdhotdoor=pdfreshall.subList(0, pdhotdoorall.size());
-				}
-				
-	
+				}	
             	request.setAttribute("pdfresh", pdfresh);
             	request.setAttribute("pdhotdoor", pdhotdoor);
             	request.getRequestDispatcher("vistormain.jsp").forward(request, response);
 				return;	
 			}else if(xra.equals("hotdoor")){
-				/* 获取热门微博*/
-				list=ws.queryWebBytype(2);				
+				/* 获取热门微博头三条微博，用于轮播滚动时用*/
+				List<W_weibo>hotpticture=new ArrayList<>();
+				list=ws.queryWebBytype(2);	
+                if(list.size()>3) {
+                	hotpticture=list.subList(0, 2);
+                }	
+                request.setAttribute("hotpticture", hotpticture);
 				request.setAttribute("list", list);		
 				request.getRequestDispatcher("vistorhotdoor.jsp").forward(request, response);
 				return;				
 			}else if(xra.equals("vsatr")){
 				/* 获取明星微博*/
-				list=ws.queryWebBytype(3);
+				list=ws.queryWebBytype(3);			 
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("vistorstar.jsp").forward(request, response);
 				return;		
 			}else if(xra.equals("vtop")) {
 				/* 获取头条微博*/
-			    list=ws.queryWebBytype(4);	
+			    list=ws.queryWebBytype(1);	
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("vistortop.jsp").forward(request, response);
 				return;		
 			}else if(xra.equals("vfresh")) {
 				/* 获取新鲜事微博*/
-				list=ws.queryWebBytype(8);
+				list=ws.queryWebBytype(9);
 				request.setAttribute("list", list);		
 				request.getRequestDispatcher("vistorfresh.jsp").forward(request, response);
 				return;		
 			}
 			else if(xra.equals("vlove")) {
 				/* 获取情感微博*/
-				list=ws.queryWebBytype(4);
+				list=ws.queryWebBytype(8);
 				request.setAttribute("list", list);			
 				request.getRequestDispatcher("vistorlove.jsp").forward(request, response);
 				return;		
 			}else if(xra.equals("xmoreweibo")) {
+				List<W_weibo> list3 = new ArrayList<>();
 				int weiboid= Integer.parseInt(request.getParameter("conid"));
 				int typeid= Integer.parseInt(request.getParameter("contypeid"));
+				
 				W_commentService wcs = new W_commentService();
 				
 				list = ws.queryWbById(weiboid);
+				list3=ws.queryWebBytype(typeid);
 				
 				W_weibo detailWb = list.get(0);
 				// 获取本条微博的所有评论内容
@@ -131,6 +137,7 @@ public class W_firstweiboServlet extends HttpServlet {
 				replyList = new W_replyService().queryAllReply();
 				request.setAttribute("replyList", replyList);
 				request.setAttribute("list2", list2);
+				request.setAttribute("list3", list3);
 				request.setAttribute("detailWb", detailWb);
 				request.getRequestDispatcher("more.jsp").forward(request, response);
 			}
