@@ -103,7 +103,8 @@ public class W_weiboServlet extends HttpServlet {
 
 				// 如果得到增加分组标志
 				if (request.getParameter("addGroup") != null) {
-					String groupName = new String(request.getParameter("groupName").getBytes("ISO-8859-1"), "UTF-8");
+//					String groupName = new String(request.getParameter("groupName").getBytes("ISO-8859-1"), "UTF-8");
+					String groupName = request.getParameter("groupName");
 					gs.addGroup(sendName, groupName);
 				}
 				// 查询到的微博list
@@ -169,7 +170,8 @@ public class W_weiboServlet extends HttpServlet {
 			} else if (op.equals("queryWbById")) {					
 				int weiboId = 0;
 				// 接收评论成功标志
-				String successFlag = new String(request.getParameter("cmsuccess").getBytes("ISO-8859-1"), "UTF-8");
+//				String successFlag = new String(request.getParameter("cmsuccess").getBytes("ISO-8859-1"), "UTF-8");
+				String successFlag = request.getParameter("cmsuccess");
 				// 如果没有评论
 				if (successFlag.equals("no")) {
 					weiboId = Integer.parseInt((String) request.getParameter("weiboid"));
@@ -177,8 +179,8 @@ public class W_weiboServlet extends HttpServlet {
 				} else if (successFlag.equals("yes")) {
 					weiboId = Integer.parseInt((String) request.getParameter("weiboId"));
 					String nikeName = (String) session.getAttribute("username");
-					String commentContent = new String(request.getParameter("commentContent").getBytes("ISO-8859-1"),
-							"UTF-8");
+//					String commentContent = new String(request.getParameter("commentContent").getBytes("ISO-8859-1"),"UTF-8");
+					String commentContent = request.getParameter("commentContent");
 					// String commentContent = request.getParameter("commentContent");
 					// String commentContent = request.getParameter("commentContent");
 					// 获取当前系统时间
@@ -189,14 +191,17 @@ public class W_weiboServlet extends HttpServlet {
 				
 				//获得微博右侧的微博类型ID,获取所有相关类型的微博
 				List<W_weibo> list3 = new ArrayList<>();
-				int typeid= Integer.parseInt(request.getParameter("contetypeid"));
-				list3=ws.queryWebBytype(typeid);
-				 int i=0;
-				for(;i<list3.size();i++){
-					 if(weiboId==(list3.get(i).getWEIBOID())){
-						 list3.remove(i);	
+				if (request.getParameter("contetypeid")!=null) {
+					int typeid= Integer.parseInt(request.getParameter("contetypeid"));
+					list3=ws.queryWebBytype(typeid);
+					 int i=0;
+					for(;i<list3.size();i++){
+						 if(weiboId==(list3.get(i).getWEIBOID())){
+							 list3.remove(i);	
+						}
 					}
-				}		
+				}
+						
 				list = ws.queryWbById(weiboId);
 				W_weibo detailWb = list.get(0);
 				// 获取本条微博的所有评论内容
@@ -350,7 +355,8 @@ public class W_weiboServlet extends HttpServlet {
 			} else if (op.equals("forward")) {
 				int weiboId = Integer.parseInt(request.getParameter("weiboid"));
 				// String content = request.getParameter("content");
-				String content = new String(request.getParameter("content").getBytes("ISO-8859-1"), "UTF-8");
+//				String content = new String(request.getParameter("content").getBytes("ISO-8859-1"), "UTF-8");
+				String content = request.getParameter("content");
 				String sendname = (String) request.getSession().getAttribute("username");
 
 				Date date = new Date();
@@ -371,9 +377,12 @@ public class W_weiboServlet extends HttpServlet {
 			} else if (op.equals("reply")) {
 				// 接收传过来的值
 				int commentId = Integer.parseInt(request.getParameter("commentId"));
-				String replyerA = new String(request.getParameter("replyerA").getBytes("ISO-8859-1"), "UTF-8");
-				String replyerB = new String(request.getParameter("replyerB").getBytes("ISO-8859-1"), "UTF-8");
-				String replyContent = new String(request.getParameter("replyContent").getBytes("ISO-8859-1"), "UTF-8");
+//				String replyerA = new String(request.getParameter("replyerA").getBytes("ISO-8859-1"), "UTF-8");
+//				String replyerB = new String(request.getParameter("replyerB").getBytes("ISO-8859-1"), "UTF-8");				
+//				String replyContent = new String(request.getParameter("replyContent").getBytes("ISO-8859-1"), "UTF-8");
+				String replyContent = request.getParameter("replyContent");
+				String replyerA = request.getParameter("replyerA");
+				String replyerB = request.getParameter("replyerB");
 				String replyTime = sdf.format(new Date());
 				W_reply reply = new W_reply(1, commentId, replyerA, replyerB, replyContent, replyTime, "SDFS");
 				// 调用service增加回复
@@ -390,14 +399,17 @@ public class W_weiboServlet extends HttpServlet {
 				list2 = wcs.queryCmById(weiboId);
 				
 				List<W_weibo> list3 = new ArrayList<>();
-				int typeid= Integer.parseInt(request.getParameter("contetypeid"));
-				list3=ws.queryWebBytype(typeid);
-				 int i=0;
-				for(;i<list3.size();i++){
-					 if(weiboId==(list3.get(i).getWEIBOID())){
-						 list3.remove(i);	
-					}
-				}		
+				if (request.getParameter("contetypeid")!=null) {
+					int typeid= Integer.parseInt(request.getParameter("contetypeid"));
+					list3=ws.queryWebBytype(typeid);
+					 int i=0;
+					for(;i<list3.size();i++){
+						 if(weiboId==(list3.get(i).getWEIBOID())){
+							 list3.remove(i);	
+						}
+					}	
+				}
+					
 				request.setAttribute("list2", list2);
 				request.setAttribute("replyList", replyList);
 				request.setAttribute("detailWb", detailWb);
@@ -427,7 +439,8 @@ public class W_weiboServlet extends HttpServlet {
 			// 聊天记录的ajax请求
 			else if (op.equals("chatcontent")) {
 				String sendName = (String) session.getAttribute("username");
-				String receiveName = new String(request.getParameter("receiveName").getBytes("ISO-8859-1"), "UTF-8");
+//				String receiveName = new String(request.getParameter("receiveName").getBytes("ISO-8859-1"), "UTF-8");
+				String receiveName = request.getParameter("receiveName");
 				List<W_message> sendMessageList = ms.queryMessageByName(sendName, receiveName);
 
 				Gson g = new Gson();
@@ -439,9 +452,11 @@ public class W_weiboServlet extends HttpServlet {
 
 			} else if (op.equals("sendMessage")) {
 				String sendName = (String) session.getAttribute("username");
-				String receiveName = new String(request.getParameter("receiveName").getBytes("ISO-8859-1"), "UTF-8");
+//				String receiveName = new String(request.getParameter("receiveName").getBytes("ISO-8859-1"), "UTF-8");
+				String receiveName = request.getParameter("receiveName");
 				String sendTime = sdf.format(new Date());
-				String content = new String(request.getParameter("sendContent").getBytes("ISO-8859-1"), "UTF-8");
+//				String content = new String(request.getParameter("sendContent").getBytes("ISO-8859-1"), "UTF-8");
+				String content = request.getParameter("sendContent");
 				W_message message = new W_message(0, sendName, receiveName, content, sendTime, "未读", "我是假的头像");
 				ms.addMessage(message);
 
