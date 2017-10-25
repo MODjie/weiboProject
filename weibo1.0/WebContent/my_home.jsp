@@ -86,10 +86,30 @@
 					});
 				});
 	});
+	//增加好友分组监听事件
 	$(function(){
+		//定义变量判断点击此按钮的次数
+		var cancleFlag = 0;
+		//新增分组按钮的点击事件
 		$("#addGroup").click(function(){
-			alert("点击成功");
-			$("#myFriendList").append("<input id='addGroupName' type='text' style='height: 32px;'/><button id='groupConfirmBtn' type='button' class='btn btn-info pull-right'>确认</button>");
+			cancleFlag=cancleFlag+1;
+			//为单数时就添加添加分组div，双数则清除此分组div
+			if ((cancleFlag%2)!=0) {
+				$("#myFriendList").append("<div id='addGroupDiv' style='padding-top: 5px;'><input id='addGroupName' type='text' style='height: 32px;'/><button id='groupConfirmBtn' type='button' class='btn btn-info pull-right'>确认</button></div>");	
+			}else{
+				$("#addGroupDiv").remove();
+			}
+			
+			//新增分组确认按钮点击事件
+			$("#myFriendList").find("button").on('click', function(){ 
+				var newGroupName=$("#myFriendList").find("#addGroupName").val();
+				if(newGroupName==""){
+					alert("请输入分组名称");
+				}else{
+					alert("添加成功");
+					location.href="WeiBoServlet?op=queryMyWb&addGroup=yes&groupName="+newGroupName;
+				}
+			});
 		});
 	});
 </script>

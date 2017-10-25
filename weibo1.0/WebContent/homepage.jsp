@@ -135,17 +135,8 @@
 						<li class="active"><a href="WeiBoServlet?op=homepage">首页</a>
 						</li>
 						<li><a href="#">简介</a></li>
-						<li><a href="WeiBoServlet?op=chatpage">信息</a></li>
-						<li class="dropdown pull-right"><a href="#"
-							data-toggle="dropdown" class="dropdown-toggle">设置<strong
-								class="caret"></strong></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">操作</a></li>
-								<li><a href="#">设置栏目</a></li>
-								<li><a href="#">更多设置</a></li>
-								<li class="divider"></li>
-								<li><a href="#">分割线</a></li>
-							</ul></li>
+						<li><a href="WeiBoServlet?op=chatpage">消息</a></li>
+						<li><a href="WeiBoServlet?op=exit">注销</a></li>
 					</ul>
 				</div>
 			</div>

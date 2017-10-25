@@ -16,4 +16,13 @@ public class W_groupService {
 	public List<W_group> queryGroupByName(String nickName) {
 		return groupDao.queryGroupByName(nickName);
 	}
+	/**
+	 * 新增分组
+	 * @param nickName
+	 * @param groupName
+	 * @return
+	 */
+	public boolean addGroup(String nickName,String groupName) {
+		return groupDao.addGroup(nickName, groupName);
+	}
 }
