@@ -48,6 +48,7 @@ public class LoginRegister extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.setContentType("text/html; charset=utf-8");
 		response.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
@@ -150,12 +151,12 @@ public class LoginRegister extends HttpServlet {
 				W_usersService us = new W_usersService();
 				String name = request.getParameter("namem");
 				String pwd = request.getParameter("pwdm");
+				PrintWriter out = response.getWriter();
 				int j = us.RegisterPhone(name);
 				if (j == 0) {
-					JOptionPane.showMessageDialog(null, "您输入的帐号不存在！", "没有帐号信息", JOptionPane.ERROR_MESSAGE);
-					request.setAttribute("name", name);
-					request.setAttribute("pwd", pwd);
-					request.getRequestDispatcher("index.jsp").forward(request, response);
+					System.out.println("您输入的帐号不存在!");
+					//JOptionPane.showMessageDialog(null, "您输入的帐号不存在！", "没有帐号信息", JOptionPane.ERROR_MESSAGE);
+					out.println("<script>alert('您输入的帐号不存在!');location.href='index.jsp'</script>");
 				} else {
 					String pwdyz = us.queryUserpwdByName(name);
 					if (pwdyz.equals(pwd)) {
@@ -169,10 +170,9 @@ public class LoginRegister extends HttpServlet {
 						}
 
 					} else {
-						JOptionPane.showMessageDialog(null, "您的密码输入错误！！", "密码错误", JOptionPane.ERROR_MESSAGE);
-						request.setAttribute("name", name);
-						request.setAttribute("pwd", pwd);
-						request.getRequestDispatcher("index.jsp").forward(request, response);
+						//JOptionPane.showMessageDialog(null, "您的密码输入错误！！", "密码错误", JOptionPane.ERROR_MESSAGE);
+						System.out.println("密码错误，请重新输入!!");
+						out.println("<script>alert('密码错误，请重新输入!');location.href='index.jsp'</script>");
 					}
 				}
 
