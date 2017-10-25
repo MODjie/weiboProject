@@ -126,6 +126,32 @@ public class W_UserInfoServlet extends HttpServlet {
 				request.setAttribute("myInfo", list.get(0));
 				request.getRequestDispatcher("friend.jsp").forward(request, response);
 			}
+			//粉丝页面
+			else if (op.equals("fans")) {
+				list = userinfoservice.getUserInfoByNikeName(nickname);
+				List<W_relation> myPointerList = relationService.queryMyAllFans(nickname);
+				//如果有搜索的名字就接收
+				
+				if (request.getParameter("searchName")!=null) {
+					String searchName = new String(request.getParameter("searchName").getBytes("ISO-8859-1"),"UTF-8");
+					myPointerList = relationService.queryMyPointerByNickName(searchName, nickname);
+				}
+				List<W_relation> myPointerListLeft = new ArrayList<>();
+				List<W_relation> myPointerListRight = new ArrayList<>();
+				//将信息拆成两列显示
+				for (int i = 0; i < myPointerList.size(); i++) {
+					if (i<myPointerList.size()/2) {
+						myPointerListRight.add(myPointerList.get(i));
+					}else {
+						myPointerListLeft.add(myPointerList.get(i));
+					}
+				}
+				
+				request.setAttribute("myPointerListLeft", myPointerListLeft);
+				request.setAttribute("myPointerListRight", myPointerListRight);
+				request.setAttribute("myInfo", list.get(0));
+				request.getRequestDispatcher("friend.jsp").forward(request, response);
+			}
 		}
 
 		

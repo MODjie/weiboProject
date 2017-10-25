@@ -25,4 +25,12 @@ public class W_relationService {
 	public List<W_relation> queryMyPointerByNickName(String aName,String bName) {
 		return (List<W_relation>) BaseDao.select("select * from relation_view where PERSONANAME =? and PERSONBNAME=?", W_relation.class, aName,bName);
 	}
+	/**
+	 * 查找我所有粉丝的信息
+	 * @param aName
+	 * @return
+	 */
+	public List<W_relation> queryMyAllFans(String bName) {
+		return relationDao.queryMyAllFans(bName);
+	}
 }
