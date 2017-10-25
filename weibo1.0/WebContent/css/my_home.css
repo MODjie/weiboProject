@@ -207,7 +207,7 @@ table td strong {
 	cursor: pointer;
 }
 /*添加好友按钮样式*/
-#addGroup{
+.deal{
 	color: rgb(245,245,245);
 	cursor: pointer;
 	text-decoration: none;
