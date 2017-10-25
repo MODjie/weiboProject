@@ -15,7 +15,14 @@
 	charset="utf-8"></script>
 <script type="text/javascript" src="js/search.js"></script>
 <link rel="stylesheet" type="text/css" href="css/friend.css" />
-
+<script type="text/javascript" >
+	$(function(){
+		$(".sbttn").click(function () {
+			var searchName = $("#searchName").val();
+			location.href = "W_UserInfoServlet?op=point&searchName="+searchName;
+		});
+	})
+</script>
 </head>
 
 <body style="background-color: rgb(94, 122, 161);">
@@ -73,10 +80,11 @@
 								<div class="panel panel-danger">
 									<div class="panel-header">
 										全部关注 <label></label>
+										<a href="W_UserInfoServlet?op=point" class="glyphicon glyphicon-home home"></a>
 									</div>
-									<div class="panel-body">
+									<div class="panel-body">										
 										<div class="pull-right">
-											<input type="text" placeholder="请输入昵称"> <input
+											<input id="searchName" type="text" placeholder="请输入昵称"> <input
 												type="button" value="搜索" class="sbttn">
 										</div>
 										<br />
