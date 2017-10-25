@@ -123,11 +123,17 @@ public class W_weiboServlet extends HttpServlet {
 
 				String nickname = "";
 				nickname = session.getAttribute("username") + "";
+				System.out.println("nisknameÊÇ"+nickname);
+				if(!nickname.equals("null")) {
 				W_UserInfoService wus = new W_UserInfoService();
 				W_userinfo userinfo = new W_userinfo();
 				userinfo = wus.getUserInfoByNikeName(nickname).get(0);
 				request.setAttribute("userinfo", userinfo);
 				request.getRequestDispatcher("homepage.jsp").forward(request, response);
+				}
+				else {
+					response.sendRedirect("index.jsp");
+				}
 
 			} else if (op.equals("queryAllWb")) {
 				list = ws.queryAllWb();
@@ -420,6 +426,12 @@ public class W_weiboServlet extends HttpServlet {
 				response.setContentType("application/json");
 				out.print(jsonString);
 			}
+			//×¢ÏúµÇÂ¼
+			else if(op.equals("exit")) {
+				session.removeAttribute("username");
+				response.sendRedirect("index.jsp");
+			}
+			
 			
 		}
 
