@@ -118,7 +118,8 @@ public class W_UserInfoServlet extends HttpServlet {
 				//如果有搜索的名字就接收
 				
 				if (request.getParameter("searchName")!=null) {
-					String searchName = new String(request.getParameter("searchName").getBytes("ISO-8859-1"),"UTF-8");
+//					String searchName = new String(request.getParameter("searchName").getBytes("ISO-8859-1"),"UTF-8");
+					String searchName = request.getParameter("searchName");
 					myPointerList = relationService.queryMyPointerByNickName(nickname, searchName);
 				}
 				List<W_relation> myPointerListLeft = new ArrayList<>();
@@ -144,7 +145,8 @@ public class W_UserInfoServlet extends HttpServlet {
 				//如果有搜索的名字就接收
 				
 				if (request.getParameter("searchName")!=null) {
-					String searchName = new String(request.getParameter("searchName").getBytes("ISO-8859-1"),"UTF-8");
+//					String searchName = new String(request.getParameter("searchName").getBytes("ISO-8859-1"),"UTF-8");
+					String searchName = request.getParameter("searchName");
 					myPointerList = relationService.queryMyPointerByNickName(searchName, nickname);
 				}
 				List<W_relation> myPointerListLeft = new ArrayList<>();
