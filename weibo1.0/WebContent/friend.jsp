@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -60,9 +61,11 @@
 						<div class="row clearfix">
 							<!--封面div开始-->
 							<div id="fm" class="col-md-12 column">
-								<a href="#"><img alt="140x140" src="img/touxiang.jpg"
-									class="img-circle" /></a>
-								<h4 id="niCheng">cleanEach</h4>
+								<a href="WeiBoServlet?op=queryMyWb"><img alt="140x140"
+									src="${requestScope.myInfo.TOUXIANG }" class="img-circle" /></a> <a
+									id="userName" href="W_UserInfoServlet?op=getUserInfo">
+									<h4 id="niCheng">${requestScope.myInfo.NICKNAME }</h4>
+								</a>
 								<h5>一句话介绍下你自己吧,让别人更了解你</h5>
 							</div>
 							<!--封面div结束-->
@@ -83,66 +86,53 @@
 										<div class="row clearfix ">
 											<ul>
 												<div class="col-md-6 column point-left">
-													<li>
-														<div class="col-md-12 column">
-															<div class="col-md-2 column">
-																<img src="img/friend_touxiang.jpg" />
-															</div>
-															<div class="col-md-10 column">
-																<blockquote>
-																	<p>周二珂</p>
-																	<small>主播，歌手 <br> <cite>上海</cite></small>
-																</blockquote>
-															</div>
-														</div>
+													<c:if test="${requestScope.myPointerListLeft!=null}">
 
-													</li>
-													<li>
-														<div class="col-md-12 column">
-															<div class="col-md-2 column">
-																<img src="img/friend_touxiang.jpg" />
-															</div>
-															<div class="col-md-10 column">
-																<blockquote>
-																	<p>周二珂</p>
-																	<small>主播，歌手 <br> <cite>上海</cite></small>
-																</blockquote>
-															</div>
-														</div>
-													</li>
+														<c:forEach items="${requestScope.myPointerListLeft}"
+															var="pointer">
+
+															<li>
+																<div class="col-md-12 column">
+																	<div class="col-md-2 column">
+																		<img src="${pointer.TOUXIANG }"
+																			style="height: 80px; margin-left: -20px" />
+																	</div>
+																	<div class="col-md-10 column">
+																		<blockquote>
+																			<p>${pointer.NICKNAME }</p>
+																			<small>${pointer.CITY1 } <br> <cite>${pointer.REMARK }</cite></small>
+																		</blockquote>
+																	</div>
+																</div>
+
+															</li>
+
+														</c:forEach>
+													</c:if>
 												</div>
 												<div class="col-md-6 column point-right">
-													<li class="point-left">
-														<div class="col-md-12 column">
-															<div class="col-md-2 column">
-																<img src="img/friend_touxiang.jpg" />
-															</div>
-															<div class="col-md-10 column">
-																<blockquote>
-																	<p>周二珂</p>
-																	<small>主播，歌手 <br> <cite>上海</cite></small>
-																</blockquote>
-															</div>
-														</div>
+													<c:if test="${requestScope.myPointerListRight!=null}">
+														<c:forEach items="${requestScope.myPointerListRight}"
+															var="pointer">
+															<li class="point-right">
+																<div class="col-md-12 column">
+																	<div class="col-md-2 column">
+																		<img src="${pointer.TOUXIANG }"
+																			style="height: 70px; margin-left: -20px" />
+																	</div>
+																	<div class="col-md-10 column">
+																		<blockquote>
+																			<p>${pointer.NICKNAME }</p>
+																			<small>${pointer.CITY1 } <br> <cite>${pointer.REMARK }</cite></small>
+																		</blockquote>
+																	</div>
+																</div>
+															</li>
 
-													</li>
-													<li class="point-right">
-														<div class="col-md-12 column">
-															<div class="col-md-2 column">
-																<img src="img/friend_touxiang.jpg" />
-															</div>
-															<div class="col-md-10 column">
-																<blockquote>
-																	<p>周二珂</p>
-																	<small>主播，歌手 <br> <cite>上海</cite></small>
-																</blockquote>
-															</div>
-														</div>
-													</li>
+														</c:forEach>
+													</c:if>
 												</div>
-
 											</ul>
-
 										</div>
 									</div>
 								</div>
