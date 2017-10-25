@@ -86,6 +86,12 @@
 					});
 				});
 	});
+	$(function(){
+		$("#addGroup").click(function(){
+			alert("点击成功");
+			$("#myFriendList").append("<input id='addGroupName' type='text' style='height: 32px;'/><button id='groupConfirmBtn' type='button' class='btn btn-info pull-right'>确认</button>");
+		});
+	});
 </script>
 </head>
 
@@ -171,8 +177,12 @@
 								</div>
 								<!--微博，粉丝，关注卡片div的结束-->
 								<!--我的好友列表开始-->
-								<div class="panel-group" id="panel-723651">
-									<h4>我的好友</h4>
+								<div class="panel-group" id="myFriendList">
+										<h4>
+											我的好友
+											<a id="addGroup" class="glyphicon glyphicon-plus pull-right"></a>
+										</h4>
+									
 									<c:if test="${requestScope.groupList!=null}">
 										<c:forEach items="${requestScope.groupList}" var="group">
 											<div class="panel panel-default myGroup">
@@ -187,6 +197,7 @@
 											</div>
 										</c:forEach>
 									</c:if>
+									
 								</div>
 
 
