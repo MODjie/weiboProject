@@ -12,6 +12,7 @@ import com.qzz.weibo.dao.W_weiboDao;
 import com.qzz.weibo.entity.W_userinfo;
 import com.qzz.weibo.entity.W_users;
 import com.qzz.weibo.entity.W_weibo;
+import com.qzz.weibo.service.W_UserInfoService;
 import com.qzz.weibo.service.W_weiboService;
 import com.qzz.weibo.util.BaseDao;
 
@@ -49,5 +50,10 @@ public class weiboTest {
 			System.out.println(w_weibo);
 		}
 	*/
+	
+		W_UserInfoService wus = new W_UserInfoService();
+		W_userinfo wu = new W_userinfo();
+		wu=wus.getUserInfoByNikeName("¿´¿´²»¶®");
+		System.out.println(wu);
 	}
 }

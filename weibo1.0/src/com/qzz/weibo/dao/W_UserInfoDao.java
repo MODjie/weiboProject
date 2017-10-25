@@ -17,8 +17,7 @@ public class W_UserInfoDao {
 		return (List<W_userinfo>) BaseDao.select("select * from W_USERINFO where USERNAME=?", W_userinfo.class,
 				username);
 	}
-	
-	
+
 	/**
 	 * 鏇存柊鐢ㄦ埛鐨勫熀鏈俊鎭儏鍐�
 	 * 
@@ -30,9 +29,9 @@ public class W_UserInfoDao {
 		return BaseDao.execute(
 				"update W_USERINFO set NICKNAME=?,REALNAME=?,SEX=?,BIRTH=?,LOCATION=?,EMAIL=?,QQ=?,PHONENUM=?,REMARK=? where USERNAME=?",
 				userinfo.getNICKNAME(), userinfo.getREALNAME(), userinfo.getSEX(), userinfo.getBIRTH(),
-				userinfo.getQQ(), userinfo.getPHONENUM(), userinfo.getREMARK(),  username);
-	}	
-	
+				userinfo.getQQ(), userinfo.getPHONENUM(), userinfo.getREMARK(), username);
+	}
+
 	/**
 	 * 通过昵称来查找用户信息
 	 * 
@@ -40,24 +39,45 @@ public class W_UserInfoDao {
 	 * @return
 	 */
 	public List<W_userinfo> getUserInfoByNikeName(String nikeName) {
+
 		return (List<W_userinfo>) BaseDao.select("select * from W_USERINFO where NICKNAME=?", W_userinfo.class,
 				nikeName);
 	}
+
 	/***
 	 * 通过用户名获取用户昵称
+	 * 
 	 * @param username
 	 * @return
 	 */
 	public String getNickNameByUserName(String username) {
-		return BaseDao.getFirst("select NICKNAME FROM W_USERINFO WHERE USERNAME=?", username)+"";
+		return BaseDao.getFirst("select NICKNAME FROM W_USERINFO WHERE USERNAME=?", username) + "";
 	}
+
 	/***
 	 * 判断用户昵称是否已存在
+	 * 
 	 * @param nickname
 	 * @return
 	 */
 	public int isExisNickname(String nickname) {
-		String flag= BaseDao.getFirst("select count(1) from W_USERINFO where NICKNAME = ?", nickname)+"";
+		String flag = BaseDao.getFirst("select count(1) from W_USERINFO where NICKNAME = ?", nickname) + "";
 		return Integer.parseInt(flag);
+	}
+
+	/***
+	 * 修改用户个人信息
+	 * 
+	 * @param userinfo
+	 * @return
+	 */
+	public boolean updateUserinfo(W_userinfo userinfo) {
+		return BaseDao.execute(
+				"UPDATE W_USERINFO SET NICKNAME =?, REALNAME = ?, SEX = ?, BIRTH = ?, PROVINCE = ?,"
+						+ " EMAIL = ?, QQ = ?, PHONENUM = ?, REMARK = ?, CITY1 = ?, CITY2 = ? WHERE USERNAME = ?",
+				userinfo.getNICKNAME(), userinfo.getREALNAME(), userinfo.getSEX(), userinfo.getBIRTH(),
+				userinfo.getPROVINCE(), userinfo.getEMAIL(), userinfo.getQQ(), userinfo.getPHONENUM(),
+				userinfo.getREMARK(), userinfo.getCITY1(), userinfo.getCITY2(), userinfo.getUSERNAME()) > 0;
+
 	}
 }

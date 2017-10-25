@@ -37,8 +37,8 @@ public class W_UserInfoService {
 	 * @param username
 	 * @return
 	 */
-	public List<W_userinfo> getUserInfoByNikeName(String nikeName) {
-		return userinfodao.getUserInfoByNikeName(nikeName);
+	public W_userinfo getUserInfoByNikeName(String nikeName) {
+		return userinfodao.getUserInfoByNikeName(nikeName).get(0);
 	}
 	
 	/***
@@ -57,5 +57,14 @@ public class W_UserInfoService {
 	 */
 	public int isExisNickname(String nickname) {
 		return userinfodao.isExisNickname(nickname);
+	}
+	/***
+	 * 修改用户个人信息
+	 * 
+	 * @param userinfo
+	 * @return
+	 */
+	public boolean updateUserinfo(W_userinfo userinfo){
+		return userinfodao.updateUserinfo(userinfo);
 	}
 }

@@ -97,22 +97,23 @@
 							</div>
 		<center>
 			<div class="content1">
+			<form action="W_UserInfoServlet?op=updateuserinfo" method="post" >
 				<table id="infomation" border="0" cellspacing="0" cellpadding="10px">
 					<tr id="nicknametr">
 						<td>昵称：</td>
-						<td><input id="nickname" name="nickname" type="text" id="" value="" /></td>
+						<td><input id="nickname" name="nickname" type="text" value="" disabled="true"/></td>
 						<td><span></span></td>
 					</tr>
 					<tr id="realnametr">
 						<td>真实姓名：</td>
-						<td><input id="realname" name="realname" type="text" id="" value="" /></td>
+						<td><input id="realname" name="realname" type="text" value="" /></td>
 						<td><span></span></td>
 					</tr>
 					<tr id="sextr">
 						<td>性别：</td>
 						<td>
-							<input type="radio" name="sex" value="male" checked="checked">男
-							<input type="radio" name="sex" value="female">女
+							<input type="radio" name="sex" value="男" checked="checked">男
+							<input type="radio" name="sex" value="女">女
 						</td>
 						<td><span></span></td>
 					</tr>
@@ -147,7 +148,11 @@
 						<td><span></span></td>
 					</tr>
 				</table>
-				<input type="button" class="btn-primary"style=" border-radius:10px;width: 100px;" id="" value="确定修改" />
+				<input type="hidden" id="privin" name="privin" >
+				<input type="hidden" id="c1" name="c1" >
+				<input type="hidden" id="c2" name="c2" >
+				<input type="submit" id="update" class="btn-primary"style=" border-radius:10px;width: 100px;" id="" value="确定修改" />
+				</form>
 			</div>
 			
 		</center>
@@ -155,13 +160,50 @@
 
 	<script type="text/javascript">
 		$(function(){
+			//回显数据接收
+			var nickname = "${userinfo.NICKNAME}";
+			var realname = "${userinfo.REALNAME}";
+			var sex = "${userinfo.SEX}";
+			var province = "${userinfo.PROVINCE}";
+			var city1 = "${userinfo.CITY1}";
+			var city2 = "${userinfo.CITY2}";
+			var birth = "${userinfo.BIRTH}".substring(0,10);
+			var qq = "${userinfo.QQ}";
+			var email = "${userinfo.EMAIL}";
+			var phone = "${userinfo.PHONENUM}";
+			var remark = "${userinfo.REMARK}";
 			
-			$("#receive").click(function(){
+			//接收完毕，开始初始化操作
+			//alert(nickname+realname+sex+province+city1+city2+birth+qq+email+phone+remark);
+			$("#nicknametr").find("input").val(nickname);
+			$("#realnametr").find("input").val(realname);
+			if(sex!=""){
+				if(sex=="男")
+					$("#sextr").find("input[name='sex'][value=男]").attr("checked",true); 
+				else
+					$("#sextr").find("input[name='sex'][value=女]").attr("checked",true); 
+			}
+			if(province!=""){
+				$("#province").find("select").eq(0).val(province);
+				//$("#province").find("select").eq(0).val("福建");
+			}
+		
+			$("#birthtr").find("input").val(birth);
+			$("#qqtr").find("input").val(qq);
+			$("#emailtr").find("input").val(email);
+			$("#phonetr").find("input").val(phone);
+			$("#remarktr").find("textarea").val(remark);
+			//初始化操作完成
+			
+			
+			$("#update").click(function(){
 				var province=$("#province").find("select").eq(0).val();
 				var city1=$("#province").find("select").eq(1).val();
 				var city2=$("#province").find("select").eq(2).val();
+				$("#privin").val(province);
+				$("#c1").val(city1);
+				$("#c2").val(city2);
 				
-				alert(province+","+city1+","+city2);
 			})
 		})
 	</script>

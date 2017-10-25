@@ -1,6 +1,7 @@
 package com.qzz.weibo.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class W_UserInfoServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
 		doPost(request, response);
 	}
 
@@ -47,7 +49,7 @@ public class W_UserInfoServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
@@ -58,7 +60,7 @@ public class W_UserInfoServlet extends HttpServlet {
 		HttpSession session = request.getSession(); 
 		
 		// 获取页面传过来的属性
-		String username = request.getParameter("username");
+		String username =session.getAttribute("name")+"";
 		String nickname = (String) session.getAttribute("username");
 		String realname = request.getParameter("realname");
 		String sex = request.getParameter("sex");
@@ -70,34 +72,43 @@ public class W_UserInfoServlet extends HttpServlet {
 		String month = request.getParameter("month");
 		String day = request.getParameter("day");
 		String province = request.getParameter("province");
-		String city1 = request.getParameter("city1");
-		String city2 = request.getParameter("city2");
+		
 
-		String location = province + city1+city2;
-		String birth = year + month + day;
+	
 
 		// 将获取的值放进W_userinfo实体类中
-		W_userinfo userinfo = new W_userinfo(username, nickname, realname, sex, birth, province, city1, city2, email, qq, phone, remark, "TX");
+		W_userinfo userinfo = null;
 
 		if (request.getParameter("op") != null) {
 			String op = request.getParameter("op");
+			String touxiang="";
 			// 如果传过来的值是getUserInfo则查询该用户下的基本信息
 			if (op.equals("getUserInfo")) {
-				list = userinfoservice.getUserInfoByNikeName(nickname);
+				userinfo = userinfoservice.getUserInfoByNikeName(nickname);
+				touxiang = userinfo.getTOUXIANG();
+				request.setAttribute("userinfo",userinfo);
+				request.getRequestDispatcher("information.jsp").forward(request, response);
 			}
 			// 如果传过来的值是updateuserinfo则先将用户的基本信息更新，再重新查询出来显示
 			else if (op.equals("updateuserinfo")) {
-				userinfoservice.updateUserInfo(userinfo, username);
-				list = userinfoservice.getAllUserInfo(username);
+				 nickname = request.getParameter("nickname");
+				 String privince = request.getParameter("privin");
+				 String city1 = request.getParameter("c1");
+				 String city2 = request.getParameter("c2");
+				 String birth = request.getParameter("birth");
+				 //System.out.println("用户名是"+username);
+				 W_userinfo newuserinfo = new W_userinfo(username, nickname, realname, sex, birth, privince, city1, city2, email, qq, phone, remark, touxiang);
+				 if(userinfoservice.updateUserinfo(newuserinfo)) {
+					 session.setAttribute("username",newuserinfo.getNICKNAME());
+					 PrintWriter out = response.getWriter();
+					 out.print("<script>alert('修改成功');location.href='WeiBoServlet?op=queryMyWb'</script>");
+				 }
+ 				
 			}
 		}
 
-		request.setAttribute("username", username);
-		request.setAttribute("nickname", nickname);
-		request.setAttribute("list", list);
-		request.setAttribute("birth", list.get(0).getBIRTH().substring(0, 10));
-		request.setAttribute("userinfo", list.get(0));
-		request.getRequestDispatcher("information.jsp").forward(request, response);
+		
+		
 
 	}
 
