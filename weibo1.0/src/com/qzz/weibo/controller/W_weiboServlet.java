@@ -123,8 +123,8 @@ public class W_weiboServlet extends HttpServlet {
 				// 获得分组list
 				List<W_group> groupList = gs.queryGroupByName(sendName);
 				request.setAttribute("groupList", groupList);
-				List<W_userinfo> myInfo = us.getUserInfoByNikeName(sendName);
-				request.setAttribute("myInfo", myInfo.get(0));
+				W_userinfo myInfo = us.getUserInfoByNikeName(sendName);
+				request.setAttribute("myInfo", myInfo);
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("my_home.jsp").forward(request, response);
 			} else if (op.equals("homepage")) {
@@ -135,7 +135,7 @@ public class W_weiboServlet extends HttpServlet {
 				if(!nickname.equals("null")) {
 				W_UserInfoService wus = new W_UserInfoService();
 				W_userinfo userinfo = new W_userinfo();
-				userinfo = wus.getUserInfoByNikeName(nickname).get(0);
+				userinfo = wus.getUserInfoByNikeName(nickname);
 				request.setAttribute("userinfo", userinfo);
 				request.getRequestDispatcher("homepage.jsp").forward(request, response);
 				}
@@ -418,10 +418,10 @@ public class W_weiboServlet extends HttpServlet {
 			} else if (op.equals("chatpage")) {
 				String nickName = (String) session.getAttribute("username");
 				List<W_friend> friendList = fs.queryMyFriend(nickName);
-				List<W_userinfo> myList = us.getUserInfoByNikeName(nickName);
+				W_userinfo myList = us.getUserInfoByNikeName(nickName);
 				request.setAttribute("firstName", friendList.get(0).getFRIENDNAME());
 				request.setAttribute("friendList", friendList);
-				request.setAttribute("mytouxiang", myList.get(0).getTOUXIANG());
+				request.setAttribute("mytouxiang", myList.getTOUXIANG());
 				request.getRequestDispatcher("chat.jsp").forward(request, response);
 			}
 			// 聊天记录的ajax请求

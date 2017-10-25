@@ -161,6 +161,7 @@ public class LoginRegister extends HttpServlet {
 					String pwdyz = us.queryUserpwdByName(name);
 					if (pwdyz.equals(pwd)) {
 						W_UserInfoService userinfoser = new W_UserInfoService();
+						session.setAttribute("name", name);
 						String username = userinfoser.getNickNameByUserName(name);
 						if (username.equals("null")) {
 							response.sendRedirect("homepage.jsp");

@@ -12,6 +12,7 @@ import com.qzz.weibo.dao.W_weiboDao;
 import com.qzz.weibo.entity.W_userinfo;
 import com.qzz.weibo.entity.W_users;
 import com.qzz.weibo.entity.W_weibo;
+import com.qzz.weibo.service.W_UserInfoService;
 import com.qzz.weibo.service.W_weiboService;
 import com.qzz.weibo.util.BaseDao;
 
@@ -52,6 +53,6 @@ public class weiboTest {
 		for (W_weibo w_weibo : hotpticture) {
 			System.out.println(w_weibo);
 		}
-	
+
 	}
 }
