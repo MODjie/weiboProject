@@ -70,13 +70,14 @@ public class W_UserInfoServlet extends HttpServlet {
 		String month = request.getParameter("month");
 		String day = request.getParameter("day");
 		String province = request.getParameter("province");
-		String city = request.getParameter("city");
+		String city1 = request.getParameter("city1");
+		String city2 = request.getParameter("city2");
 
-		String location = province + city;
+		String location = province + city1+city2;
 		String birth = year + month + day;
 
 		// 将获取的值放进W_userinfo实体类中
-		W_userinfo userinfo = new W_userinfo(nickname, realname, sex, birth, location, email, qq, phone, remark);
+		W_userinfo userinfo = new W_userinfo(username, nickname, realname, sex, birth, province, city1, city2, email, qq, phone, remark, "TX");
 
 		if (request.getParameter("op") != null) {
 			String op = request.getParameter("op");
