@@ -280,32 +280,40 @@ $(function() {
 							</a>
 					</div>
 					<div class="list lefelist" style="border: none;">
-						<a href="firstWeiBoServlet?xra=vsatr" class="list-group "
-							target="vistorcontent">
-							<div>						
-							明星
-							</div>
-							</a>
-					</div>
-					<div class="list lefelist" style="border: none;">
-						<a href="firstWeiBoServlet?xra=vtop" class="list-group  "
+						<a href="firstWeiBoServlet?xra=vtop" class="list-group "
 							target="vistorcontent">
 							<div>						
 							头条
 							</div>
 							</a>
 					</div>
-					<div class="list lefelist xxfresh" style="border: none;">
-						<a href="firstWeiBoServlet?xra=vfresh" class="list-group "
+					<div class="list lefelist" style="border: none;">
+						<a href="firstWeiBoServlet?xra=vsatr" class="list-group  "
 							target="vistorcontent">
 							<div>						
-							新鲜事
+							明星
+							</div>
+							</a>
+					</div>
+					<div class="list lefelist xxfresh" style="border: none;">
+						<a href="firstWeiBoServlet?xra=vlove" class="list-group "
+							target="vistorcontent">
+							<div>						
+							娱乐
 							</div>
 							</a>
 					</div>
 					<div class="list lefelist" style="border: none;">
-						<a href="firstWeiBoServlet?xra=vlove" class="list-group  "
-							target="vistorcontent">
+						<a href="" class="list-group  "
+							target="list-group">
+							<div>						
+							美女
+							</div>
+							</a>
+					</div>
+					<div class="list lefelist" style="border: none;">
+						<a href="" class="list-group  "
+							>
 							<div>						
 							动漫
 							</div>
@@ -323,15 +331,7 @@ $(function() {
 						<a href="" class="list-group  "
 							>
 							<div>						
-							美女
-							</div>
-							</a>
-					</div>
-					<div class="list lefelist" style="border: none;">
-						<a href="" class="list-group  "
-							>
-							<div>						
-							情感
+							时尚
 							</div>
 						</a>
 					</div>
@@ -339,10 +339,11 @@ $(function() {
 						<a href="" class="list-group  "
 							>
 							<div>						
-							时尚
+							搞笑
 							</div>
 							</a>
 					</div>
+					
 					</div>
 					</div>
 				</div>
@@ -469,7 +470,7 @@ $(function() {
 													<!-- 第一行左边图片 开始-->
 													<div class="col-md-5">
 														<!-- 第一行左边图片 开始-->
-														<img src="img/visitor_img/6.jpg"
+														<img src="${rs.IMAGE }"
 															style="width: 110px; height: 88px;">
 														<!-- 第一行左边图片结束  -->
 													</div>
@@ -527,7 +528,7 @@ $(function() {
 													<!-- 第一行右边开始  -->
 													<div class="col-md-4" style="text-align: left;">
 														<!-- 第一行左边图片 开始-->
-														<img src="img/visitor_img/8.jpg"
+														<img src="${rs.IMAGE }"
 															/ style="width: 66px; height: 66px;">
 														<!-- 第一行左边图片结束  -->
 													</div>
@@ -589,13 +590,13 @@ $(function() {
 	<div class="modal fade" id="modal-container-580488" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
+			<div class="modal-content tm">
+				<div class="modal-header tm">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">×</button>
 					<h4 class="modal-title" id="myModalLabel">账号登录</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body tm">
 					<form action="LoginRegister" method="post">
 						<div id="name">
 							<input type="text" id="textname" name="namet" placeholder="用户名" />

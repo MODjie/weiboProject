@@ -64,32 +64,42 @@
 						a.find(".zanNumSpan").html(zanNum);
 					});
 				});
-		//好友分组标签的点击事件
-		$('.zanA').click(
-				function() {
-					var a = $(this);
-					weiboid = $(this).find(".ajaxWbId").val();
-					$.post("WeiBoServlet?op=zan&weiboid=" + weiboid, function(
-							zanNum, status) {
-						a.find(".zanNumSpan").html(zanNum);
-					});
-				});
 		//好友列表的ajax请求
 		$('.myGroup').click(function() {
 				var groupId = $(this).find("#groupId").val();
 				$('#'+groupId).children().remove();
 				$.post("WeiBoServlet?op=myHomeFriend&groupId="+ groupId,function(myHomefriendList, status) {
 					$.each(myHomefriendList,function(index,friend) {
-						$("#"+groupId).append("<div class='panel-body afriend_bg'><a href='WeiBoServlet?op=chatpage' class='afriend_wrap'> <img src='"+friend.TOUXIANG+"' class='img-circle FL_tx' /> <spanclass='FL_name'>"+ friend.FRIENDNAME+ "</span></a></div>");
+						$("#"+groupId).append("<div class='panel-body afriend_bg'><input type='checkbox' class='pull-left friend-choose'/><a href='WeiBoServlet?op=chatpage' class='afriend_wrap'> <img src='"+friend.TOUXIANG+"' class='img-circle FL_tx' /> <spanclass='FL_name'>"+ friend.FRIENDNAME+ "</span></a></div>");
 						});
 
 					});
 				});
 	});
+	//增加好友分组监听事件
 	$(function(){
+		//定义变量判断点击此按钮的次数
+		var cancleFlag = 0;
+		//新增分组按钮的点击事件
 		$("#addGroup").click(function(){
-			alert("点击成功");
-			$("#myFriendList").append("<input id='addGroupName' type='text' style='height: 32px;'/><button id='groupConfirmBtn' type='button' class='btn btn-info pull-right'>确认</button>");
+			cancleFlag=cancleFlag+1;
+			//为单数时就添加添加分组div，双数则清除此分组div
+			if ((cancleFlag%2)!=0) {
+				$("#myFriendList").append("<div id='addGroupDiv' style='padding-top: 5px;'><input id='addGroupName' type='text' style='height: 32px;'/><button id='groupConfirmBtn' type='button' class='btn btn-info pull-right'>确认</button></div>");	
+			}else{
+				$("#addGroupDiv").remove();
+			}
+			
+			//新增分组确认按钮点击事件
+			$("#myFriendList").find("button").on('click', function(){ 
+				var newGroupName=$("#myFriendList").find("#addGroupName").val();
+				if(newGroupName==""){
+					alert("请输入分组名称");
+				}else{
+					alert("添加成功");
+					location.href="WeiBoServlet?op=queryMyWb&addGroup=yes&groupName="+newGroupName;
+				}
+			});
 		});
 	});
 </script>
@@ -180,7 +190,10 @@
 								<div class="panel-group" id="myFriendList">
 										<h4>
 											我的好友
-											<a id="addGroup" class="glyphicon glyphicon-plus pull-right"></a>
+											<input type="checkbox" class="chooseAll" style="margin-left: 50px;"/>							
+											<a id="edit" class="glyphicon glyphicon-pencil deal" ></a>
+											<a id="delete" class="glyphicon glyphicon-trash deal" ></a>
+											<a id="addGroup" class="glyphicon glyphicon-plus pull-right deal"></a>
 										</h4>
 									
 									<c:if test="${requestScope.groupList!=null}">
@@ -188,6 +201,7 @@
 											<div class="panel panel-default myGroup">
 
 												<div class="panel-heading friends_list">
+													<input type="checkbox" class="pull-left group-choose"/>
 													<input id="groupId" type="hidden" value="${group.GROUPID }">
 													<a class="panel-title collapsed" data-toggle="collapse"
 														data-parent="#panel-723651" href="#${group.GROUPID }">${group.GROUPNAME }</a>

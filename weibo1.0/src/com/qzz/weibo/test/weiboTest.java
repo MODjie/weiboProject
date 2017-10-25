@@ -18,6 +18,7 @@ import com.qzz.weibo.util.BaseDao;
 public class weiboTest {
 
 	public static void main(String[] args) {
+		
 		// TODO Auto-generated method stub
 
 		
@@ -41,9 +42,12 @@ public class weiboTest {
 //		W_UserInfoDao wif = new W_UserInfoDao();
 //		int i = Integer.parseInt(wif.isExisNickname("心心音峡"));
 //		System.out.println(i>1);
-		W_usersDao ws = new W_usersDao();
-		boolean f=ws.userRegister("haha", "000000", "込込込");
-		System.out.println(f);
+		/*List<W_weibo>list=new ArrayList<>();
+		W_weiboDao ws = new W_weiboDao();
+		list=ws.queryWebBytype(3);
+		for (W_weibo w_weibo : list) {
+			System.out.println(w_weibo);
+		}
+	*/
 	}
-
 }

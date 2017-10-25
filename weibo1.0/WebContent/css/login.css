@@ -1,13 +1,16 @@
 /*登录弹窗*/
+.tm{
+	background: rgba(255,255,255,.5);
+}
 #name{
 	margin-left: auto;
 	margin-right: auto;
 	width: 302px;
 	height: 42px;
-	background-image: url(../img/name.jpg);
-	background-size: 42px;
+	background-image: url(../img/name.png);
+	background-size: 33px;
 	background-repeat: no-repeat;
-	border: 1px solid black;
+	
 }
 #password{
 	margin-top: 20px;
@@ -15,10 +18,10 @@
 	margin-right: auto;
 	width: 302px;
 	height: 42px;
-	background-image: url(../img/password.jpg);
-	background-size: 42px;
+	background-image: url(../img/password.png);
+	background-size: 33px;
 	background-repeat: no-repeat;
-	border: 1px solid black;
+	
 }
 #changeuser{
 	margin-top: 10px;
@@ -42,14 +45,14 @@
 	width: 260px;
 	height: 40px;
 	color: grey;
-	border: none;
+	background: rgba(255,255,255,.5);
 	box-shadow: none;
 }#pwd {
 	color: grey;
 	margin-left: 40px;
 	width: 260px;
 	height: 40px;
-	border: none;
+	background: rgba(255,255,255,.5);
 	box-shadow: none;
 }
 #log {

@@ -14,4 +14,13 @@ public class W_groupDao {
 	public List<W_group> queryGroupByName(String nickName) {
 		return (List<W_group>) BaseDao.select("select * from W_GROUP where CREATENAME =?", W_group.class, nickName);
 	}
+	/**
+	 * 新增分组
+	 * @param nickName
+	 * @param groupName
+	 * @return
+	 */
+	public boolean addGroup(String nickName,String groupName) {
+		return BaseDao.execute("insert into W_group values(null,?,?)", groupName,nickName)>0;
+	}
 }

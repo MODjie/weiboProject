@@ -25,6 +25,7 @@
 		    var conteid=parseInt($(this).find(".contentid").html());
 		    parent.location.href="firstWeiBoServlet?xra=xmoreweibo&contypeid="+contetypeid+"&conid="+conteid; 
 	})
+	       
 })
 		 
    </script>		
@@ -39,32 +40,26 @@
 					<div class="col-md-7 column" style="margin: 0px ; padding: 0px;">
 						<div class="carousel slide" id="carousel-299699" data-ride="carousel" data-interval="2000">
 							<div class="carousel-inner">
-								<div class="item">
-									<a href=""><img alt="" src="img/visitor_img/2.jpg" style="width: 700px; height: 300px;" /></a>
+							<c:if test="${requestScope.hotpticture!=null}">
+							<c:forEach items="${requestScope.hotpticture}" var="rs">
+								<div class="item moreweibo" >
+									<a href=""><img alt="" src="${rs.IMAGE}" width="700px"  height="300px"  /></a>
 									
 									<div class="carousel-caption">
 										<h4>
-								细数娱乐圈好姐妹
-							</h4>
+								     ${rs.CONTENT}
+							             </h4>
 									</div>
-								</div>
-								<div class="item active">
-									<a href=""><img alt="" src="img/visitor_img/1.jpg" style="width: 700px; height: 300px;" /></a>
-									
-									<div class="carousel-caption">
-										<h4>
-								世预赛阿根廷惊醒晋级
-							</h4>
-									</div>
-								</div>
-								<div class="item">
-									<a href=""><img alt="" src="img/visitor_img/3.jpg" style="width: 700px; height: 300px;" /></a>					
-									<div class="carousel-caption">
-										<h4>
-								失联大学生
-							</h4>
-									</div>
-								</div>
+								
+								                   <div class="contentid">
+                                                         ${rs.WEIBOID }  
+                                                   </div>
+                                                    <div class="contenttypeid">
+                                                         ${rs.TYPEID }  
+                                                   </div>
+                                     </div>
+								</c:forEach>
+							</c:if>													
 							</div>
 							<a class="left carousel-control" href="#carousel-299699" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
 							<a class="right carousel-control" href="#carousel-299699" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
@@ -88,7 +83,7 @@
 			                        <div class="col-md-12 moreweibo" id="zhongjianneirong"   style="height: 120px;width: 100%;margin-bottom: 15px; margin-bottom: 15px; padding-bottom: 6px; border-bottom: 1px solid #CFCFCF;">
 										<div class="col-md-3" id="tupian" style="height: 120px;float: left;position: absolute;width: 40%;">
 											<!-- 第一行左边图片 开始-->
-											<img src="img/visitor_img/1.1.jpg" style="height: 120px;width: 160px;" />
+											<img src="${rs.IMAGE }" width="160px" style="height: 120px;" />
 											<!-- 第一行左边图片结束  -->
 										</div>
 										<!-- 第一行右边开始  -->
@@ -115,7 +110,7 @@
             	
 
 													<ul class="list-inline   "  style="float: left;display: inline-block;">
-														<li ><img src="img/visitor_img/10.jpg" style="border-radius:50%; overflow:hidden; width: 24px;height: 24px;" /></li>
+														<li ><img src="${rs.TOUXIANG }" style="border-radius:50%; overflow:hidden; width: 24px;height: 24px;" /></li>
 														<li style="padding: 0px;">${rs.SENDNAME }</li>
 														<li >${rs.PUBLISHTIME }</li>												
 													</ul>

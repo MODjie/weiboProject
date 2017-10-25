@@ -17,7 +17,124 @@
 <script src="backdrop/introBG.js" type="text/javascript"></script>
 <meta charset="UTF-8">
 <title></title>
+<style type="text/css">
+.firstconnt:hover{
+	background-color: #E3E3E3;
+}
 
+
+.change:hover{
+color: orangered;
+}
+			.hotresearch {
+				position: fixed;				 
+				border-radius: 10px;
+				height: 770px;
+				width: 290px;
+				background-color: white;				         		 
+			}
+			.xracont{
+				height:700px;
+				width: 285px;				
+				overflow-y: auto;
+				overflow-x: hidden;
+			    
+			}
+			.firstconnt div{
+				margin: 0px;
+				padding: 0px;
+			}
+			.firstconnt{				
+				height: 270px;
+			}
+			
+ .rightshoucangqu{
+	height: 25px;
+}
+ 
+.rightshoucangqu ul li{
+	list-style: none;
+	float: right;
+	height: 25px;
+	width: 30%;
+	text-align: center;
+	line-height: 25px;
+	margin-top: 15px;
+	
+}
+.rightshoucangqu ul li a{
+	width: 100%;  	
+	display: inline-block;
+	text-decoration: none;
+	color:#889db6;
+	text-align: center;
+		
+}	
+.rightshoucangqu ul li a:hover{
+	color: orangered;
+}
+
+</style>
+<script type="text/javascript">
+	$(function() {
+		$(".weiboid").hide();
+		$(".typeid").hide();
+		$(".oneweiboid").hide();
+		$(".onetypeid").hide();
+		$(".pagetotal").hide();
+		$(".hotspan").hover().css("cursor", "pointer");
+		$(".change").hover().css("cursor", "pointer");
+		$(".firstconnt").hover().css("cursor", "pointer");
+		//search-box 设置相关话题固定
+		$(window).scroll(function() {
+			console.log($(window).scrollTop());
+			if ($(window).scrollTop() > 250) {
+				$(".hotresearch").attr("style", "margin-top:-450px");
+			} else {
+				$(".hotresearch").attr("style", "margin-top:0px");
+			}
+		});
+	});
+  $(function(){
+	  
+  
+		$(".firstconnt")
+				.click(
+						function() {
+							var conteid = parseInt($(this).find(".weiboid")
+									.html());
+							var contetypeid = parseInt($(this).find(".typeid")
+									.html());                                                      
+							parent.location.href = "WeiBoServlet?xra=xmoreweibo&contypeid="
+									+ contetypeid + "&conid=" + conteid;
+						})
+						
+		$(function(){
+        //元素时网页回到顶部
+       $(".change").click(function(){     
+        $(".xracont").animate({scrollTop:0},100);//回到顶端
+        return false;
+               });
+         });			
+
+		/* $(".change").click(
+				function() {
+					var conteid = parseInt($(".oneweiboid").html());
+					var contetypeid = parseInt($(".onetypeid").html());
+					var pagetotal = parseInt($(".pagetotal").html());
+					page = parseInt(Math.random() * pagetotal + 1);
+					if (page > pagetotal) {
+						page = page - 1;
+					}
+					// alert("微博id是"+conteid+"微博类型是"+contetypeid+"页数是"+page);			   
+					parent.location.href = "WeiBoServlet?xra=xmoreweibo&page="
+							+ page + "&contypeid=" + contetypeid + "&conid="
+							+ conteid;
+				}) */
+				
+  })
+
+</script>
 </head>
 <body class="home">
 	<canvas width="100%" height="100%"></canvas>
@@ -247,54 +364,79 @@
                 	描述：所有评论结束
               -->
 					</div>
-					<div class="col-md-4 column"
-						style="background-color: white; margin-left: 10px; padding-left: 0px; padding-right: 0px;">
-						<div style="margin-left: 20px;">
-							<h5 style="font-weight: bold;">相关推荐</h5>
-						</div>
-
-						<div style="padding: 20px; border-bottom: 1px solid #DAE0E5;"
-							class="rightlist">
-							<img alt="300x200" src="img/imagemore/6.jpg" />
-							<div class="caption">
-								<h3>Thumbnail label</h3>
-								<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-									quam. Donec id elit non mi porta gravida at eget metus. Nullam
-									id dolor id nibh ultricies vehicula ut id elit.</p>
-								<p>
-									<a class="btn btn-primary" href="#">Action</a> <a class="btn"
-										href="#">Action</a>
-								</p>
-							</div>
-						</div>
-
-						<div style="padding: 20px;" class="rightlist">
-							<img alt="300x200" src="img/imagemore/6.jpg" />
-							<div class="caption">
-								<h3>Thumbnail label</h3>
-								<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-									quam. Donec id elit non mi porta gravida at eget metus. Nullam
-									id dolor id nibh ultricies vehicula ut id elit.</p>
-								<p>
-									<a class="btn btn-primary" href="#">Action</a> <a class="btn"
-										href="#">Action</a>
-								</p>
-							</div>
-						</div>
-						<div style="padding: 20px;" class="rightlist">
-							<img alt="300x200" src="img/imagemore/6.jpg" />
-							<div class="caption">
-								<h3>Thumbnail label</h3>
-								<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-									quam. Donec id elit non mi porta gravida at eget metus. Nullam
-									id dolor id nibh ultricies vehicula ut id elit.</p>
-								<p>
-									<a class="btn btn-primary" href="#">Action</a> <a class="btn"
-										href="#">Action</a>
-								</p>
-							</div>
-						</div>
-
+					<div class="col-md-4 column">
+									       <div class="hotresearch" >
+                	<div style="width: 310px;height: 45px;">
+                		<label class="control-label" style="margin:15px 0px 0px 15px;">相关话题</label>
+						<span class="glyphicon glyphicon-repeat change"
+								style="margin-left: 120px;">刷新</span>
+                	</div>               	
+                	<!--   描述：右侧中间滚动的内容开始-->     
+				<div class="xracont">
+				
+				<c:if test="${requestScope.list3!=null }">	
+				<div class="pagetotal">
+				${pd.totalPage}
+				</div>			
+				<c:forEach items="${requestScope.list3}" var="rs">						
+		                <div class="col-md-12 firstconnt" style="height: 240px;border-bottom: 1px solid #D4D4D4;">
+		                	<!--      描述：第一div(包括用户头像、用户昵称、日期时间、关注字样)开始-->
+		                	<div class="col-md-12"  style="height: 40px;margin: 0px ;padding: 5px;  line-height: 40px;">
+								<div class="col-md-2" style="text-align: center;padding: 0px;margin: 0px;">
+										<!-- 第一行左边图片 开始-->
+									<img src="${rs.TOUXIANG }" style="border-radius:50%; overflow:hidden; width: 28px;height:28px;" />
+										<!-- 第一行左边图片结束  -->
+								</div>
+								<div class="col-md-10" style="padding-left: 10px;">				    	
+								   	<div class="col-md-12" style=" height: 20px;line-height: 20px;margin-top: 5px;">
+					                    <span>${rs.SENDNAME}</span>					      
+					                </div>
+					              <div class="col-md-12" style="  color:#889db6;font:12px/18px arial;overflow:hidden;zoom:1;height: 20px;line-height: 10px;">
+					              	 <span>
+					                   ${rs.PUBLISHTIME}
+					                </span>					            
+					              </div>					    
+								</div>								  
+								    	
+						    </div>						    
+                            <!--  描述：下边内容、大图、点赞、评论、转发开始-->          
+						    <div class="col-md-12" style="height:170px ;padding: 5px;">						    	
+						    	<div class="col-md-12">						    		
+						         <div class="" style="border: none;" >   				     
+                                 ${rs.CONTENT}                     
+                                  </div>
+                                  <div class="weiboid"  >   
+                                  ${rs.WEIBOID}                     
+                                  </div><div class="typeid" >   
+                                  ${rs.TYPEID}                     
+                                  </div>						    							    		
+						    	</div>
+						    	<!--描述：用户发的图片开始-->                                 
+						    	<div class="col-md-12" style="text-align: center;">
+						    		<img src="${rs.IMAGE }" style="width: 200px;height: 122px;"/>
+						    	</div>
+						    	<div class="col-md-12">
+						    		<div class="rightshoucangqu">
+				                    <ul>
+					               <li><a><span class="glyphicon glyphicon-new-window"></span> &nbsp;<span>${rs.ZANNUM}</span></a></li>
+					               <li><a><span class="glyphicon glyphicon-comment"></span> &nbsp;<span>${rs.COMMENTNUM}</span></a></a></li>
+					               <li><a><span class="glyphicon glyphicon-thumbs-up"></span> &nbsp;<span>${rs.FORWARDNUM}</span></a></a></li>
+				                   </ul>
+				
+			                      </div>		
+						    	</div>
+						    	
+						    </div>	
+						     
+	               </div>
+	               </c:forEach>
+				</c:if>	
+	               
+	              <!--	描述：右侧中间滚动的内容结束-->
+	         </div>	
+		
+ 			
+	</div>
 
 					</div>
 
