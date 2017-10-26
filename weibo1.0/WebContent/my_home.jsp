@@ -71,7 +71,7 @@
 				$('#'+groupId).children().remove();
 				$.post("WeiBoServlet?op=myHomeFriend&groupId="+ groupId,function(myHomefriendList, status) {
 					$.each(myHomefriendList,function(index,friend) {
-						$("#"+groupId).append("<div class='panel-body afriend_bg'><input type='checkbox' class='pull-left friend-choose'/><a href='WeiBoServlet?op=chatpage' class='afriend_wrap'> <img src='"+friend.TOUXIANG+"' class='img-circle FL_tx' /> <spanclass='FL_name'>"+ friend.FRIENDNAME+ "</span></a></div>");
+						$("#"+groupId).append("<div class='panel-body afriend_bg'><a href='WeiBoServlet?op=chatpage' class='afriend_wrap'> <img src='"+friend.TOUXIANG+"' class='img-circle FL_tx' /> <spanclass='FL_name'>"+ friend.FRIENDNAME+ "</span></a></div>");
 						});
 
 					});
@@ -163,7 +163,7 @@
 												<tbody>
 													<tr>
 														<td class="S_line1"><a href="W_UserInfoServlet?op=point"> <strong
-																class="W_f18">92</strong> <span class="S_txt2">关注</span>
+																class="W_f18">${requestScope.pointNum }</strong> <span class="S_txt2">关注</span>
 														</a></td>
 														<td class="S_line1"><a href="W_UserInfoServlet?op=fans"> <strong
 																class="W_f18">15</strong> <span class="S_txt2">粉丝</span>
@@ -192,8 +192,7 @@
 										<c:forEach items="${requestScope.groupList}" var="group">
 											<div class="panel panel-default myGroup">
 
-												<div class="panel-heading friends_list">
-													<input type="checkbox" class="pull-left group-choose"/>
+												<div class="panel-heading friends_list">								
 													<input id="groupId" type="hidden" value="${group.GROUPID }">
 													<a class="panel-title collapsed" data-toggle="collapse"
 														data-parent="#panel-723651" href="#${group.GROUPID }">${group.GROUPNAME }</a>
