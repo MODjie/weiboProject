@@ -80,4 +80,9 @@ public class W_UserInfoDao {
 				userinfo.getREMARK(), userinfo.getCITY1(), userinfo.getCITY2(), userinfo.getUSERNAME()) > 0;
 
 	}
+	
+	
+	public boolean updateTouxiang(String nickname,String touxiang) {
+		return BaseDao.execute("update W_USERINFO set TOUXIANG = ? where NICKNAME =?", touxiang,nickname)>0;
+	}
 }

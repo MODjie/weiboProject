@@ -5,5 +5,6 @@ package com.qzz.weibo.util;
 */
 public class DataUtil {
 	public static String imgname;
+	public static String fileName;
 	public static String number;
 }
