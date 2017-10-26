@@ -2,6 +2,7 @@ package com.qzz.weibo.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,8 +18,10 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-@WebServlet("/GoodsServlet")
-public class GoodsServlet extends HttpServlet {
+import com.qzz.weibo.util.DataUtil;
+
+@WebServlet("/ImageServlet")
+public class ImageServlet extends HttpServlet {
 
 	/**
 	 * The doGet method of the servlet. <br>
@@ -99,15 +102,22 @@ public class GoodsServlet extends HttpServlet {
 					String contentType = item.getContentType();
 					boolean isInMemory = item.isInMemory();
 					long sizeInBytes = item.getSize(); // 大小
-
+					String houzhui = fileName.substring(fileName.lastIndexOf("."));
+					fileName=System.currentTimeMillis()+houzhui;
+					
 					// path应该如何来赋值？ 这个文件上传之后的实际目录是哪里 ->还要将文件名写完整
 					// 分析 实际上应该是 tomcat下的webapps/工程名/某个目录 暂时定为 imgs
-					String path = request.getRealPath("/imgs/" + fileName);
+					String path = request.getRealPath("/upload/" +fileName);
 					System.out.println("path :" + path);
 					// 构建一个FIle对象出来
+					fileName = "upload/"+fileName;
+					DataUtil.fileName=fileName;
 					File uploadedFile = new File(path);
 					// write写 实际就是文件上传的具体动作
 					item.write(uploadedFile);
+					
+					PrintWriter out = response.getWriter();
+					out.print("<script>parent.location.href='W_UserInfoServlet?op=updatetouxiang'</script>");
 					
 					System.out.println("上传成功~");
 

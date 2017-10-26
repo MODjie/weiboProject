@@ -20,21 +20,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 	<style type="text/css">
-		.btn-upload{position: relative; display:inline-block;height:36px; *display:inline;overflow:hidden;vertical-align:middle;cursor:pointer}
-.upload-url{cursor: pointer}
-.input-file{position:absolute; right:0; top:0; cursor: pointer; z-index:1; font-size:30em; *font-size:30px;opacity:0;filter: alpha(opacity=0)}
-.btn-upload .input-text{ width:auto}
-.form-group .upload-btn{ margin-left:-1px}
+		.file{
+			margin:25px;
+		}
 	</style>
   </head>
   
   <body>
-<span class="btn-upload form-group">
- <form action="GoodsServlet" method="post" enctype="multipart/form-data">
-  <input class="input-text upload-url radius" type="text" name="uploadfile-1" id="uploadfile-1" readonly><a href="javascript:void();" class="btn btn-primary radius"><i class="iconfont">&#xf0020;</i> 浏览文件</a>
-  <input type="file" multiple name="goodsImg" class="input-file">
-  <input type="submit" class="btn btn-primary radius" value="提交" >
-  </form>
-</span>
+
+ <form action="ImageServlet" method="post" enctype="multipart/form-data">
+  <input type="file" value="上传图片" class="btn btn-primary radius file" name="goodsImg">
+ <center><input type="submit" class="btn btn-success radius submit" value="确定修改" ></center> 
+ </form>
+
+
   </body>
 </html>

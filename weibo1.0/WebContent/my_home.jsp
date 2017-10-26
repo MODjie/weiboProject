@@ -350,9 +350,9 @@
 		$("#touxiangimg").click(function(){
 			layer.open({
 				type: 1,
-				area: ['', ''],
+				area: ['360px', '200px'],
 				shadeClose: true, //点击遮罩关闭
-				content: '<iframe src="touxiangupload.jsp" width="100%" height="100%"></iframe>'
+				content: '<iframe  src="touxiangupload.jsp" width="100%" height="100%"></iframe>'
 			});
 		})
 	});

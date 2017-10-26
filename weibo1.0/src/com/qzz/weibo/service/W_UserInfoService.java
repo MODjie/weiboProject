@@ -67,4 +67,9 @@ public class W_UserInfoService {
 	public boolean updateUserinfo(W_userinfo userinfo){
 		return userinfodao.updateUserinfo(userinfo);
 	}
+	
+	public boolean updateTouxiang(String nickname,String touxiang) {
+		
+		return userinfodao.updateTouxiang(nickname, touxiang);
+	}
 }

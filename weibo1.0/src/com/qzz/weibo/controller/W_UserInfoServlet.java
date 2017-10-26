@@ -17,6 +17,7 @@ import com.qzz.weibo.entity.W_userinfo;
 import com.qzz.weibo.entity.W_weibo;
 import com.qzz.weibo.service.W_UserInfoService;
 import com.qzz.weibo.service.W_relationService;
+import com.qzz.weibo.util.DataUtil;
 
 /**
  * Servlet implementation class W_UserInfoServlet
@@ -110,6 +111,12 @@ public class W_UserInfoServlet extends HttpServlet {
 					 out.print("<script>alert('修改成功');location.href='WeiBoServlet?op=queryMyWb'</script>");
 				 }
  				
+			}
+			//修改头像
+			else if (op.equals("updatetouxiang")) {
+				String touxiangname = DataUtil.fileName;
+				userinfoservice.updateTouxiang(nickname, touxiangname);
+				request.getRequestDispatcher("WeiBoServlet?op=queryMyWb").forward(request, response);
 			}
 			//关注页面
 			else if (op.equals("point")) {
