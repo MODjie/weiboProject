@@ -136,7 +136,7 @@
 					<form onsubmit="return check()"  action="LoginRegister" method="post">
 						<div style="display: flex; height: 40px;">
 							<input name="phone" type="text" class="kuang_txt phone"
-								id="phone" placeholder="手机号">
+								id="phone" placeholder="用户名">
 							<p id="pname"></p>
 						</div>
 						<div style="display: flex; height: 40px;">
