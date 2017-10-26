@@ -91,6 +91,7 @@ public class W_firstweiboServlet extends HttpServlet {
 				list=ws.queryWebBytype(2);	
                 if(list.size()>4) {
                 	hotpticture=list.subList(0, 3);
+
                 } 
                 int second=0;
                 second=list.get(1).getWEIBOID();              

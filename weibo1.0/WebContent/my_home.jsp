@@ -71,7 +71,7 @@
 				$('#'+groupId).children().remove();
 				$.post("WeiBoServlet?op=myHomeFriend&groupId="+ groupId,function(myHomefriendList, status) {
 					$.each(myHomefriendList,function(index,friend) {
-						$("#"+groupId).append("<div class='panel-body afriend_bg'><input type='checkbox' class='pull-left friend-choose'/><a href='WeiBoServlet?op=chatpage' class='afriend_wrap'> <img src='"+friend.TOUXIANG+"' class='img-circle FL_tx' /> <spanclass='FL_name'>"+ friend.FRIENDNAME+ "</span></a></div>");
+						$("#"+groupId).append("<div class='panel-body afriend_bg'><a href='WeiBoServlet?op=chatpage' class='afriend_wrap'> <img src='"+friend.TOUXIANG+"' class='img-circle FL_tx' /> <spanclass='FL_name'>"+ friend.FRIENDNAME+ "</span></a></div>");
 						});
 
 					});
@@ -116,22 +116,13 @@
 					<input type="text" class="search-input" placeholder="看不完的新鲜事" />
 				</div>
 
-				<div class="col-md-3 column">
+				<div class="col-md-3 column ">
 					<ul class="nav nav-tabs"
 						style="position: absolute; display: inline;">
-						<li class="active"><a href="WeiBoServlet?op=homepage">首页</a></li>
-						<li><a href="#">简介</a></li>
-						<li><a href="WeiBoServlet?op=chatpage">信息</a></li>
-						<li class="dropdown pull-right"><a href="#"
-							data-toggle="dropdown" class="dropdown-toggle">设置<strong
-								class="caret"></strong></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">操作</a></li>
-								<li><a href="#">设置栏目</a></li>
-								<li><a href="#">更多设置</a></li>
-								<li class="divider"></li>
-								<li><a href="#">分割线</a></li>
-							</ul></li>
+						<li class="active"><a href="WeiBoServlet?op=homepage">首页</a>
+						</li>
+						<li><a href="WeiBoServlet?op=chatpage">消息</a></li>
+						<li><a href="WeiBoServlet?op=exit">注销</a></li>
 					</ul>
 				</div>
 			</div>
@@ -172,7 +163,7 @@
 												<tbody>
 													<tr>
 														<td class="S_line1"><a href="W_UserInfoServlet?op=point"> <strong
-																class="W_f18">92</strong> <span class="S_txt2">关注</span>
+																class="W_f18">${requestScope.pointNum }</strong> <span class="S_txt2">关注</span>
 														</a></td>
 														<td class="S_line1"><a href="W_UserInfoServlet?op=fans"> <strong
 																class="W_f18">15</strong> <span class="S_txt2">粉丝</span>
@@ -201,8 +192,7 @@
 										<c:forEach items="${requestScope.groupList}" var="group">
 											<div class="panel panel-default myGroup">
 
-												<div class="panel-heading friends_list">
-													<input type="checkbox" class="pull-left group-choose"/>
+												<div class="panel-heading friends_list">								
 													<input id="groupId" type="hidden" value="${group.GROUPID }">
 													<a class="panel-title collapsed" data-toggle="collapse"
 														data-parent="#panel-723651" href="#${group.GROUPID }">${group.GROUPNAME }</a>

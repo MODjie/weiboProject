@@ -24,7 +24,7 @@ public class W_usersDao {
 	
 	public boolean userRegister(String username,String password,String nickname) {
 		int i = BaseDao.execute("insert into w_users values(null,?,?,'ÓÃ»§')", username, password) ;
-		int j = BaseDao.execute("insert into W_USERINFO values(?,?,null,null,null,null,null,null,null,null,'upload/touxiang.jpg')", username, nickname);
+		int j = BaseDao.execute("insert into W_USERINFO values(?,?,null,null,null,null,null,null,null,null,'upload/touxiang.jpg',null,null)", username, nickname);
 		return (i+j)>1;
 	}
 }

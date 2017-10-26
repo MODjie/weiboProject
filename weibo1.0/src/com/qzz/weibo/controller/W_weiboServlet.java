@@ -113,11 +113,10 @@ public class W_weiboServlet extends HttpServlet {
 				} else if (request.getParameter("queryWbBy").equals("type")) {
 					// 我的主页通过类型查询
 					int typeId = Integer.parseInt(request.getParameter("typeId"));
-					list = ws.queryWebBytype(typeId);
+					list = ws.queryMyWebBytype(typeId,sendName);
 				} else if (request.getParameter("queryWbBy").equals("word")) {
 					// 我的主页模糊查询微博内容
 					String word = request.getParameter("serchContent");
-					System.out.println(word);
 					list = ws.queryWbByWord(word, sendName);
 				}
 
@@ -132,7 +131,6 @@ public class W_weiboServlet extends HttpServlet {
 
 				String nickname = "";
 				nickname = session.getAttribute("username") + "";
-				System.out.println("niskname是"+nickname);
 				if(!nickname.equals("null")) {
 				W_UserInfoService wus = new W_UserInfoService();
 				W_userinfo userinfo = new W_userinfo();
@@ -145,12 +143,17 @@ public class W_weiboServlet extends HttpServlet {
 				}
 
 			} else if (op.equals("queryAllWb")) {
+				String nickName = (String) session.getAttribute("username");
 				list = ws.queryAllWb();
 				if (request.getParameter("queryWbBy")!=null) {
 					if (request.getParameter("queryWbBy").equals("type")) {
-						// 我的主页通过类型查询
+						// 首页通过类型查询
 						int typeId = Integer.parseInt(request.getParameter("typeId"));
 						list = ws.queryWebBytype(typeId);
+					} else if (request.getParameter("queryWbBy").equals("word")) {
+						// 首页模糊查询微博内容
+						String word = request.getParameter("serchContent");
+						list = ws.queryWbByWord(word, nickName);
 					}
 				}
 				request.setAttribute("list", list);

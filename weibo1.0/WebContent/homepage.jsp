@@ -129,12 +129,11 @@
 					<input id="serach" type="search" placeholder="看不完的新鲜事"> <input
 						type="button" id="sousuo" value="" />
 				</div>
-				<div class="col-md-3 column">
+				<div class="col-md-3 column ">
 					<ul class="nav nav-tabs"
 						style="position: absolute; display: inline;">
 						<li class="active"><a href="WeiBoServlet?op=homepage">首页</a>
 						</li>
-						<li><a href="#">简介</a></li>
 						<li><a href="WeiBoServlet?op=chatpage">消息</a></li>
 						<li><a href="WeiBoServlet?op=exit">注销</a></li>
 					</ul>

@@ -137,29 +137,28 @@ color: orangered;
 </head>
 <body class="home">
 	<canvas width="100%" height="100%"></canvas>
-	<!--头部logo以及导航栏开始-->
-	<div id="header"">
+	<!--顶部导航栏开始-->
+	<div id="header">
 		<div class="container">
 			<div class="row clearfix">
-				<div class="col-md-9 column  sousuo">
-					<a href="WeiBoServlet?op=homepage"><img style="height: 40px; widows: 50px;" src="img/logo.PNG" /></a> <input
-						id="serach" type="search" placeholder="大家都在搜：鹿晗、关晓彤分手"> <input
-						type="button" class="btnsearch" name="" id="" value="" />
+				<div class="col-md-9 column">
+					<a href="WeiBoServlet?op=homepage"><img src="img/logo.PNG" /></a>
+					<input type="text" class="search-input" placeholder="看不完的新鲜事" />
 				</div>
-				<div class="col-md-3 column daohan3">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="WeiBoServlet?op=homepage"><span
-								class="glyphicon glyphicon-home"></span>首页</a></li>
-						<li><a href="regiter2.jsp">注册</a></li>
-						<li class="nav navbar-nav navbar-right"><a id="loginmain"
-							href="#modal-container-580488" role="button" class="btn"
-							data-toggle="modal">登录</a></li>
+
+				<div class="col-md-3 column ">
+					<ul class="nav nav-tabs"
+						style="position: absolute; display: inline;">
+						<li class="active"><a href="WeiBoServlet?op=homepage">首页</a>
+						</li>
+						<li><a href="WeiBoServlet?op=chatpage">消息</a></li>
+						<li><a href="WeiBoServlet?op=exit">注销</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!--头部logo以及导航栏结束-->
+	<!--顶部导航栏结束-->
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-md-12 column" style="margin-top: 75px;">
