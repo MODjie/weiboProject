@@ -146,6 +146,13 @@ public class W_weiboServlet extends HttpServlet {
 
 			} else if (op.equals("queryAllWb")) {
 				list = ws.queryAllWb();
+				if (request.getParameter("queryWbBy")!=null) {
+					if (request.getParameter("queryWbBy").equals("type")) {
+						// 我的主页通过类型查询
+						int typeId = Integer.parseInt(request.getParameter("typeId"));
+						list = ws.queryWebBytype(typeId);
+					}
+				}
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("mainpage.jsp").forward(request, response);
 			}

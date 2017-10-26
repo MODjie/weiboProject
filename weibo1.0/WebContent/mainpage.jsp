@@ -55,7 +55,7 @@ textarea {
 	float: left;
 }
 
-.nav li {
+.nav-show {
 	float: left;
 }
 
@@ -96,10 +96,11 @@ a:hover {
 	color: #0000FF
 } /* 选定的链接 */
 /*设置收藏与赞的鼠标为手*/
-.collectA{
+.collectA {
 	cursor: pointer;
 }
-.zanA{
+
+.zanA {
 	cursor: pointer;
 }
 </style>
@@ -234,20 +235,31 @@ a:hover {
 	</div>
 	<!--微博类型选择导航区域-->
 	<!--微博内容导航栏开-->
-	<div class="type"">
+	<div class="type">
 		<!--<nav class="navbar navbar-default " role="navigation ">-->
 		<div class=" navbar-collapse " id="bs-example-navbar-collapse-1 ">
 			<ul class="nav navbar-nav ">
-				<li><a href="# " class="aa ">全部</a></li>
-				<li><a href="# " class="aa ">原创</a></li>
-				<li><a href="# " class="aa ">图片</a></li>
-				<li><a href="# " class="aa ">标签</a></li>
-				<li><a href="# " class="aa ">音乐</a></li>
-				<li><a href="# " class="aa ">文章</a></li>
+				<li class="nav-show"><a href="WeiBoServlet?op=queryAllWb">全部</a></li>
+				<li class="nav-show"><a href="WeiBoServlet?op=queryAllWb&queryWbBy=type&typeId=3">明星</a></li>
+				<li class="nav-show"><a href="WeiBoServlet?op=queryAllWb&queryWbBy=type&typeId=5">美女</a></li>
+				<li class="nav-show"><a href="WeiBoServlet?op=queryAllWb&queryWbBy=type&typeId=6">动漫</a></li>
+				<li class="dropdown nav-show" style="width:60px"><a href="#" data-toggle="dropdown"
+					class="dropdown-toggle">更多<strong class="caret pull-right"></strong></a>
+					<ul class="dropdown-menu" style="width:60px">
+						<li><a
+							href="WeiBoServlet?op=queryAllWb&queryWbBy=type&typeId=7">社会</a></li>
+						<li><a
+							href="WeiBoServlet?op=queryAllWb&queryWbBy=type&typeId=4">情感</a></li>
+						<li><a
+							href="WeiBoServlet?op=queryAllWb&queryWbBy=type&typeId=10">时尚</a></li>
+						<li><a
+							href="WeiBoServlet?op=queryAllWb&queryWbBy=type&typeId=9">新鲜事</a></li>
+					</ul></li>
 			</ul>
 			<form class=" form-horizontal navbar-form navbar-left "
 				role="search "
-				style="margin-left: 15px; margin-top: 5px; float: left;">
+				style="margin-left: 45px; margin-top: 5px; float: left;"
+				method="post" action="WeiBoServlet?op=queryMyWb&queryWbBy=word">
 				<div class="form-group ">
 					<input type="text " class="form-control " style="width: 250px;" />
 					<input type="submit " class="btn btn-info " value="搜索 "
@@ -306,9 +318,10 @@ a:hover {
 						<div class="content_bottom">
 							<ul class="nav nav-pills WB_row_line" style="margin-left: 35px">
 								<li class="col" style="width: 150px; text-align: center;">
-									<a class="collectA">
-										<input class="ajaxWbId" type="hidden" value="${weibo.WEIBOID }">
-										<span class="glyphicon glyphicon-star-empty"></span>&nbsp;<span class="collectNumSpan">${weibo.COLLECTNUM }</span>
+									<a class="collectA"> <input class="ajaxWbId" type="hidden"
+										value="${weibo.WEIBOID }"> <span
+										class="glyphicon glyphicon-star-empty"></span>&nbsp;<span
+										class="collectNumSpan">${weibo.COLLECTNUM }</span>
 								</a>
 								</li>
 								<li class="col" style="width: 150px; text-align: center;">
@@ -324,10 +337,11 @@ a:hover {
 									target="_parent"> <span class="glyphicon glyphicon-comment"></span>
 										&nbsp;<span>${weibo.COMMENTNUM}</span></a>
 								</li>
-								<li style="width: 150px; text-align: center;"><a class="zanA"> 
-								<input class="ajaxWbId" type="hidden" value="${weibo.WEIBOID }">
-								<span
-										class="glyphicon glyphicon-thumbs-up"></span> &nbsp;<span class="zanNumSpan">${weibo.ZANNUM }</span></a></li>
+								<li style="width: 150px; text-align: center;"><a
+									class="zanA"> <input class="ajaxWbId" type="hidden"
+										value="${weibo.WEIBOID }"> <span
+										class="glyphicon glyphicon-thumbs-up"></span> &nbsp;<span
+										class="zanNumSpan">${weibo.ZANNUM }</span></a></li>
 							</ul>
 						</div>
 					</div>
