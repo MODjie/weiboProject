@@ -43,16 +43,12 @@ public class weiboTest {
 //		W_UserInfoDao wif = new W_UserInfoDao();
 //		int i = Integer.parseInt(wif.isExisNickname("¿´¿´²»¶®"));
 //		System.out.println(i>1);
-		List<W_weibo>list=new ArrayList<>();
-		List<W_weibo>hotpticture=new ArrayList<>();
+		/*List<W_weibo>list=new ArrayList<>();	
 		W_weiboDao ws = new W_weiboDao();
 		list=ws.queryWebBytype(2);
-		if(list.size()>3) {
-			hotpticture=list.subList(0, 3);
-		}
-		for (W_weibo w_weibo : hotpticture) {
-			System.out.println(w_weibo);
-		}
-
+		int second=0;
+		second=list.get(1).getWEIBOID();
+		System.out.println(second);
+*/
 	}
 }

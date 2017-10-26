@@ -50,7 +50,7 @@
 								</div> -->
 							<c:if test="${requestScope.hotpticture!=null}">
 							<c:forEach items="${requestScope.hotpticture}" var="rs">
-							 <c:if test="${rs.WEIBOID==542}">                                   
+							 <c:if test="${rs.WEIBOID==requestScope.second}">                                   
                                   <div class="item active moreweibo" >
 									<a href=""><img alt="" src="${rs.IMAGE }" width="700px"  height="300px"  /></a>									
 									<div class="carousel-caption">
@@ -68,7 +68,7 @@
                                      </div>
                                      
                                      </c:if>
-							<c:if test="${rs.WEIBOID!=542}">   							
+							<c:if test="${rs.WEIBOID!=requestScope.second}">   							
 								<div class="item moreweibo" >
 									<a href=""><img alt="" src="${rs.IMAGE }" width="700px"  height="300px"  /></a>									
 									<div class="carousel-caption">
