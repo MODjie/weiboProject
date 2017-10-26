@@ -221,12 +221,13 @@ a:hover {
 				<option value="">好友可见</option>
 				<option value="">匿名</option>
 			</select> <select name="type" class="" style="margin-left: 50px;">
-				<option value="娱乐">娱乐</option>
-				<option value="热门">热门</option>
-				<option value="体育">体育</option>
-				<option value="情感">情感</option>
+				<option value="明星">明星</option>
 				<option value="美女">美女</option>
 				<option value="动漫">动漫</option>
+				<option value="社会">社会</option>
+				<option value="情感">情感</option>
+				<option value="时尚">时尚</option>
+				<option value="新鲜事">新鲜事</option>
 			</select>
 
 			<button type="submit" class="btn btn-warning">发布</button>
@@ -240,12 +241,16 @@ a:hover {
 		<div class=" navbar-collapse " id="bs-example-navbar-collapse-1 ">
 			<ul class="nav navbar-nav ">
 				<li class="nav-show"><a href="WeiBoServlet?op=queryAllWb">全部</a></li>
-				<li class="nav-show"><a href="WeiBoServlet?op=queryAllWb&queryWbBy=type&typeId=3">明星</a></li>
-				<li class="nav-show"><a href="WeiBoServlet?op=queryAllWb&queryWbBy=type&typeId=5">美女</a></li>
-				<li class="nav-show"><a href="WeiBoServlet?op=queryAllWb&queryWbBy=type&typeId=6">动漫</a></li>
-				<li class="dropdown nav-show" style="width:60px"><a href="#" data-toggle="dropdown"
-					class="dropdown-toggle">更多<strong class="caret pull-right"></strong></a>
-					<ul class="dropdown-menu" style="width:60px">
+				<li class="nav-show"><a
+					href="WeiBoServlet?op=queryAllWb&queryWbBy=type&typeId=3">明星</a></li>
+				<li class="nav-show"><a
+					href="WeiBoServlet?op=queryAllWb&queryWbBy=type&typeId=5">美女</a></li>
+				<li class="nav-show"><a
+					href="WeiBoServlet?op=queryAllWb&queryWbBy=type&typeId=6">动漫</a></li>
+				<li class="dropdown nav-show" style="width: 60px"><a href="#"
+					data-toggle="dropdown" class="dropdown-toggle">更多<strong
+						class="caret pull-right"></strong></a>
+					<ul class="dropdown-menu" style="width: 60px">
 						<li><a
 							href="WeiBoServlet?op=queryAllWb&queryWbBy=type&typeId=7">社会</a></li>
 						<li><a
@@ -255,16 +260,16 @@ a:hover {
 						<li><a
 							href="WeiBoServlet?op=queryAllWb&queryWbBy=type&typeId=9">新鲜事</a></li>
 					</ul></li>
-			</ul>
+			</ul>	
 			<form class=" form-horizontal navbar-form navbar-left "
 				role="search "
 				style="margin-left: 45px; margin-top: 5px; float: left;"
-				method="post" action="WeiBoServlet?op=queryMyWb&queryWbBy=word">
+				method="post" action="WeiBoServlet?op=queryAllWb&queryWbBy=word">
 				<div class="form-group ">
-					<input type="text " class="form-control " style="width: 250px;" />
-					<input type="submit " class="btn btn-info " value="搜索 "
-						style="position: absolute; width: 60px; top: 250px; left: 90%;"></input>
+					<input name="serchContent" type="text" class="form-control"
+						style="width: 250px;" placeholder="搜索我的微博" /> 
 				</div>
+				<button type="submit" class="btn btn-default" style="position: absolute; width: 60px; top: 250px; left: 90%;">搜索</button>
 			</form>
 
 		</div>

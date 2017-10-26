@@ -68,6 +68,17 @@ public class W_weiboService {
 	public List<W_weibo> queryWebBytype(int contenttypeid){
 		return weiboDao.queryWebBytype(contenttypeid);
 	}
+	
+	/**
+	 *  根据微博类型编号获取我的相关类型微博
+	 *
+	 * @return
+	*/
+	public  List<W_weibo> queryMyWebBytype(int contenttypeid,String sendName){
+		String sql="select * from WB_VIEW where TYPEID =? and SENDNAME =?";
+		return weiboDao.queryMyWebBytype(contenttypeid, sendName);
+	}
+	
 	/**
 	 * 修改微博的收藏、转发、评论、点赞数
 	 * @param weibo

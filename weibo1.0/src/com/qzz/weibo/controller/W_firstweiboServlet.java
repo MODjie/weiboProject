@@ -91,8 +91,10 @@ public class W_firstweiboServlet extends HttpServlet {
 				list=ws.queryWebBytype(2);	
                 if(list.size()>4) {
                 	hotpticture=list.subList(0, 3);
-                }   
-                hotbutton=list.subList(3, list.size());
+                }else {
+                	hotbutton=list.subList(3, list.size());
+				}   
+                
                 request.setAttribute("hotpticture", hotpticture);
 				request.setAttribute("hotbutton", hotbutton);		
 				request.getRequestDispatcher("vistorhotdoor.jsp").forward(request, response);
