@@ -91,10 +91,13 @@ public class W_firstweiboServlet extends HttpServlet {
 				list=ws.queryWebBytype(2);	
                 if(list.size()>4) {
                 	hotpticture=list.subList(0, 3);
-                }   
+                } 
+                int second=0;
+                second=list.get(1).getWEIBOID();              
                 hotbutton=list.subList(3, list.size());
                 request.setAttribute("hotpticture", hotpticture);
-				request.setAttribute("hotbutton", hotbutton);		
+				request.setAttribute("hotbutton", hotbutton);
+				request.setAttribute("second", second);
 				request.getRequestDispatcher("vistorhotdoor.jsp").forward(request, response);
 				return;				
 			}else if(xra.equals("vsatr")){
@@ -129,7 +132,7 @@ public class W_firstweiboServlet extends HttpServlet {
 				W_commentService wcs = new W_commentService();					
 				list = ws.queryWbById(weiboid);
 				list3=ws.queryWebBytype(typeid);
-				 int i=0;
+				int i=0;
 				for(;i<list3.size();i++){
 					 if(weiboid==(list3.get(i).getWEIBOID())){
 						 list3.remove(i);	
