@@ -22,6 +22,7 @@ import com.qzz.weibo.entity.W_comment;
 import com.qzz.weibo.entity.W_friend;
 import com.qzz.weibo.entity.W_group;
 import com.qzz.weibo.entity.W_message;
+import com.qzz.weibo.entity.W_relation;
 import com.qzz.weibo.entity.W_reply;
 import com.qzz.weibo.entity.W_type;
 import com.qzz.weibo.entity.W_userinfo;
@@ -33,6 +34,7 @@ import com.qzz.weibo.service.W_commentService;
 import com.qzz.weibo.service.W_friendService;
 import com.qzz.weibo.service.W_groupService;
 import com.qzz.weibo.service.W_messageService;
+import com.qzz.weibo.service.W_relationService;
 import com.qzz.weibo.service.W_replyService;
 import com.qzz.weibo.service.W_weiboService;
 import com.qzz.weibo.service.W_zanService;
@@ -55,6 +57,7 @@ public class W_weiboServlet extends HttpServlet {
 	private W_friendService fs = new W_friendService();
 	private W_messageService ms = new W_messageService();
 	private W_groupService gs = new W_groupService();
+	private W_relationService relationService = new W_relationService();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -119,11 +122,19 @@ public class W_weiboServlet extends HttpServlet {
 					String word = request.getParameter("serchContent");
 					list = ws.queryWbByWord(word, sendName);
 				}
-
+				//我的关注人数
+				Object pointCount = relationService.queryPointerCount(sendName);
+				//我的粉丝人数
+				Object fansCount = relationService.queryFansCount(sendName);
+				//我的微博人数
+				Object weiBoCount = ws.queryMyWbNum(sendName);
 				// 获得分组list
 				List<W_group> groupList = gs.queryGroupByName(sendName);
 				request.setAttribute("groupList", groupList);
 				W_userinfo myInfo = us.getUserInfoByNikeName(sendName);
+				request.setAttribute("pointCount", pointCount);
+				request.setAttribute("fansCount", fansCount);
+				request.setAttribute("weiBoCount", weiBoCount);
 				request.setAttribute("myInfo", myInfo);
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("my_home.jsp").forward(request, response);
@@ -135,6 +146,17 @@ public class W_weiboServlet extends HttpServlet {
 				W_UserInfoService wus = new W_UserInfoService();
 				W_userinfo userinfo = new W_userinfo();
 				userinfo = wus.getUserInfoByNikeName(nickname);
+				
+				//我的关注人数
+				Object pointCount = relationService.queryPointerCount(nickname);
+				//我的粉丝人数
+				Object fansCount = relationService.queryFansCount(nickname);
+				//我的微博人数
+				Object weiBoCount = ws.queryMyWbNum(nickname);
+				
+				request.setAttribute("pointCount", pointCount);
+				request.setAttribute("fansCount", fansCount);
+				request.setAttribute("weiBoCount", weiBoCount);
 				request.setAttribute("userinfo", userinfo);
 				request.getRequestDispatcher("homepage.jsp").forward(request, response);
 				}

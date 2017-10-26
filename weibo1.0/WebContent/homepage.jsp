@@ -228,14 +228,14 @@
 										<table class="tb_counter" cellspacing="0" cellpadding="0">
 											<tbody>
 												<tr>
-													<td class="S_line1"><a href="#"> <strong
-															class="W_f18">92</strong> <span class="S_txt2">关注</span>
+													<td class="S_line1"><a href="W_UserInfoServlet?op=point"> <strong
+															class="W_f18">${requestScope.pointCount }</strong> <span class="S_txt2">关注</span>
 													</a></td>
 													<td class="S_line1"><a href="#"> <strong
-															class="W_f18">15</strong> <span class="S_txt2">粉丝</span>
+															class="W_f18">${requestScope.fansCount }</strong> <span class="S_txt2">粉丝</span>
 													</a></td>
-													<td class="S_line1"><a href="#"> <strong
-															class="W_f18">10</strong> <span class="S_txt2">微博</span>
+													<td class="S_line1"><a href="WeiBoServlet?op=queryMyWb"> <strong
+															class="W_f18">${requestScope.weiBoCount }</strong> <span class="S_txt2">微博</span>
 													</a></td>
 												</tr>
 											</tbody>

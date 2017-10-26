@@ -107,4 +107,12 @@ public class W_weiboDao {
 	public List<W_weibo> queryWbByWord(String word,String sendName) {
 		return (List<W_weibo>) BaseDao.select("select * from WB_VIEW where SENDNAME = ? and CONTENT like ?", W_weibo.class,sendName, "%"+word+"%");
 	}
+	/**
+	 * 通过昵称查找我的微博数
+	 * @param sendName
+	 * @return
+	 */
+	public Object queryMyWbNum(String sendName) {
+		return BaseDao.getFirst("select count(1) from WB_VIEW where SENDNAME =?", sendName);
+	}
 }

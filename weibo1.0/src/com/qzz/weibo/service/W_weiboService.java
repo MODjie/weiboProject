@@ -95,4 +95,12 @@ public class W_weiboService {
 	public List<W_weibo> queryWbByWord(String word,String sendName) {
 		return weiboDao.queryWbByWord(word,sendName);
 	}
+	/**
+	 * 通过昵称查找我的微博数
+	 * @param sendName
+	 * @return
+	 */
+	public Object queryMyWbNum(String sendName) {
+		return weiboDao.queryMyWbNum(sendName);
+	}
 }

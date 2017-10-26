@@ -33,4 +33,21 @@ public class W_relationService {
 	public List<W_relation> queryMyAllFans(String bName) {
 		return relationDao.queryMyAllFans(bName);
 	}
+	
+	/**
+	 * 查找我关注的人数
+	 * @param aname
+	 * @return
+	 */
+	public Object queryPointerCount(String aname) {
+		return relationDao.queryPointerCount(aname);
+	}
+	/**
+	 * 查找我的粉丝人数
+	 * @param bname
+	 * @return
+	 */
+	public Object queryFansCount(String bname) {
+		return relationDao.queryFansCount(bname);
+	}
 }
