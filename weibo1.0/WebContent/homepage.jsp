@@ -165,7 +165,7 @@
 						</div>
 						<hr />
 						<div class="aa">
-							<a href="">好友圈</a>
+							<a href="WeiBoServlet?op=queryAllWb?queryWbBy=friendCirle">好友圈</a>
 						</div>
 						<div class="aa">
 							<a href="">特别关注</a>
