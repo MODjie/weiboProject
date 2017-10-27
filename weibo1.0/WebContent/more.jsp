@@ -600,7 +600,6 @@ color: orangered;
 			replyerA = $(this).prev().val();
 			//被回复的人
 			replyerB = $(this).next().next().val();
-			alert(replyerA+" "+replyerB);
 		
 		})
 		

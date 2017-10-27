@@ -144,7 +144,7 @@
 									src="${requestScope.myInfo.TOUXIANG }" title="换个头像试试？" width="120px" class="img-circle" /> <a
 									id="userName" href="W_UserInfoServlet?op=getUserInfo"><h4
 										id="niCheng">${requestScope.myInfo.NICKNAME }</h4></a>
-								<h5>一句话介绍下你自己吧,让别人更了解你</h5>
+								<h5>${requestScope.myInfo.REMARK }</h5>
 							</div>
 							<!--封面div结束-->
 							

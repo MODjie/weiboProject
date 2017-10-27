@@ -80,7 +80,7 @@
 	</div>
 	<!--顶部导航栏结束-->
 <div id="fm" class="col-md-12 column" style="margin-top:50px;color:white ">
-								<a href="#"><img alt="100x100" src="img/touxiang.jpg"
+								<a href="#"><img width="150px" src="${userinfo.TOUXIANG}"
 									class="img-circle" /></a>
 									<a id="userName" href="W_UserInfoServlet?op=getUserInfo">
 								<h4 id="niCheng">${requestScope.nickname}</h4></a>

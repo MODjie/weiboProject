@@ -185,6 +185,9 @@ public class W_weiboServlet extends HttpServlet {
 			else if (op.equals("publish")) {
 				Date date = new Date();
 				String content = request.getParameter("content");
+				content=content.replaceAll("²ÝÄàÂí", "***");
+				content=content.replaceAll("Éµ±Æ", "**");
+				content=content.replaceAll("Ð¡·É", "**");
 				String sendname = (String) request.getSession().getAttribute("username");
 				String typeName = request.getParameter("type");
 				int typeId = ws.queryTypeIdByName(typeName);
